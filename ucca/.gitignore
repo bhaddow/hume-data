@@ -1,0 +1,9 @@
+cscope.*
+tags
+*~
+.*.swp
+__pycache__*
+*.pyc
+*.orig
+*.tmp
+.ropeproject
