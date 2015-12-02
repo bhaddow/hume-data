@@ -16,10 +16,10 @@ def main():
   annot = dfh.readline()[2:-2]
   
   elem = fromstring(annot)
-  xmlstr = minidom.parseString(ET.tostring(elem)).toprettyxml(indent="   ")
-  print(xmlstr)
-  #passage = from_site(elem)
-  #print("Passage nodes count: ", len(passage.nodes))
+  #xmlstr = minidom.parseString(ET.tostring(elem)).toprettyxml(indent="   ")
+  #print(xmlstr)
+  passage = from_standard(elem)
+  print("Passage nodes count: ", len(passage.nodes))
 
 
 
