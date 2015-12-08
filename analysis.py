@@ -50,22 +50,24 @@ def read_dump(fileName):
             else:
                 raise Exception('Error sentences and segments not lining up', sendId)
                 break
-            data['user'] = dfh.readline()[:-1]
+            data['user'] = dfh.readline()[2:-2]#Some weird b at beginning, and '' around field
             data['ID'] = dfh.readline()[:-1]
 
-            mtdict = parse_mteval(dfh.readline()[:-1])
+            mtdict = parse_mteval(dfh.readline()[2:-2])
             data['mteval'] = mtdict
 
-            data['source'] = dfh.readline()[:-1]
-            data['target'] = dfh.readline()[:-1]
-            data['align'] = dfh.readline()[:-1]
+            data['source'] = dfh.readline()[2:-2]
+            data['target'] = dfh.readline()[2:-2]
+            data['align'] = dfh.readline()[2:-2]
 
-            elem = fromstring(dfh.readline()[2:-2])  #Some weird b' char at the beginning
-            passage = from_standard(elem)
+            xml = dfh.readline()[:-1]
+            elem = fromstring(xml)  
+            #passage = from_standard(elem) - old style with node ids = 0.1 etc
+            passage = from_site(elem)
             data['annot'] = passage
 
-            data['sent'] = dfh.readline()[:-1]
-            data['uccauser'] = dfh.readline()[:-1]
+            data['sent'] = dfh.readline()[2:-2]
+            data['uccauser'] = dfh.readline()[2:-2]
             data['timestamp'] = dfh.readline()[:-1]
 
 
@@ -83,6 +85,22 @@ def parse_mteval(line):
         if len(els) == 2:
             eval_list[int(els[0])] = int(els[1])
     return eval_list
+
+def getTreeStats(sent):
+    
+    passage = sent['annot']
+    print("Passage nodes count: ", len(passage.nodes))
+    for ID,node in passage.nodes.items():
+        print ("ID", ID, "node", node )
+
+        myList = list(node.iter(method='bfs',duplicates=True))
+        for item in myList:
+            print ("item", item )
+ 
+      
+
+    for node in passage.nodes:
+        print ("ID", node)
 
 def getBasicStats(sent):
 
@@ -172,6 +190,8 @@ def main():
         stats = getBasicStats(sent)
         for key, val in stats.items():
             myStats[key] = val + myStats.get(key, 0)
+        stats = getTreeStats(sent)
+        break
 
 
     printBasicStats(myStats, len(myDump))
