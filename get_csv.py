@@ -37,6 +37,7 @@ def read_dump(fileName):
                 raise Exception('Error sentences and segments not lining up', sendId)
                 break
             annot = dfh.readline()[2:-2]#Some weird b at beginning, and '' around field
+            data['filename'] = annot
             data['lang'] = annot[-3:-1]
             data['user'] = annot[-3:]
             data['ID'] = dfh.readline()[:-1]
@@ -176,6 +177,7 @@ def getNodeStats(sent):
     base['uccauser'] = sent['uccauser']
     base['sent'] = sent['ID']
     base['timestamp'] = sent['timestamp']
+    base['filename'] = sent['filename']
 
 
     passage = sent['annot']
@@ -252,7 +254,7 @@ def main():
 
     sentsNum = 0
     ofh = None
-    keys = ("id", "sent", "user", "lang", "mteval", "numChildren", "children", "parent", "uccalabel", "uccauser", "timestamp")
+    keys = ("id", "sent", "user", "lang", "filename", "mteval", "numChildren", "children", "parent", "uccalabel", "uccauser", "timestamp")
     if args.outFile:
       ofh = open(args.outFile, "w")
       print(",".join(keys), file=ofh)
