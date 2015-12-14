@@ -329,7 +329,7 @@ def _from_site_annotation(elem, passage, elem2node):
             raise SiteXMLUnknownElement
 
 
-def from_site(elem):
+def from_site(elem,ids=False):
     """Converts site XML structure to :class:core.Passage object.
 
     Args:
@@ -344,7 +344,10 @@ def from_site(elem):
     elem2node = {}
     _from_site_terminals(elem, passage, elem2node)
     _from_site_annotation(elem, passage, elem2node)
-    return passage
+    if ids:
+        return passage, dict([(y.ID,x) for x,y in elem2node.items()])
+    else:
+        return passage
 
 
 def to_site(passage):
