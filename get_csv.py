@@ -243,9 +243,9 @@ def main():
 
     parser = argparse.ArgumentParser()
     parser.add_argument('-i', '--inputFile', nargs='+', dest='inFile', help="Input UCCAMT Eval dump files")
-    parser.add_argument('-o', '--output', dest='outFile', help="Output file")
+    parser.add_argument("-n", "--ignore-not-annotated", action="store_true", help="Ignore non-annotated", default=False)
+    parser.add_argument('-o', '--output', dest='outFile', help="Output file", default="data.csv")
     args = parser.parse_args()
-
 
 
     bStats = []
@@ -253,23 +253,20 @@ def main():
     tStats = []
 
     sentsNum = 0
-    ofh = None
     keys = ("id", "sent", "user", "lang", "filename", "mteval", "numChildren", "children", "parent", "uccalabel", "uccauser", "timestamp")
-    if args.outFile:
-      ofh = open(args.outFile, "w")
-      print(",".join(keys), file=ofh)
+    ofh = open(args.outFile, "w")
+    print(",".join(keys), file=ofh)
     for inFile in args.inFile:
         LOG.info("Parsing input file: " + inFile)
         myDump = read_dump(inFile)
         sentsNum += len(myDump)
         for sent in myDump:
-            #bStats = getBasicStats(sent)
             sentStats = getNodeStats(sent)
-            nStats += sentStats
-            if ofh:
-              for node in sentStats:
+            numMissing = len([node for node  in sentStats if node['mteval'] == "M"])
+            if args.ignore_not_annotated and numMissing == len(sentStats):
+                continue
+            for node in sentStats:
                 print (",".join([str(node[k]) for k in keys]), file=ofh)
-            tStats = getTreeStats(sent)
 
 
 
