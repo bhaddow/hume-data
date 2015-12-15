@@ -43,8 +43,6 @@ def read_dump(fileName):
             data['ID'] = dfh.readline()[:-1]
 
             mtevals = dfh.readline()[2:-2]
-            if not mtevals:
-                LOG.warn('ERROR: no mt evaluations for this sentence')
             mtdict = parse_mteval(mtevals)
             data['mteval'] = mtdict
 
@@ -52,8 +50,12 @@ def read_dump(fileName):
             data['target'] = dfh.readline()[2:-2]
             data['align'] = dfh.readline()[2:-2]
 
-            xml = dfh.readline() #[2:-2]
-            elem = fromstring(xml)  
+            xml = dfh.readline()
+            version = xml[0:1]
+            if version == 'b':
+                xml = xml[2:-2]
+            elem = fromstring(xml)
+
             #passage = from_standard(elem) - old style with node ids = 0.1 etc
             passage,idMap = from_site(elem,True)
             data['annot'] = passage
@@ -65,7 +67,10 @@ def read_dump(fileName):
 
 
             #print ("Sentence id: ", data['ID'])
-            myDump.append(data)
+            if not mtevals:
+                LOG.warn('ERROR: no mt evaluations for this sentence')
+            else:
+                myDump.append(data)
         dfh.close()
 
     return myDump
@@ -184,6 +189,7 @@ def getNodeStats(sent):
     mteval  = sent['mteval']
 
     idMap = sent['idmap']
+    count = 0
 
     for key in passage.nodes:
         node = passage.nodes[key]
@@ -202,15 +208,17 @@ def getNodeStats(sent):
             if node.ID in idMap.keys():
                 id = int(idMap[node.ID])
                 if  id in mteval:
-                    #print ("Node", node.ID, "Map", idMap[node.ID], "Eval:", mteval[id])
                     storeNode["mteval"] = getCode(mteval[id])
                 else:
-                    #print ("Missing MT node evaluation")
+                    LOG.warn("Missing MT node evaluation ID:%s id:%s", node.ID, id)
+                    count += 1
                     storeNode["mteval"] = getCode(0)
             else:
+                count += 1
+                LOG.warn ("Missing MT node evaluation ID: %s" % node.ID)
                 storeNode["mteval"] = getCode(0)
             stats.append(storeNode)
-    return stats
+    return stats,count
 
 
 
@@ -260,13 +268,16 @@ def main():
         LOG.info("Parsing input file: " + inFile)
         myDump = read_dump(inFile)
         sentsNum += len(myDump)
+        count = 0
         for sent in myDump:
-            sentStats = getNodeStats(sent)
+            sentStats,c = getNodeStats(sent)
+            count += c
             numMissing = len([node for node  in sentStats if node['mteval'] == "M"])
             if args.ignore_not_annotated and numMissing == len(sentStats):
                 continue
             for node in sentStats:
                 print (",".join([str(node[k]) for k in keys]), file=ofh)
+        LOG.info ("Missing count = %d", count)
 
 
 
