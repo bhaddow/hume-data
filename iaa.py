@@ -41,6 +41,7 @@ def main():
         except:
           kappa = "Failed"
       print("UCCA label: %3s  Kappa: %s" % (label,kappa))
+      # Comment out this to get all CMs
       if code == "pl" and label == "H":
         print(cm)
 
