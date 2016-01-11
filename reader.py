@@ -17,7 +17,7 @@ from ucca.convert import *
 LOG = logging.getLogger(__name__)
 
 AnnotatedSentence = namedtuple('AnnotatedSentence',
-  ['sent_id', 'annot_id', 'lang', 'filename', 'ucca_annot_id', 'source', 'target', 'align',  'ucca_tree', 'id_map', 'mtevals', 'timestamp'])
+  ['sent_id', 'annot_id', 'lang', 'filename', 'ucca_annot_id', 'source', 'target', 'align',  'ucca_tree', 'mt_annotation', 'timestamp'])
 
 ANNOTATION_KEY = {65: 'A', 66: 'B', 71 : 'G', 79 : 'O', 82 : 'R'}
 
@@ -58,15 +58,19 @@ def get_sentences(filenames):
         ucca_annot = read_string(dfh)
         timestamp = dfh.readline()[:-1]
 
+        #decode mt annotation
+        invert_id_map = {int(v):k for k,v in idMap.items()}
+        #FIXME Why do some mt evaluations not map to nodes?
+        mt_annotation = {invert_id_map.get(node_number, None) : ANNOTATION_KEY[mt_annot] for node_number,mt_annot in mtevals}
 
-        annot = AnnotatedSentence(sent_id, annot_id, lang, filename, ucca_annot, source, target, align, passage, idMap, mtevals, timestamp)
+        annot = AnnotatedSentence(sent_id, annot_id, lang, filename, ucca_annot, source, target, align, passage, mt_annotation, timestamp)
         yield annot
 
 
 
 
 def main():
-    logging.basicConfig(format='%(asctime)s %(levelname)s: %(message)s', datefmt='%Y-%m-%d %H:%M:%S', level=logging.DEBUG)
+    logging.basicConfig(format='%(asctime)s %(levelname)s: %(name)s: %(message)s', datefmt='%Y-%m-%d %H:%M:%S', level=logging.DEBUG)
     parser = argparse.ArgumentParser()
     parser.add_argument('-i', '--inputFile', nargs='+', dest='inFile', help="Input UCCAMT Eval dump files")
     args = parser.parse_args()
