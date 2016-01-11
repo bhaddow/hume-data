@@ -30,18 +30,19 @@ def main():
     parser.add_argument('-o', '--outputFile',  dest='outFile', help="Output csv file", default="sentences.csv")
     args = parser.parse_args()
 
-    # Load references
+    # Load references and bleu
     references = {}
+    bleus = {}
     sources = []
     with open("data/texts/source.en") as sfh:
       sources = [deescape(line[:-1]) for line in sfh.readlines()]
     for lang in "cs", "de", "pl", "ro":
-      with open("data/texts/reference." + lang) as rfh:
+      with open("data/texts/reference." + lang) as rfh,\
+        open("data/texts/bleu." + lang) as bfh:
         line_no = 0
-        for line in rfh:
-          references[(lang,sources[line_no])] = line[:-1]
+        for rline,bline in zip(rfh,bfh):
+          references[(lang,sources[line_no])] = (rline[:-1], float(bline[:-1]))
           line_no += 1
-          #print (lang,sources[line_no])
 
     inFile = args.inFile
     mt_keys = list(ANNOTATION_KEY.values()) + ["M"]
@@ -59,8 +60,9 @@ def main():
         fields.append(sent.lang)
         fields.append(sent.source)
         fields.append(sent.target)
-        fields.append(references[(sent.lang,deescape(sent.source))]) 
-        fields.append(0) #TODO: bleu
+        ref,bleu = references[(sent.lang,deescape(sent.source))]
+        fields.append(ref)
+        fields.append(bleu)
 
         # ucca nodes and annotations
         mt_eval_counts = Counter()
