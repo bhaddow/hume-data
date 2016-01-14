@@ -53,6 +53,7 @@ def get_sentences(filenames):
         xml = read_string(dfh)
         elem = fromstring(xml)
         passage,idMap = from_site(elem,True)
+        idMap['1.1'] = '1'
 
         source = read_string(dfh)
         ucca_annot = read_string(dfh)

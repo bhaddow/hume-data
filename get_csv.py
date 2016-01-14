@@ -1,13 +1,15 @@
 #!/usr/bin/env python3
+import argparse
+import glob
 import logging
+import pprint
+
 from xml.etree.ElementTree import ElementTree, tostring, fromstring
 from xml.dom import minidom
-import argparse
 
 from ucca.convert import *
 from ucca import core, layer0, layer1, convert, util, scenes
 
-import pprint
 
 LOG = logging.getLogger(__name__)
 
@@ -58,6 +60,7 @@ def read_dump(fileName):
 
             #passage = from_standard(elem) - old style with node ids = 0.1 etc
             passage,idMap = from_site(elem,True)
+            idMap['1.1'] = '1'
             data['annot'] = passage
             data['idmap'] = idMap
 
@@ -252,8 +255,11 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('-i', '--inputFile', nargs='+', dest='inFile', help="Input UCCAMT Eval dump files")
     parser.add_argument("-n", "--ignore-not-annotated", action="store_true", help="Ignore non-annotated", default=False)
-    parser.add_argument('-o', '--output', dest='outFile', help="Output file", default="data.csv")
+    parser.add_argument('-o', '--output', dest='outFile', help="Output file", default="nodes.csv")
     args = parser.parse_args()
+
+    if not args.inFile:
+      args.inFile = glob.glob("data/raw/*")
 
 
     bStats = []
