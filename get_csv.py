@@ -43,6 +43,8 @@ def read_dump(fileName):
             data['lang'] = annot[-3:-1]
             data['user'] = annot[-3:]
             data['ID'] = dfh.readline()[:-1]
+            if int(data['ID']) < 0: 
+              data['ID'] = str(1600 + int(data['ID']))
 
             mtevals = dfh.readline()[2:-2]
             mtdict = parse_mteval(mtevals)

@@ -45,6 +45,8 @@ def get_sentences(filenames):
         lang = filename[-3:-1]
         annot_id = filename[-3:]
         sent_id = eval(dfh.readline())
+        if int(sent_id) < 0:
+          sent_id = str(int(sent_id) + 1600)
         mtevals = parse_pairs(read_string(dfh))
         untok_source = read_string(dfh)
         target = read_string(dfh)
