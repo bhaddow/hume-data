@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 #
-# Create a csv entry for each sentence, containing detail info about the sentence and its annotation
+# Create csv files with details of sentences and nodes
 #
 
 import argparse
@@ -27,7 +27,8 @@ def main():
     logging.basicConfig(format='%(asctime)s %(levelname)s: %(name)s: %(message)s', datefmt='%Y-%m-%d %H:%M:%S', level=logging.DEBUG)
     parser = argparse.ArgumentParser()
     parser.add_argument('-i', '--inputFile', nargs='+', dest='inFile', help="Input UCCAMT Eval dump files")
-    parser.add_argument('-o', '--outputFile',  dest='outFile', help="Output csv file", default="sentences.csv")
+    parser.add_argument('-s', '--sentenceFile',   help="Sentence csv file", default="sentences.csv")
+    parser.add_argument('-n', '--nodeFile',  help="Node csv file", default="nodes.csv")
     args = parser.parse_args()
 
     # Load references and bleu
@@ -47,17 +48,23 @@ def main():
     inFile = args.inFile
     mt_keys = list(ANNOTATION_KEY.values()) + ["M"]
     mt_colkeys = ["mteval_{}".format(key) for key in mt_keys]
-    with open(args.outFile, "w") as csvfh:
-      print("sent_id,annot_id,lang,source,target,reference,bleu,ucca_node_count,", file=csvfh, end="")
+    with open(args.sentenceFile, "w") as csvfh,\
+      open(args.nodeFile, "w") as ncsvfh:
+      print("sent_id,annot_id,ucca_annot_id,lang,timestamp,source,target,reference,bleu,ucca_node_count,", file=csvfh, end="")
       print("ucca_H,", file=csvfh, end="")
       print(",".join(mt_colkeys), file=csvfh,end="")
       print(file=csvfh)
+
+      print("node_id,sent_id,annot_id,lang,mt_label,child_count,children,parent,ucc_label", file=ncsvfh)
+
       csv_writer = csv.writer(csvfh,  lineterminator=os.linesep)
       for sent in get_sentences(inFile):
         fields = []
         fields.append(sent.sent_id)
         fields.append(sent.annot_id)
+        fields.append(sent.ucca_annot_id)
         fields.append(sent.lang)
+        fields.append(sent.timestamp)
         fields.append(sent.source)
         fields.append(sent.target)
         ref,bleu = references[(sent.lang,deescape(sent.source))]
