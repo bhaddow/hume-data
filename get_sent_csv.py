@@ -80,6 +80,15 @@ def main():
           mt_annot = sent.mt_annotation.get(node.ID, "M")
           mt_eval_counts[mt_annot] += 1
           ucca_counts[node.ftag] += 1
+          # Update the node file
+          child_count = len(node.children)
+          children = " ".join([child.ID for child in node.children])
+          parent = "0"
+          if node.fparent: parent = node.fparent.ID
+          tag = node.ftag
+          if not tag: tag = "root"
+          print(",".join((node.ID, str(sent.sent_id), sent.annot_id, sent.lang, mt_annot, \
+            str(child_count), children, parent, tag )), file=ncsvfh)
         fields.append(sum(mt_eval_counts.values()))
         fields.append(ucca_counts["H"])
         fields += [mt_eval_counts[key] for key in mt_keys]
