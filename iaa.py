@@ -1,10 +1,68 @@
 #!/usr/bin/env python
 from __future__ import print_function
 
+import argparse
+import logging
+import sys
 import pandas
+
 from  pandas_confusion import ConfusionMatrix
 
+LANGCODES = ("Romanian","ro"), ("Polish", "pl")
+
+def print_overall_stats(by_lang,args):
+  print("Counts of doubly annotated nodes") 
+  node_count = len(by_lang)
+  sentence_count = len(by_lang['sent_id'].value_counts())
+  print("Sentence count: {}; Node count: {}".format(sentence_count, node_count))
+
+def print_overall_iaa(by_lang, args):
+  groups = (("A", "B", "R", "O", "G"),)
+  if args.separate_label_groups:
+    groups = (("A", "B"), ("R", "O", "G"),)
+  for group in groups:
+    print("Considering labels: " +  str(group))
+    by_label = by_lang[\
+      (by_lang['mt_label_x'].isin(group)) & (by_lang['mt_label_y'].isin(group))]
+    print("Confusion matrix")
+    cm = ConfusionMatrix(by_label['mt_label_x'], by_label['mt_label_y'], \
+      true_name="annot_1", pred_name="annot_2")
+    print(cm)
+    print("Kappa: %7.5f" % cm.stats()['overall']['Kappa'])
+
 def main():
+  parser = argparse.ArgumentParser()
+  parser.add_argument("-n", "--node-file", default="nodes.csv", \
+    help="CSV file containing the node data")
+  parser.add_argument("--exclude-missing", default=True, action="store_true",
+    help="Excluding nodes that either annotator has missed")
+  parser.add_argument("--separate-label-groups", default=True, action="store_true",
+    help="Treat A,B and R,G,O separately")
+    
+
+  args = parser.parse_args()
+
+  allnodes = pandas.read_csv(args.node_file, converters={'node_id': str, 'parent' : str})
+
+  # Generate records of multiply-annotated nodes
+  # Join to find nodes annotated by each annotator
+  merged = allnodes.merge(allnodes, on = ["node_id", "sent_id", "lang"])
+  # Only want records where annotators do not much. Use an ordering
+  # so we just get (pl1, pl2) and not (pl2, pl1)
+  agree = merged[(merged["annot_id_x"] < merged["annot_id_y"])]
+  # Optionally exclude missing annotations. Many of these are when one annotator has missed
+  # the node, or the sentences. However some are legitimate, when a leaf node is not required
+  # in the target language (such as an article)
+  if args.exclude_missing: agree = agree[(agree["mt_label_x"] != "M") & (agree["mt_label_y"] != "M")]
+
+  for lang, code in LANGCODES:
+    by_lang = agree[agree['lang'] == code]
+    print ("************{}*************".format(lang))
+    print_overall_stats(by_lang,args)
+    print_overall_iaa(by_lang, args)
+    print ()
+
+
 #  alldata = pandas.read_csv("data.csv", converters={'id': str, 'parent' : str})
 #  merged = alldata.merge(alldata, on = ["id", "sent", "lang"])
 #  agree  = merged[(merged["user_x"] <  merged["user_y"])]

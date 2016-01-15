@@ -55,7 +55,7 @@ def main():
       print(",".join(mt_colkeys), file=csvfh,end="")
       print(file=csvfh)
 
-      print("node_id,sent_id,annot_id,lang,mt_label,child_count,children,parent,ucc_label", file=ncsvfh)
+      print("node_id,sent_id,annot_id,lang,mt_label,child_count,children,parent,ucca_label", file=ncsvfh)
 
       csv_writer = csv.writer(csvfh,  lineterminator=os.linesep)
       for sent in get_sentences(inFile):

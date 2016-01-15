@@ -1,0 +1,18 @@
+Data
+----
+data/raw - The dumps from the UCCA tool
+data/texts - The source, target (mt output) and reference.
+
+
+Code
+----
+get_csv.py        Get all UCCA nodes and their annotation as csv (db) format
+get_dups.py       Check for duplicate entries in the data
+get_refs.py       Extract the references from svn, and match up the lines
+iaa.py            IAA calculation (uses output of get_csv.py)
+reader.py         Iterator for annotated sentences
+sample_annot.py   Testing the UCCA interface ...
+trees.py          Drawing of trees (unfinished)
+ucca_score.py     Calculation of UCCA score
+
+get_csv_OLD.py    Original code for parsing trees.
