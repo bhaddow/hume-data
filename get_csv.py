@@ -49,13 +49,13 @@ def main():
     mt_keys = list(ANNOTATION_KEY.values()) + ["M"]
     mt_colkeys = ["mteval_{}".format(key) for key in mt_keys]
     with open(args.sentenceFile, "w") as csvfh,\
-      open(args.nodeFile, "w") as ncsvfh:
+        open(args.nodeFile, "w") as ncsvfh:
       print("sent_id,annot_id,ucca_annot_id,lang,timestamp,source,target,reference,bleu,ucca_node_count,", file=csvfh, end="")
       print("ucca_H,", file=csvfh, end="")
       print(",".join(mt_colkeys), file=csvfh,end="")
       print(file=csvfh)
 
-      print("node_id,sent_id,annot_id,lang,mt_label,child_count,children,parent,ucca_label", file=ncsvfh)
+      print("node_id,sent_id,annot_id,lang,mt_label,child_count,children,parent,ucca_label,pos,source,target", file=ncsvfh)
 
       csv_writer = csv.writer(csvfh,  lineterminator=os.linesep)
       for sent in get_sentences(inFile):
@@ -72,6 +72,8 @@ def main():
         fields.append(bleu)
 
         # ucca nodes and annotations
+        target_tokens = sent.target.split()
+        align_map = {src: target_tokens[tgt] for src,tgt in sent.align}
         mt_eval_counts = Counter()
         ucca_counts = Counter()
         for node in sent.ucca_tree.nodes:
@@ -87,8 +89,17 @@ def main():
           if node.fparent: parent = node.fparent.ID
           tag = node.ftag
           if not tag: tag = "root"
+          pos,source,target = "-1","",""
+          if node.children and node.children[0].tag == "Word":
+            #print(node.ID, str(sent.sent_id), sent.annot_id)
+            def get_src_tgt(child):
+              if child.tag == "Word":
+                return child.text, align_map.get(child.para_pos-1, "UNALIGNED"), str(child.para_pos-1)
+              elif child.tag == "PNCT":
+                return get_src_tgt(node.children[0])
+            source,target,pos = [" ".join(l) for l in list(zip(*[get_src_tgt(node) for node in node.children]))]
           print(",".join((node.ID, str(sent.sent_id), sent.annot_id, sent.lang, mt_annot, \
-            str(child_count), children, parent, tag )), file=ncsvfh)
+            str(child_count), children, parent, tag, pos, source, target )), file=ncsvfh)
         fields.append(sum(mt_eval_counts.values()))
         fields.append(ucca_counts["H"])
         fields += [mt_eval_counts[key] for key in mt_keys]
