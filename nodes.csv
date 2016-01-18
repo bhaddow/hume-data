@@ -1166,7 +1166,7 @@ node_id,sent_id,annot_id,lang,mt_label,child_count,children,parent,ucca_label,po
 1.16,191,ro2,ro,G,1,0.11,1.14,C,10,leg,piciorul
 1.17,191,ro2,ro,B,3,1.18 1.19 1.20,1.2,A,-1,,
 1.14,191,ro2,ro,M,2,1.15 1.16,1.2,A,-1,,
-1.15,191,ro2,ro,G,1,0.10,1.14,E,9,the,,
+1.15,191,ro2,ro,G,1,0.10,1.14,E,9,the,","
 1.12,191,ro2,ro,G,1,0.8,1.2,D,7,slowly,încet
 1.13,191,ro2,ro,B,2,0.9 0.12,1.2,P,8 11,take out,UNALIGNED UNALIGNED
 1.10,191,ro2,ro,G,1,0.6,1.3,C,5,weight,greutate
@@ -1254,12 +1254,12 @@ node_id,sent_id,annot_id,lang,mt_label,child_count,children,parent,ucca_label,po
 1.18,159,ro2,ro,G,1,0.13,1.17,E,12,regular,regulate
 1.19,159,ro2,ro,O,1,0.14,1.17,C,13,exercise,exerciţii
 1.8,159,ro2,ro,B,3,0.4 0.5 0.6,1.5,E,3 4 5,Introduction to exercise,Introducere să UNALIGNED
-1.9,159,ro2,ro,O,1,0.7,1.5,F,6,",&quot;
+1.9,159,ro2,ro,O,1,0.7,1.5,F,6,"""",&quot;
 1.41,159,ro2,ro,O,1,0.30,1.40,F,29,to,pentru
 1.40,159,ro2,ro,B,2,1.41 1.42,1.33,A,-1,,
 1.42,159,ro2,ro,R,1,0.31,1.40,C,30,help,UNALIGNED
 1.6,159,ro2,ro,O,1,0.2,1.5,E,1,our,ne
-1.7,159,ro2,ro,O,1,0.3,1.5,F,2,",&quot;
+1.7,159,ro2,ro,O,1,0.3,1.5,F,2,"""",&quot;
 1.1,159,ro2,ro,B,8,1.2 1.11 1.12 1.27 1.28 1.29 1.30 1.43,0,root,-1,,
 1.2,159,ro2,ro,B,3,1.3 1.4 1.5,1.1,H,-1,,
 1.3,159,ro2,ro,M,0,,1.2,A,-1,,
@@ -3091,7 +3091,7 @@ node_id,sent_id,annot_id,lang,mt_label,child_count,children,parent,ucca_label,po
 1.14,299,pl1,pl,R,1,0.11,1.13,D,10,try,przesunąć
 1.15,299,pl1,pl,O,1,0.12,1.13,P,11,moving,przesunąć
 1.13,299,pl1,pl,B,4,1.14 1.15 1.16 1.19,1.1,H,-1,,
-1.10,299,pl1,pl,G,1,0.7,1.9,A,6,you,,
+1.10,299,pl1,pl,G,1,0.7,1.9,A,6,you,","
 1.11,299,pl1,pl,A,2,0.8 0.9,1.9,P,7 8,get up,wstaniesz wstaniesz
 1.18,299,pl1,pl,G,1,0.14,1.16,C,13,legs,nogi
 1.19,299,pl1,pl,B,5,1.20 1.21 1.22 1.23 1.24,1.13,D,-1,,
@@ -3116,7 +3116,7 @@ node_id,sent_id,annot_id,lang,mt_label,child_count,children,parent,ucca_label,po
 1.14,235,pl1,pl,R,1,0.10,1.1,L,9,and,wstań
 1.15,235,pl1,pl,B,2,1.16 1.17,1.1,H,-1,,
 1.12,235,pl1,pl,R,1,0.7,1.11,P,6,stand,złączone
-1.13,235,pl1,pl,B,2,0.8 0.9,1.11,D,7 8,up tall,, wstań
+1.13,235,pl1,pl,B,2,0.8 0.9,1.11,D,7 8,up tall,", wstań"
 1.11,235,pl1,pl,B,2,1.12 1.13,1.1,H,-1,,
 1.18,235,pl1,pl,R,1,0.13,1.17,R,12,to,się
 1.19,235,pl1,pl,R,1,0.14,1.17,C,13,something,się
@@ -3599,7 +3599,7 @@ node_id,sent_id,annot_id,lang,mt_label,child_count,children,parent,ucca_label,po
 1.12,473,ro2,ro,O,1,0.9,1.2,P,8,cause,provoca
 1.13,473,ro2,ro,G,1,0.10,1.2,A,9,constipation,constipaţie
 1.10,473,ro2,ro,G,1,0.7,1.2,D,6,may,poate
-1.11,473,ro2,ro,G,1,0.8,1.2,G,7,also,,
+1.11,473,ro2,ro,G,1,0.8,1.2,G,7,also,","
 1.9,473,ro2,ro,A,2,0.5 0.6,1.3,C,4 5,channel blocker,canalelor blocant
 1.4,473,ro2,ro,A,3,1.5 1.6 1.7,1.3,E,-1,,
 1.5,473,ro2,ro,G,1,0.1,1.4,E,0,Certain,Anumite
@@ -5501,7 +5501,7 @@ node_id,sent_id,annot_id,lang,mt_label,child_count,children,parent,ucca_label,po
 1.10,601,ro2,ro,A,4,1.11 1.12 1.13 1.14,1.9,A,-1,,
 1.11,601,ro2,ro,G,1,0.5,1.10,E,4,their,UNALIGNED
 1.18,601,ro2,ro,G,1,0.11,1.9,D,10,may,poate
-1.19,601,ro2,ro,G,1,0.12,1.9,R,11,also,,
+1.19,601,ro2,ro,G,1,0.12,1.9,R,11,also,","
 1.30,601,ro2,ro,G,1,0.20,1.28,E,19,catheter,cateterului
 1.31,601,ro2,ro,G,1,0.21,1.28,C,20,removal,îndepărtarea
 1.8,601,ro2,ro,G,1,0.4,1.7,R,3,that,că
@@ -5833,7 +5833,7 @@ node_id,sent_id,annot_id,lang,mt_label,child_count,children,parent,ucca_label,po
 1.11,23,ro2,ro,G,1,0.6,1.10,F,5,be,fi
 1.18,23,ro2,ro,A,3,1.19 1.20 1.21,1.2,A,-1,,
 1.19,23,ro2,ro,G,1,0.12,1.18,R,11,in,la
-1.8,23,ro2,ro,G,1,0.5,1.2,G,4,also,,
+1.8,23,ro2,ro,G,1,0.5,1.2,G,4,also,","
 1.9,23,ro2,ro,B,3,1.10 1.13 1.14,1.2,S,-1,,
 1.4,23,ro2,ro,O,1,0.1,1.3,C,0,Swimming,Înot
 1.5,23,ro2,ro,G,1,0.2,1.3,N,1,and,şi
@@ -7254,21 +7254,21 @@ node_id,sent_id,annot_id,lang,mt_label,child_count,children,parent,ucca_label,po
 1.5,159,cs1,cs,B,5,1.6 1.7 1.8 1.9 1.10,1.2,A,-1,,
 1.16,159,cs1,cs,G,1,0.12,1.15,F,11,why,proč
 1.17,159,cs1,cs,A,2,1.18 1.19,1.15,A,-1,,
-1.14,159,cs1,cs,O,2,0.10 0.11,1.12,P,9 10,find out,, ,
+1.14,159,cs1,cs,O,2,0.10 0.11,1.12,P,9 10,find out,", ,"
 1.15,159,cs1,cs,A,4,1.16 1.17 1.20 1.23,1.12,A,-1,,
 1.12,159,cs1,cs,A,3,1.13 1.14 1.15,1.1,H,-1,,
 1.13,159,cs1,cs,M,0,,1.12,A,-1,,
 1.10,159,cs1,cs,G,1,0.8,1.5,C,7,video,video
-1.11,159,cs1,cs,G,1,0.9,1.1,L,8,to,,
+1.11,159,cs1,cs,G,1,0.9,1.1,L,8,to,","
 1.18,159,cs1,cs,G,1,0.13,1.17,E,12,regular,pravidelné
 1.19,159,cs1,cs,G,1,0.14,1.17,C,13,exercise,cvičení
 1.8,159,cs1,cs,R,3,0.4 0.5 0.6,1.5,E,3 4 5,Introduction to exercise,Úvod UNALIGNED vykonávat
-1.9,159,cs1,cs,R,1,0.7,1.5,F,6,",&quot;
+1.9,159,cs1,cs,R,1,0.7,1.5,F,6,"""",&quot;
 1.41,159,cs1,cs,R,1,0.30,1.40,F,29,to,UNALIGNED
 1.40,159,cs1,cs,B,2,1.41 1.42,1.33,A,-1,,
 1.42,159,cs1,cs,R,1,0.31,1.40,C,30,help,UNALIGNED
 1.6,159,cs1,cs,R,1,0.2,1.5,E,1,our,UNALIGNED
-1.7,159,cs1,cs,R,1,0.3,1.5,F,2,",&quot;
+1.7,159,cs1,cs,R,1,0.3,1.5,F,2,"""",&quot;
 1.1,159,cs1,cs,B,8,1.2 1.11 1.12 1.27 1.28 1.29 1.30 1.43,0,root,-1,,
 1.2,159,cs1,cs,A,3,1.3 1.4 1.5,1.1,H,-1,,
 1.3,159,cs1,cs,M,0,,1.2,A,-1,,
@@ -8230,11 +8230,11 @@ node_id,sent_id,annot_id,lang,mt_label,child_count,children,parent,ucca_label,po
 1.4,275,de1,de,A,3,1.5 1.6 1.7,1.2,A,-1,,
 1.5,275,de1,de,G,1,0.2,1.4,E,1,your,Ihre
 1.6,211,de1,de,O,1,0.3,1.2,D,2,will,wird
-1.7,211,de1,de,G,1,0.4,1.2,D,3,help,,
+1.7,211,de1,de,G,1,0.4,1.2,D,3,help,","
 1.1,211,de1,de,B,2,1.2 1.21,0,root,-1,,
 1.2,211,de1,de,M,6,1.3 1.6 1.7 1.8 1.9 1.10,1.1,H,-1,,
 1.3,211,de1,de,A,2,1.4 1.5,1.2,A,-1,,
-1.8,211,de1,de,G,1,0.5,1.2,F,4,to,,
+1.8,211,de1,de,G,1,0.5,1.2,F,4,to,","
 1.16,211,de1,de,G,1,0.10,1.15,A,9,muscle,Muskelkraft
 1.17,211,de1,de,G,1,0.11,1.15,S,10,strength,Muskelkraft
 1.15,211,de1,de,A,3,1.12 1.16 1.17,1.10,C,-1,,
@@ -8244,7 +8244,7 @@ node_id,sent_id,annot_id,lang,mt_label,child_count,children,parent,ucca_label,po
 1.11,211,de1,de,A,2,1.12 1.13,1.10,C,-1,,
 1.18,211,de1,de,G,1,0.12,1.10,N,11,and,und
 1.19,211,de1,de,A,2,1.12 1.20,1.10,C,-1,,
-1.9,211,de1,de,R,1,0.6,1.2,P,5,improve,,
+1.9,211,de1,de,R,1,0.6,1.2,P,5,improve,","
 1.4,211,de1,de,G,1,0.1,1.3,E,0,These,Diese
 1.20,211,de1,de,G,1,0.13,1.19,S,12,balance,Balance
 1.5,211,de1,de,G,1,0.2,1.3,C,1,exercises,Übungen
@@ -8460,7 +8460,7 @@ node_id,sent_id,annot_id,lang,mt_label,child_count,children,parent,ucca_label,po
 1.14,235,de1,de,R,1,0.10,1.1,L,9,and,steh
 1.15,235,de1,de,B,2,1.16 1.17,1.1,H,-1,,
 1.12,235,de1,de,R,1,0.7,1.11,P,6,stand,auseinander
-1.13,235,de1,de,R,2,0.8 0.9,1.11,D,7 8,up tall,, steh
+1.13,235,de1,de,R,2,0.8 0.9,1.11,D,7 8,up tall,", steh"
 1.11,235,de1,de,B,2,1.12 1.13,1.1,H,-1,,
 1.18,235,de1,de,R,1,0.13,1.17,R,12,to,halten
 1.19,235,de1,de,R,1,0.14,1.17,C,13,something,an
@@ -8486,7 +8486,7 @@ node_id,sent_id,annot_id,lang,mt_label,child_count,children,parent,ucca_label,po
 1.46,147,de1,de,G,1,0.33,1.31,S,32,suitable,geeignet
 1.41,147,de1,de,A,1,1.42,1.35,C,-1,,
 1.40,147,de1,de,G,1,0.28,1.35,N,27,or,oder
-1.43,147,de1,de,R,1,0.30,1.31,F,29,that,,
+1.43,147,de1,de,R,1,0.30,1.31,F,29,that,","
 1.42,147,de1,de,G,1,0.29,1.41,P,28,activities,Aktivitäten
 1.4,147,de1,de,G,1,0.2,1.3,A,1,you,Sie
 1.5,147,de1,de,R,1,0.3,1.3,F,2,have,UNALIGNED
@@ -8576,7 +8576,7 @@ node_id,sent_id,annot_id,lang,mt_label,child_count,children,parent,ucca_label,po
 1.21,11,de1,de,O,1,0.16,1.18,C,15,fats,Fette
 1.20,11,de1,de,O,1,0.15,1.18,E,14,saturated,gesättigte
 1.5,11,de1,de,G,1,0.2,1.3,C,1,foods,Milchprodukte
-1.6,307,de1,de,G,1,0.4,1.4,F,3,to,,
+1.6,307,de1,de,G,1,0.4,1.4,F,3,to,","
 1.7,307,de1,de,B,2,0.5 0.7,1.4,P,4 6,take pulse,Sie Puls
 1.1,307,de1,de,B,2,1.2 1.14,0,root,-1,,
 1.2,307,de1,de,B,3,1.3 1.4 1.9,1.1,H,-1,,
@@ -8634,7 +8634,7 @@ node_id,sent_id,annot_id,lang,mt_label,child_count,children,parent,ucca_label,po
 1.12,243,de1,de,O,1,0.9,1.1,L,8,to,zu
 1.13,243,de1,de,B,2,1.14 1.15,1.1,H,-1,,
 1.11,243,de1,de,G,1,0.8,1.4,C,7,video,Video
-1.18,243,de1,de,R,1,0.12,1.16,F,11,to,,
+1.18,243,de1,de,R,1,0.12,1.16,F,11,to,","
 1.19,243,de1,de,G,1,0.13,1.16,F,12,do,machen
 1.8,243,de1,de,O,2,0.4 0.5,1.7,E,3 4,Level 3,Level 3
 1.9,243,de1,de,G,1,0.6,1.7,C,5,exercise,Übung
@@ -8670,7 +8670,7 @@ node_id,sent_id,annot_id,lang,mt_label,child_count,children,parent,ucca_label,po
 1.21,51,de1,de,G,1,0.16,1.17,C,15,homes,Häusern
 1.20,51,de1,de,G,1,0.15,1.17,F,14,own,eigenen
 1.5,51,de1,de,G,1,0.3,1.2,D,2,less,weniger
-1.6,131,de1,de,R,1,0.4,1.2,F,3,to,,
+1.6,131,de1,de,R,1,0.4,1.2,F,3,to,","
 1.7,131,de1,de,R,1,0.5,1.2,F,4,do,UNALIGNED
 1.1,131,de1,de,B,2,1.2 1.17,0,root,-1,,
 1.2,131,de1,de,B,7,1.3 1.4 1.5 1.6 1.7 1.8 1.11,1.1,H,-1,,
@@ -9660,7 +9660,7 @@ node_id,sent_id,annot_id,lang,mt_label,child_count,children,parent,ucca_label,po
 1.14,235,ro1,ro,R,1,0.10,1.1,L,9,and,UNALIGNED
 1.15,235,ro1,ro,B,2,1.16 1.17,1.1,H,-1,,
 1.12,235,ro1,ro,R,1,0.7,1.11,P,6,stand,depărtate
-1.13,235,ro1,ro,B,2,0.8 0.9,1.11,D,7 8,up tall,, UNALIGNED
+1.13,235,ro1,ro,B,2,0.8 0.9,1.11,D,7 8,up tall,", UNALIGNED"
 1.11,235,ro1,ro,B,2,1.12 1.13,1.1,H,-1,,
 1.18,235,ro1,ro,R,1,0.13,1.17,R,12,to,ţineţi
 1.19,235,ro1,ro,R,1,0.14,1.17,C,13,something,ţineţi
@@ -10496,7 +10496,7 @@ node_id,sent_id,annot_id,lang,mt_label,child_count,children,parent,ucca_label,po
 1.11,445,cs1,cs,G,2,0.7 0.8,1.10,R,6 7,in which,způsobem způsobem
 1.18,445,cs1,cs,G,1,0.13,1.16,E,12,be,být
 1.19,445,cs1,cs,G,1,0.14,1.16,C,13,measured,měřen
-1.8,445,cs1,cs,G,1,0.5,1.7,E,4,the,,
+1.8,445,cs1,cs,G,1,0.5,1.7,E,4,the,","
 1.9,445,cs1,cs,G,1,0.6,1.7,C,5,ways,způsobem
 1.4,445,cs1,cs,A,3,1.5 1.6 1.7,1.2,A,-1,,
 1.20,445,cs1,cs,G,1,0.15,1.2,D,14,below,níže
@@ -10510,7 +10510,7 @@ node_id,sent_id,annot_id,lang,mt_label,child_count,children,parent,ucca_label,po
 1.16,443,cs1,cs,R,1,0.11,1.14,P,10,take,UNALIGNED
 1.17,443,cs1,cs,R,1,0.12,1.14,A,11,home,UNALIGNED
 1.14,443,cs1,cs,B,3,1.15 1.16 1.17,1.8,E,-1,,
-1.15,443,cs1,cs,R,1,0.10,1.14,R,9,to,,
+1.15,443,cs1,cs,R,1,0.10,1.14,R,9,to,","
 1.12,443,cs1,cs,O,1,0.8,1.10,S,7,pressure,tlak
 1.13,443,cs1,cs,R,1,0.9,1.8,C,8,device,zařízení
 1.10,443,cs1,cs,A,2,1.11 1.12,1.8,E,-1,,
@@ -13599,7 +13599,7 @@ node_id,sent_id,annot_id,lang,mt_label,child_count,children,parent,ucca_label,po
 1.14,299,pl2,pl,R,1,0.11,1.13,D,10,try,przesunąć
 1.15,299,pl2,pl,R,1,0.12,1.13,P,11,moving,przesunąć
 1.13,299,pl2,pl,B,4,1.14 1.15 1.16 1.19,1.1,H,-1,,
-1.10,299,pl2,pl,G,1,0.7,1.9,A,6,you,,
+1.10,299,pl2,pl,G,1,0.7,1.9,A,6,you,","
 1.11,299,pl2,pl,O,2,0.8 0.9,1.9,P,7 8,get up,wstaniesz wstaniesz
 1.18,299,pl2,pl,G,1,0.14,1.16,C,13,legs,nogi
 1.19,299,pl2,pl,B,5,1.20 1.21 1.22 1.23 1.24,1.13,D,-1,,
@@ -13962,7 +13962,7 @@ node_id,sent_id,annot_id,lang,mt_label,child_count,children,parent,ucca_label,po
 1.12,63,pl2,pl,O,1,0.7,1.10,P,6,notice,zauważy
 1.13,63,pl2,pl,A,2,1.14 1.17,1.10,A,-1,,
 1.10,63,pl2,pl,A,3,1.11 1.12 1.13,1.1,H,-1,,
-1.11,63,pl2,pl,G,1,0.6,1.10,A,5,you,,
+1.11,63,pl2,pl,G,1,0.6,1.10,A,5,you,","
 1.18,63,pl2,pl,G,1,0.10,1.17,R,9,in,w
 1.19,63,pl2,pl,G,1,0.11,1.17,E,10,your,UNALIGNED
 1.9,63,pl2,pl,G,1,0.5,1.1,L,4,if,jeśli
@@ -15121,12 +15121,12 @@ node_id,sent_id,annot_id,lang,mt_label,child_count,children,parent,ucca_label,po
 1.18,159,pl2,pl,G,1,0.13,1.17,E,12,regular,regularne
 1.19,159,pl2,pl,R,1,0.14,1.17,C,13,exercise,wykonywanie
 1.8,159,pl2,pl,R,3,0.4 0.5 0.6,1.5,E,3 4 5,Introduction to exercise,Wprowadzenie do wykonywania
-1.9,159,pl2,pl,G,1,0.7,1.5,F,6,",&quot;
+1.9,159,pl2,pl,G,1,0.7,1.5,F,6,"""",&quot;
 1.41,159,pl2,pl,O,1,0.30,1.40,F,29,to,aby
 1.40,159,pl2,pl,A,2,1.41 1.42,1.33,A,-1,,
 1.42,159,pl2,pl,O,1,0.31,1.40,C,30,help,pomóc
 1.6,159,pl2,pl,G,1,0.2,1.5,E,1,our,nasza
-1.7,159,pl2,pl,G,1,0.3,1.5,F,2,",&quot;
+1.7,159,pl2,pl,G,1,0.3,1.5,F,2,"""",&quot;
 1.1,159,pl2,pl,M,8,1.2 1.11 1.12 1.27 1.28 1.29 1.30 1.43,0,root,-1,,
 1.2,159,pl2,pl,M,3,1.3 1.4 1.5,1.1,H,-1,,
 1.3,159,pl2,pl,M,0,,1.2,A,-1,,
@@ -16850,13 +16850,13 @@ node_id,sent_id,annot_id,lang,mt_label,child_count,children,parent,ucca_label,po
 1.9,527,de1,de,R,1,0.5,1.8,R,4,of,von
 1.4,527,de1,de,G,1,0.1,1.3,R,0,In,In
 1.29,527,de1,de,R,1,0.21,1.27,C,20,improve,UNALIGNED
-1.28,527,de1,de,R,1,0.20,1.27,F,19,to,,
+1.28,527,de1,de,R,1,0.20,1.27,F,19,to,","
 1.23,527,de1,de,O,1,0.17,1.19,C,16,ways,Wegen
 1.22,527,de1,de,G,1,0.16,1.19,E,15,different,verschiedenen
 1.21,527,de1,de,G,1,0.15,1.19,E,14,several,mehreren
 1.20,527,de1,de,G,1,0.14,1.19,R,13,with,mit
 1.27,527,de1,de,B,2,1.28 1.29,1.24,P,-1,,
-1.26,527,de1,de,G,1,0.19,1.24,D,18,try,,
+1.26,527,de1,de,G,1,0.19,1.24,D,18,try,","
 1.25,527,de1,de,R,1,0.18,1.24,F,17,to,zu
 1.24,527,de1,de,B,4,1.25 1.26 1.27 1.30,1.19,E,-1,,
 1.4,87,de1,de,G,1,0.1,1.2,P,0,Eat,essen
@@ -17299,12 +17299,12 @@ node_id,sent_id,annot_id,lang,mt_label,child_count,children,parent,ucca_label,po
 1.18,159,de1,de,G,1,0.13,1.17,E,12,regular,regelmäßige
 1.19,159,de1,de,G,1,0.14,1.17,C,13,exercise,Bewegung
 1.8,159,de1,de,R,3,0.4 0.5 0.6,1.5,E,3 4 5,Introduction to exercise,Einleitung zu UNALIGNED
-1.9,159,de1,de,G,1,0.7,1.5,F,6,",&quot;
+1.9,159,de1,de,G,1,0.7,1.5,F,6,"""",&quot;
 1.41,159,de1,de,G,1,0.30,1.40,F,29,to,zu
 1.40,159,de1,de,A,2,1.41 1.42,1.33,A,-1,,
 1.42,159,de1,de,G,1,0.31,1.40,C,30,help,helfen
 1.6,159,de1,de,O,1,0.2,1.5,E,1,our,unsere
-1.7,159,de1,de,G,1,0.3,1.5,F,2,",&quot;
+1.7,159,de1,de,G,1,0.3,1.5,F,2,"""",&quot;
 1.1,159,de1,de,B,8,1.2 1.11 1.12 1.27 1.28 1.29 1.30 1.43,0,root,-1,,
 1.2,159,de1,de,A,3,1.3 1.4 1.5,1.1,H,-1,,
 1.3,159,de1,de,M,0,,1.2,A,-1,,
@@ -17740,7 +17740,7 @@ node_id,sent_id,annot_id,lang,mt_label,child_count,children,parent,ucca_label,po
 1.23,359,de1,de,G,1,0.15,1.22,R,14,with,mit
 1.22,359,de1,de,A,3,1.23 1.24 1.25,1.19,A,-1,,
 1.21,359,de1,de,O,1,0.14,1.19,S,13,comes,kommt
-1.20,359,de1,de,R,1,0.13,1.19,F,12,that,,
+1.20,359,de1,de,R,1,0.13,1.19,F,12,that,","
 1.27,359,de1,de,G,1,0.18,1.26,R,17,for,für
 1.26,359,de1,de,A,3,1.27 1.28 1.29,1.10,A,-1,,
 1.25,359,de1,de,G,1,0.17,1.22,C,16,medicine,Arzneimittel
@@ -18015,13 +18015,13 @@ node_id,sent_id,annot_id,lang,mt_label,child_count,children,parent,ucca_label,po
 1.19,143,de1,de,G,1,0.11,1.17,P,10,remember,daran
 1.48,143,de1,de,A,2,0.35 0.36,1.39,Ti,34 35,every day,jeden Tag
 1.45,143,de1,de,R,1,0.32,1.43,F,31,be,UNALIGNED
-1.44,143,de1,de,G,1,0.31,1.43,F,30,to,,
+1.44,143,de1,de,G,1,0.31,1.43,F,30,to,","
 1.47,143,de1,de,G,1,0.34,1.43,C,33,active,aktiv
 1.46,143,de1,de,G,1,0.33,1.43,E,32,physically,körperlich
 1.41,143,de1,de,G,1,0.29,1.39,D,28,should,sollten
 1.40,143,de1,de,G,1,0.28,1.39,A,27,you,Sie
 1.43,143,de1,de,B,4,1.44 1.45 1.46 1.47,1.39,S,-1,,
-1.42,143,de1,de,G,1,0.30,1.39,D,29,try,,
+1.42,143,de1,de,G,1,0.30,1.39,D,29,try,","
 1.4,143,de1,de,G,1,0.2,1.3,P,1,planning,Planung
 1.5,143,de1,de,B,3,1.6 1.7 1.13,1.3,A,-1,,
 1.6,143,de1,de,R,1,0.3,1.5,F,2,what,was
@@ -18072,7 +18072,7 @@ node_id,sent_id,annot_id,lang,mt_label,child_count,children,parent,ucca_label,po
 1.12,215,de1,de,B,3,1.13 1.14 1.15,1.1,H,-1,,
 1.13,215,de1,de,R,1,0.8,1.12,P,7,maintain,UNALIGNED
 1.10,215,de1,de,G,1,0.6,1.2,A,5,you,helfen
-1.11,215,de1,de,R,1,0.7,1.1,L,6,to,,
+1.11,215,de1,de,R,1,0.7,1.1,L,6,to,","
 1.18,215,de1,de,G,1,0.12,1.15,C,11,muscle,Muskel
 1.19,215,de1,de,A,5,1.20 1.21 1.22 1.25 1.26,1.15,E,-1,,
 1.8,215,de1,de,O,1,0.4,1.2,D,3,will,wird
@@ -19004,15 +19004,15 @@ node_id,sent_id,annot_id,lang,mt_label,child_count,children,parent,ucca_label,po
 1.2,155,cs1,cs,A,5,1.3 1.6 1.7 1.8 1.9,1.1,H,-1,,
 1.3,155,cs1,cs,A,2,1.4 1.5,1.2,A,-1,,
 1.16,155,cs1,cs,G,1,0.10,1.14,C,9,balance,rovnováhu
-1.17,155,cs1,cs,R,1,0.11,1.9,L,10,to,,
+1.17,155,cs1,cs,R,1,0.11,1.9,L,10,to,","
 1.14,155,cs1,cs,A,2,1.15 1.16,1.12,A,-1,,
 1.15,155,cs1,cs,O,1,0.9,1.14,E,8,your,rovnováhu
 1.12,155,cs1,cs,A,3,1.8 1.13 1.14,1.9,H,-1,,
 1.13,155,cs1,cs,O,1,0.8,1.12,P,7,test,test
 1.10,155,cs1,cs,G,1,0.6,1.9,R,5,how,jak
-1.11,155,cs1,cs,R,1,0.7,1.9,F,6,to,,
+1.11,155,cs1,cs,R,1,0.7,1.9,F,6,to,","
 1.18,155,cs1,cs,A,2,1.19 1.20,1.9,H,-1,,
-1.19,155,cs1,cs,O,2,0.12 0.13,1.18,P,11 12,find out,, ,
+1.19,155,cs1,cs,O,2,0.12 0.13,1.18,P,11 12,find out,", ,"
 1.8,155,cs1,cs,G,1,0.5,1.2,A,4,you,ukáže
 1.9,155,cs1,cs,A,5,1.10 1.11 1.12 1.17 1.18,1.2,A,-1,,
 1.4,155,cs1,cs,G,1,0.1,1.3,E,0,This,Toto
@@ -19091,7 +19091,7 @@ node_id,sent_id,annot_id,lang,mt_label,child_count,children,parent,ucca_label,po
 1.21,147,cs1,cs,G,1,0.15,1.1,L,14,or,nebo
 1.20,147,cs1,cs,R,1,0.14,1.18,C,13,condition,stavu
 1.27,147,cs1,cs,R,1,0.19,1.25,D,18,makes,UNALIGNED
-1.26,147,cs1,cs,R,1,0.18,1.25,R,17,that,,
+1.26,147,cs1,cs,R,1,0.18,1.25,R,17,that,","
 1.25,147,cs1,cs,B,4,1.26 1.27 1.28 1.29,1.22,E,-1,,
 1.24,147,cs1,cs,G,1,0.17,1.22,C,16,condition,onemocnění
 1.4,43,cs1,cs,G,1,0.2,1.3,A,1,you,jste
@@ -19368,7 +19368,7 @@ node_id,sent_id,annot_id,lang,mt_label,child_count,children,parent,ucca_label,po
 1.12,63,pl1,pl,G,1,0.7,1.10,P,6,notice,zauważy
 1.13,63,pl1,pl,B,2,1.14 1.17,1.10,A,-1,,
 1.10,63,pl1,pl,A,3,1.11 1.12 1.13,1.1,H,-1,,
-1.11,63,pl1,pl,G,1,0.6,1.10,A,5,you,,
+1.11,63,pl1,pl,G,1,0.6,1.10,A,5,you,","
 1.18,63,pl1,pl,G,1,0.10,1.17,R,9,in,w
 1.19,63,pl1,pl,G,1,0.11,1.17,E,10,your,UNALIGNED
 1.9,63,pl1,pl,G,1,0.5,1.1,L,4,if,jeśli
@@ -20527,12 +20527,12 @@ node_id,sent_id,annot_id,lang,mt_label,child_count,children,parent,ucca_label,po
 1.18,159,pl1,pl,G,1,0.13,1.17,E,12,regular,regularne
 1.19,159,pl1,pl,R,1,0.14,1.17,C,13,exercise,wykonywanie
 1.8,159,pl1,pl,R,3,0.4 0.5 0.6,1.5,E,3 4 5,Introduction to exercise,Wprowadzenie do wykonywania
-1.9,159,pl1,pl,G,1,0.7,1.5,F,6,",&quot;
+1.9,159,pl1,pl,G,1,0.7,1.5,F,6,"""",&quot;
 1.41,159,pl1,pl,M,1,0.30,1.40,F,29,to,aby
 1.40,159,pl1,pl,R,2,1.41 1.42,1.33,A,-1,,
 1.42,159,pl1,pl,M,1,0.31,1.40,C,30,help,pomóc
 1.6,159,pl1,pl,O,1,0.2,1.5,E,1,our,nasza
-1.7,159,pl1,pl,G,1,0.3,1.5,F,2,",&quot;
+1.7,159,pl1,pl,G,1,0.3,1.5,F,2,"""",&quot;
 1.1,159,pl1,pl,B,8,1.2 1.11 1.12 1.27 1.28 1.29 1.30 1.43,0,root,-1,,
 1.2,159,pl1,pl,B,3,1.3 1.4 1.5,1.1,H,-1,,
 1.3,159,pl1,pl,M,0,,1.2,A,-1,,
@@ -23387,7 +23387,7 @@ node_id,sent_id,annot_id,lang,mt_label,child_count,children,parent,ucca_label,po
 1.4,337,de1,de,A,2,1.5 1.6,1.3,A,-1,,
 1.5,337,de1,de,G,1,0.2,1.4,E,1,your,Ihr
 1.6,337,de1,de,G,1,0.3,1.4,C,2,GP,Arzt
-1.7,337,de1,de,G,1,0.4,1.3,P,3,thinks,,
+1.7,337,de1,de,G,1,0.4,1.3,P,3,thinks,","
 1.1,337,de1,de,B,8,1.2 1.3 1.20 1.21 1.35 1.36 1.37 1.53,0,root,-1,,
 1.2,337,de1,de,G,1,0.1,1.1,L,0,If,Wenn
 1.3,337,de1,de,A,4,1.4 1.7 1.8 1.14,1.1,H,-1,,
@@ -23432,7 +23432,7 @@ node_id,sent_id,annot_id,lang,mt_label,child_count,children,parent,ucca_label,po
 1.23,329,de1,de,G,1,0.16,1.17,A,15,pulse,Puls
 1.22,329,de1,de,G,1,0.15,1.17,A,14,your,Ihren
 1.21,329,de1,de,R,1,0.14,1.19,C,13,take,Sie
-1.20,329,de1,de,R,1,0.13,1.19,F,12,to,,
+1.20,329,de1,de,R,1,0.13,1.19,F,12,to,","
 1.6,737,de1,de,G,1,0.3,1.2,D,2,no,keinen
 1.7,737,de1,de,G,1,0.4,1.3,C,3,difference,Unterschied
 1.1,737,de1,de,B,3,1.2 1.32 1.33,0,root,-1,,
@@ -23617,7 +23617,7 @@ node_id,sent_id,annot_id,lang,mt_label,child_count,children,parent,ucca_label,po
 1.20,777,de1,de,A,2,1.21 1.22,1.17,E,-1,,
 1.27,777,de1,de,G,1,0.18,1.24,P,17,occur,auftreten
 1.26,777,de1,de,O,1,0.17,1.24,D,16,can,können
-1.25,777,de1,de,R,1,0.16,1.24,R,15,that,,
+1.25,777,de1,de,R,1,0.16,1.24,R,15,that,","
 1.24,777,de1,de,B,4,1.25 1.26 1.27 1.28,1.2,A,-1,,
 1.6,297,de1,de,B,2,1.7 1.10,1.3,A,-1,,
 1.7,297,de1,de,B,2,1.8 1.9,1.6,P,-1,,
@@ -23690,7 +23690,7 @@ node_id,sent_id,annot_id,lang,mt_label,child_count,children,parent,ucca_label,po
 1.15,281,de1,de,G,1,0.8,1.14,C,7,smartphone,Smartphone
 1.12,281,de1,de,A,2,1.13 1.14,1.8,A,-1,,
 1.13,281,de1,de,G,1,0.7,1.12,E,6,a,ein
-1.10,281,de1,de,R,1,0.5,1.9,F,4,to,,
+1.10,281,de1,de,R,1,0.5,1.9,F,4,to,","
 1.11,281,de1,de,R,1,0.6,1.9,C,5,use,UNALIGNED
 1.18,281,de1,de,G,1,0.11,1.14,C,10,tablet,Tablet
 1.52,281,de1,de,A,2,1.53 1.54,1.49,S,-1,,
@@ -23774,7 +23774,7 @@ node_id,sent_id,annot_id,lang,mt_label,child_count,children,parent,ucca_label,po
 1.1,273,de1,de,B,2,1.2 1.26,0,root,-1,,
 1.2,273,de1,de,A,4,1.3 1.14 1.15 1.19,1.1,H,-1,,
 1.3,273,de1,de,A,2,1.4 1.5,1.2,A,-1,,
-1.16,273,de1,de,G,1,0.9,1.15,F,8,to,,
+1.16,273,de1,de,G,1,0.9,1.15,F,8,to,","
 1.17,273,de1,de,G,1,0.10,1.15,F,9,make,dass
 1.15,273,de1,de,A,3,1.16 1.17 1.18,1.2,P,-1,,
 1.12,273,de1,de,O,1,0.6,1.11,E,5,your,dein
@@ -23894,7 +23894,7 @@ node_id,sent_id,annot_id,lang,mt_label,child_count,children,parent,ucca_label,po
 1.3,257,de1,de,B,3,1.4 1.5 1.8,1.2,A,-1,,
 1.5,257,de1,de,A,2,1.6 1.7,1.3,A,-1,,
 1.16,257,de1,de,B,3,1.17 1.18 1.21,1.2,A,-1,,
-1.17,257,de1,de,R,1,0.10,1.16,R,9,that,,
+1.17,257,de1,de,R,1,0.10,1.16,R,9,that,","
 1.14,257,de1,de,O,1,0.8,1.11,E,7,core,zentrale
 1.15,257,de1,de,R,1,0.9,1.11,C,8,exercise,Aufgabe
 1.12,257,de1,de,G,1,0.6,1.11,F,5,is,ist
@@ -23917,11 +23917,11 @@ node_id,sent_id,annot_id,lang,mt_label,child_count,children,parent,ucca_label,po
 1.26,257,de1,de,O,1,0.15,1.25,E,14,your,deine
 1.25,257,de1,de,A,2,1.26 1.27,1.21,A,-1,,
 1.24,257,de1,de,G,1,0.14,1.22,C,13,improve,verbessern
-1.6,249,de1,de,R,1,0.2,1.5,E,1,to,,
-1.7,249,de1,de,R,1,0.3,1.5,C,2,keep,,
+1.6,249,de1,de,R,1,0.2,1.5,E,1,to,","
+1.7,249,de1,de,R,1,0.3,1.5,C,2,keep,","
 1.1,249,de1,de,B,2,1.2 1.23,0,root,-1,,
 1.2,249,de1,de,A,2,1.3 1.4,1.1,H,-1,,
-1.3,249,de1,de,G,1,0.1,1.2,P,0,Try,,
+1.3,249,de1,de,G,1,0.1,1.2,P,0,Try,","
 1.8,249,de1,de,A,2,1.9 1.10,1.4,A,-1,,
 1.16,249,de1,de,A,2,1.17 1.18,1.15,C,-1,,
 1.17,249,de1,de,G,1,0.8,1.16,E,7,big,großen
@@ -24129,7 +24129,7 @@ node_id,sent_id,annot_id,lang,mt_label,child_count,children,parent,ucca_label,po
 1.1,201,de1,de,B,2,1.2 1.17,0,root,-1,,
 1.2,201,de1,de,B,4,1.3 1.4 1.7 1.10,1.1,H,-1,,
 1.3,201,de1,de,G,1,0.1,1.2,A,0,It,Es
-1.8,201,de1,de,R,1,0.4,1.7,F,3,to,,
+1.8,201,de1,de,R,1,0.4,1.7,F,3,to,","
 1.16,201,de1,de,R,1,0.10,1.14,C,9,raises,wirft
 1.14,201,de1,de,B,2,1.15 1.16,1.10,A,-1,,
 1.15,201,de1,de,O,1,0.9,1.14,E,8,toe,Zehen
@@ -24167,7 +24167,7 @@ node_id,sent_id,annot_id,lang,mt_label,child_count,children,parent,ucca_label,po
 1.14,185,de1,de,R,1,0.8,1.12,C,7,maintain,UNALIGNED
 1.15,185,de1,de,A,2,1.16 1.17,1.11,A,-1,,
 1.12,185,de1,de,B,2,1.13 1.14,1.11,S,-1,,
-1.13,185,de1,de,R,1,0.7,1.12,F,6,to,,
+1.13,185,de1,de,R,1,0.7,1.12,F,6,to,","
 1.10,185,de1,de,G,1,0.6,1.2,A,5,you,helfen
 1.11,185,de1,de,B,3,1.12 1.15 1.21,1.2,A,-1,,
 1.18,185,de1,de,G,1,0.10,1.17,R,9,in,in
@@ -24240,7 +24240,7 @@ node_id,sent_id,annot_id,lang,mt_label,child_count,children,parent,ucca_label,po
 1.32,177,de1,de,G,1,0.21,1.30,S,20,ready,bereit
 1.33,177,de1,de,A,2,1.34 1.37,1.30,A,-1,,
 1.34,177,de1,de,B,2,1.35 1.36,1.33,P,-1,,
-1.35,177,de1,de,O,1,0.22,1.34,F,21,to,,
+1.35,177,de1,de,O,1,0.22,1.34,F,21,to,","
 1.36,177,de1,de,O,1,0.23,1.34,C,22,join,mit
 1.37,177,de1,de,A,2,1.38 1.39,1.33,A,-1,,
 1.29,177,de1,de,G,1,0.19,1.1,L,18,and,und
@@ -24291,7 +24291,7 @@ node_id,sent_id,annot_id,lang,mt_label,child_count,children,parent,ucca_label,po
 1.25,681,de1,de,G,1,0.14,1.24,C,13,few,wenige
 1.24,681,de1,de,A,3,1.25 1.26 1.27,1.21,C,-1,,
 1.6,113,de1,de,A,4,1.7 1.8 1.9 1.10,1.2,A,-1,,
-1.7,113,de1,de,R,1,0.5,1.6,R,4,that,,
+1.7,113,de1,de,R,1,0.5,1.6,R,4,that,","
 1.1,113,de1,de,B,4,1.2 1.23 1.24 1.27,0,root,-1,,
 1.2,113,de1,de,A,4,1.3 1.4 1.5 1.6,1.1,H,-1,,
 1.3,113,de1,de,A,2,0.1 0.2,1.2,A,0 1,NHS Choices,NHS Choices
@@ -24350,7 +24350,7 @@ node_id,sent_id,annot_id,lang,mt_label,child_count,children,parent,ucca_label,po
 1.3,153,de1,de,A,2,1.4 1.5,1.2,A,-1,,
 1.8,153,de1,de,G,1,0.4,1.7,R,3,how,wie
 1.16,153,de1,de,B,2,1.17 1.18,1.15,P,-1,,
-1.17,153,de1,de,O,1,0.9,1.16,F,8,to,,
+1.17,153,de1,de,O,1,0.9,1.16,F,8,to,","
 1.14,153,de1,de,G,1,0.8,1.12,P,7,help,helfen
 1.15,153,de1,de,B,2,1.16 1.19,1.12,A,-1,,
 1.12,153,de1,de,A,3,1.13 1.14 1.15,1.7,E,-1,,
@@ -24407,7 +24407,7 @@ node_id,sent_id,annot_id,lang,mt_label,child_count,children,parent,ucca_label,po
 1.29,25,de1,de,G,1,0.18,1.27,C,17,physiotherapist,Physiotherapeuten
 1.28,25,de1,de,G,1,0.17,1.27,E,16,a,einem
 1.23,25,de1,de,R,1,0.15,1.21,C,14,talk,mit
-1.22,25,de1,de,R,1,0.14,1.21,F,13,to,,
+1.22,25,de1,de,R,1,0.14,1.21,F,13,to,","
 1.21,25,de1,de,B,2,1.22 1.23,1.20,P,-1,,
 1.20,25,de1,de,B,3,1.21 1.24 1.34,1.13,A,-1,,
 1.27,25,de1,de,A,2,1.28 1.29,1.26,C,-1,,
@@ -24467,7 +24467,7 @@ node_id,sent_id,annot_id,lang,mt_label,child_count,children,parent,ucca_label,po
 1.2,705,de1,de,B,6,1.3 1.8 1.9 1.10 1.11 1.12,1.1,H,-1,,
 1.3,705,de1,de,A,2,1.4 1.5,1.2,A,-1,,
 1.30,705,de1,de,G,1,0.20,1.28,C,19,participants,Teilnehmer
-1.32,705,de1,de,R,9,0.22 0.23 0.25 0.26 0.27 0.28 0.29 0.30 1.33,1.23,C,21 22 24 25 26 27 28 29 21,RR 2.45 95 % CI 1.84 to 3.26 RR,RR 2,45 95 % CI 1,84 UNALIGNED 3.26 RR
+1.32,705,de1,de,R,9,0.22 0.23 0.25 0.26 0.27 0.28 0.29 0.30 1.33,1.23,C,21 22 24 25 26 27 28 29 21,RR 2.45 95 % CI 1.84 to 3.26 RR,"RR 2,45 95 % CI 1,84 UNALIGNED 3.26 RR"
 1.29,705,de1,de,G,1,0.19,1.28,E,18,1395,1395
 1.28,705,de1,de,A,2,1.29 1.30,1.23,C,-1,,
 1.23,705,de1,de,A,5,1.24 1.27 1.28 1.31 1.32,1.12,E,-1,,
@@ -24485,7 +24485,7 @@ node_id,sent_id,annot_id,lang,mt_label,child_count,children,parent,ucca_label,po
 1.17,129,de1,de,O,1,0.10,1.15,E,9,your,deinen
 1.14,129,de1,de,O,1,0.8,1.11,C,7,steadier,ruhigere
 1.15,129,de1,de,A,3,1.16 1.17 1.18,1.10,A,-1,,
-1.12,129,de1,de,R,1,0.6,1.11,F,5,to,,
+1.12,129,de1,de,R,1,0.6,1.11,F,5,to,","
 1.13,129,de1,de,R,1,0.7,1.11,E,6,feel,spüren
 1.10,129,de1,de,A,2,1.11 1.15,1.2,A,-1,,
 1.11,129,de1,de,B,3,1.12 1.13 1.14,1.10,S,-1,,
@@ -24716,13 +24716,13 @@ node_id,sent_id,annot_id,lang,mt_label,child_count,children,parent,ucca_label,po
 1.32,697,de1,de,G,1,0.18,1.30,C,17,system,Immunsystem
 1.33,697,de1,de,G,1,0.19,1.29,C,18,activity,Aktivität
 1.35,697,de1,de,B,3,1.36 1.37 1.40,1.7,E,-1,,
-1.36,697,de1,de,R,1,0.21,1.35,R,20,that,,
+1.36,697,de1,de,R,1,0.21,1.35,R,20,that,","
 1.37,697,de1,de,B,2,1.38 1.39,1.35,P,-1,,
 1.29,697,de1,de,A,2,1.30 1.33,1.27,A,-1,,
 1.28,697,de1,de,G,1,0.16,1.27,P,15,stop,stoppen
 1.23,697,de1,de,B,2,1.24 1.25,1.20,A,-1,,
 1.22,697,de1,de,R,1,0.12,1.20,P,11,reduce,Entzündungen
-1.21,697,de1,de,R,1,0.11,1.20,R,10,that,,
+1.21,697,de1,de,R,1,0.11,1.20,R,10,that,","
 1.20,697,de1,de,B,3,1.21 1.22 1.23,1.19,C,-1,,
 1.27,697,de1,de,B,2,1.28 1.29,1.19,C,-1,,
 1.26,697,de1,de,G,1,0.15,1.19,N,14,or,oder
@@ -27483,7 +27483,7 @@ node_id,sent_id,annot_id,lang,mt_label,child_count,children,parent,ucca_label,po
 1.17,651,pl2,pl,G,1,0.10,1.16,E,9,the,UNALIGNED
 1.14,651,pl2,pl,R,1,0.9,1.13,P,8,bring,UNALIGNED
 1.15,651,pl2,pl,A,3,1.16 1.21 1.22,1.13,A,-1,,
-1.12,651,pl2,pl,R,1,0.8,1.1,L,7,to,,
+1.12,651,pl2,pl,R,1,0.8,1.1,L,7,to,","
 1.13,651,pl2,pl,B,3,1.14 1.15 1.23,1.1,H,-1,,
 1.10,651,pl2,pl,O,1,0.6,1.8,E,5,this,tego
 1.11,651,pl2,pl,G,1,0.7,1.8,C,6,review,przeglądu
@@ -28740,7 +28740,7 @@ node_id,sent_id,annot_id,lang,mt_label,child_count,children,parent,ucca_label,po
 1.12,499,de1,de,G,1,0.7,1.10,F,6,are,sind
 1.13,499,de1,de,R,1,0.8,1.10,S,7,high,hoch
 1.10,499,de1,de,B,5,1.9 1.11 1.12 1.13 1.14,1.7,E,-1,,
-1.11,499,de1,de,R,1,0.6,1.10,R,5,that,,
+1.11,499,de1,de,R,1,0.6,1.10,R,5,that,","
 1.18,499,de1,de,G,1,0.12,1.4,D,11,can,kann
 1.19,499,de1,de,G,1,0.13,1.4,D,12,actually,sogar
 1.8,499,de1,de,G,1,0.4,1.7,E,3,some,einige
@@ -28791,7 +28791,7 @@ node_id,sent_id,annot_id,lang,mt_label,child_count,children,parent,ucca_label,po
 1.41,493,de1,de,G,1,0.24,1.39,E,23,kidney,Nierentransplantation
 1.40,493,de1,de,G,1,0.23,1.39,E,22,a,eine
 1.42,493,de1,de,G,1,0.25,1.39,C,24,transplant,Nierentransplantation
-1.6,493,de1,de,R,1,0.2,1.5,L,1,that,,
+1.6,493,de1,de,R,1,0.2,1.5,L,1,that,","
 1.7,493,de1,de,B,2,1.8 1.9,1.5,H,-1,,
 1.1,493,de1,de,B,2,1.2 1.43,0,root,-1,,
 1.2,493,de1,de,B,3,1.3 1.12 1.15,1.1,H,-1,,
@@ -28867,10 +28867,10 @@ node_id,sent_id,annot_id,lang,mt_label,child_count,children,parent,ucca_label,po
 1.6,483,de1,de,A,2,1.7 1.10,1.3,S,-1,,
 1.7,483,de1,de,G,1,0.7,1.6,F,6,have,haben
 1.1,483,de1,de,B,3,1.2 1.3 1.26,0,root,-1,,
-1.2,483,de1,de,A,3,0.1 0.2 0.3,1.1,L,0 1 2,This is because,Das liegt ,
+1.2,483,de1,de,A,3,0.1 0.2 0.3,1.1,L,0 1 2,This is because,"Das liegt ,"
 1.3,483,de1,de,B,5,1.4 1.6 1.8 1.9 1.11,1.1,H,-1,,
 1.16,483,de1,de,B,7,1.15 1.17 1.18 1.19 1.20 1.21 1.22,1.11,E,-1,,
-1.17,483,de1,de,R,1,0.16,1.16,R,15,that,,
+1.17,483,de1,de,R,1,0.16,1.16,R,15,that,","
 1.14,483,de1,de,G,1,0.14,1.11,E,13,other,andere
 1.15,483,de1,de,O,1,0.15,1.11,C,14,medications,Medikamente
 1.12,483,de1,de,G,1,0.12,1.11,R,11,than,als
@@ -29169,7 +29169,7 @@ node_id,sent_id,annot_id,lang,mt_label,child_count,children,parent,ucca_label,po
 1.12,445,de1,de,A,3,1.13 1.14 1.15,1.10,A,-1,,
 1.13,445,de1,de,G,1,0.9,1.12,E,8,your,Ihr
 1.10,445,de1,de,A,3,1.11 1.12 1.16,1.7,E,-1,,
-1.11,445,de1,de,A,2,0.7 0.8,1.10,R,6 7,in which,Weise ,
+1.11,445,de1,de,A,2,0.7 0.8,1.10,R,6 7,in which,"Weise ,"
 1.18,445,de1,de,G,1,0.13,1.16,E,12,be,werden
 1.19,445,de1,de,G,1,0.14,1.16,C,13,measured,gemessen
 1.8,445,de1,de,G,1,0.5,1.7,E,4,the,die
@@ -29606,7 +29606,7 @@ node_id,sent_id,annot_id,lang,mt_label,child_count,children,parent,ucca_label,po
 1.11,365,de1,de,B,3,1.12 1.13 1.14,1.6,E,-1,,
 1.18,365,de1,de,G,1,0.11,1.17,R,10,of,eines
 1.19,365,de1,de,G,1,0.12,1.17,C,11,stroke,Schlaganfalls
-1.30,365,de1,de,G,1,0.19,1.29,F,18,to,,
+1.30,365,de1,de,G,1,0.19,1.29,F,18,to,","
 1.31,365,de1,de,G,1,0.20,1.29,P,19,increase,zunehmen
 1.32,365,de1,de,A,2,1.33 1.34,1.2,D,-1,,
 1.33,365,de1,de,G,1,0.21,1.32,R,20,with,mit
@@ -29924,7 +29924,7 @@ node_id,sent_id,annot_id,lang,mt_label,child_count,children,parent,ucca_label,po
 1.22,645,de1,de,G,1,0.14,1.21,E,13,may,kann
 1.21,645,de1,de,B,3,1.22 1.23 1.24,1.10,S,-1,,
 1.27,645,de1,de,G,1,0.18,1.25,P,17,ensuring,gewährleisten
-1.26,645,de1,de,G,1,0.17,1.25,F,16,in,,
+1.26,645,de1,de,G,1,0.17,1.25,F,16,in,","
 1.25,645,de1,de,A,3,1.26 1.27 1.28,1.10,A,-1,,
 1.24,645,de1,de,G,1,0.16,1.21,C,15,successful,erfolgreich
 1.6,285,de1,de,G,1,0.2,1.4,A,1,active,aktiv
@@ -30168,12 +30168,12 @@ node_id,sent_id,annot_id,lang,mt_label,child_count,children,parent,ucca_label,po
 1.26,637,de1,de,B,3,1.27 1.28 1.32,1.2,D,-1,,
 1.24,637,de1,de,G,1,0.16,1.22,C,15,status,Status
 1.4,237,de1,de,B,3,1.5 1.6 1.9,1.2,A,-1,,
-1.5,237,de1,de,M,1,0.2,1.4,F,1,to,,
+1.5,237,de1,de,M,1,0.2,1.4,F,1,to,","
 1.6,237,de1,de,B,2,1.7 1.8,1.4,P,-1,,
 1.7,237,de1,de,G,1,0.3,1.6,E,2,keep,weiter
 1.1,237,de1,de,B,2,1.2 1.10,0,root,-1,,
 1.2,237,de1,de,A,2,1.3 1.4,1.1,H,-1,,
-1.3,237,de1,de,G,1,0.1,1.2,P,0,Try,,
+1.3,237,de1,de,G,1,0.1,1.2,P,0,Try,","
 1.8,237,de1,de,R,1,0.4,1.6,C,3,looking,nach
 1.9,237,de1,de,R,1,0.5,1.4,D,4,forward,vorn
 1.4,229,de1,de,R,1,0.3,1.2,D,2,tall,groß
@@ -30288,7 +30288,7 @@ node_id,sent_id,annot_id,lang,mt_label,child_count,children,parent,ucca_label,po
 1.34,213,de1,de,G,1,0.22,1.33,C,21,ready,bereit
 1.35,213,de1,de,A,3,1.36 1.45 1.46,1.33,E,-1,,
 1.36,213,de1,de,A,3,1.37 1.38 1.39,1.35,H,-1,,
-1.37,213,de1,de,G,1,0.23,1.36,F,22,to,,
+1.37,213,de1,de,G,1,0.23,1.36,F,22,to,","
 1.28,213,de1,de,O,1,0.17,1.21,P,16,improving,verbessern
 1.23,213,de1,de,G,1,0.13,1.22,E,12,your,Ihr
 1.22,213,de1,de,A,2,1.23 1.24,1.21,A,-1,,
@@ -30388,7 +30388,7 @@ node_id,sent_id,annot_id,lang,mt_label,child_count,children,parent,ucca_label,po
 1.29,189,de1,de,R,2,0.18 0.19,1.28,P,17 18,get out,aus aus
 1.28,189,de1,de,B,4,1.29 1.30 1.39 1.40,1.23,A,-1,,
 1.23,189,de1,de,B,3,1.24 1.27 1.28,1.1,H,-1,,
-1.22,189,de1,de,R,1,0.14,1.1,L,13,which,,
+1.22,189,de1,de,R,1,0.14,1.1,L,13,which,","
 1.20,189,de1,de,G,1,0.12,1.15,C,11,strength,Muskelkraft
 1.27,189,de1,de,G,1,0.17,1.23,A,16,you,helfen
 1.26,189,de1,de,G,1,0.16,1.24,C,15,help,helfen
@@ -31151,7 +31151,7 @@ node_id,sent_id,annot_id,lang,mt_label,child_count,children,parent,ucca_label,po
 1.10,101,de1,de,G,1,0.6,1.8,C,5,calories,Kalorien
 1.11,101,de1,de,G,1,0.7,1.1,L,6,and,und
 1.18,101,de1,de,A,3,1.19 1.20 1.21,1.13,A,-1,,
-1.19,101,de1,de,O,1,0.11,1.18,F,10,to,,
+1.19,101,de1,de,O,1,0.11,1.18,F,10,to,","
 1.8,101,de1,de,A,2,1.9 1.10,1.5,E,-1,,
 1.9,101,de1,de,O,1,0.5,1.8,R,4,of,von
 1.4,101,de1,de,G,1,0.2,1.2,S,1,are,sind
@@ -31185,7 +31185,7 @@ node_id,sent_id,annot_id,lang,mt_label,child_count,children,parent,ucca_label,po
 1.7,93,de1,de,A,2,1.8 1.9,1.4,A,-1,,
 1.1,93,de1,de,B,2,1.2 1.14,0,root,-1,,
 1.2,93,de1,de,A,2,1.3 1.4,1.1,H,-1,,
-1.3,93,de1,de,G,1,0.1,1.2,P,0,Try,,
+1.3,93,de1,de,G,1,0.1,1.2,P,0,Try,","
 1.8,93,de1,de,A,3,0.4 0.5 0.6,1.7,E,3 4 5,a variety of,eine Vielzahl von
 1.12,93,de1,de,G,1,0.9,1.10,E,8,your,Ihre
 1.13,93,de1,de,O,1,0.10,1.10,C,9,diet,Diät
@@ -31193,7 +31193,7 @@ node_id,sent_id,annot_id,lang,mt_label,child_count,children,parent,ucca_label,po
 1.11,93,de1,de,G,1,0.8,1.10,R,7,in,in
 1.9,93,de1,de,G,1,0.7,1.7,C,6,foods,Lebensmitteln
 1.4,93,de1,de,B,4,1.5 1.6 1.7 1.10,1.2,A,-1,,
-1.5,93,de1,de,R,1,0.2,1.4,F,1,to,,
+1.5,93,de1,de,R,1,0.2,1.4,F,1,to,","
 1.6,603,de1,de,G,1,0.3,1.3,C,2,circumstances,Bedingungen
 1.1,603,de1,de,B,5,1.2 1.22 1.23 1.24 1.36,0,root,-1,,
 1.2,603,de1,de,B,5,1.3 1.7 1.8 1.12 1.13,1.1,H,-1,,
@@ -31251,7 +31251,7 @@ node_id,sent_id,annot_id,lang,mt_label,child_count,children,parent,ucca_label,po
 1.21,85,de1,de,A,2,1.22 1.24,1.19,P,-1,,
 1.20,85,de1,de,G,1,0.13,1.19,A,12,it,es
 1.27,85,de1,de,O,1,0.18,1.25,P,17,prevent,dass
-1.26,85,de1,de,R,1,0.17,1.25,F,16,to,,
+1.26,85,de1,de,R,1,0.17,1.25,F,16,to,","
 1.25,85,de1,de,B,3,1.26 1.27 1.28,1.19,A,-1,,
 1.24,85,de1,de,G,1,0.16,1.21,C,15,help,helfen
 1.6,595,de1,de,G,1,0.3,1.3,S,2,retention,Harnretention
@@ -31951,7 +31951,7 @@ node_id,sent_id,annot_id,lang,mt_label,child_count,children,parent,ucca_label,po
 1.34,371,de1,de,G,1,0.22,1.32,A,21,clot,Gerinnselbildung
 1.35,371,de1,de,G,1,0.23,1.32,P,22,formation,Gerinnselbildung
 1.8,371,de1,de,B,6,1.7 1.9 1.10 1.11 1.13 1.15,1.6,E,-1,,
-1.9,371,de1,de,R,1,0.3,1.8,R,2,who,,
+1.9,371,de1,de,R,1,0.3,1.8,R,2,who,","
 1.4,371,de1,de,A,2,1.5 1.6,1.3,A,-1,,
 1.29,371,de1,de,G,1,0.18,1.28,E,17,an,einem
 1.28,371,de1,de,B,3,1.29 1.30 1.31,1.26,S,-1,,
@@ -32154,7 +32154,7 @@ node_id,sent_id,annot_id,lang,mt_label,child_count,children,parent,ucca_label,po
 1.16,195,de1,de,G,1,0.11,1.9,D,10,keeps,hält
 1.17,195,de1,de,G,1,0.12,1.9,F,11,us,uns
 1.14,195,de1,de,O,1,0.9,1.12,C,8,thing,was
-1.15,195,de1,de,R,1,0.10,1.9,F,9,that,,
+1.15,195,de1,de,R,1,0.10,1.9,F,9,that,","
 1.12,195,de1,de,A,2,1.13 1.14,1.9,D,-1,,
 1.13,195,de1,de,G,1,0.8,1.12,E,7,first,erste
 1.10,195,de1,de,G,1,0.6,1.9,A,5,they,sie
@@ -33291,7 +33291,7 @@ node_id,sent_id,annot_id,lang,mt_label,child_count,children,parent,ucca_label,po
 1.2,337,pl2,pl,G,1,0.1,1.1,L,0,If,Jeśli
 1.3,337,pl2,pl,B,4,1.4 1.7 1.8 1.14,1.1,H,-1,,
 1.8,337,pl2,pl,A,3,1.9 1.10 1.11,1.3,A,-1,,
-1.9,337,pl2,pl,G,1,0.5,1.8,A,4,you,,
+1.9,337,pl2,pl,G,1,0.5,1.8,A,4,you,","
 1.38,337,pl2,pl,R,1,0.26,1.37,P,25,referred,mowa
 1.39,337,pl2,pl,B,2,1.40 1.41,1.37,A,-1,,
 1.30,337,pl2,pl,A,4,1.31 1.32 1.33 1.34,1.27,A,-1,,
@@ -33971,7 +33971,7 @@ node_id,sent_id,annot_id,lang,mt_label,child_count,children,parent,ucca_label,po
 1.3,121,pl2,pl,B,4,1.4 1.5 1.8 1.9,1.1,H,-1,,
 1.5,121,pl2,pl,A,2,1.6 1.7,1.3,D,-1,,
 1.16,121,pl2,pl,O,1,0.10,1.13,C,9,activity,aktywności
-1.17,121,pl2,pl,G,1,0.11,1.12,A,10,you,,
+1.17,121,pl2,pl,G,1,0.11,1.12,A,10,you,","
 1.14,121,pl2,pl,R,1,0.8,1.13,E,7,any,żadnej
 1.15,121,pl2,pl,O,1,0.9,1.13,E,8,physical,fizycznej
 1.12,121,pl2,pl,B,3,1.13 1.17 1.18,1.11,A,-1,,
@@ -35186,7 +35186,7 @@ node_id,sent_id,annot_id,lang,mt_label,child_count,children,parent,ucca_label,po
 1.20,501,ro2,ro,O,1,0.14,1.19,E,13,your,UNALIGNED
 1.26,501,ro2,ro,A,3,0.19 0.20 0.21,1.22,C,18 19 20,taken into account,luat în considerare
 1.25,501,ro2,ro,G,1,0.18,1.22,E,17,be,fie
-1.24,501,ro2,ro,G,1,0.17,1.18,D,16,also,,
+1.24,501,ro2,ro,G,1,0.17,1.18,D,16,also,","
 1.6,499,ro2,ro,G,1,0.3,1.5,P,2,eating,consumul
 1.7,499,ro2,ro,A,3,1.8 1.9 1.10,1.5,A,-1,,
 1.1,499,ro2,ro,A,4,1.2 1.3 1.4 1.25,0,root,-1,,
@@ -35640,7 +35640,7 @@ node_id,sent_id,annot_id,lang,mt_label,child_count,children,parent,ucca_label,po
 1.1,443,ro2,ro,A,4,1.2 1.18 1.19 1.33,0,root,-1,,
 1.2,443,ro2,ro,A,6,1.3 1.4 1.5 1.6 1.7 1.8,1.1,H,-1,,
 1.3,443,ro2,ro,R,1,0.1,1.2,A,0,You,UNALIGNED
-1.5,443,ro2,ro,G,1,0.3,1.2,D,2,also,,
+1.5,443,ro2,ro,G,1,0.3,1.2,D,2,also,","
 1.16,443,ro2,ro,R,1,0.11,1.14,P,10,take,UNALIGNED
 1.17,443,ro2,ro,G,1,0.12,1.14,A,11,home,acasă
 1.14,443,ro2,ro,B,3,1.15 1.16 1.17,1.8,E,-1,,
@@ -35799,7 +35799,7 @@ node_id,sent_id,annot_id,lang,mt_label,child_count,children,parent,ucca_label,po
 1.10,421,ro2,ro,G,1,0.6,1.9,R,5,of,de
 1.11,421,ro2,ro,B,3,1.12 1.13 1.16,1.9,H,-1,,
 1.9,421,ro2,ro,A,2,1.10 1.11,1.6,E,-1,,
-1.4,421,ro2,ro,G,1,0.2,1.2,D,1,also,,
+1.4,421,ro2,ro,G,1,0.2,1.2,D,1,also,","
 1.18,421,ro2,ro,G,1,0.11,1.16,C,10,you,dumneavoastră
 1.5,421,ro2,ro,R,1,0.3,1.2,S,2,have,trebuie
 1.6,419,ro2,ro,G,1,0.2,1.4,S,1,pressure,arteriale
@@ -36655,7 +36655,7 @@ node_id,sent_id,annot_id,lang,mt_label,child_count,children,parent,ucca_label,po
 1.15,37,ro2,ro,G,1,0.10,1.12,C,9,menopause,menopauză
 1.12,37,ro2,ro,A,4,1.13 1.14 1.15 1.16,1.2,A,-1,,
 1.13,37,ro2,ro,R,1,0.8,1.12,E,7,an,devreme
-1.10,37,ro2,ro,G,1,0.6,1.2,D,5,also,,
+1.10,37,ro2,ro,G,1,0.6,1.2,D,5,also,","
 1.11,37,ro2,ro,O,1,0.7,1.8,C,6,cause,provoca
 1.18,37,ro2,ro,O,1,0.11,1.17,P,10,increasing,creşte
 1.19,37,ro2,ro,A,3,1.20 1.21 1.22,1.17,A,-1,,
@@ -37140,7 +37140,7 @@ node_id,sent_id,annot_id,lang,mt_label,child_count,children,parent,ucca_label,po
 1.7,667,ro2,ro,R,1,0.3,1.6,E,2,the,în
 1.1,667,ro2,ro,B,11,1.2 1.3 1.4 1.13 1.14 1.15 1.16 1.27 1.28 1.32 1.41,0,root,-1,,
 1.2,667,ro2,ro,G,1,0.1,1.1,L,0,Additionally,plus
-1.38,667,ro2,ro,G,1,0.30,1.32,D,29,also,,
+1.38,667,ro2,ro,G,1,0.30,1.32,D,29,also,","
 1.39,667,ro2,ro,O,1,0.31,1.32,P,30,treated,tratat
 1.30,667,ro2,ro,R,1,0.25,1.28,N,24,or,UNALIGNED
 1.31,667,ro2,ro,R,1,0.26,1.28,C,25,not,UNALIGNED
@@ -37778,7 +37778,7 @@ node_id,sent_id,annot_id,lang,mt_label,child_count,children,parent,ucca_label,po
 1.9,85,ro2,ro,A,4,1.10 1.11 1.12 1.13,1.2,A,-1,,
 1.4,85,ro2,ro,O,1,0.1,1.3,P,0,Eating,mănânce
 1.28,85,ro2,ro,R,1,0.19,1.25,A,18,falls,UNALIGNED
-1.23,85,ro2,ro,G,1,0.15,1.19,D,14,also,,
+1.23,85,ro2,ro,G,1,0.15,1.19,D,14,also,","
 1.22,85,ro2,ro,G,1,0.14,1.21,E,13,can,poate
 1.21,85,ro2,ro,A,2,1.22 1.24,1.19,P,-1,,
 1.20,85,ro2,ro,G,1,0.13,1.19,A,12,it,UNALIGNED
@@ -37906,7 +37906,7 @@ node_id,sent_id,annot_id,lang,mt_label,child_count,children,parent,ucca_label,po
 1.18,693,ro2,ro,A,2,1.19 1.20,1.15,E,-1,,
 1.19,693,ro2,ro,G,1,0.12,1.18,R,11,of,UNALIGNED
 1.8,693,ro2,ro,A,2,1.9 1.10,1.1,H,-1,,
-1.9,693,ro2,ro,G,1,0.6,1.8,L,5,therefore,,
+1.9,693,ro2,ro,G,1,0.6,1.8,L,5,therefore,","
 1.4,693,ro2,ro,G,1,0.2,1.2,P,1,found,găsit
 1.5,693,ro2,ro,G,1,0.3,1.2,D,2,no,Nu
 1.23,693,ro2,ro,O,1,0.15,1.21,C,14,hypothyroidism,hipotiroidism
@@ -38182,7 +38182,7 @@ node_id,sent_id,annot_id,lang,mt_label,child_count,children,parent,ucca_label,po
 1.16,29,ro2,ro,R,1,0.12,1.13,C,11,attempt,tentativă
 1.17,29,ro2,ro,B,2,1.18 1.22,1.3,C,-1,,
 1.14,29,ro2,ro,G,1,0.10,1.13,E,9,should,trebui
-1.15,29,ro2,ro,G,1,0.11,1.2,D,10,also,,
+1.15,29,ro2,ro,G,1,0.11,1.2,D,10,also,","
 1.12,29,ro2,ro,G,1,0.9,1.2,A,8,you,UNALIGNED
 1.13,29,ro2,ro,B,2,1.14 1.16,1.2,S,-1,,
 1.10,29,ro2,ro,G,1,0.7,1.5,C,6,exercises,exerciţii
@@ -40679,7 +40679,7 @@ node_id,sent_id,annot_id,lang,mt_label,child_count,children,parent,ucca_label,po
 1.17,651,pl1,pl,G,1,0.10,1.16,E,9,the,UNALIGNED
 1.14,651,pl1,pl,R,1,0.9,1.13,P,8,bring,UNALIGNED
 1.15,651,pl1,pl,A,3,1.16 1.21 1.22,1.13,A,-1,,
-1.12,651,pl1,pl,R,1,0.8,1.1,L,7,to,,
+1.12,651,pl1,pl,R,1,0.8,1.1,L,7,to,","
 1.13,651,pl1,pl,A,3,1.14 1.15 1.23,1.1,H,-1,,
 1.10,651,pl1,pl,G,1,0.6,1.8,E,5,this,tego
 1.11,651,pl1,pl,G,1,0.7,1.8,C,6,review,przeglądu
@@ -42021,7 +42021,7 @@ node_id,sent_id,annot_id,lang,mt_label,child_count,children,parent,ucca_label,po
 1.19,481,cs1,cs,G,1,0.12,1.17,F,11,it,je
 1.8,481,cs1,cs,O,1,0.5,1.5,C,4,vessels,cévy
 1.9,481,cs1,cs,A,2,1.10 1.11,1.2,A,-1,,
-1.6,481,cs1,cs,G,1,0.3,1.5,E,2,the,,
+1.6,481,cs1,cs,G,1,0.3,1.5,E,2,the,","
 1.7,481,cs1,cs,O,1,0.4,1.5,E,3,blood,krevní
 1.1,481,cs1,cs,A,2,1.2 1.40,0,root,-1,,
 1.2,481,cs1,cs,A,6,1.3 1.4 1.5 1.9 1.16 1.17,1.1,H,-1,,
@@ -42702,7 +42702,7 @@ node_id,sent_id,annot_id,lang,mt_label,child_count,children,parent,ucca_label,po
 1.3,329,cs1,cs,G,2,0.1 0.2,1.2,A,0 1,NHS Fife,NHS Fife
 1.16,329,cs1,cs,G,1,0.11,1.15,R,10,on,UNALIGNED
 1.17,329,cs1,cs,B,4,1.18 1.19 1.22 1.23,1.15,C,-1,,
-1.14,329,cs1,cs,G,1,0.10,1.11,A,9,you,,
+1.14,329,cs1,cs,G,1,0.10,1.11,A,9,you,","
 1.15,329,cs1,cs,B,2,1.16 1.17,1.11,A,-1,,
 1.12,329,cs1,cs,G,1,0.8,1.11,R,7,which,která
 1.13,329,cs1,cs,R,1,0.9,1.11,P,8,guides,řídí
@@ -45193,7 +45193,7 @@ node_id,sent_id,annot_id,lang,mt_label,child_count,children,parent,ucca_label,po
 1.16,191,ro1,ro,G,1,0.11,1.14,C,10,leg,piciorul
 1.17,191,ro1,ro,R,3,1.18 1.19 1.20,1.2,A,-1,,
 1.14,191,ro1,ro,A,2,1.15 1.16,1.2,A,-1,,
-1.15,191,ro1,ro,G,1,0.10,1.14,E,9,the,,
+1.15,191,ro1,ro,G,1,0.10,1.14,E,9,the,","
 1.12,191,ro1,ro,G,1,0.8,1.2,D,7,slowly,încet
 1.13,191,ro1,ro,B,2,0.9 0.12,1.2,P,8 11,take out,UNALIGNED UNALIGNED
 1.10,191,ro1,ro,G,1,0.6,1.3,C,5,weight,greutate
@@ -45281,12 +45281,12 @@ node_id,sent_id,annot_id,lang,mt_label,child_count,children,parent,ucca_label,po
 1.18,159,ro1,ro,G,1,0.13,1.17,E,12,regular,regulate
 1.19,159,ro1,ro,G,1,0.14,1.17,C,13,exercise,exerciţii
 1.8,159,ro1,ro,B,3,0.4 0.5 0.6,1.5,E,3 4 5,Introduction to exercise,Introducere să UNALIGNED
-1.9,159,ro1,ro,G,1,0.7,1.5,F,6,",&quot;
+1.9,159,ro1,ro,G,1,0.7,1.5,F,6,"""",&quot;
 1.41,159,ro1,ro,G,1,0.30,1.40,F,29,to,pentru
 1.40,159,ro1,ro,B,2,1.41 1.42,1.33,A,-1,,
 1.42,159,ro1,ro,R,1,0.31,1.40,C,30,help,UNALIGNED
 1.6,159,ro1,ro,R,1,0.2,1.5,E,1,our,ne
-1.7,159,ro1,ro,G,1,0.3,1.5,F,2,",&quot;
+1.7,159,ro1,ro,G,1,0.3,1.5,F,2,"""",&quot;
 1.1,159,ro1,ro,B,8,1.2 1.11 1.12 1.27 1.28 1.29 1.30 1.43,0,root,-1,,
 1.2,159,ro1,ro,B,3,1.3 1.4 1.5,1.1,H,-1,,
 1.3,159,ro1,ro,M,0,,1.2,A,-1,,
@@ -46426,7 +46426,7 @@ node_id,sent_id,annot_id,lang,mt_label,child_count,children,parent,ucca_label,po
 1.12,473,ro1,ro,G,1,0.9,1.2,P,8,cause,provoca
 1.13,473,ro1,ro,G,1,0.10,1.2,A,9,constipation,constipaţie
 1.10,473,ro1,ro,G,1,0.7,1.2,D,6,may,poate
-1.11,473,ro1,ro,G,1,0.8,1.2,G,7,also,,
+1.11,473,ro1,ro,G,1,0.8,1.2,G,7,also,","
 1.9,473,ro1,ro,A,2,0.5 0.6,1.3,C,4 5,channel blocker,canalelor blocant
 1.4,473,ro1,ro,A,3,1.5 1.6 1.7,1.3,E,-1,,
 1.5,473,ro1,ro,G,1,0.1,1.4,E,0,Certain,Anumite
@@ -48377,7 +48377,7 @@ node_id,sent_id,annot_id,lang,mt_label,child_count,children,parent,ucca_label,po
 1.10,601,ro1,ro,A,4,1.11 1.12 1.13 1.14,1.9,A,-1,,
 1.11,601,ro1,ro,G,1,0.5,1.10,E,4,their,UNALIGNED
 1.18,601,ro1,ro,G,1,0.11,1.9,D,10,may,poate
-1.19,601,ro1,ro,G,1,0.12,1.9,R,11,also,,
+1.19,601,ro1,ro,G,1,0.12,1.9,R,11,also,","
 1.30,601,ro1,ro,G,1,0.20,1.28,E,19,catheter,cateterului
 1.31,601,ro1,ro,G,1,0.21,1.28,C,20,removal,îndepărtarea
 1.8,601,ro1,ro,G,1,0.4,1.7,R,3,that,că
@@ -48775,7 +48775,7 @@ node_id,sent_id,annot_id,lang,mt_label,child_count,children,parent,ucca_label,po
 1.11,23,ro1,ro,G,1,0.6,1.10,F,5,be,fi
 1.18,23,ro1,ro,A,3,1.19 1.20 1.21,1.2,A,-1,,
 1.19,23,ro1,ro,G,1,0.12,1.18,R,11,in,la
-1.8,23,ro1,ro,G,1,0.5,1.2,G,4,also,,
+1.8,23,ro1,ro,G,1,0.5,1.2,G,4,also,","
 1.9,23,ro1,ro,B,3,1.10 1.13 1.14,1.2,S,-1,,
 1.4,23,ro1,ro,O,1,0.1,1.3,C,0,Swimming,Înot
 1.5,23,ro1,ro,G,1,0.2,1.3,N,1,and,şi
@@ -50414,7 +50414,7 @@ node_id,sent_id,annot_id,lang,mt_label,child_count,children,parent,ucca_label,po
 1.2,337,pl1,pl,G,1,0.1,1.1,L,0,If,Jeśli
 1.3,337,pl1,pl,A,4,1.4 1.7 1.8 1.14,1.1,H,-1,,
 1.8,337,pl1,pl,A,3,1.9 1.10 1.11,1.3,A,-1,,
-1.9,337,pl1,pl,G,1,0.5,1.8,A,4,you,,
+1.9,337,pl1,pl,G,1,0.5,1.8,A,4,you,","
 1.38,337,pl1,pl,R,1,0.26,1.37,P,25,referred,mowa
 1.39,337,pl1,pl,B,2,1.40 1.41,1.37,A,-1,,
 1.30,337,pl1,pl,O,4,1.31 1.32 1.33 1.34,1.27,A,-1,,
@@ -51094,7 +51094,7 @@ node_id,sent_id,annot_id,lang,mt_label,child_count,children,parent,ucca_label,po
 1.3,121,pl1,pl,B,4,1.4 1.5 1.8 1.9,1.1,H,-1,,
 1.5,121,pl1,pl,G,2,1.6 1.7,1.3,D,-1,,
 1.16,121,pl1,pl,O,1,0.10,1.13,C,9,activity,aktywności
-1.17,121,pl1,pl,R,1,0.11,1.12,A,10,you,,
+1.17,121,pl1,pl,R,1,0.11,1.12,A,10,you,","
 1.14,121,pl1,pl,R,1,0.8,1.13,E,7,any,żadnej
 1.15,121,pl1,pl,O,1,0.9,1.13,E,8,physical,fizycznej
 1.12,121,pl1,pl,B,3,1.13 1.17 1.18,1.11,A,-1,,
@@ -51489,7 +51489,7 @@ node_id,sent_id,annot_id,lang,mt_label,child_count,children,parent,ucca_label,po
 1.2,705,pl1,pl,A,6,1.3 1.8 1.9 1.10 1.11 1.12,1.1,H,-1,,
 1.3,705,pl1,pl,A,2,1.4 1.5,1.2,A,-1,,
 1.30,705,pl1,pl,M,1,0.20,1.28,C,19,participants,uczestników
-1.32,705,pl1,pl,A,9,0.22 0.23 0.25 0.26 0.27 0.28 0.29 0.30 1.33,1.23,C,21 22 24 25 26 27 28 29 21,RR 2.45 95 % CI 1.84 to 3.26 RR,RR 2,45 95 % CI 1,84 do 3.26 RR
+1.32,705,pl1,pl,A,9,0.22 0.23 0.25 0.26 0.27 0.28 0.29 0.30 1.33,1.23,C,21 22 24 25 26 27 28 29 21,RR 2.45 95 % CI 1.84 to 3.26 RR,"RR 2,45 95 % CI 1,84 do 3.26 RR"
 1.29,705,pl1,pl,M,1,0.19,1.28,E,18,1395,1395
 1.28,705,pl1,pl,G,2,1.29 1.30,1.23,C,-1,,
 1.23,705,pl1,pl,A,5,1.24 1.27 1.28 1.31 1.32,1.12,E,-1,,

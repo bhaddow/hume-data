@@ -58,6 +58,7 @@ def main():
       print("node_id,sent_id,annot_id,lang,mt_label,child_count,children,parent,ucca_label,pos,source,target", file=ncsvfh)
 
       csv_writer = csv.writer(csvfh,  lineterminator=os.linesep)
+      ncsv_writer = csv.writer(ncsvfh,  lineterminator=os.linesep)
       for sent in get_sentences(inFile):
         fields = []
         fields.append(sent.sent_id)
@@ -98,8 +99,8 @@ def main():
               elif child.tag == "PNCT":
                 return get_src_tgt(node.children[0])
             source,target,pos = [" ".join(l) for l in list(zip(*[get_src_tgt(node) for node in node.children]))]
-          print(",".join((node.ID, str(sent.sent_id), sent.annot_id, sent.lang, mt_annot, \
-            str(child_count), children, parent, tag, pos, source, target )), file=ncsvfh)
+          ncsv_writer.writerow((node.ID, str(sent.sent_id), sent.annot_id, sent.lang, mt_annot, \
+                str(child_count), children, parent, tag, pos, source, target ))
         fields.append(sum(mt_eval_counts.values()))
         fields.append(ucca_counts["H"])
         fields += [mt_eval_counts[key] for key in mt_keys]

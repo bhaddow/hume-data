@@ -30,6 +30,11 @@ def print_overall_iaa(by_lang, args):
     print(cm)
     print("Kappa: %7.5f" % cm.stats()['overall']['Kappa'])
 
+def print_iaa_detail(agree, detail_file):
+  detail = pandas.DataFrame({"node_id" : agree["node_id"]})
+
+  detail.to_csv(detail_file)
+
 def main():
   parser = argparse.ArgumentParser()
   parser.add_argument("-n", "--node-file", default="nodes.csv", \
@@ -38,6 +43,7 @@ def main():
     help="Excluding nodes that either annotator has missed")
   parser.add_argument("--separate-label-groups", default=True, action="store_true",
     help="Treat A,B and R,G,O separately")
+  parser.add_argument("--iaa-detail", help="Write detailed IAA for each sentence to the given file")
     
 
   args = parser.parse_args()
@@ -55,12 +61,16 @@ def main():
   # in the target language (such as an article)
   if args.exclude_missing: agree = agree[(agree["mt_label_x"] != "M") & (agree["mt_label_y"] != "M")]
 
+  if args.iaa_detail:
+    print_iaa_detail(agree, args.iaa_detail)
+
   for lang, code in LANGCODES:
     by_lang = agree[agree['lang'] == code]
     print ("************{}*************".format(lang))
     print_overall_stats(by_lang,args)
     print_overall_iaa(by_lang, args)
     print ()
+
 
 
 #  alldata = pandas.read_csv("data.csv", converters={'id': str, 'parent' : str})
