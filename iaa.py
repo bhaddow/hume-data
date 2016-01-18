@@ -32,12 +32,19 @@ def print_overall_iaa(by_lang, args):
 
 def print_iaa_sentence_detail(agree, detail_file):
 #TODO sentence id, matches per sentence, pc a/b, pc r/o/g. src, tgt, ucca stats
-  detail = pandas.DataFrame({"node_id" : agree["node_id"], 
-                             "sent_id" : agree["sent_id"],
-  })
-  print(agree.head())
+  #sentences = agree[['sent_id', 'lang', 'annot_id_x', 'annot_id_y', 'ucca_label_x', 'mt_label_x', 'mt_label_y']]
+  #sentences = sentences.groupby(['sent_id', 'lang'], as_index = False) 
+  agree['match'] = agree['mt_label_x'] == agree['mt_label_y']
+  group = ('A','B')
+  agree['ab'] = agree['mt_label_x'].isin(group) & agree['mt_label_y'].isin(group)
+  agree['abmatch'] = agree['ab'] & agree['match']
 
-  detail.to_csv(detail_file)
+  grouped = agree.groupby(['sent_id', 'lang'], as_index=True)
+  sentences = pandas.DataFrame({'accuracy' : grouped['match'].sum() / grouped['match'].size()})
+  sentences['ab_accuracy'] = grouped['abmatch'].sum() / grouped['ab'].sum()
+
+
+  sentences.to_csv(detail_file)
 
 def main():
   parser = argparse.ArgumentParser()
