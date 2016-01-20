@@ -11,7 +11,13 @@ import pandas
 import pydot
 import sys
 
-#TODO: Use Cluster and randir=LR for ordering
+COLORS = {
+  "R" : "red",
+  "O" : "orange", 
+  "G" : "green", 
+  "A" : "yellow", 
+  "B" : "bleu"
+}
 
 def plot(nodes):
   """Plot an UCCA tree"""
@@ -31,7 +37,8 @@ def plot(nodes):
 
   # Add the other nodes
   for index, node in nodes.iterrows():
-    ucca = pydot.Node(name = node.node_id, label = node.ucca_label)
+    ucca = pydot.Node(name = node.node_id, label = node.ucca_label,
+       fillcolor = COLORS[node.mt_label], style="filled", shape="circle")
     graph.add_node(ucca)
     if isinstance(node.source,str):
       # Add link to word
