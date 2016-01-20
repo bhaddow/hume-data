@@ -6,9 +6,11 @@ data/texts - The source, target (mt output) and reference.
 
 Code
 ----
+run.sh            Runs all analysis, with the deploy option will update the website
 get_csv.py        Get all UCCA nodes and their annotation as csv (db) format
 get_dups.py       Check for duplicate entries in the data
 get_refs.py       Extract the references from svn, and match up the lines
+get_errors.py     Pick out common errors in the annotated sentences
 iaa.py            IAA calculation (uses output of get_csv.py)
 reader.py         Iterator for annotated sentences
 sample_annot.py   Testing the UCCA interface ...

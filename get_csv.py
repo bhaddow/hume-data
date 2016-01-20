@@ -9,6 +9,7 @@ import csv
 import glob
 import logging
 import os
+import os.path
 import sys
 
 from collections import Counter
@@ -30,6 +31,20 @@ def main():
     parser.add_argument('-s', '--sentenceFile',   help="Sentence csv file", default="sentences.csv")
     parser.add_argument('-n', '--nodeFile',  help="Node csv file", default="nodes.csv")
     args = parser.parse_args()
+
+    #Check timestamps before running update
+    if args.inFile:
+      inTime = 0
+      for inFile in args.inFile:
+        inFileTime = os.path.getmtime(inFile)
+        if inFileTime > inTime:
+          inTime = inFileTime
+      #inTime is now the last modified dump. Is it older than the output files?
+      if os.path.exists(args.sentenceFile) and os.path.getmtime(args.sentenceFile) > inTime and \
+          os.path.exists(args.nodeFile) and  os.path.getmtime(args.nodeFile) > inTime:
+        LOG.warn("Files {} and {} more recent than dumps, not recreating".format(args.nodeFile, args.sentenceFile))
+        sys.exit(0)
+
 
     # Load references and bleu
     references = {}
