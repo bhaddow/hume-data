@@ -10,11 +10,12 @@ run.sh            Runs all analysis, with the deploy option will update the webs
 get_csv.py        Get all UCCA nodes and their annotation as csv (db) format
 get_dups.py       Check for duplicate entries in the data
 get_refs.py       Extract the references from svn, and match up the lines
-get_errors.py     Pick out common errors in the annotated sentences
 iaa.py            IAA calculation (uses output of get_csv.py)
+show_errors.py    Picks out common errors (cgi)
 reader.py         Iterator for annotated sentences
 sample_annot.py   Testing the UCCA interface ...
 trees.py          Drawing of trees (unfinished)
 ucca_score.py     Calculation of UCCA score
+
 
 get_csv_OLD.py    Original code for parsing trees.

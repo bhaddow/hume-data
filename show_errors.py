@@ -26,11 +26,19 @@ def main():
     return
   lang = args["lang"].value
 
+  sentences = pandas.read_csv("sentences.csv")
+  nodes = pandas.read_csv("nodes.csv")
+  errors = nodes[(nodes.mt_label == "R")]
+  errors = errors.merge(sentences, on=("sent_id", "annot_id"), suffixes=("_word", "_sentence"))
+  errors.rename(columns={'lang_word':'lang'}, inplace=True)
+  error_counts = pandas.DataFrame({"count" : errors.groupby(['source_word', 'target_word', 'lang']).size()})
+
   print("<head><meta charset=\"UTF-8\">")
   print("<TITLE>Common Errors: {}</TITLE>".format(LANGS[lang]))
   print("</head>")
   print("<BODY>")
   print("The table shows translations marked as <b>red</b> by any annotator<br>")
+
   error_counts = pandas.read_csv("error-counts.csv")
   def convert(x):
     x = x.replace("&apos;", "'").replace("&quot;", "\"")
