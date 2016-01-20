@@ -16,16 +16,32 @@ import sys
 def plot(nodes):
   """Plot an UCCA tree"""
   graph = pydot.Dot(graph_type='graph')
-  text = pydot.Subgraph(rank = 'same')
+
+  # Collect text nodes
+  textnodes = [] # (pos,text)
   for index,node in nodes.iterrows():
-    if isinstance(node.source, str):
-      textnode = pydot.Node(node.source)
-      text.add_node(textnode)
-      graph.add_edge(pydot.Edge(node.node_id, textnode))
-    if node.parent == "0": continue
-    edge = pydot.Edge(node.node_id, node.parent)
-    graph.add_edge(edge)
+    if isinstance(node.source,str):
+      textnodes.append((node.pos,node.source))
+  text = pydot.Cluster(rank = 'same', rankdir='LR')
+  for pos,source in sorted(textnodes, key=lambda x: int((x[0]))):
+    key = source + "_" + pos
+    textnode = pydot.Node(name = key, label=source)
+    text.add_node(textnode)
   graph.add_subgraph(text)
+
+  # Add the other nodes
+  for index, node in nodes.iterrows():
+    ucca = pydot.Node(name = node.node_id, label = node.ucca_label)
+    graph.add_node(ucca)
+    if isinstance(node.source,str):
+      # Add link to word
+      textnode = text.get_node(node.source + "_" + node.pos)
+      graph.add_edge(pydot.Edge(textnode[0],ucca))
+    if node.parent != "0": 
+      # Link to parent
+      #print("Creating {} -> {}".format(node.ucca_label, node.parent))
+      graph.add_edge(pydot.Edge(ucca, node.parent))
+
   return graph
     
 def main():
