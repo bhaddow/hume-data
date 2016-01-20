@@ -32,6 +32,7 @@ def main():
   errors = errors.merge(sentences, on=("sent_id", "annot_id"), suffixes=("_word", "_sentence"))
   errors.rename(columns={'lang_word':'lang'}, inplace=True)
   error_counts = pandas.DataFrame({"count" : errors.groupby(['source_word', 'target_word', 'lang']).size()})
+  for i in 1,2,3: error_counts.reset_index(level=0, inplace=True)
 
   print("<head><meta charset=\"UTF-8\">")
   print("<TITLE>Common Errors: {}</TITLE>".format(LANGS[lang]))
@@ -39,7 +40,7 @@ def main():
   print("<BODY>")
   print("The table shows translations marked as <b>red</b> by any annotator<br>")
 
-  error_counts = pandas.read_csv("error-counts.csv")
+  #error_counts = pandas.read_csv("error-counts.csv")
   def convert(x):
     x = x.replace("&apos;", "'").replace("&quot;", "\"")
     return x.decode("utf8")
@@ -47,7 +48,7 @@ def main():
   print(error_counts[error_counts.lang == lang].to_html(index=False,formatters = {"source_word" : convert, "target_word" : convert}).encode("utf8"))
   
 
-  print("<BODY>")
+  print("</BODY>")
 
 
 if __name__ == "__main__":
