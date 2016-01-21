@@ -65,7 +65,7 @@ def main():
     mt_colkeys = ["mteval_{}".format(key) for key in mt_keys]
     with open(args.sentenceFile, "w") as csvfh,\
         open(args.nodeFile, "w") as ncsvfh:
-      print("sent_id,annot_id,ucca_annot_id,lang,timestamp,source,target,reference,bleu,ucca_node_count,", file=csvfh, end="")
+      print("sent_id,annot_id,ucca_annot_id,lang,timestamp,source,target,reference,align,bleu,ucca_node_count,", file=csvfh, end="")
       print("ucca_H,", file=csvfh, end="")
       print(",".join(mt_colkeys), file=csvfh,end="")
       print(file=csvfh)
@@ -85,6 +85,7 @@ def main():
         fields.append(sent.target)
         ref,bleu = references[(sent.lang,deescape(sent.source))]
         fields.append(ref)
+        fields.append(" ".join(["%s-%s" % (src,tgt) for src,tgt in sent.align]))
         fields.append(bleu)
 
         # ucca nodes and annotations
