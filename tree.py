@@ -104,7 +104,7 @@ def main():
   sentences = pandas.read_csv("sentences.csv")
   plotter = Plotter(sentences, nodes)
   
-  annot = "ro1"
+  annot = "cs1"
   sent = 505
   graph = plotter.plot(sent,annot)
   graph.write_png("tree.png")
