@@ -14,7 +14,7 @@ iaa.py            IAA calculation (uses output of get_csv.py)
 show_errors.py    Picks out common errors (cgi)
 reader.py         Iterator for annotated sentences
 sample_annot.py   Testing the UCCA interface ...
-trees.py          Drawing of trees (unfinished)
+tree.py           Drawing of trees (unfinished)
 ucca_score.py     Calculation of UCCA score
 
 
