@@ -6,6 +6,50 @@ import pandas
 from  pandas_confusion import ConfusionMatrix
 
 def stats(alldata):
+  print ("Stats \n\n")
+  users = alldata['annot_id'].unique()
+  for user in users:
+    print ("User: " , user)
+    data = alldata.loc[alldata["annot_id"] == user]
+
+    sentences = data['sent_id'].unique()
+    print ("User: ", user, " num sentences: ", len(sentences) )
+    print ("User: ", user, " num nodes: ", len(data['node_id']) )
+
+    dataS = data.loc[(data["mt_label"]=="A") | (data["mt_label"]=="B") ]
+    print ("User: ", user, " struct nodes: ", len(dataS['node_id'])/len(data['node_id'])  )
+    dataL = data.loc[(data["mt_label"]=="R") | (data["mt_label"]=="G") | (data["mt_label"]=="O") ]
+    print ("User: ", user, " lexical nodes: ", len(dataL['node_id'])/len(data['node_id'])  )
+    dataM = data.loc[(data["mt_label"]=="M") ]
+    print ("User: ", user, " missing nodes: ", len(dataM['node_id'])/len(data['node_id']) )
+
+  for user in users:
+    print ("User: " , user)
+    data = alldata.loc[alldata["annot_id"] == user]
+
+    sentences = data['sent_id'].unique()
+    dataS = data.loc[(data["mt_label"]=="A") | (data["mt_label"]=="B") ]
+    dataA = data.loc[(data["mt_label"]=="A")]
+    print ("User: ", user, " struct nodes: ", len(dataS['node_id']) )
+
+    print ("User: ", user, " correct nodes: ", len(dataA['node_id'])/len(dataS['node_id'])  )
+    print ("User: ", user, " incorrect nodes: ", 1- len(dataA['node_id'])/len(dataS['node_id'])  )
+
+  for user in users:
+    print ("User: " , user)
+    data = alldata.loc[alldata["annot_id"] == user]
+
+    sentences = data['sent_id'].unique()
+    dataL =  data.loc[(data["mt_label"]=="R") | (data["mt_label"]=="G") | (data["mt_label"]=="O") ]
+
+    print ("User: ", user, " Lex nodes: ", len(dataL['node_id']) )
+    dataR = data.loc[(data["mt_label"]=="R")]
+    dataO = data.loc[(data["mt_label"]=="O")]
+    dataG = data.loc[(data["mt_label"]=="G")]
+
+    print ("User: ", user, " G nodes: ", len(dataG['node_id'])/len(dataL['node_id'])  )
+    print ("User: ", user, " O nodes: ", len(dataO['node_id'])/len(dataL['node_id'])  )
+    print ("User: ", user, " R nodes: ", len(dataR['node_id'])/len(dataL['node_id'])  )
 
 def plain_score(alldata):
 #Plain score = (correct nodes + (partially correct nodes/2) ) / all nodes(excl missing)
@@ -91,8 +135,9 @@ def count_children(alldata,node,count):
 def main():
   alldata = pandas.read_csv("nodes.csv", converters={'node_id': str, 'parent' : str})
 #  alldata = pandas.read_csv("mini.csv", converters={'id': str, 'parent' : str})
-  plain_score(alldata)
-  span_score(alldata)
+  stats(alldata)
+#  plain_score(alldata)
+#  span_score(alldata)
 
 
 
