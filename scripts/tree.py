@@ -16,8 +16,11 @@ COLORS = {
   "O" : "orange", 
   "G" : "green", 
   "A" : "yellow", 
-  "B" : "blue"
+  "B" : "blue",
+  "M" : "white"
 }
+
+LOG = logging.getLogger(__name__)
 
 class Plotter:
   
@@ -54,7 +57,8 @@ class Plotter:
     src_keys = set()
     for index,node in nodes.iterrows():
       if isinstance(node.source,str):
-        textnodes.append((node.pos,node.source))
+        #textnodes.extend(zip(node.pos.split(), node.source.split()))
+        textnodes.append((node.pos.split()[0],node.source))
     text = pydot.Cluster("src", rank = 'same', rankdir='LR', color="white")
     text.add_node(pydot.Node(style="invis", name = "src_start"))
     for pos,source in sorted(textnodes, key=lambda x: int((x[0]))):
@@ -69,9 +73,9 @@ class Plotter:
     graph.add_edge(pydot.Edge("tgt_end", "src_end", style="invis"))
 
     # Alignment
-    print (sentence['source'].iloc[0])
-    print (sentence['target'].iloc[0])
-    print (sentence['align'].iloc[0])
+    LOG.debug(sentence['source'].iloc[0])
+    LOG.debug(sentence['target'].iloc[0])
+    LOG.debug(sentence['align'].iloc[0])
     for align in sentence['align'].iloc[0].split():
       src_pos,tgt_pos = align.split("-")
       src_key = "src_" + str(src_pos)
@@ -86,7 +90,7 @@ class Plotter:
       graph.add_node(ucca)
       if isinstance(node.source,str):
         # Add link to word
-        textnode = text.get_node("src_" + node.pos)
+        textnode = text.get_node("src_" + node.pos.split()[0])
         graph.add_edge(pydot.Edge(textnode[0],ucca))
       if node.parent != "0": 
         # Link to parent
@@ -98,15 +102,15 @@ class Plotter:
 def main():
   logging.basicConfig(format='%(asctime)s %(levelname)s: %(name)s: %(message)s', datefmt='%Y-%m-%d %H:%M:%S', level=logging.DEBUG)
   parser = argparse.ArgumentParser()
+  parser.add_argument("-a", "--annotator-id", default="pl1")
+  parser.add_argument("-s", "--sentence-id", type=int, default=169)
   args = parser.parse_args()
 
   nodes = pandas.read_csv("nodes.csv", converters={'node_id': str, 'parent' : str})
   sentences = pandas.read_csv("sentences.csv")
   plotter = Plotter(sentences, nodes)
   
-  annot = "cs1"
-  sent = 505
-  graph = plotter.plot(sent,annot)
+  graph = plotter.plot(args.sentence_id,args.annotator_id)
   graph.write_png("tree.png")
 
 
