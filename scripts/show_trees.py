@@ -35,14 +35,16 @@ def main():
     sort = args["sort"].value
 
   has_mult_annot = (lang == "ro" or lang == "pl")
+  title = "All Annotated Trees: {}".format(LANGS[lang])
 
   print("<head><meta charset=\"UTF-8\">")
-  print("<TITLE>All Annotated Trees: {}</TITLE>".format(LANGS[lang]))
+  print("<TITLE>{}</TITLE>".format(title))
   print("</head>")
   print("<BODY>")
 
   
 
+  print("<h1>{}</h1>".format(title))
   print("<table border=1>")
   print("<tr>")
   headings = [("SentenceId", "sent_id")]
