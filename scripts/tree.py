@@ -33,7 +33,23 @@ class Plotter:
     #print((self.nodes.columns))
     nodes = self.nodes[(self.nodes.sent_id == sent_id) & (self.nodes.annot_id == annot_id)]
     sentence = self.sentences[(self.sentences.sent_id == sent_id) & (self.sentences.annot_id == annot_id)]
-    graph = pydot.Dot(graph_type='graph')
+    graph = pydot.Dot(graph_type='graph', splines=False, rankdir="TB")
+
+    # Source nodes
+    textnodes = [] # (pos,text)
+    src_keys = set()
+    for index,node in nodes.iterrows():
+      if isinstance(node.source,str):
+        textnodes.append((node.pos.split()[0],node.source))
+    text = pydot.Cluster("src", rank = 'same', rankdir='LR', color="white")
+    text.add_node(pydot.Node(style="invis", name = "src_start"))
+    for pos,source in sorted(textnodes, key=lambda x: int((x[0]))):
+      key = "src_" + pos
+      src_keys.add(key)
+      textnode = pydot.Node(name = key, label=source, shape="rectangle")
+      text.add_node(textnode)
+    text.add_node(pydot.Node(style="invis", name = "src_end"))
+    graph.add_subgraph(text)
 
     # Target nodes
     target = pydot.Cluster("tgt", rank = 'same', rankdir='LR', color="white")
@@ -47,27 +63,10 @@ class Plotter:
       node = pydot.Node(name = key, label=token, shape="rectangle")
       target.add_node(node)
       #if prev_node:
-      #  target.add_edge(pydot.Edge(prev_node,node))
+      #  target.add_edge(pydot.Edge(prev_node,node, style="invis"))
       prev_node = node
     target.add_node(pydot.Node(style="invis", name = "tgt_end"))
     graph.add_subgraph(target)
-
-    # Collect source text nodes
-    textnodes = [] # (pos,text)
-    src_keys = set()
-    for index,node in nodes.iterrows():
-      if isinstance(node.source,str):
-        #textnodes.extend(zip(node.pos.split(), node.source.split()))
-        textnodes.append((node.pos.split()[0],node.source))
-    text = pydot.Cluster("src", rank = 'same', rankdir='LR', color="white")
-    text.add_node(pydot.Node(style="invis", name = "src_start"))
-    for pos,source in sorted(textnodes, key=lambda x: int((x[0]))):
-      key = "src_" + pos
-      src_keys.add(key)
-      textnode = pydot.Node(name = key, label=source, shape="rectangle")
-      text.add_node(textnode)
-    text.add_node(pydot.Node(style="invis", name = "src_end"))
-    graph.add_subgraph(text)
 
     graph.add_edge(pydot.Edge("tgt_start", "src_start", style="invis"))
     graph.add_edge(pydot.Edge("tgt_end", "src_end", style="invis"))
@@ -81,7 +80,7 @@ class Plotter:
       src_key = "src_" + str(src_pos)
       if src_key in src_keys:
         # Alignment nodes should not affect positioning, so constraint=false
-        graph.add_edge(pydot.Edge(src_key,  "tgt_" + str(tgt_pos), constraint=False))
+        graph.add_edge(pydot.Edge(src_key,  "tgt_" + str(tgt_pos), constraint=False, headport="s", tailport="n"))
 
     # Add the other nodes
     for index, node in nodes.iterrows():
