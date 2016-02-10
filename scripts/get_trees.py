@@ -40,7 +40,7 @@ def main():
     sent_id,annot_id = row[1].sent_id,row[1].annot_id
     LOG.debug("Plotting sentence id: {} annotator id: {}".format(sent_id,annot_id))
     graph_file = "{}/tree_{}_{}.png".format(args.output_dir,sent_id,annot_id)
-    graph = plotter.plot(sent_id,annot_id)
+    graph = plotter.plot_tree(sent_id,annot_id)
     graph.write_png(graph_file)
     if i  and i % 50 == 0:
       LOG.info("Processed {} trees".format(i))
