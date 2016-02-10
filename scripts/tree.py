@@ -27,6 +27,13 @@ class Plotter:
   def __init__(self, sentences, nodes):
     self.nodes = nodes
     self.sentences = sentences
+  
+  def make_label(self,label):
+    #escape quotes
+    label = label.replace("\"", "\\\"")
+    # enclose in quotes
+    label = "\"{}\"".format(label)
+    return label
 
   def plot(self, sent_id, annot_id):
     """Plot an UCCA tree"""
@@ -46,7 +53,7 @@ class Plotter:
     for pos,source in sorted(textnodes, key=lambda x: int((x[0]))):
       key = "src_" + pos
       src_keys.add(key)
-      textnode = pydot.Node(name = key, label=source, shape="rectangle")
+      textnode = pydot.Node(name = key, label=self.make_label(source), shape="rectangle")
       text.add_node(textnode)
     text.add_node(pydot.Node(style="invis", name = "src_end"))
     graph.add_subgraph(text)
@@ -59,8 +66,7 @@ class Plotter:
     prev_node = None
     for pos,token in enumerate(target_tokens):
       key = "tgt_" + str(len(target_tokens) - pos - 1)
-      if token == ",": token = "COMMA"
-      node = pydot.Node(name = key, label=token, shape="rectangle")
+      node = pydot.Node(name = key, label=self.make_label(token), shape="rectangle")
       target.add_node(node)
       #if prev_node:
       #  target.add_edge(pydot.Edge(prev_node,node, style="invis"))
