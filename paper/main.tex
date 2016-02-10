@@ -110,11 +110,11 @@ Universal Conceptual Cognitive Annotation (UCCA).  UCCA was developed in the Com
 UCCA views the text as a collection of scenes (or events)
 and their inter-relations and participants. 
 
-\begin{figure}[ht]
+\begin{figure*}[t]
     \includegraphics[width=1\textwidth]{ucca-tree}
     \caption{UCCA Tree with scenes}
     \label{ucca-tree}
-\end{figure}
+\end{figure*}
 
 %As you can see 
 As can be seen
@@ -286,12 +286,12 @@ more of the child nodes has themselves been translated wrongly (and so is marked
 orange or red), then the structural node should be 
 annotated as ``Acceptable''.
 
-\begin{figure}[ht]
+\begin{figure*}[t]
     \includegraphics[width=1\textwidth]{ucca-tree-mteval}
     \caption{UCCA Tree evaluated in comparison to an aligned ``translation'' (an
 	English paraphrase).}
     \label{ucca-tree-mteval}
-\end{figure}
+\end{figure*}
 
 %TODO describe figure 2 here
 
@@ -320,11 +320,11 @@ relationships between the children.
 
 In this section, we will describe the tool that the annotators used to perform the annotation. 
 
-\begin{figure}[ht]
+\begin{figure*}[t]
     \includegraphics[width=1\textwidth]{interface-annotations}
     \caption{Machine translation evaluation tool}
     \label{mttool}
-\end{figure}
+\end{figure*}
 
 In Figure~\ref{mttool} you can see the MT evaluation tool. The sentence at the top shows the complete MT system output. Underneath the MT output is the  source sentence.  Underneath the source sentence we see its expandable semantic tree structure with both lexical and structural nodes. Lexical nodes only have traffic light annotation, whereas a structural node would normally be labelled ``A'' or ``B'' but could also be labelled as a lexical node, in the case where there is no word to word correspondence for the translation of its children.
 
@@ -652,12 +652,12 @@ low kappa reported in Table~\ref{tab:iaa-ab-pl}
 brings into question the reliability of the Polish annotations.  
 
 
-\begin{figure}[ht]
+\begin{figure*}[t]
     \includegraphics[width=1.1\textwidth]{tree_convert.png}
     \caption{UCCA tree on the source labelled with the MT Eval labels and aligned to the target translation. The 
     ``Acceptable'' structural nodes are yellow, the ``Bad'' ones are blue.}
     \label{fig:ucca-tree-evaluated}
-\end{figure}
+\end{figure*}
 
 %\lexi{TODO: Any chance of an example with bad structural nodes ? }
 In order to visualise the UCCA evaluation results and see how the node scores are calculated, we provide an  example from the experiment. 
