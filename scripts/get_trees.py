@@ -36,6 +36,20 @@ def main():
   LOG.info("Writing trees to directory: {}/".format(args.output_dir))
 
   #NOTE: Iterating through rows like this is not really the pandas way
+
+  # All doubly annotated trees
+  merged = sentences.merge(sentences, on = ["sent_id", "lang"])
+  agree = merged[(merged["annot_id_x"] < merged["annot_id_y"])]
+  for i,row in enumerate(agree.iterrows()):
+    sent_id,annot_id1,annot_id2 = row[1].sent_id,row[1].annot_id_x,row[1].annot_id_y
+    LOG.debug("Plotting sentence id: {} annotators: {} and {}".format(sent_id,annot_id1,annot_id2))
+    graph_file = "{}/tree_{}_{}_{}.png".format(args.output_dir,sent_id,annot_id1,annot_id2)
+    graph = plotter.plot_doubly_annotated_tree(sent_id,annot_id1,annot_id2)
+    graph.write_png(graph_file)
+    if i  and i % 50 == 0:
+      LOG.info("Processed {} doubly annotated trees".format(i))
+
+  # All trees
   for i,row in enumerate(sentences.iterrows()):
     sent_id,annot_id = row[1].sent_id,row[1].annot_id
     LOG.debug("Plotting sentence id: {} annotator id: {}".format(sent_id,annot_id))
@@ -44,6 +58,8 @@ def main():
     graph.write_png(graph_file)
     if i  and i % 50 == 0:
       LOG.info("Processed {} trees".format(i))
+
+
 
 if __name__ == "__main__":
   main()

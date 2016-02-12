@@ -8,7 +8,9 @@ rsync -av --rsh=ssh --delete \
           index.html \
           show_errors.py \
           show_trees.py \
+          show_double_trees.py \
           show_tree.py \
+          show_double_tree.py \
           show_iaa_rg.py \
           iaa-report.txt \
           trees \
