@@ -23,8 +23,18 @@ def main():
   annot_id = args["annot_id"].value
   sent_id = args["sent_id"].value
 
+  sentences = pandas.read_csv("sentences.csv")
+  sentence = sentences[(sentences.annot_id == annot_id) & (sentences.sent_id == int(sent_id))]
+
   print("<head><meta charset=\"UTF-8\">")
   print("<TITLE>Tree: {}, Annotator: {}</TITLE>".format(sent_id,annot_id))
+  print("""
+  <style>
+  th, td {
+        padding: 10px;
+  }
+  </style>
+  """)
   print("</head>")
   print("<BODY>")
 
@@ -39,6 +49,22 @@ def main():
   #print("<h2>Tree</h2>")
   print('<img src="trees/tree_{}_{}.png" width="2000">'.format(sent_id,annot_id))
 
+  print("<br>")
+  print("<table>")
+  print("<tr>")
+  print("<td>Source</td>")
+  print("<td>{}</td>".format(sentence.source.iloc[0]))
+  print("</tr>")
+  print("<tr>")
+  print("<td>Target</td>")
+  print("<td>{}</td>".format(sentence.target.iloc[0]))
+  print("</tr>")
+  print("<tr>")
+  print("<td>Alignment</td>")
+  print("<td>{}</td>".format(sentence['align'].iloc[0]))
+  print("</tr>")
+
+  print("</table>")
   print("</BODY>")
 
 if __name__ == "__main__":
