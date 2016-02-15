@@ -75,6 +75,8 @@ def main():
       csv_writer = csv.writer(csvfh,  lineterminator=os.linesep)
       ncsv_writer = csv.writer(ncsvfh,  lineterminator=os.linesep)
       for sent in get_sentences(inFile):
+        # Ignore example with mis-aligned hyphens
+        if sent.sent_id == "235" and sent.annot_id == "de1": continue
         fields = []
         fields.append(sent.sent_id)
         fields.append(sent.annot_id)
