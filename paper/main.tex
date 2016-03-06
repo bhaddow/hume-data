@@ -4,10 +4,16 @@
 \usepackage{latexsym}
 \usepackage{graphicx}
 
+\newcommand{\com}[1]{}
+\newcommand{\secref}[1]{Section \ref{#1}}
+\newcommand{\figref}[1]{Figure~\ref{#1}}
+\newcommand{\tabref}[1]{Table~\ref{#1}}
+\newcommand{\oa}[1]{\footnote{\color{red} #1}}
+
 \newcommand\BibTeX{B{\sc ib}\TeX}
 
 
-\title{Human accuracy evaluation using UCCA}
+\title{HUME: Human UCCA-based Machine-Translation Evaluation}
 
 \author{Author 1\\
 	    XYZ Company\\
@@ -28,18 +34,74 @@
 \maketitle
 
 \begin{abstract}
- This document contains instructions for preparing ACL 2016 submissions and camera-ready
-  manuscripts.  The document itself conforms
-  to its own specifications, and is therefore an example of what
-  your manuscript should look like.  Papers are required to conform to
-  all the directions reported in this document.  
-By using the provided \LaTeX\ and \BibTeX\ styles ({\small\tt acl2016.sty}, {\small\tt acl2016.bst}), the required formatting will be enabled by default.
+
+  Semantic evaluation of Machine Translation (MT) systems has become
+  a necessity, given recent interest in semantics-aware MT systems.
+  We present a novel human semantic evaluation measure for MT, Human
+  UCCA-based MT evaluation (HUME), building on the UCCA semantic representation scheme.
+  Making progress over previous work, the proposed measure takes into account
+  a wider range of semantic phenomena and does not rely on semantic annotation
+  of the MT output, whose interpretation is often unclear. 
+  We experiment with four language pairs, demonstrating the broad applicability of
+  the measure, as well as its reliability, reflected by the inter-annotator agreement
+  rates.
+
 \end{abstract}
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Introduction}\label{sec:intro}
+
+Human judgement is the central (and perhaps the ultimate) criterion for the quality of an MT system.
+Nevertheless, common measures for MT evaluation, such as adequacy and frequency judgements or the relative
+ranking of several possible translations, are problematic in two ways.
+First, as the quality of translation is determined by multiple factors, it is difficult
+to assign a single number so to reflect the quality of the entire sentence, even for a
+trained annotator. This also shows up with the diminishing IAA scores as a function of the
+sentence length \cite{}.
+Second, a single number is not instructive enough for localizing the translation errors, so to inform
+the improvement of the MT system. This problem is partly addressed by using scores that decompose over
+the sub-parts of the sentence, such as BLEU, thereby localizing the translation error.
+However, decomposition into n-grams are most suitable for evaluating shallow methods,
+such as phrase-based translation, 
+and are less instructive for more structurally-aware methods,
+which are at the forefront of MT research today.
+
+These difficulties have motivated the definition of a human measure that decomposes over the semantic
+structure of the sentence, rather than its n-grams. The most notable attempt of this brand is the HMEANT
+measure \cite{LoWu2010,LoWu2011a,LoWu2011b,LoWu2012}, which is based on the similarity
+between the translation output and a reference, defined in terms of the verbal argument structures of the
+two sentences. While appealing in addressing the two major shortcomings detailed above, HMEANT 
+is unable to capture semantic differences which do not show up in the verb-argument structure,
+including several very frequent phenomena, such as inter-clause linkage, nominalizations and copula clauses
+(see \secref{}). For instance, consider the sentence ``A coronary angioplasty may not be technically possible'',
+which was translated by one of the systems we experimented with as
+``Eine koronare Angioplastie kann nicht technisch m{\"o}glich'', i.e., the main verb ``sein'' (``be'') is omitted.
+While this may be interpreted is a minor error, HMEANT will assign it a very low score, as it failed to
+translate the main verb. 
+Another problem with HMEANT is that it requires semantically annotating MT output, which is often unintelligible,
+as well as involves the annotation and comparison to a reference translation: an impractical if not unattainable
+solution, given the huge number of reasonable translations a sentence may have \cite{dryer_marcu:12}.
+
+In this work we propose the Human UCCA-based MT Evaluation ({\it HUME}) metric,
+a human evaluation measure that decomposes over local semantic structures.
+The measure is based on a decomposition of the source sentence into semantic units according
+to the UCCA semantic annotation, and the estimation of their translation quality.
+UCCA covers a wide range of fundamental linguistic phenomena,
+including verbal, nominal and adjectival argument structures, inter-clause relations, coorindation
+and others. Importantly, HUME only requires an annotation of the source sentence, thus avoiding the 
+annotatation machine-generated text. By basing the measure on a direct comparison
+of the source and translation we avoid the difficulties engendered by using
+reference translations, but impose the additional requirement
+that the evaluator be proficient in both the source
+and target languages.
+Further discussion of the strengths and weaknesses of HUME relative to previous approaches
+can be found in \secref{}. 
 
 
-\section{ Human Semantic Evaluation}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Human Semantic Evaluation}
 \label{sec:sem-eval:human}
 We focus on producing high accuracy machine translation systems, but common 
 automatic MT metrics are not able to directly capture accuracy. Even previously suggested methods
