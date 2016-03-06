@@ -3,6 +3,12 @@
 \usepackage{times}
 \usepackage{latexsym}
 \usepackage{graphicx}
+\usepackage{url}
+\usepackage{subfigure}
+\usepackage{pgfplotstable}
+\usepackage{hyperref}
+\usepackage{color}
+\usepackage{lipsum,adjustbox}
 
 \newcommand{\com}[1]{}
 \newcommand{\secref}[1]{Section \ref{#1}}
@@ -52,56 +58,158 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Introduction}\label{sec:intro}
 
-Human judgement is the central (and perhaps the ultimate) criterion for the quality of an MT system.
-Nevertheless, common measures for MT evaluation, such as adequacy and frequency judgements or the relative
-ranking of several possible translations, are problematic in two ways.
+Human judgement is the central, and perhaps ultimate, criterion for estimating the
+quality of an MT system.
+Nevertheless, common measures for MT evaluation, such as adequacy and frequency judgements
+or the relative ranking of several possible translations, are problematic in two ways.
 First, as the quality of translation is determined by multiple factors, it is difficult
-to assign a single number so to reflect the quality of the entire sentence, even for a
-trained annotator. This also shows up with the diminishing IAA scores as a function of the
-sentence length \cite{}.
-Second, a single number is not instructive enough for localizing the translation errors, so to inform
-the improvement of the MT system. This problem is partly addressed by using scores that decompose over
-the sub-parts of the sentence, such as BLEU, thereby localizing the translation error.
-However, decomposition into n-grams are most suitable for evaluating shallow methods,
-such as phrase-based translation, 
-and are less instructive for more structurally-aware methods,
-which are at the forefront of MT research today.
+to assign a single number that quantifies the quality of the entire sentence, as is reflected
+by the diminishing inter-annotator agreement rates of human ranking measures
+as a function of the sentence length \cite{Bojar:2011}.
+Second, a global quality score does not localize the errors in the translation output,
+and hence cannot inform measures to overcome these errors.
+This problem can be addressed by using scores that decompose over
+the sub-parts of the sentence. 
+However, common decompositions into n-grams or even individual words, as employed by the
+popular BLEU \cite{Papineni:2002} and METEOR measures \cite{Banerjee:2005},
+are most suitable for evaluating shallow MT approaches and are
+less instructive for more structurally-aware methods, which are at
+the forefront of MT research today.
 
-These difficulties have motivated the definition of a human measure that decomposes over the semantic
-structure of the sentence, rather than its n-grams. The most notable attempt of this brand is the HMEANT
-measure \cite{LoWu2010,LoWu2011a,LoWu2011b,LoWu2012}, which is based on the similarity
-between the translation output and a reference, defined in terms of the verbal argument structures of the
-two sentences. While appealing in addressing the two major shortcomings detailed above, HMEANT 
-is unable to capture semantic differences which do not show up in the verb-argument structure,
-including several very frequent phenomena, such as inter-clause linkage, nominalizations and copula clauses
-(see \secref{}). For instance, consider the sentence ``A coronary angioplasty may not be technically possible'',
+These difficulties have motivated the definition of a human measure that decomposes over
+the semantic structure of the sentence, rather than its n-grams. The most notable attempt of
+this brand is the HMEANT
+measure \cite{LoWu2010,lo2011structured,LoWu2011b,LoWu2012}, which quantifies the
+similarity the verbal argument structures of the translation output and reference.
+While appealing in addressing the two major shortcomings
+detailed above, HMEANT is unable to capture semantic differences which do not show up in
+the verb-argument structure, including several very frequent phenomena, such as
+inter-clause linkage, nominalizations and copula clauses (see \secref{sec:hmeant_comp}).
+Another shortcoming of MEANT lies with its reliance on semantically annotating MT output,
+which is often unintelligible. Finally, measures based on a comparison to a reference translation
+is necessarily incomplete, given the huge number of reasonable translations
+a sentence may have \cite{dryer_marcu:12}.
+
+In this work we propose the Human UCCA-based MT Evaluation ({\it HUME}) metric,
+a human evaluation measure that decomposes over the sentence's semantic units.
+The units are defined according to the 
+UCCA scheme \cite{abend2013universal}, an appealing candidate for semantic analysis,
+due to its cross-linguistic applicability, support for rapid annotation, and coverage
+of many fundamental semantic phenomena, such as verbal, nominal and adjectival
+argument structures and the inter-relations between them.
+In contrast to previous proposals of semantic MT evaluation, 
+
+HUME operates by aggregating human assessments of the translation quality of the different
+semantic units in the source sentence.
+In thus only requires the semantic annotation of the source sentence, thus avoiding the 
+annotatation of machine-generated text, a difficult if not ill-defined task.
+By basing the measure on a direct comparison
+of the source and translation we avoid the difficulties engendered by using
+reference translations, albeit at the cost of imposing the additional requirement
+that the evaluator be proficient in both the source and target languages.
+See \secref{sec:} for a discussion of HUME's advantages realative to other measures.
+
+We conduct experiments with four language pairs, English-German, English-Polish,
+English-Romanian and English-Czech, and report efficiency (time of annotation) and
+inter-annotator agreement scores, as well as qualitative comparison of resulting
+HUME scores and BLEU, and crowd-sourced adequacy judgements. Results show that HUME obtains 
+agreements which are in par with standard sentence-level ranking measures, but unlike with them,
+the agreement does not diminish with the sentence length.
+
+\oa{summary of contribution}
+
+\oa{what is the purpose of the BLEU binning?}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Background}\label{sec:background}
+
+% MT evaluation
+\paragraph{MT Evaluation.}
+
+
+% semantic representation
+\paragraph{Semantic Representation.}
+Much interest has been devoted recently to broad-coverage semantic analysis of text.
+The Abstract Meaning Representation (AMR) scheme \cite{banarescu2013abstract}
+shares much of UCCA's motivation for defining a more complete semantic annotation.
+However, it is not optimal for our purposes as they do not ground the semantic symbols
+in the text, thus not straightwardly allowing a decomposition of the sentence into sub-units,
+and are more fine-grained and consequently more difficult to annotate.
+
+Several approaches have been proposed for grounded semantic representations,
+generally viewing semantic structures as bi-lexical dependencies. Examples include
+the Prague Treebank tectogrammatical layer \cite{hajic2012announcing}, as well as dependencies derived
+from Minimal Recursion Semantics representations \cite{oepen2006discriminant}.
+Despite their appeal as deep and intuitive means for semantic representations,
+these approaches also provide fine-grained distinctions and require linguistic expertise to annotate.
+%\newcite{Basile:12} attempted to make some aspects of the semantic annotation more accessible,
+%but to our knowledge no results of this brand have been reported.
+
+UCCA (Universal Conceptual Cognitive Annotation) is a natural selection for purposes of MT evaluation
+for a number of reasons. 
+First, it diverges from the above approaches in representing
+semantic structure as a hierarchy of units, defined using coarse-grained and intuitive definitions,
+and consequently can be reliably annotated by non-experts, after as little as two hours
+of training \cite{marinotti2014}.
+Second, UCCA is a cross-linguistically applicable scheme, seeking to represent what is shared between languages,
+by building on an established framework for typological description called
+``Basic Linguistic Theory'' \cite[BLT]{Dixon:10a,Dixon:10b,Dixon:12},
+one of the most widely used frameworks for linguistic description.
+Indeed, the scheme's cross-linguistic applicability has been demonstrated through its
+application to annotation in English, French, German and Czech. 
+Third, the scheme has been shown to be semantically stable
+in translation: UCCA annotations of translated text usually contain the same set of relationships
+\cite{sulem2012}. This is an important feature for the semantic annotation, as it allows us to
+assume that the semantic units of the source indeed reflect a common layer of representation that
+should be preserved in translation, and so should be represented in the translation output too.
+The non-stability of verbal argument structures, which may be translated to a nominal or adjectival
+argument structure in another language, is one of the shortcomings of MEANT which HUME addresses.
+\oa{example?}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{The HUME Measure}\label{sec:hume}
+
+
+We do not distinguish fluency and adequacy judgements, as they are correlated anyway \cite{ccb}.
+
+\subsection{Comparison with HMEANT}\label{sec:hmeant_comp}
+
+For instance, consider the sentence ``A coronary angioplasty may not be technically possible'',
 which was translated by one of the systems we experimented with as
 ``Eine koronare Angioplastie kann nicht technisch m{\"o}glich'', i.e., the main verb ``sein'' (``be'') is omitted.
 While this may be interpreted is a minor error, HMEANT will assign it a very low score, as it failed to
 translate the main verb. 
-Another problem with HMEANT is that it requires semantically annotating MT output, which is often unintelligible,
-as well as involves the annotation and comparison to a reference translation: an impractical if not unattainable
-solution, given the huge number of reasonable translations a sentence may have \cite{dryer_marcu:12}.
 
-In this work we propose the Human UCCA-based MT Evaluation ({\it HUME}) metric,
-a human evaluation measure that decomposes over local semantic structures.
-The measure is based on a decomposition of the source sentence into semantic units according
-to the UCCA semantic annotation, and the estimation of their translation quality.
-UCCA covers a wide range of fundamental linguistic phenomena,
-including verbal, nominal and adjectival argument structures, inter-clause relations, coorindation
-and others. Importantly, HUME only requires an annotation of the source sentence, thus avoiding the 
-annotatation machine-generated text. By basing the measure on a direct comparison
-of the source and translation we avoid the difficulties engendered by using
-reference translations, but impose the additional requirement
-that the evaluator be proficient in both the source
-and target languages.
-Further discussion of the strengths and weaknesses of HUME relative to previous approaches
-can be found in \secref{}. 
+\oa{add statistics about frequency of nominalization and copula clauses and linkers annotation}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Experiments}\label{sec:experiments}
+
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Conlusion}\label{sec:conclusion}
+
+
+
+
+
+
+
 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Human Semantic Evaluation}
+
+\oa{mention TER: using insertions, deletions, substitutions and shift of the entire sentence}
+
 \label{sec:sem-eval:human}
 We focus on producing high accuracy machine translation systems, but common 
 automatic MT metrics are not able to directly capture accuracy. Even previously suggested methods
@@ -840,7 +948,7 @@ the Prague treebank t-layer. This will be described in Deliverable D5.3, due at 
 Do not number the acknowledgment section.
 This section should not be presented for the submission version.
 
-\bibliography{mt}
+\bibliography{main}
 \bibliographystyle{acl2016}
 
 
