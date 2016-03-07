@@ -15,6 +15,7 @@
 \newcommand{\figref}[1]{Figure~\ref{#1}}
 \newcommand{\tabref}[1]{Table~\ref{#1}}
 \newcommand{\oa}[1]{\footnote{\color{red} #1}}
+\newcommand{\bh}[2]{\footnote{\color{blue} #1}}
 
 \newcommand\BibTeX{B{\sc ib}\TeX}
 
@@ -227,10 +228,65 @@ translate the main verb.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Experiments}\label{sec:experiments}
+\subsection{Data Sets and Translation Systems}
+\begin{itemize}
+  \item Briefly describe translation systems.
+  \item Source texts (no need to describe references)
+\end{itemize}
+
+\subsection{Annotation Process}
+\begin{itemize}
+  \item Numbers of annotators, IDs
+  \item Length of annotation, timings
+  \item Sentences annotated
+\end{itemize}
+
+\subsection{Inter-Annotator Agreement}
+\begin{itemize}
+  \item Multiple annotation stats
+  \item Kappas -- ROG, AB
+  \item Kappa versus length
+  \item Kappa versus bleu?
+\end{itemize}
+
+In order to assess the consistency of the annotation, we measure the Inter-Annotator
+Agreement (IAA) using Cohen's Kappa on the multiply-annotated portions of the data.
+For German, Polish and Romanian we used two annotators, so we report IAA on the overlap
+between these annotators. For Czech we used one main annotator, plus several other extra
+annotators to provide IAA. 
+
+To calculate Kappa, we consider the annotation task as a classification task on 
+nodes. We only consider nodes where there are at least two annotations from different
+annotators and we treat nodes with more than two annotations as a set of paired
+annotations\bh{This may not be correct, so should/could we do Kappa across the 
+variable multiple annotations on Czech}. We consider Kappa separately on the lexical
+nodes (annotated as red, orange or green) and the structural nodes (annotated
+as acceptable or bad) since there should not be any confusion between these two types of
+nodes. The small number of nodes which one annotator had labelled as structural and 
+the other as lexical were ignored for the purposes of IAA, since such cases of annotator 
+error could be caught by improved tool support.  The Kappas are shown in \tabref{tab:iaa}
+\begin{table}[!ht]
+\begin{center}
+\begin{tabular}{l|cccc}
+ & cs & de & pl & ro \\
+\hline
+Sentences & & & & \\
+\hline
+Lexical nodes & & & & \\
+Kappa & & & & \\
+\hline
+Structural nodes & & & & \\
+Kappa & & & & \\
+\end{tabular}
+\caption{Inter-annotator agreement for the multiply-annotated portions of the data, as
+measured by Cohen's Kappa. }
+\label{tab:iaa}
+\end{center}
+\end{table}
 
 
-
-
+To assess whether, as we hoped, HUME would make it easier to reliably annotate long sentences,
+we binned the sentences according to length and measured Kappa on each of the bins.
 
 
 
