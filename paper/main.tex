@@ -97,7 +97,6 @@ UCCA scheme \cite{abend2013universal}, an appealing candidate for semantic analy
 due to its cross-linguistic applicability, support for rapid annotation, and coverage
 of many fundamental semantic phenomena, such as verbal, nominal and adjectival
 argument structures and the inter-relations between them.
-In contrast to previous proposals of semantic MT evaluation, 
 
 HUME operates by aggregating human assessments of the translation quality of the different
 semantic units in the source sentence.
@@ -116,16 +115,56 @@ HUME scores and BLEU, and crowd-sourced adequacy judgements. Results show that H
 agreements which are in par with standard sentence-level ranking measures, but unlike with them,
 the agreement does not diminish with the sentence length.
 
-\oa{summary of contribution}
+While keeping a human in the loop is never a scalable solution, human evaluation is the
+fundamental measure of quality of MT output, and we therefore begin our inquiries here.
 
-\oa{what is the purpose of the BLEU binning?}
+\oa{summary of contribution}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Background}\label{sec:background}
 
-% MT evaluation
-\paragraph{MT Evaluation.}
+\paragraph{Machine Translation Evaluation.}
+MT evaluation measures has been traditionally pursued through human-based
+evaluation that quantifies the adequacy of the translation in preserving the meaning
+of the source sentence, and its fluency as a sentence in the target language.
+Human evaluation is still accepted as the standard evaluation measure, and is
+estimated either in terms of the relative ranking of the outputs of multiple systems
+(as is standard in the WMT shared tasks \cite[inter alia]{wmt14}, or by assigning
+indiviaul adequacy/fluency scores for each sentence, recently streamlined by \newcite{graham2015}.
+The problem with these measures is that they are costly to conduct on large scale, as
+they require a human in the loop.
 
+While providing the cleanest signal, human-based evaluation are not ideal for cases where
+a wide variety of systems needs to be evaluated (e.g., with many different settings of hyper-parameters),
+which has motivated the construction of cheaper methods that correlate with human
+judgement. A common approach is to compare the MT output with reference translations,
+created or verified by an expert. Methods often rely on some sort of string matching
+methods, such as overlap of n-grams, as with the BLEU and METEOR measures, or edit
+distance. While these measures greatly supported MT research by allowing to cheply
+conduct many MT experiments, they suffer from two principal problems.
+First, they rely on comparison to reference translations, which reflect a small
+number out of the enormous number of ways to translate a sentence and are thus
+inherently incomplete. Second, they decompose over the words and n-grams of the sentence,
+and not over their lexical units, and are thus better suited for localizing errors
+when evaluating shallow MT methods, and are less telling for identifying the semantic
+nature of translation errors in the output. 
+
+To address the second issue, more structure-aware methods were proposed, with the
+purpose of quantifying how different the reference and translation output are in terms
+of their {\it structure}. \newcite{LiuGildea2005} took a syntactic approach, checking
+syntactic similarity between the reference and translation\oa{verify!}. \newcite{Owczarzak2008}
+took a similar approach using lexical-functional grammar structures.
+
+Comparison of semantic structures with a reference translation
+was conducted by \newcite{gimenezMarquez2007,gimenezMarquez2008},
+who incorapoted them as features that were combined with lexical and morphosyntactic features.
+Perhaps the most notable attempt at a semantic MT evaluation measure is MEANT \cite{lo2011meant} and
+its human variant HMEANT, which compares the reference and translation in terms of their semantic
+role labeling structure. The measure shares much of HUME's motivation for providing a measure that
+decomposes over semantic units, rather than strings. Nevertheless, HMEANT suffers from several major
+shortcomings, in that it is not able to capture much frequent phenomena that is not expressed
+in the semantic structures, in addition to not addressing the problems incurred by using references.
+HUME addresses both of these shortcomings, see \secref{sec:hmeant_comp}. 
 
 % semantic representation
 \paragraph{Semantic Representation.}
@@ -181,6 +220,9 @@ While this may be interpreted is a minor error, HMEANT will assign it a very low
 translate the main verb. 
 
 \oa{add statistics about frequency of nominalization and copula clauses and linkers annotation}
+
+\oa{what is the purpose of the BLEU binning?}
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
