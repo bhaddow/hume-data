@@ -255,12 +255,33 @@ to preserve for MT translation, and which are less important
   \item Source texts (no need to describe references)
 \end{itemize}
 
+For each of the four language pairs under consideration (i.e. English to 
+Czech, German, Polish and Romanian) we built phrase-based MT systems
+using Moses \cite{Koehn:2007}. We used large training sets extracted from OPUS \cite{tiedemann:2009}, and
+the data sets released for the WMT14 medical translation task \cite{bojar-EtAl:2014:W14-33}, to provide between
+45 and 85 million sentences of training data, depending on language pair.
+
+These translation systems were used to translate texts derived from both NHS 24\footnote{\url{http://www.nhs24.com/}} and 
+Cochrane\footnote{\url{http://www.cochrane.org/}} into the four languages. The first organisation is a public body
+providing healthcare and health-service related information in Scotland, whereas the second is an international NGO which 
+provides independent systematic reviews on health-related research. From NHS 24, we selected the segments from their
+``Health A-Z'' which is part of the NHS Inform website, and the Cochrane texts come from their plain language summaries
+and abstracts.\bh{How much more do we need? Perhaps in the intro we could justify our focus on public health text
+(accuracy!). The test corpora should have a public URL by the time we submit, although of course the source texts were 
+already public anyway, and Lexi did some selection of examples for use in this expt. -- do we have to explain this?}
+
 \subsection{Annotation Process}
 \begin{itemize}
   \item Numbers of annotators, IDs
   \item Length of annotation, timings
   \item Sentences annotated
 \end{itemize}
+
+For the annotation process, we recruited seven annotators, two for each of the target languages apart from Czech. They were
+all native speakers of the target languages and fluent in English. For Czech, we also recruited a  group of additional annotators
+to annotate small numbers of sentences each for the purpose of calculating inter-annotator agreement. In \tabref{tab:annot}
+we show the total number of sentences and nodes annotated by each annotator, where we consider the additional Czech
+annotators as a single annotator.
 
 \subsection{Data}\label{sec:data}
 
