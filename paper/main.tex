@@ -70,6 +70,62 @@ by the diminishing inter-annotator agreement rates of human ranking measures
 as a function of the sentence length \cite{Bojar:2011}.
 Second, a sentence-level quality score does not indicate what parts of the sentence
 are erroneously translated in the output, and hence cannot inform developers in overcoming these errors.
+
+These problems were partially addressed by measures that decompose over sub-parts of the sentence,
+most commonly over its words or n-grams, quantifying the overlap of the sub-parts with a reference
+translation. More recent work on MT evaluation, most notably the MEANT measure \cite{lo2011structured},
+proposed measures that decompose over semantically defined units,
+quantifying the similarity of the output and the reference in terms of their verb argument structures.
+While allowing a localization of the semantic errors in the translation,
+focusing on verb argument structures misses out on many very pervasive semantic phenomena,
+such as inter-clause linkage and nominal argument structures, and thus provides only a limited
+perspective on the semantic similarity between the output and reference.
+Moreover, assigning a semantic structure to MT output, which is often low in quality,
+is difficult and arguably ill-defined.
+
+In this work we propose the Human UCCA-based MT Evaluation ({\it HUME}) metric,
+a human evaluation measure that decomposes over the semantic units of the sentence.
+Semantic units are defined according to the 
+UCCA scheme \cite{abend2013universal}, an appealing candidate for semantic analysis,
+due to its cross-linguistic applicability, support for rapid annotation, and coverage
+of many fundamental semantic phenomena, such as verbal, nominal and adjectival
+argument structures and the inter-relations between them.
+
+HUME operates by aggregating human assessments of the translation quality of individual
+semantic units in the source sentence.
+Importantly, HUME only requires the semantic annotation of the source sentence, thus avoiding the 
+annotatation of machine-generated text, a difficult if not ill-defined task, and allowing the re-use
+of the source semantic annotation for measuring the quality of different translations of the same source sentence.
+By basing the measure on a direct comparison
+of the source and translation we avoid the difficulties engendered by using
+reference translations, albeit at the cost of imposing the additional requirement
+that the evaluator be proficient in both the source and target languages.
+See \secref{sec:hmeant_comp} for further discussion.
+
+We conduct experiments with four language pairs, English-German, English-Polish,
+English-Romanian and English-Czech, and report efficiency (time of annotation) and
+inter-annotator agreement scores, as well as qualitative comparison of the resulting
+HUME scores with crowd-sourced adequacy judgements. Results show that HUME obtains 
+agreements which are on par with those of standard sentence-level ranking measures,
+but unlike them, HUME's agreement does not diminish with the sentence length.
+
+While human evaluation is not a scalable solution,
+it provides the foundations and justification for defining a measure.
+The paper thus focuses on human evaluation, but concludes
+by outlining ongoing work to construct semi- and fully-automatic variants of HUME.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Background}\label{sec:background}
+
+While the measure addresses the two major shortcomings
+detailed above, it is unable to capture semantic differences which do not show up in
+the verb-argument structure, including several very frequent phenomena, 
+Another shortcoming of MEANT is its reliance on semantically annotating MT output,
+which is often unintelligible. Finally, measures based on a comparison to a
+
+
+
 This problem can be addressed by using scores that decompose over the sub-parts of the sentence. 
 However, common decompositions into n-grams or even individual words, as employed by the
 popular BLEU \cite{Papineni:2002} and METEOR measures \cite{Banerjee:2005},
@@ -86,44 +142,15 @@ between their verbal argument structures
 While the measure addresses the two major shortcomings
 detailed above, it is unable to capture semantic differences which do not show up in
 the verb-argument structure, including several very frequent phenomena, such as
-inter-clause linkage, nominalizations and copula clauses (see \secref{sec:hmeant_comp}).
+inter-clause linkage, nominalizations and copula clauses
+(see \secref{sec:hmeant_comp}).
 Another shortcoming of MEANT is its reliance on semantically annotating MT output,
-which is often unintelligible. Finally, measures based on a comparison to a reference translation
+which is often unintelligible. Finally, measures based on a comparison to a
+reference translation
 are necessarily incomplete, as they compare to a small number of references
-out of the the huge number of possible translations a sentence may have \cite{dryer_marcu:12}.
+out of the the huge number of possible translations a sentence may have
+\cite{dreyer2012hyter}.
 
-In this work we propose the Human UCCA-based MT Evaluation ({\it HUME}) metric,
-a human evaluation measure that decomposes over the sentence's semantic units.
-Semantic units are defined according to the 
-UCCA scheme \cite{abend2013universal}, an appealing candidate for semantic analysis,
-due to its cross-linguistic applicability, support for rapid annotation, and coverage
-of many fundamental semantic phenomena, such as verbal, nominal and adjectival
-argument structures and the inter-relations between them.
-
-HUME operates by aggregating human assessments of the translation quality of the different
-semantic units in the source sentence.
-In thus only requires the semantic annotation of the source sentence, thus avoiding the 
-annotatation of machine-generated text, a difficult if not ill-defined task.
-By basing the measure on a direct comparison
-of the source and translation we avoid the difficulties engendered by using
-reference translations, albeit at the cost of imposing the additional requirement
-that the evaluator be proficient in both the source and target languages.
-See \secref{sec:} for a discussion of HUME's advantages realative to other measures.
-
-We conduct experiments with four language pairs, English-German, English-Polish,
-English-Romanian and English-Czech, and report efficiency (time of annotation) and
-inter-annotator agreement scores, as well as qualitative comparison of resulting
-HUME scores and BLEU, and crowd-sourced adequacy judgements. Results show that HUME obtains 
-agreements which are in par with standard sentence-level ranking measures, but unlike with them,
-the agreement does not diminish with the sentence length.
-
-While keeping a human in the loop is never a scalable solution, human evaluation is the
-fundamental measure of quality of MT output, and we therefore begin our inquiries here.
-
-\oa{summary of contribution}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Background}\label{sec:background}
 
 \paragraph{Machine Translation Evaluation.}
 MT evaluation measures has been traditionally pursued through human-based
