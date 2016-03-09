@@ -51,7 +51,7 @@ def do_bins(agree, first_bin_start, bin_size, field_name, csv_file, graph_file, 
             if len(match_labels) == 2:
               cm = ConfusionMatrix(selected['mt_label_x'], selected['mt_label_y'], \
                 true_name="annot_1", pred_name="annot_2")
-              kappa = get_kappa(cm) #cm.stats()['overall']['Kappa']
+              kappa,_,_ = get_kappa(cm) #cm.stats()['overall']['Kappa']
               if kappa < 0:
                 print(cm)
             elif match_labels[0]:
