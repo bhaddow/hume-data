@@ -28,6 +28,7 @@ def print_overall_iaa(by_lang, args):
     cm = ConfusionMatrix(by_label['mt_label_x'], by_label['mt_label_y'], \
       true_name="annot_1", pred_name="annot_2")
     print(cm)
+    print(cm.stats())
     print("Kappa: %7.5f" % cm.stats()['overall']['Kappa'])
 
 def print_iaa_sentence_detail(agree, detail_file):

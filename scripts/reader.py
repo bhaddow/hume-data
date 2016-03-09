@@ -42,6 +42,9 @@ def get_sentences(filenames):
         if not line.startswith("==="):
           break # end of file
         filename = read_string(dfh)
+        # hack to remove end of file name in de2
+        if filename.endswith("_b4"):
+          filename = filename[:-3]
         lang = filename[-3:-1]
         annot_id = filename[-3:]
         sent_id = eval(dfh.readline())
