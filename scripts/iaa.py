@@ -28,7 +28,7 @@ def get_kappa(cm):
   p_o = float(sum_diag) / N
   #print(p_o)
   kappa = (p_o - p_e) / (1 - p_e)
-  return kappa
+  return kappa,p_o,p_e
 
 def print_overall_stats(by_lang,args):
   print("Counts of doubly annotated nodes") 
@@ -48,10 +48,10 @@ def print_overall_iaa(by_lang, args):
     cm = ConfusionMatrix(by_label['mt_label_x'], by_label['mt_label_y'], \
       true_name="annot_1", pred_name="annot_2")
     print(cm)
-    kappa = get_kappa(cm)
+    kappa, p_o, p_e = get_kappa(cm)
     #print(cm.to_dataframe())
     #print(cm.stats())
-    print("Kappa: %7.5f" % kappa)
+    print("Kappa: %7.5f; P_o: %7.5f; P_e: %7.5f" % (kappa, p_o, p_e))
 
 def print_iaa_sentence_detail(agree, detail_file):
 #TODO sentence id, matches per sentence, pc a/b, pc r/o/g. src, tgt, ucca stats
