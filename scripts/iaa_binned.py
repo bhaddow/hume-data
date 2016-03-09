@@ -25,19 +25,23 @@ def do_bins(agree, first_bin_start, bin_size, field_name, csv_file, graph_file, 
     writer = csv.writer(ofh)
     writer.writerow(("lang","group","bin_start","bin_end","count","kappa"))
     for lang_name,lang in LANGCODES:
+      by_lang = agree[agree["lang"] == lang]
       LOG.info("Considering " + lang_name)
-      max_length = max(agree[agree['lang'] == lang][field_name])
+      max_length = max(by_lang[field_name])
       #min_length = min(agree[agree['lang'] == lang][field_name])
       kappas = { g: [] for g,_ in groups}
       bins = []
       bin_start = first_bin_start
       while bin_start < max_length:
         bin_end = bin_start + bin_size
+        if len(by_lang[by_lang[field_name] >= bin_start]) == 0: break
+        while len(by_lang[(by_lang[field_name] >= bin_start) & (by_lang[field_name] < bin_end)]) == 0:
+          bin_end += bin_size
         LOG.debug("Bin start: {}; Bin end: {}".format(bin_start,bin_end))
         for group_name, group in groups:
-          selected = agree[(agree["lang"] == lang) & \
-          (agree["mt_label_x"].isin(group)) & (agree["mt_label_y"].isin(group))  & \
-          (agree[field_name] >= bin_start) & (agree[field_name] < bin_end)]
+          selected = by_lang[ \
+          (by_lang["mt_label_x"].isin(group)) & (by_lang["mt_label_y"].isin(group))  & \
+          (by_lang[field_name] >= bin_start) & (by_lang[field_name] < bin_end)]
           LOG.debug("Selected {} nodes".format(len(selected)))
           if not len(selected):
             kappa = 0
@@ -57,7 +61,7 @@ def do_bins(agree, first_bin_start, bin_size, field_name, csv_file, graph_file, 
           writer.writerow((lang, group_name, str(bin_start), str(bin_end), len(selected), kappa))
           kappas[group_name].append(kappa)
         bins.append((bin_start,bin_end))
-        bin_start += bin_size
+        bin_start = bin_end
 
       # Plotting to file
       fig,ax = plt.subplots()
