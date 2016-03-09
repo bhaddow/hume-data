@@ -1,10 +1,11 @@
 \documentclass[11pt]{article}
 \usepackage{acl2016}
+\usepackage{subfig}
 \usepackage{times}
 \usepackage{latexsym}
 \usepackage{graphicx}
 \usepackage{url}
-\usepackage{subfigure}
+%\usepackage{subfigure}
 \usepackage{pgfplotstable}
 \usepackage{hyperref}
 \usepackage{color}
@@ -351,13 +352,13 @@ error could be caught by improved tool support.  The Kappas are shown in \tabref
 \begin{tabular}{l|cccc}
  & cs & de & pl & ro \\
 \hline
-Sentences & & & & \\
+Sentences & & 102 & 334 & 217 \\
 \hline
-Lexical nodes & & & & \\
-Kappa & & & & \\
+Lexical nodes & & 1724 & 5386 & 3570 \\
+Kappa & & 0.29 & 0.54 & 0.50 \\
 \hline
-Structural nodes & & & & \\
-Kappa & & & & \\
+Structural nodes & & 1040 & 2655 & 1989 \\
+Kappa & & 0.44 & 0.33 & 0.58 \\
 \end{tabular}
 \caption{Inter-annotator agreement for the multiply-annotated portions of the data, as
 measured by Cohen's Kappa. }
@@ -367,7 +368,41 @@ measured by Cohen's Kappa. }
 
 
 To assess whether, as we hoped, HUME would make it easier to reliably annotate long sentences,
-we binned the sentences according to length and measured Kappa on each of the bins.
+we binned the sentences according to length and measured Kappa on each of the bins. Each bin covers
+a length range of 10, and we show the variance of kappa with length in \figref{fig:iaalength}.\bh{Note that cs is missing}
+
+\def\iaafig #1{\includegraphics[width=7cm]{iaa_length_#1.png}}
+
+\begin{figure*}[ht!]
+\begin{tabular}{cc}
+
+
+\subfloat[English-Czech]{
+  \iaafig{de}
+}
+&
+\subfloat[English-German]{
+  \iaafig{de}
+
+}
+\\
+
+\subfloat[English-Polish]{
+  \iaafig{pl}
+  
+}
+&
+\subfloat[English-Romanian]{
+  \iaafig{ro}
+
+}
+\end{tabular}
+\caption{Inter-annotator Agreement (Kappa) versus sentence length, separately for
+structural and lexical nodes. }
+\label{fig:iaallength}
+
+
+\end{figure*}
 
 
 \subsection{Discussion of Disagreements}\label{sec:disagreements}
