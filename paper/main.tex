@@ -1,10 +1,11 @@
 \documentclass[11pt]{article}
 \usepackage{acl2016}
+\usepackage{subfig}
 \usepackage{times}
 \usepackage{latexsym}
 \usepackage{graphicx}
 \usepackage{url}
-\usepackage{subfigure}
+%\usepackage{subfigure}
 \usepackage{pgfplotstable}
 \usepackage{hyperref}
 \usepackage{color}
@@ -118,120 +119,149 @@ by outlining ongoing work to construct semi- and fully-automatic variants of HUM
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Background}\label{sec:background}
 
-While the measure addresses the two major shortcomings
-detailed above, it is unable to capture semantic differences which do not show up in
-the verb-argument structure, including several very frequent phenomena, 
-Another shortcoming of MEANT is its reliance on semantically annotating MT output,
-which is often unintelligible. Finally, measures based on a comparison to a
+%While the measure addresses the two major shortcomings 
+%detailed above, it is unable to capture semantic differences which do not show up in 
+%the verb-argument structure, including several very frequent phenomena, 
+%Another shortcoming of MEANT is its reliance on semantically annotating MT output,
+%which is often unintelligible. Finally, measures based on a comparison to a
 
 
-
-This problem can be addressed by using scores that decompose over the sub-parts of the sentence. 
-However, common decompositions into n-grams or even individual words, as employed by the
-popular BLEU \cite{Papineni:2002} and METEOR measures \cite{Banerjee:2005},
-are most suitable for evaluating shallow MT approaches and are
-less instructive for more structurally-aware methods, which are at
-the forefront of MT research today.
-
-These difficulties have motivated the definition of a human measure that decomposes over
-the semantic structure of the sentence, rather than its n-grams. The most notable attempt of
-this type is the MEANT measure, and its human variant HMEANT
-\cite{lo2010evaluating,lo2011structured,Lo2011meant,lo2013meant}, which quantifies the
-similarity between the output translation and a reference translation in terms of the similarity
-between their verbal argument structures
-While the measure addresses the two major shortcomings
-detailed above, it is unable to capture semantic differences which do not show up in
-the verb-argument structure, including several very frequent phenomena, such as
-inter-clause linkage, nominalizations and copula clauses
-(see \secref{sec:hmeant_comp}).
-Another shortcoming of MEANT is its reliance on semantically annotating MT output,
-which is often unintelligible. Finally, measures based on a comparison to a
-reference translation
-are necessarily incomplete, as they compare to a small number of references
-out of the the huge number of possible translations a sentence may have
-\cite{dreyer2012hyter}.
+%These difficulties have motivated the definition of a human measure that decomposes over
+%the semantic structure of the sentence, rather than its n-grams. The most notable attempt of
+%this type is the MEANT measure, and its human variant HMEANT
+%\cite{lo2010evaluating,lo2011structured,Lo2011meant,lo2013meant}, which quantifies the
+%similarity between the output translation and a reference translation in terms of the similarity
+%between their verbal argument structures
+%While the measure addresses the two major shortcomings
+%detailed above, it is unable to capture semantic differences which do not show up in
+%the verb-argument structure, including several very frequent phenomena, such as
+%inter-clause linkage, nominalizations and copula clauses
+%(see \secref{sec:hmeant_comp}).
+%Another shortcoming of MEANT is its reliance on semantically annotating MT output,
+%which is often unintelligible. Finally, measures based on a comparison to a
+%reference translation
+%are necessarily incomplete, as they compare to a small number of references
+%out of the the huge number of possible translations a sentence may have
+%\cite{dreyer2012hyter}.
 
 
 \paragraph{Machine Translation Evaluation.}
 MT evaluation measures has been traditionally pursued through human-based
-evaluation that quantifies the adequacy of the translation in preserving the meaning
-of the source sentence, and its fluency as a sentence in the target language.
+evaluation that quantifies the adequacy of the translation in preserving the meaning 
+of the source sentence, and its fluency as a sentence in the target language \cite{lopez2008statistical}.
 Human evaluation is still accepted as the standard evaluation measure, and is
 estimated either in terms of the relative ranking of the outputs of multiple systems
-(as is standard in the WMT shared tasks \cite[inter alia]{wmt14}, or by assigning
-indiviaul adequacy/fluency scores for each sentence, recently streamlined by \newcite{graham2015}.
-The problem with these measures is that they are costly to conduct on large scale, as
-they require a human in the loop.
+as is standard in the WMT shared tasks, e.g., \cite{bojar2015findings}, or by assigning
+indiviaul adequacy/fluency scores for each sentence, a procedure recently improved
+by \newcite{graham2015improving}.
 
-While providing the cleanest signal, human-based evaluation are not ideal for cases where
-a wide variety of systems needs to be evaluated (e.g., with many different settings of hyper-parameters),
+While providing the gold standard for MT evaluation, human evaluation is not a scalable solution,
+and is unfeasible for a wide variety of systems or hyper-parameter settings are to be evaluated.
 which has motivated the construction of cheaper methods that correlate with human
-judgement. A common approach is to compare the MT output with reference translations,
-created or verified by an expert. Methods often rely on some sort of string matching
-methods, such as overlap of n-grams, as with the BLEU and METEOR measures, or edit
-distance. While these measures greatly supported MT research by allowing to cheply
-conduct many MT experiments, they suffer from two principal problems.
-First, they rely on comparison to reference translations, which reflect a small
-number out of the enormous number of ways to translate a sentence and are thus
-inherently incomplete. Second, they decompose over the words and n-grams of the sentence,
-and not over their lexical units, and are thus better suited for localizing errors
+judgement.
+
+Scalability has been addressed by scores that decompose over the sub-parts of
+the translation, and quantify how many of these sub-parts appear in a reference translation,
+whose validity has been manually confirmed. The most commonly used measures decompose
+over n-grams or even individual words, with examples such as
+the BLEU \cite{Papineni:2002} and METEOR measures \cite{Banerjee:2005}.
+Other methods employ a string edit distance for determining the similarity between the
+reference and translation \cite{snover2006study}.
+While these measures stimulated much progress in MT research by allowing
+to evaluate experiments no a massive scale, they 
+decompose over the words and n-grams of the sentence,
+and are thus better suited for localizing errors
 when evaluating shallow MT methods, and are less telling for identifying the semantic
 nature of translation errors in the output. 
 
-To address the second issue, more structure-aware methods were proposed, with the
-purpose of quantifying how different the reference and translation output are in terms
-of their {\it structure}. \newcite{LiuGildea2005} took a syntactic approach, checking
-syntactic similarity between the reference and translation\oa{verify!}. \newcite{Owczarzak2008}
-took a similar approach using lexical-functional grammar structures.
+%These methods are most suitable for evaluating shallow MT approaches and are
+%less instructive as to what aspects of the reference's meaning were not preserved
+%in the translation output.
+%A common approach is to compare the MT output with reference translations,
+%created or verified by an expert. Methods often rely on some sort of string matching
+%methods, such as overlap of n-grams, as with the BLEU and METEOR measures, or edit
+%distance.
+%First, they rely on comparison to reference translations, which reflect a small
+%number out of the enormous number of ways to translate a sentence and are thus
+%inherently incomplete. 
 
-Comparison of semantic structures with a reference translation
-was conducted by \newcite{gimenezMarquez2007,gimenezMarquez2008},
-who incorapoted them as features that were combined with lexical and morphosyntactic features.
-Perhaps the most notable attempt at a semantic MT evaluation measure is MEANT \cite{lo2011meant} and
-its human variant HMEANT, which compares the reference and translation in terms of their semantic
-role labeling structure. The measure shares much of HUME's motivation for providing a measure that
-decomposes over semantic units, rather than strings. Nevertheless, HMEANT suffers from several major
-shortcomings, in that it is not able to capture much frequent phenomena that is not expressed
-in the semantic structures, in addition to not addressing the problems incurred by using references.
-HUME addresses both of these shortcomings, see \secref{sec:hmeant_comp}. 
+To address this shortcoming, more structure-aware methods were proposed, with the 
+purpose of quantifying how different the reference and translation output are in terms 
+of their {\it semantic structure}. \newcite{liu2005syntactic} took a syntactic approach, 
+quantifying the similarity between the syntactic structures of the reference and translation.
+\newcite{owczarzak2007evaluating} took a similar approach using lexical-functional grammar structures.
+\newcite{gimenez2007linguistic} proposed an evaluation measure that incorapotes features
+that capture the overlap between the output and reference in terms of their
+semantic (argument structure phenomena), lexical and morphosyntactic features.
 
-% semantic representation
+Perhaps the most notable attempt at a semantic MT evaluation measure is MEANT and
+its human variant HMEANT, which compares the reference and translation in terms of the similarity
+of their semantic role labeling structure. HMEANT shares much of HUME's motivation for providing a
+measure that decomposes over semantic units, rather than strings, but focuses on verbal
+argument structures, ignoring other pervasive phenomena such as nominal predicates, inter-clause
+relations and copula clauses. HUME further diverges from both MEANT and the more shallow BLEU and
+METEOR measures, in not requiring a reference, as it compares the source directly with the output
+translation. We see this difference as crucial where semantic analysis is concerned, as it
+is often impossible to assign a semantic structure to a low quality MT output sentence.
+See \secref{sec:hmeant_comp} for a more elaborate discussion of the differences between HUME
+and HMEANT.
+
 \paragraph{Semantic Representation.}
-Much interest has been devoted recently to broad-coverage semantic analysis of text.
-The Abstract Meaning Representation (AMR) scheme \cite{banarescu2013abstract}
-shares much of UCCA's motivation for defining a more complete semantic annotation.
-However, it is not optimal for our purposes as they do not ground the semantic symbols
-in the text, thus not straightwardly allowing a decomposition of the sentence into sub-units,
-and are more fine-grained and consequently more difficult to annotate.
+UCCA (Universal Conceptual Cognitive Annotation) is a cross-linguistically applicable, lightweight
+scheme for semantic annotation. Formally, a UCCA structure is a directed acyclic graph (DAG),
+whose leaves correspond to the words of the text.
+The graph’s nodes, called {\sc units} , are either terminals or several elements jointly
+viewed as a single entity according to some semantic or cognitive consideration. Edges bear one
+or more categories, indicating the role of the sub-unit in the relation the unit represents. UCCA
+currently focuses on annotating argument structures (adjectival, nominal, verbal and others) and
+relations between them. The most basic notion is the {\sc scene}, which describes a movement, an
+action or a state which is persistent in time. Each Scene contains one main relation, as well
+as one or more participants. For example, the sentence ``After graduating, Tom moved to NYC''
+contains two Scenes, whose main relations are ``graduating'' and ``John''. The participant ``John''
+is a part of both Scenes, while ``NYC'' only of the latter. Further categories account for
+relations between Scenes and the internal structures of complex participants and relations.\oa{add figure}
 
-Several approaches have been proposed for grounded semantic representations,
-generally viewing semantic structures as bi-lexical dependencies. Examples include
-the Prague Treebank tectogrammatical layer \cite{hajic2012announcing}, as well as dependencies derived
-from Minimal Recursion Semantics representations \cite{oepen2006discriminant}.
-Despite their appeal as deep and intuitive means for semantic representations,
-these approaches also provide fine-grained distinctions and require linguistic expertise to annotate.
-%\newcite{Basile:12} attempted to make some aspects of the semantic annotation more accessible,
-%but to our knowledge no results of this brand have been reported.
-
-UCCA (Universal Conceptual Cognitive Annotation) is a natural pick for purposes of MT evaluation
-for a number of reasons. 
-First, it diverges from the above approaches in representing
-semantic structure as a hierarchy of units, defined using coarse-grained and intuitive definitions,
+% UCCA Motivation
+UCCA is a natural candidate for defining a semantic
+MT evaluation measure for a number of reasons. 
+First, it defines a coarse-grained and intuitive set of distinctions definitions,
 and consequently can be reliably annotated by non-experts, after as little as two hours
 of training \cite{marinotti2014}.
 Second, UCCA is a cross-linguistically applicable scheme, seeking to represent what is shared between languages,
-by building on an established framework for typological description called
-``Basic Linguistic Theory'' \cite[BLT]{Dixon:10a,Dixon:10b,Dixon:12},
-one of the most widely used frameworks for linguistic description.
-Indeed, the scheme's cross-linguistic applicability has been demonstrated through its
+by building on linguistic typological theory, and specifically on ``Basic Linguistic Theory''
+\cite{Dixon:10a,Dixon:10b,Dixon:12}, one of the most widely used frameworks for linguistic description.
+Indeed, UCCA's cross-linguistic applicability has been demonstrated through its
 application to annotation in English, French, German and Czech. 
 Third, the scheme has been shown to be semantically stable
 in translation: UCCA annotations of translated text usually contain the same set of relationships
-\cite{sulem2012}. This is an important feature for the semantic annotation, as it allows us to
-assume that the semantic units of the source indeed reflect a common layer of representation that
+\cite{sulem2012}. This is an indication that the scheme reflect a common layer of representation that
 should be preserved in translation, and so should be represented in the translation output too.
-The non-stability of verbal argument structures, which may be translated to a nominal or adjectival
-argument structure in another language, is one of the shortcomings of MEANT which HUME addresses.
+We note that that verbal argument structures are less stable in this sense, as a verbal
+argument structure may be translated or paraphrased to a nominal or adjectival
+argument structure. For example, ``after he graduated, Tom moved to NYC'' conveys a similar meaning
+to ``after graduation, Tom moved to NYC''. 
+
+While most broad-coverage semantic work has focused on shallow semantic structures,
+predominantly argument structures annotated with their semantic roles, much recent
+interest has been devoted to defining more complete semantic representation schemes.
+The Abstract Meaning Representation (AMR) scheme \cite{banarescu2013abstract}
+shares much of UCCA's motivation for defining a more complete semantic annotation.
+However, using AMR is not optimal for defining a decomposition of a sentence into semantic
+units as it does not ground its semantic symbols in the text,
+thus not straightwardly allowing a decomposition of the sentence into sub-units.
+Moreover, AMR is more fine-grained than UCCA and consequently more difficult to annotate.
+
+Other approaches have been proposed for semantic representations, which are grounded in the words
+and phrases of the text, and have generally represented semantic structures as bi-lexical dependencies.
+Examples include the Prague Treebank tectogrammatical layer \cite{hajic2012announcing}, as well
+as dependencies derived from Minimal Recursion Semantics representations \cite{oepen2006discriminant}.
+Nevertheless, despite their appeal as deep and intuitive means for semantic representations,
+these approaches require linguistic expertise for their annotatation, due to the intricate and
+fine-grained distinctions they provide, and are thus in our view less suitable and
+easily interpretable means for our purposes.
+%\newcite{Basile:12} attempted to make some aspects of the semantic annotation more accessible,
+%but to our knowledge no results of this brand have been reported.
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{The HUME Measure}\label{sec:hume}
@@ -351,13 +381,13 @@ error could be caught by improved tool support.  The Kappas are shown in \tabref
 \begin{tabular}{l|cccc}
  & cs & de & pl & ro \\
 \hline
-Sentences & & & & \\
+Sentences & & 102 & 334 & 217 \\
 \hline
-Lexical nodes & & & & \\
-Kappa & & & & \\
+Lexical nodes & & 1724 & 5386 & 3570 \\
+Kappa & & 0.29 & 0.54 & 0.50 \\
 \hline
-Structural nodes & & & & \\
-Kappa & & & & \\
+Structural nodes & & 1040 & 2655 & 1989 \\
+Kappa & & 0.44 & 0.33 & 0.58 \\
 \end{tabular}
 \caption{Inter-annotator agreement for the multiply-annotated portions of the data, as
 measured by Cohen's Kappa. }
@@ -367,7 +397,41 @@ measured by Cohen's Kappa. }
 
 
 To assess whether, as we hoped, HUME would make it easier to reliably annotate long sentences,
-we binned the sentences according to length and measured Kappa on each of the bins.
+we binned the sentences according to length and measured Kappa on each of the bins. Each bin covers
+a length range of 10, and we show the variance of kappa with length in \figref{fig:iaalength}.\bh{Note that cs is missing}
+
+\def\iaafig #1{\includegraphics[width=7cm]{iaa_length_#1.png}}
+
+\begin{figure*}[ht!]
+\begin{tabular}{cc}
+
+
+\subfloat[English-Czech]{
+  \iaafig{de}
+}
+&
+\subfloat[English-German]{
+  \iaafig{de}
+
+}
+\\
+
+\subfloat[English-Polish]{
+  \iaafig{pl}
+  
+}
+&
+\subfloat[English-Romanian]{
+  \iaafig{ro}
+
+}
+\end{tabular}
+\caption{Inter-annotator Agreement (Kappa) versus sentence length, separately for
+structural and lexical nodes. }
+\label{fig:iaallength}
+
+
+\end{figure*}
 
 
 \subsection{Discussion of Disagreements}\label{sec:disagreements}
