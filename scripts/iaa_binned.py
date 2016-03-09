@@ -20,7 +20,8 @@ LOG = logging.getLogger(__name__)
 
 def do_bins(agree, first_bin_start, bin_size, field_name, csv_file, graph_file, name):
   LOG.info("Calculating kappas, binning by " +name)
-  groups = (("ab", ("A", "B")), ("rog", ("R", "O", "G")), ("all", ("A", "B","R", "O", "G")))
+  #groups = (("ab", ("A", "B")), ("rog", ("R", "O", "G")), ("all", ("A", "B","R", "O", "G")))
+  groups = (("struct", ("A", "B")), ("lex", ("R", "O", "G")))
   with open(csv_file, "w") as ofh:
     writer = csv.writer(ofh)
     writer.writerow(("lang","group","bin_start","bin_end","count","kappa"))
@@ -66,12 +67,13 @@ def do_bins(agree, first_bin_start, bin_size, field_name, csv_file, graph_file, 
       # Plotting to file
       fig,ax = plt.subplots()
       index = np.arange(len(bins))
-      cols = ('r', 'g', 'b')
+      cols = ('r', 'b', 'g')[:len(groups)]
       offset = 0.0
       rects = []
+      width = 1.0 / len(groups) - 0.03
       for (group,_),col in zip(groups,cols):
-        rects.append(ax.bar(index + offset, kappas[group], width=0.3, color = col))
-        offset += 0.3
+        rects.append(ax.bar(index + offset, kappas[group], width=width, color = col))
+        offset += width
       ax.set_yticks(np.arange(0,1.1,0.1))
       ax.set_xticks(index + 0.5)
       ax.set_xticklabels(["{}-{}".format(n,m) for n,m in bins])
