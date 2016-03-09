@@ -42,8 +42,9 @@
 
 \begin{abstract}
 
-  Semantic evaluation of Machine Translation (MT) systems has become
-  a necessity, given recent interest in semantics-aware MT systems.
+  Semantic evaluation of Machine Translation (MT) systems, informative as for
+  semantic discrepencies between the translation and the source text,
+  has become a necessity, given recent interest in semantics-aware MT systems.
   We present a novel human semantic evaluation measure for MT, Human
   UCCA-based MT evaluation (HUME), building on the UCCA semantic representation scheme.
   Making progress over previous work, the proposed measure takes into account
@@ -51,7 +52,7 @@
   of the MT output, whose interpretation is often unclear. 
   We experiment with four language pairs, demonstrating the broad applicability of
   the measure, as well as its reliability, reflected by the inter-annotator agreement
-  rates.
+  scores.
 
 \end{abstract}
 
@@ -67,10 +68,9 @@ First, as the quality of translation is determined by multiple factors, it is di
 to assign a single number that quantifies the quality of the entire sentence, as is reflected
 by the diminishing inter-annotator agreement rates of human ranking measures
 as a function of the sentence length \cite{Bojar:2011}.
-Second, a global quality score does not localize the errors in the translation output,
-and hence cannot inform measures to overcome these errors.
-This problem can be addressed by using scores that decompose over
-the sub-parts of the sentence. 
+Second, a sentence-level quality score does not indicate what parts of the sentence
+are erroneously translated in the output, and hence cannot inform developers in overcoming these errors.
+This problem can be addressed by using scores that decompose over the sub-parts of the sentence. 
 However, common decompositions into n-grams or even individual words, as employed by the
 popular BLEU \cite{Papineni:2002} and METEOR measures \cite{Banerjee:2005},
 are most suitable for evaluating shallow MT approaches and are
@@ -79,21 +79,22 @@ the forefront of MT research today.
 
 These difficulties have motivated the definition of a human measure that decomposes over
 the semantic structure of the sentence, rather than its n-grams. The most notable attempt of
-this brand is the HMEANT
-measure \cite{LoWu2010,lo2011structured,LoWu2011b,LoWu2012}, which quantifies the
-similarity the verbal argument structures of the translation output and reference.
-While appealing in addressing the two major shortcomings
-detailed above, HMEANT is unable to capture semantic differences which do not show up in
+this type is the MEANT measure, and its human variant HMEANT
+\cite{lo2010evaluating,lo2011structured,Lo2011meant,lo2013meant}, which quantifies the
+similarity between the output translation and a reference translation in terms of the similarity
+between their verbal argument structures
+While the measure addresses the two major shortcomings
+detailed above, it is unable to capture semantic differences which do not show up in
 the verb-argument structure, including several very frequent phenomena, such as
 inter-clause linkage, nominalizations and copula clauses (see \secref{sec:hmeant_comp}).
-Another shortcoming of MEANT lies with its reliance on semantically annotating MT output,
+Another shortcoming of MEANT is its reliance on semantically annotating MT output,
 which is often unintelligible. Finally, measures based on a comparison to a reference translation
-is necessarily incomplete, given the huge number of reasonable translations
-a sentence may have \cite{dryer_marcu:12}.
+are necessarily incomplete, as they compare to a small number of references
+out of the the huge number of possible translations a sentence may have \cite{dryer_marcu:12}.
 
 In this work we propose the Human UCCA-based MT Evaluation ({\it HUME}) metric,
 a human evaluation measure that decomposes over the sentence's semantic units.
-The units are defined according to the 
+Semantic units are defined according to the 
 UCCA scheme \cite{abend2013universal}, an appealing candidate for semantic analysis,
 due to its cross-linguistic applicability, support for rapid annotation, and coverage
 of many fundamental semantic phenomena, such as verbal, nominal and adjectival
@@ -378,7 +379,7 @@ retained in the translation, and if it is not, then some essential part of the m
 is
 lost. 
 The semantic framework that we base our evaluations on is called 
-Universal Conceptual Cognitive Annotation \shortcite{abend-rappoport:2013:ACL2013}.  
+Universal Conceptual Cognitive Annotation \shortcite{abend2013universal}.  
 UCCA has been developed using linguistic theories about 
 what types of components and structures are universal across many different languages.
 
