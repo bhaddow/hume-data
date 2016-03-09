@@ -14,30 +14,35 @@ import sys
 import pandas
 
 from  pandas_confusion import ConfusionMatrix
+from iaa import get_kappa, LANGCODES
 
 LOG = logging.getLogger(__name__)
-LANGCODES = ("Romanian","ro"), ("Polish", "pl")
 
 def do_bins(agree, first_bin_start, bin_size, field_name, csv_file, graph_file, name):
   LOG.info("Calculating kappas, binning by " +name)
-  groups = (("ab", ("A", "B")), ("rog", ("R", "O", "G")), ("all", ("A", "B","R", "O", "G")))
+  #groups = (("ab", ("A", "B")), ("rog", ("R", "O", "G")), ("all", ("A", "B","R", "O", "G")))
+  groups = (("struct", ("A", "B")), ("lex", ("R", "O", "G")))
   with open(csv_file, "w") as ofh:
     writer = csv.writer(ofh)
     writer.writerow(("lang","group","bin_start","bin_end","count","kappa"))
     for lang_name,lang in LANGCODES:
+      by_lang = agree[agree["lang"] == lang]
       LOG.info("Considering " + lang_name)
-      max_length = max(agree[agree['lang'] == lang][field_name])
+      max_length = max(by_lang[field_name])
       #min_length = min(agree[agree['lang'] == lang][field_name])
       kappas = { g: [] for g,_ in groups}
       bins = []
       bin_start = first_bin_start
       while bin_start < max_length:
         bin_end = bin_start + bin_size
+        if len(by_lang[by_lang[field_name] >= bin_start]) == 0: break
+        while len(by_lang[(by_lang[field_name] >= bin_start) & (by_lang[field_name] < bin_end)]) == 0:
+          bin_end += bin_size
         LOG.debug("Bin start: {}; Bin end: {}".format(bin_start,bin_end))
         for group_name, group in groups:
-          selected = agree[(agree["lang"] == lang) & \
-          (agree["mt_label_x"].isin(group)) & (agree["mt_label_y"].isin(group))  & \
-          (agree[field_name] >= bin_start) & (agree[field_name] < bin_end)]
+          selected = by_lang[ \
+          (by_lang["mt_label_x"].isin(group)) & (by_lang["mt_label_y"].isin(group))  & \
+          (by_lang[field_name] >= bin_start) & (by_lang[field_name] < bin_end)]
           LOG.debug("Selected {} nodes".format(len(selected)))
           if not len(selected):
             kappa = 0
@@ -46,7 +51,7 @@ def do_bins(agree, first_bin_start, bin_size, field_name, csv_file, graph_file, 
             if len(match_labels) == 2:
               cm = ConfusionMatrix(selected['mt_label_x'], selected['mt_label_y'], \
                 true_name="annot_1", pred_name="annot_2")
-              kappa = cm.stats()['overall']['Kappa']
+              kappa = get_kappa(cm) #cm.stats()['overall']['Kappa']
               if kappa < 0:
                 print(cm)
             elif match_labels[0]:
@@ -57,17 +62,18 @@ def do_bins(agree, first_bin_start, bin_size, field_name, csv_file, graph_file, 
           writer.writerow((lang, group_name, str(bin_start), str(bin_end), len(selected), kappa))
           kappas[group_name].append(kappa)
         bins.append((bin_start,bin_end))
-        bin_start += bin_size
+        bin_start = bin_end
 
       # Plotting to file
       fig,ax = plt.subplots()
       index = np.arange(len(bins))
-      cols = ('r', 'g', 'b')
+      cols = ('r', 'b', 'g')[:len(groups)]
       offset = 0.0
       rects = []
+      width = 1.0 / len(groups) - 0.03
       for (group,_),col in zip(groups,cols):
-        rects.append(ax.bar(index + offset, kappas[group], width=0.3, color = col))
-        offset += 0.3
+        rects.append(ax.bar(index + offset, kappas[group], width=width, color = col))
+        offset += width
       ax.set_yticks(np.arange(0,1.1,0.1))
       ax.set_xticks(index + 0.5)
       ax.set_xticklabels(["{}-{}".format(n,m) for n,m in bins])
