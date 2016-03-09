@@ -14,9 +14,9 @@ import sys
 import pandas
 
 from  pandas_confusion import ConfusionMatrix
+from iaa import get_kappa, LANGCODES
 
 LOG = logging.getLogger(__name__)
-LANGCODES = ("Romanian","ro"), ("Polish", "pl")
 
 def do_bins(agree, first_bin_start, bin_size, field_name, csv_file, graph_file, name):
   LOG.info("Calculating kappas, binning by " +name)
@@ -46,7 +46,7 @@ def do_bins(agree, first_bin_start, bin_size, field_name, csv_file, graph_file, 
             if len(match_labels) == 2:
               cm = ConfusionMatrix(selected['mt_label_x'], selected['mt_label_y'], \
                 true_name="annot_1", pred_name="annot_2")
-              kappa = cm.stats()['overall']['Kappa']
+              kappa = get_kappa(cm) #cm.stats()['overall']['Kappa']
               if kappa < 0:
                 print(cm)
             elif match_labels[0]:

@@ -6,9 +6,29 @@ import logging
 import sys
 import pandas
 
+import numpy as np
 from  pandas_confusion import ConfusionMatrix
 
-LANGCODES = ("Romanian","ro"), ("Polish", "pl")
+LANGCODES = ("Romanian","ro"), ("Polish", "pl"), ("German", "de")
+
+def get_kappa(cm):
+  # The pandas_confusion kappa implementation crashes on some platforms,
+  # so I reimplement it here.
+  df = cm.to_dataframe()
+  N = df.sum().sum()
+  #print(N)
+  sum_diag = np.trace(df)
+  #print(sum_diag)
+  sum_row = df.sum(axis=0)
+  sum_col = df.sum(axis=1)
+  p_e = float(sum(sum_row*sum_col)) / (N*N)
+  #print(sum_row)
+  #print(sum_col)
+  #print (p_e)
+  p_o = float(sum_diag) / N
+  #print(p_o)
+  kappa = (p_o - p_e) / (1 - p_e)
+  return kappa
 
 def print_overall_stats(by_lang,args):
   print("Counts of doubly annotated nodes") 
@@ -28,8 +48,10 @@ def print_overall_iaa(by_lang, args):
     cm = ConfusionMatrix(by_label['mt_label_x'], by_label['mt_label_y'], \
       true_name="annot_1", pred_name="annot_2")
     print(cm)
-    print(cm.stats())
-    print("Kappa: %7.5f" % cm.stats()['overall']['Kappa'])
+    kappa = get_kappa(cm)
+    #print(cm.to_dataframe())
+    #print(cm.stats())
+    print("Kappa: %7.5f" % kappa)
 
 def print_iaa_sentence_detail(agree, detail_file):
 #TODO sentence id, matches per sentence, pc a/b, pc r/o/g. src, tgt, ucca stats
