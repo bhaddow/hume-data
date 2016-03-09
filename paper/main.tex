@@ -1,5 +1,6 @@
 \documentclass[11pt]{article}
 \usepackage{acl2016}
+\usepackage{paralist}
 \usepackage{subfig}
 \usepackage{times}
 \usepackage{latexsym}
@@ -276,27 +277,30 @@ following the UCCA guidelines. Since this is is fully explained elsewhere \cite{
 here, except to say that in our case the source sentences were all in English, and  the annotation was performed by four
 computational linguists. After we have the UCCA annotation on 
 the source, we use the word-to-word alignments from the MT system in order to project this annotation to the MT output, and
-we used native speakers of the target language in order to annotate this output. 
+we used native speakers of the target language in order to annotate this output. Since these annotators have to
+judge the quality of the translation, they also needed to be fluent in English.\bh{Somewhere we could explain that we
+could do a similar annotation with monolinguals, although it entails aligning reference and MT output}
 
-The basic strategy for annotating the semantics of the MT output to step through the source sentence semantic 
+The basic strategy for annotating HUME on the  MT output to step through the source sentence semantic 
 components (projected UCCA nodes), looking at the translation via the word alignments, and marking on the source structure
 which parts have 
 been correctly translated.
-There are two kinds of components: a word or basic semantic unit, and a structural component which contains one
+There are two kinds of components (nodes): a word or basic semantic unit, and a structural component which contains one
 or more sub-components. 
 
-\paragraph{Lexical nodes} are usually comprised of individual words. They are the leaf nodes on the tree, the smallest 
+\paragraph{Lexical nodes} are usually comprised of individual words. They are the leaf nodes of the tree, the smallest 
 meaning-bearing
-units of the tree.
+units.
 Leaf nodes can be labelled as green (correct), orange (partially correct) and red (incorrect). 
 The traffic light system makes the marking of the
 lexical units as simple as possible.
 
-\begin{description}
+\begin{compactdesc}
 \item[Green] The meaning of the word or phrase has been largely captured.
-\item[Orange] the essential meaning has been captured, but some part of the translation is wrong. This could often be due to the translated word having the wrong tense, or the wrong morphology. 
+\item[Orange] the essential meaning has been captured, but some part of the translation is wrong. 
+For example, this could often be due to the translated word having the wrong tense, or the wrong morphology. 
 \item[Red] The essential meaning of the unit has not been captured.
-\end{description}
+\end{compactdesc}
 
 
 \paragraph{Structural nodes} contain other nodes which could be either lexical or structural nodes, 
@@ -305,14 +309,14 @@ What we are trying to gauge for structural nodes
 is if the children of these nodes
 relate to each other in the same way in the source sentence and in the translation. 
 There are many ways that the relationship between the children might go wrong in translation:
-\begin{itemize}
+\begin{compactitem}
 \item One of the child nodes is missing from the aligned translation. 
 \item An extra word or phrase has been inserted into the aligned  translation.
 \item The components of the translation are ordered differently 
 %to 
 from
 the source.
-\end{itemize}
+\end{compactitem}
 
 If any of these changes have occurred and this damages the meaning of the aligned translation, then we mark the 
 structural node as ``Bad''. 
@@ -350,12 +354,14 @@ relationships between the children.
 \\
 
 \begin{figure*}[t]
+    \begin{center}
     \includegraphics[width=1\textwidth]{interface-annotations}
-    \caption{Machine translation evaluation tool}
+    \caption{The HUME annotation tool, based on the UCCA tool}
     \label{mttool}
+    \end{center}
 \end{figure*}
 
-In Figure~\ref{mttool} you can see the MT evaluation tool. The sentence at the top shows the complete MT system output. Underneath the MT output is the  source sentence.  Underneath the source sentence we see its expandable semantic tree structure with both lexical and structural nodes. Lexical nodes only have traffic light annotation, whereas a structural node would normally be labelled ``A'' or ``B'' but could also be labelled as a lexical node, in the case where there is no word to word correspondence for the translation of its children.
+In Figure~\ref{mttool} you we show the MT evaluation tool. The sentence at the top shows the complete MT system output. Underneath the MT output is the  source sentence.  Underneath the source sentence we see its expandable semantic tree structure with both lexical and structural nodes. Lexical nodes only have traffic light annotation, whereas a structural node would normally be labelled ``A'' or ``B'' but could also be labelled as a lexical node, in the case where there is no word to word correspondence for the translation of its children.
 
  The child components of a structural node are marked with different coloured rectangles. When navigating through the different source sentence nodes, one can see the relevant sections of the translation because the aligned words in the translation are highlighted in the complete sentence above. Aligned translations are also shown in black alongside the source node. If the node is aligned to a set of discontiguous words in the translation, then the unaligned words that appear in between the aligned words are shown in red. Even if these words are not directly aligned to the source node, they 
 will likely change the meaning of the translation and must be considered when marking 
@@ -400,10 +406,27 @@ to preserve for MT translation, and which are less important
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Experiments}\label{sec:experiments}
+
+In order to validate the HUME metric, we ran an annotation experiment with one source language (English), and four 
+target languages (Czech, German, Polish and Romanian), using text from the public health domain. We are 
+particularly interested in this domain since our ultimate goal is to provide high-quality translations of health
+information for speakers of languages other than English, and in this domain accurate transfer of meaning is
+paramount.
+
+Our annotation experiment sought to address the following questions:
+\begin{itemize}
+\item Can HUME be annotated quickly and reliably, and does the reliability still hold for longer sentences.
+\item Can HUME capture translation issues that other annotation schemes (such as adequacy judgements and HMEANT
+cannot)?
+\item What can HUME annotation tell us about the strengths and weaknesses of MT?
+\end{itemize}
+
+\bh{Maybe we should remove the third one, we
+probably don't address it in this paper}
+
 \subsection{Data Sets and Translation Systems}
 
-For each of the four language pairs under consideration (i.e. English to 
-Czech, German, Polish and Romanian) we built phrase-based MT systems
+For each of the four language pairs under consideration  we built phrase-based MT systems
 using Moses \cite{Koehn:2007}. We used large training sets extracted from OPUS \cite{tiedemann:2009}, and
 the data sets released for the WMT14 medical translation task \cite{bojar-EtAl:2014:W14-33}, to provide between
 45 and 85 million sentences of training data, depending on language pair.
