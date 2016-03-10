@@ -479,23 +479,43 @@ already public anyway, and Lexi did some selection of examples for use in this e
 
 \subsection{Annotation Statistics}
 
-For the annotation of the machine translation, we recruited seven annotators, two for each of the target languages apart from Czech. They were
+For the annotation of MT output, we recruited seven annotators, two for each of the target languages apart from Czech. They were
 all native speakers of the target languages and fluent in English. For Czech, we also recruited a  group of additional annotators
 to annotate small numbers of sentences each for the purpose of calculating inter-annotator agreement. In \tabref{tab:annot}
 we show the total number of sentences and nodes annotated by each annotator, where we consider the additional Czech
-annotators as a single annotator.
+annotators as a single annotator. Note that not all nodes in all sentences were annotated. Sometimes this was because the
+annotator did not finish a node, or accidentally missed a node, but in many cases it was also because it was an implicit 
+UCCA node, which was not shown to the annotators since there is no corresponding source segment.
+\begin{table}
+\begin{center}
+{\small
+\begin{tabular}{ll|cccc}
+& & cs & de & pl & ro \\
+\hline
+Sentences &  Annot. 1 & 324   & 339  & 351  & 230  \\
+ & Annot. 2 & -- & 104  & 340  & 337 \\
+\hline
+Nodes & Annot. 1 & 8794  & 9253 & 9557  & 6152 \\
+ &Annot. 2 & -- & 2906  & 9303  & 9228  \\
+\end{tabular}
+}
+\caption{Total numbers of sentences and nodes annotated on the MT output.}
+\label{tab:annot}
+\end{center}
+\end{table}
 
-\emph{Show numbers of annotations, and timings}
+\emph{Timing of annotations}
 
 \emph{Describe the UCCA annotation}
 
-\subsection{Data}\label{sec:data}
+%\subsection{Data}\label{sec:data}
 
-\subsection{Efficiency of Annotation}\label{sec:efficiency}
+%\subsection{Efficiency of Annotation}\label{sec:efficiency}
 
 
 
 \subsection{Inter-Annotator Agreement}
+\label{sec:iaa}
 \begin{itemize}
   \item Multiple annotation stats
   \item Kappas -- ROG, AB
@@ -529,13 +549,13 @@ error could be caught by improved tool support.  The Kappas are shown in \tabref
 \begin{tabular}{l|cccc}
  & cs & de & pl & ro \\
 \hline
-Sentences & & 102 & 334 & 217 \\
+Sentences & -- & 102 & 334 & 217 \\
 \hline
-Lexical nodes & & 1724 & 5386 & 3570 \\
-Kappa & & 0.29 & 0.54 & 0.50 \\
+Lexical nodes & -- & 1724 & 5386 & 3570 \\
+Kappa & -- & 0.29 & 0.54 & 0.50 \\
 \hline
 Structural nodes & & 1040 & 2655 & 1989 \\
-Kappa & & 0.44 & 0.33 & 0.58 \\
+Kappa & -- & 0.44 & 0.33 & 0.58 \\
 \end{tabular}
 \caption{Inter-annotator agreement for the multiply-annotated portions of the data, as
 measured by Cohen's Kappa. }
