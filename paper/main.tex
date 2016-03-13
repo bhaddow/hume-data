@@ -44,20 +44,19 @@
 
 \begin{abstract}
   
-  Recent interest in semantics-aware MT systems underscores te importance of
+  Recent interest in semantics-aware MT systems underscores the importance of
   semantic evaluation for Machine Translation (MT) systems. 
   A semantic measure, sensitive to possible semantic discrepencies
   between the translation output and the source, is likely support the construction
   and tuning of structure-aware MT, much in the same way that string-based measures,
-  such as BLEU, support advances with shallower MT systems.  
+  such as BLEU, enabled progress in shallower MT.
   We present a novel human semantic evaluation measure for MT, Human
   UCCA-based MT evaluation (HUME), building on the UCCA semantic representation scheme.
   Making progress over previous work, the proposed measure takes into account
   a wider range of semantic phenomena and does not rely on semantic annotation
   of the MT output itself, whose interpretation is often unclear.
-  We experiment with four language pairs, demonstrating the broad applicability of
-  the measure, as well as its reliability, reflected in the inter-annotator agreement
-  scores.
+  We experiment with four language pairs, demonstrating HUME's broad applicability,
+  as well as its reliability, reflected in its inter-annotator agreement rates.
 
 \end{abstract}
 
@@ -67,18 +66,20 @@
 
 Human judgement is the central, and perhaps most fundamental, criterion for
 estimating the quality of an MT system.
-Nevertheless, common measures for MT evaluation, such as adequacy and frequency judgements
+Nevertheless, common measures for MT evaluation, such as adequacy and fluency judgements
 or the relative ranking of several possible translations, are problematic in two ways.
 First, as the quality of translation is determined by multiple factors, it is difficult
-to assign a single number that quantifies the quality of the whole entire sentence. This
+to assign a single number that quantifies the quality of the entire sentence. This
 is indeed reflected in the diminishing inter-annotator agreement rates of human ranking measures
 as a function of the sentence length \cite{Bojar:2011}.
 Second, a sentence-level quality score does not indicate what parts of the sentence
 are erroneously translated, and hence cannot inform developers in overcoming these errors.
 
-These problems were partially addressed by measures that decompose over sub-parts of the sentence,
-most commonly over its words or n-grams, quantifying the overlap of the sub-parts with a reference
-translation. More recent work on MT evaluation proposed measures
+These problems were partially addressed by measures that decompose over sub-parts of the evaluated
+translation sentence (henceforth, {\it translation}),
+most commonly over its words or n-grams,
+quantifying the overlap of its sub-parts relative a reference translation.
+More recent work on MT evaluation proposed measures
 that decompose over semantically defined units,
 quantifying the similarity of the output and the reference in terms of
 their verb argument structure (the most notable of these measures is
@@ -90,7 +91,7 @@ a limited perspective on the semantic similarity between the output and referenc
 Moreover, assigning semantic structure to MT output, especially when low in quality,
 is difficult and arguably ill-defined.
 
-In this work we propose the Human UCCA-based MT Evaluation ({\it HUME}) metric,
+We propose the Human UCCA-based MT Evaluation ({\it HUME}) metric,
 a human evaluation measure that decomposes over the semantic units of the sentence.
 Semantic units are defined according to the 
 UCCA scheme \cite{abend2013universal}, an appealing candidate for semantic analysis,
@@ -108,15 +109,16 @@ By basing the measure on a direct comparison
 of the source and translation we avoid the difficulties engendered by using
 reference translations, albeit at the cost of imposing the additional requirement
 that the evaluator be proficient in both the source and target languages.
-See \secref{sec:hmeant_comp} for further discussion.
+See \secref{sec:hmeant_comp}.
 
-We conduct experiments with four language pairs, English-German, English-Polish,
+We conduct experiments with four language pairs: English-German, English-Polish,
 English-Romanian and English-Czech, and report efficiency (time of annotation) and
 inter-annotator agreement scores, as well as qualitative comparison of the resulting
 HUME scores with crowd-sourced adequacy judgements. Results show that HUME obtains 
-agreements which are on par with those of standard sentence-level ranking measures,
-but unlike them, HUME's agreement does not diminish with the sentence length.
-The paper concludes by outlining ongoing work to construct semi- and fully-automatic variants of HUME.
+agreement scores which are on par with those of standard sentence-level ranking measures,
+but unlike them, HUME's scores do not decrease with logner sentences.
+The paper concludes by outlining ongoing work to construct semi- and
+fully-automatic variants of HUME.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -152,29 +154,30 @@ The paper concludes by outlining ongoing work to construct semi- and fully-autom
 %MT evaluation has been traditionally pursued through human-based
 %evaluation that quantifies the adequacy of the translation in preserving the meaning 
 %of the source sentence, and its fluency as a sentence in the target language \cite{lopez2008statistical}.
-Human evaluation is the standard measure, and is
-estimated either in terms of the relative ranking of the outputs of multiple systems
+Human evaluation is generally determined
+either according to the relative ranking of the outputs of multiple systems
 e.g., in the WMT shared tasks \cite{bojar2015findings}, or by assigning
-indiviaul adequacy/fluency scores to each sentence, a procedure recently improved
+indiviaul adequacy/fluency scores to each translation, a procedure recently improved
 by \newcite{graham2015improving}.
 However, while providing the gold standard for MT evaluation, human evaluation is not a scalable solution,
-and is unfeasible for a wide variety of systems or hyper-parameter settings are to be evaluated.
-which has motivated the construction of cheaper methods that correlate with human
-judgement.
+and is unfeasible where a wide variety of systems or parameter settings are to be evaluated.
+% has motivated the construction of cheaper methods that correlate with human
+%judgement.
 
-Scalability is addressed by scores that decompose over the sub-parts of
+Scalability is addressed by employing automatic and semi-automatic approximations of human
+judgements. Most commonly, such scores decompose over the sub-parts of
 the translation, and quantify how many of these sub-parts appear in a reference translation,
-whose validity has been manually confirmed. The most commonly used measures decompose
-over n-grams or even individual words, e.g., 
+whose validity has been manually confirmed. This decomposition further allows system developers
+to localize the errors within the translation.
+The most commonly used measures decompose over n-grams or even individual words, e.g., 
 the BLEU \cite{Papineni:2002}, NIST \cite{Doddington:2002} and METEOR measures \cite{Banerjee:2005}.
-Other methods employ a string edit distance for determining the similarity between the
-reference and translation \cite{snover2006study}.
+Another common approach is to determine the similarity between the reference and translation
+by applying string edit distance \cite{snover2006study}.
 While these measures stimulated much progress in MT research by allowing
-to evaluate experiments no a massive scale, they 
-decompose over the words and n-grams of the sentence,
-and are thus better suited for localizing errors
-in the output of shallow MT methods, and are less telling for identifying the semantic
-nature of translation errors in the output. 
+the evaluation of massive-scale experiments,
+their decomposition over words and n-grams is better suited for localizing errors
+in the output of shallow MT methods, and is less instructive in identifying the semantic
+nature of the errors. 
 
 %These methods are most suitable for evaluating shallow MT approaches and are
 %less instructive as to what aspects of the reference's meaning were not preserved
@@ -187,29 +190,20 @@ nature of translation errors in the output.
 %number out of the enormous number of ways to translate a sentence and are thus
 %inherently incomplete. 
 
-To address this shortcoming, more more recent work quantifies
-the similarity of the reference and translation output in terms
+In order to address this shortcoming, more recent work quantified
+the similarity of the reference and translation in terms
 of their {\it semantic structure}. \newcite{liu2005syntactic} took a syntactic approach, 
 quantifying the similarity between the syntactic structures of the reference and translation.
 \newcite{owczarzak2007evaluating} took a similar approach using lexical-functional grammar structures.
-\newcite{gimenez2007linguistic} proposed an evaluation measure that incorapotes features
-that capture the overlap between the output and reference in terms of their
-semantic (argument structure phenomena), lexical and morphosyntactic features.
+\newcite{gimenez2007linguistic} proposed to aggregate multiple types of information,
+capturing the overlap between the output and reference in terms of their
+semantic (predicate-argument structures), lexical and morphosyntactic features.
 
 Perhaps the most notable attempt at semantic MT evaluation is MEANT and
 its human variant HMEANT, which quantifies the similarity between
 the reference and translation in terms of the overlap in
 their verbal argument structures structures, and associated semantic roles.
-HMEANT shares much of HUME's motivation for providing a
-measure that decomposes over semantic units, rather than strings, but focuses on verbal
-argument structures, ignoring other pervasive phenomena such as nominal predicates, inter-clause
-relations and copula clauses. HUME further diverges from both MEANT and the more shallow BLEU and
-METEOR measures, in not requiring a reference. Instead,
-it compares the source directly with the output
-translation. We see this difference as crucial where semantic analysis is concerned, as it
-is often impossible to assign a semantic structure to a low quality MT output sentence.
-See \secref{sec:hmeant_comp} for a more elaborate discussion of the differences between HUME
-and HMEANT.
+We discuss the differences between HMEANT and HUME in \secref{sec:hmeant_comp}.
 
 \begin{figure}
   
@@ -260,7 +254,7 @@ See \figref{fig:ucca_example}.
 % UCCA Motivation
 UCCA is a natural candidate for defining a semantic
 MT evaluation measure for a number of reasons. 
-First, it defines a coarse-grained and intuitive set of distinctions definitions,
+First, it defines a coarse-grained and intuitive set of categories,
 and consequently can be reliably annotated by non-experts, after as little as two hours
 of training \cite{marinotti2014}.
 Second, UCCA is a cross-linguistically applicable scheme, seeking to represent what is shared between languages,
@@ -275,7 +269,7 @@ a common layer of representation that in a correct translation
 is mostly shared between the translation and the source. 
 We note that that verbal argument structures are less stable in this sense, as a verbal
 argument structure may be translated or paraphrased to a nominal or adjectival
-argument structure, and are thus less motivated as a basis for a semantic measure.
+argument structure, and are thus less suitable as a basis for a semantic measure.
 For example, ``after he graduated, Tom moved to NYC''
 conveys a similar meaning to ``after graduation, Tom moved to NYC''. 
 
@@ -287,7 +281,8 @@ shares much of UCCA's motivation for defining a more complete semantic annotatio
 However, using AMR is not optimal for defining a decomposition of a sentence into semantic
 units as it does not ground its semantic symbols in the text,
 thus not straightwardly allowing a decomposition of the sentence into sub-units.
-Moreover, AMR is more fine-grained than UCCA and consequently more difficult to annotate.
+Moreover, AMR is more fine-grained than UCCA and consequently more difficult to annotate.\oa{should we
+  add that it is less cross-linguistically stable? maybe that's an overkill..}
 
 Other approaches have been proposed for semantic representation, which are grounded in the words
 and phrases of the text, and have generally represented semantic structures as bi-lexical dependencies.
@@ -304,30 +299,29 @@ an interpretable MT evaluation on.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{The HUME Measure}\label{sec:hume}
 
-We do not distinguish fluency and adequacy judgements, as they are correlated anyway \cite{ccb}.
+%We do not distinguish fluency and adequacy judgements, as they are correlated anyway \cite{ccb}.
+
 
 \subsection{Annotation Guidelines}\label{sec:guidelines}
 In this section we summarise the procedure for annotating machine translation output.
 
 There are two manual steps in the annotation process. The first is to create UCCA annotations for the source sentence,
-following the UCCA guidelines. Since this is is fully explained elsewhere \cite{abend2013universal}, we will not go into detail
-here, except to say that in our case the source sentences were all in English, and  the annotation was performed by four
-computational linguists. After we have the UCCA annotation on 
-the source, we use the word-to-word alignments from the MT system in order to project this annotation to the MT output, and
-we used native speakers of the target language in order to annotate this output. Since these annotators have to
+following the
+UCCA guidelines\footnote{All UCCA-related resources can be found here: \url{http://www.cs.huji.ac.il/~oabend/ucca.html}}. Source sentences are all in English, and the annotation was performed by four
+computational linguists\oa{were there no other annotators from Prague?}. After we have the UCCA annotation on 
+the source, we use the word-to-word alignments from the MT system in order to project this annotation to the MT output,
+and use native speakers of the target language in order to annotate this output. Since these annotators have to
 judge the quality of the translation, they also needed to be fluent in English.\bh{Somewhere we could explain that we
 could do a similar annotation with monolinguals, although it entails aligning reference and MT output}
 
 The basic strategy for annotating HUME on the  MT output to step through the source sentence semantic 
-components (projected UCCA nodes), looking at the translation via the word alignments, and marking on the source structure
-which parts have 
-been correctly translated.
-There are two kinds of components (nodes): a word or basic semantic unit, and a structural component which contains one
-or more sub-components. 
+components (projected UCCA nodes), looking at the translation via the word alignments, and marking
+on the source structure which parts have been correctly translated.
+There are two kinds of components (nodes): a word or basic semantic unit, and a structural component
+which contains one or more sub-components. 
 
-\paragraph{Lexical nodes} are usually comprised of individual words. They are the leaf nodes of the tree, the smallest 
-meaning-bearing
-units.
+\paragraph{Lexical nodes} are usually comprised of individual words. They are the leaf nodes of the tree,
+the smallest meaning-bearing units.
 Leaf nodes can be labelled as green (correct), orange (partially correct) and red (incorrect). 
 The traffic light system makes the marking of the
 lexical units as simple as possible.
@@ -414,6 +408,19 @@ composite score (uniform, sub-sets, weighted rather not -- according to categori
 
 \subsection{Comparison with HMEANT}\label{sec:hmeant_comp}
 
+HMEANT shares much of HUME's motivation for providing a
+measure that decomposes over semantic units, rather than strings, but focuses on verbal
+argument structures, ignoring other pervasive phenomena such as nominal predicates, inter-clause
+relations and copula clauses.
+HUME further diverges from both MEANT and the shallower BLEU and
+METEOR measures, in not requiring a reference.
+Instead, it compares the source directly with the output
+translation. We see this difference as crucial where semantic analysis is concerned, as it
+is often impossible to assign a semantic structure to a low quality MT output sentence.
+See \secref{sec:hmeant_comp} for a more elaborate discussion of the differences between HUME
+and HMEANT.
+
+
 For instance, consider the sentence ``A coronary angioplasty may not be technically possible'',
 which was translated by one of the systems we experimented with as
 ``Eine koronare Angioplastie kann nicht technisch m{\"o}glich'', i.e., the main verb ``sein'' (``be'') is omitted.
@@ -421,7 +428,7 @@ While this may be interpreted is a minor error, HMEANT will assign it a very low
 translate the main verb. 
 
 We conducted an analysis of the English UCCA Wikipedia
-corpus\footnote{\url{http://www.cs.huji.ac.il/~oabend/ucca.html}}, comprising
+corpus, comprising
 of 5324 sentences,
 in order to assess the frequency of some of the major phenomena HMEANT fails to address,
 Coppula cluases are treated in HMEANT simply as instances of the main verb ``be'', which
