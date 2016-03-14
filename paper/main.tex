@@ -273,6 +273,8 @@ argument structure, and are thus less suitable as a basis for a semantic measure
 For example, ``after he graduated, Tom moved to NYC''
 conveys a similar meaning to ``after graduation, Tom moved to NYC''. 
 
+\oa{explain how semantic units represent relations}
+
 While most broad-coverage semantic work focused on shallow semantic structures,
 predominantly argument structures annotated with their semantic roles, much recent
 interest has been devoted to defining more complete semantic representation schemes.
@@ -301,53 +303,113 @@ an interpretable MT evaluation on.
 
 %We do not distinguish fluency and adequacy judgements, as they are correlated anyway \cite{ccb}.
 
+\subsection{Annotation Procedure}\label{sec:guidelines}
 
-\subsection{Annotation Guidelines}\label{sec:guidelines}
-In this section we summarise the procedure for annotating machine translation output.
+This section summarises the procedure for annotation involved in computing HUME. We mark
+the source sentence as $s$ and the translation sentence as $t$. 
+The procedure involves two manual steps: (1) UCCA-annotating $s$, 
+(2) human judgements for each semantic unit of $s$,
+defined by its UCCA annotation, of whether its meaning has been preserved in $t$.
+We note that (1) is performed once for every source sentence, irrespective
+of the number of its translations we wish to evaluate.
 
-There are two manual steps in the annotation process. The first is to create UCCA annotations for the source sentence,
-following the
-UCCA guidelines\footnote{All UCCA-related resources can be found here: \url{http://www.cs.huji.ac.il/~oabend/ucca.html}}. Source sentences are all in English, and the annotation was performed by four
-computational linguists\oa{were there no other annotators from Prague?}. After we have the UCCA annotation on 
-the source, we use the word-to-word alignments from the MT system in order to project this annotation to the MT output,
-and use native speakers of the target language in order to annotate this output. Since these annotators have to
-judge the quality of the translation, they also needed to be fluent in English.\bh{Somewhere we could explain that we
-could do a similar annotation with monolinguals, although it entails aligning reference and MT output}
+\paragraph{UCCA Annotation.}
+We begin by creating UCCA annotations for the source sentence, following the
+UCCA guidelines\footnote{All UCCA-related resources can be found
+  here: http://www.cs.huji.ac.il/~oabend/ucca.html}.
+Let $L$ be the set of possible UCCA labels.
+Given a sentence $s = (w_1, \ldots,w_n)$, the UCCA annotation is a DAG $G=(V,E,\ell)$,
+where $\ell: V \rightarrow L$, and where $W = \{w_1,\ldots,w_n\}$ correspond to the leaves of $G$.
+For every node $v \in V$, we define its {\it yield} $yld(v)$ as $v$'s descendants in $W$.
+The semantic units for a sentence $s$, induced by the annotation $G$
+is the set of yields of nodes in $V$. We denote it with $Units(s)$ for brevity.
+We note that the translation need not be annotated.
 
-The basic strategy for annotating HUME on the  MT output to step through the source sentence semantic 
-components (projected UCCA nodes), looking at the translation via the word alignments, and marking
+\paragraph{Translation Evaluation.}
+The basic strategy for computing HUME is to traverse
+the semantic units of the source sentence, and to mark the extent to which
+they have been correctly translated. As semantic units correspond to the
+semantic relations expressed in the text and the inter-relations between them,
+HUME effectively aggregates the judgements of the users into a composite score.
+
+Human annotation of the semantic units requires first deciding whether
+a unit is an {\it atomic units}, i.e., that it has no meaning-bearing
+sub-units, or a {\it structural unit}. In most cases, atomic units would
+correspond to individual words, but they may also correspond to opaque
+multi-word expressions, i.e., expressions that do not have meaningful sub-units.
+When a multi-word unit is labeled as atomic, all its sub-units are discarded
+from the evaluation.
+
+Atomic units can be labelled as ``Green'' (correct), ``Orange'' (partially correct)
+and ``Red'' (incorrect). 
+A Green label means that the meaning of the word or phrase has been largely preserved.
+An Orange label means that the essential meaning of the unit has been preserved,
+but some part of the translation is wrong.
+This could often be due to the translated word having the wrong tense,
+or the wrong morphology, in a way that impacts little on the understandability of the sentence.
+A Red label means that the essential meaning of the unit has not been captured.
+
+Structural units have sub-units (children in the UCCA graph), which may either be
+atomic or structural, and represent the relation between the sub-units.
+For instance, a Scene unit 
+represents the relation between the main relation, participants and secondary
+relations in it. Structural units may be labeld as ``Adequate'' or ``Bad'', meaning
+that the relation between the sub-units went wrong.
+
+There are many ways that the relationship between the children might go
+wrong in translation:
+
+\begin{compactitem}
+\item The components of the translation are ordered differently from the source,
+  such that the relation between them changes. For instance, where
+  the sentence ``man bites dog'' is translated into a sentence meaning ``dog bites man'',
+  the semantic unit corresponding to the Scene will be marked as Bad, while
+  the inidividual atomic units ``dog'', ``bites'' and ``man'' will be marked as Green.
+\item A superfluous word or phrase has been inserted into
+  the translation. For instance, if ``dog bites man'' is translated into ``dog visciously bites man''.
+\item One of the sub-units is missing from the translation. For instance, if ``dog bites man''
+  is translated into ``dog bites''.
+\end{compactitem}
+
+We note that the defined labels are more similar in spirit to adequacy,
+rather than fluency judgements. Specifically, annotators are instructed to
+label a unit as Adequate if its translation is understandable and preserves
+the meaning of the source unit, even if its fluency is impaired.
+
+\subsection{Composite Score}\label{sec:score}
+
+composite score (uniform, sub-sets, weighted rather not -- according to categories [or empirically according to agreement])
+
+
+\subsection{Annotation Interface.}
+
+As translations may be long, we provide assistance to the annotator.
+Where the annotator is asked to judge the translation quality of a unit $u$,
+the part of by highlighting the part of the translation which is likely to be
+most relevant for the semantic unit in question.
+This is done by highlighting the words in the translation which are aligned 
+
+using automatically derived word-to-word  in order to project
+this annotation to the MT output.
+
+
+
+looking at the translation via the word alignments, and marking
 on the source structure which parts have been correctly translated.
 There are two kinds of components (nodes): a word or basic semantic unit, and a structural component
 which contains one or more sub-components. 
 
-\paragraph{Lexical nodes} are usually comprised of individual words. They are the leaf nodes of the tree,
-the smallest meaning-bearing units.
-Leaf nodes can be labelled as green (correct), orange (partially correct) and red (incorrect). 
-The traffic light system makes the marking of the
-lexical units as simple as possible.
-
-\begin{compactdesc}
-\item[Green] The meaning of the word or phrase has been largely captured.
-\item[Orange] the essential meaning has been captured, but some part of the translation is wrong. 
-For example, this could often be due to the translated word having the wrong tense, or the wrong morphology. 
-\item[Red] The essential meaning of the unit has not been captured.
-\end{compactdesc}
+In order 
+, and use native speakers of the target
+language to annotate this output.
 
 
-\paragraph{Structural nodes} contain other nodes which could be either lexical or structural nodes, 
-and they can be labelled as ``Adequate'' or ``Bad''. 
-What we are trying to gauge for structural nodes
-is if the children of these nodes
-relate to each other in the same way in the source sentence and in the translation. 
-There are many ways that the relationship between the children might go wrong in translation:
-\begin{compactitem}
-\item One of the child nodes is missing from the aligned translation. 
-\item An extra word or phrase has been inserted into the aligned  translation.
-\item The components of the translation are ordered differently 
-%to 
-from
-the source.
-\end{compactitem}
+Since these annotators have to judge the quality of the translation,
+they also needed to be fluent in English.\bh{Somewhere we could explain that we
+could do a similar annotation with monolinguals, although it entails aligning reference and MT output}
+
+
+
 
 If any of these changes have occurred and this damages the meaning of the aligned translation, then we mark the 
 structural node as ``Bad''. 
@@ -401,12 +463,9 @@ the translation as correct or not. The alignments are meant just as a guide. The
 
 
 
-\subsection{Composite Score}\label{sec:score}
 
-composite score (uniform, sub-sets, weighted rather not -- according to categories [or empirically according to agreement])
-
-
-\subsection{Comparison with HMEANT}\label{sec:hmeant_comp}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Comparison with HMEANT}\label{sec:hmeant_comp}
 
 HMEANT shares much of HUME's motivation for providing a
 measure that decomposes over semantic units, rather than strings, but focuses on verbal
@@ -450,6 +509,10 @@ to preserve for MT translation, and which are less important
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Experiments}\label{sec:experiments}
+
+\paragraph{Annotation.}
+Source sentences are all in English, and the UCCA annotation was performed by four
+computational linguists\oa{were there no other annotators from Prague?}.
 
 In order to validate the HUME metric, we ran an annotation experiment with one source language (English), and four 
 target languages (Czech, German, Polish and Romanian), using text from the public health domain. We are 
@@ -792,11 +855,16 @@ UCCA-Eval in contrast to HMEANT:
 - we were not very quick at explaining even the Eval annotations, but I guess we could have done better
 + relies only on one structure
 + relies on automatic alignment (in the form of hints only)
-  These two positive design decisions are in line with what Dekai observed for HMEANT (see the abstract of http://repository.ust.hk/ir/Record/1783.1-66107): IAA of SRL drops from 90 to 61 when the two aligned structures are from two different annotators.
+These two positive design decisions are in line with what Dekai observed for HMEANT
+(see the abstract of http://repository.ust.hk/ir/Record/1783.1-66107): IAA of SRL drops from 90
+to 61 when the two aligned structures are from two different annotators.
 
 + allows for multi-word and even non-contiguous elements
 + allows to indicate the quality of the predicates ("Actions")
-+/- expects to cover the whole hypothesis with annotations, whereas HMEANT 'gives up' when the hypothesis is not intelligible, giving a zero score to the bad frame/whole sentence. This can be a good decision for HMEANT, since our way may artificially boost the chances of understanding the sentence.
++/- expects to cover the whole hypothesis with annotations, whereas HMEANT 'gives up' when the
+hypothesis is not intelligible, giving a zero score to the bad frame/whole sentence.
+This can be a good decision for HMEANT, since our way may artificially boost the chances of
+understanding the sentence.
 
 
 HMEAN disadvantages:
