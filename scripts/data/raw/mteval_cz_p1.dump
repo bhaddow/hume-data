@@ -1,0 +1,11 @@
+===================
+b'mteval_cz_p1'
+515
+b'1:79#20:65#16:71#17:71#18:71#19:65#23:71#22:71#21:71#'
+b'How safe is a coronary angioplasty?'
+b'Jak bezpe\xc4\x8dn\xc3\xa9 je koron\xc3\xa1rn\xc3\xad angioplastika ?'
+b'0:0#1:1#2:2#4:3#5:4#6:5'
+b'<root schemeVersion="1.0.6" direction="ltr"><unitGroups/><units passageID="2453"><unit type="To Be Defined" id="0" unanalyzable="false" uncertain="false"><unit type="To Be Defined" id="1" unanalyzable="false" uncertain="false"><unit type="Parallel Scene" id="20" unanalyzable="false" uncertain="false"><unit type="aDverbial" id="16" unanalyzable="false" uncertain="false"><unit type="To Be Defined" id="3" unanalyzable="false" uncertain="false"><word id="2">How</word></unit></unit><unit type="State" id="17" unanalyzable="false" uncertain="false"><unit type="To Be Defined" id="5" unanalyzable="false" uncertain="false"><word id="4">safe</word></unit></unit><unit type="Function" id="18" unanalyzable="false" uncertain="false"><unit type="To Be Defined" id="7" unanalyzable="false" uncertain="false"><word id="6">is</word></unit></unit><unit type="Participant" id="19" unanalyzable="false" uncertain="false"><unit type="Function" id="23" unanalyzable="false" uncertain="false"><unit type="To Be Defined" id="9" unanalyzable="false" uncertain="false"><word id="8">a</word></unit></unit><unit type="Participant" id="22" unanalyzable="false" uncertain="false"><unit type="To Be Defined" id="11" unanalyzable="false" uncertain="false"><word id="10">coronary</word></unit></unit><unit type="State" id="21" unanalyzable="false" uncertain="false"><unit type="To Be Defined" id="13" unanalyzable="false" uncertain="false"><word id="12">angioplasty</word></unit></unit></unit></unit><unit type="Punctuation" id="15" unanalyzable="false" uncertain="false"><word id="14">?</word></unit></unit></unit></units><LRUunits><LRUunit id="23"/><LRUunit id="22"/><LRUunit id="21"/><LRUunit id="20"/><LRUunit id="19"/><LRUunit id="18"/><LRUunit id="17"/><LRUunit id="16"/></LRUunits><hiddenUnits/></root>'
+b'How safe is a coronary angioplasty ?'
+b'omri1'
+2016-02-22 02:46:22.804801
