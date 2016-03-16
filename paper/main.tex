@@ -308,7 +308,7 @@ Examples include the tectogrammatical layer \parcite{sgallhp:1986} used in the P
 treebanks, e.g. the Czech-English one \parcite{hajic2012announcing}, as well
 as dependencies derived from Minimal Recursion Semantics representations \parcite{oepen2006discriminant}.
 Nevertheless, despite their appeal as deep and intuitive means for semantic representation,
-these approaches require linguistic expertise for their annotatation, due to the intricate and
+these approaches require linguistic expertise for their annotation, due to the intricate and
 fine-grained distinctions they provide, and are thus in our view less suitable for basing
 an interpretable MT evaluation on. 
 %\newcite{Basile:12} attempted to make some aspects of the semantic annotation more accessible,
@@ -350,11 +350,11 @@ semantic relations expressed in the text and the inter-relations between them,
 HUME effectively aggregates the judgements of the users into a composite score.
 
 Human annotation of the semantic units requires first deciding whether
-a unit is an {\it atomic units}, i.e., that it has no meaning-bearing
+a unit is an {\it atomic unit}, i.e., that it has no meaning-bearing
 sub-units, or a {\it structural unit}. In most cases, atomic units would
 correspond to individual words, but they may also correspond to opaque
 multi-word expressions, i.e., expressions that do not have meaningful sub-units.
-When a multi-word unit is labeled as atomic, all its sub-units are discarded
+When a multi-word unit is labeled as atomic, all its sub-units' annotations are discarded
 from the evaluation.
 
 Atomic units can be labelled as ``Green'' (correct), ``Orange'' (partially correct)
@@ -370,7 +370,8 @@ Structural units have sub-units (children in the UCCA graph), which may either b
 atomic or structural, and represent the relation between the sub-units.
 For instance, a Scene unit 
 represents the relation between the main relation, participants and secondary
-relations in it. Structural units may be labeld as ``Adequate'' or ``Bad'', meaning
+relations in it\XXX{again, could we avoid the word ``relation'' here? Would
+``event'' be an acceptable synonym?}. Structural units are labeled as ``Adequate'' or ``Bad'', meaning
 that the relation between the sub-units went wrong.
 
 There are many ways that the relationship between the children might go
@@ -381,14 +382,14 @@ wrong in translation:
   such that the relation between them changes. For instance, where
   the sentence ``man bites dog'' is translated into a sentence meaning ``dog bites man'',
   the semantic unit corresponding to the Scene will be marked as Bad, while
-  the inidividual atomic units ``dog'', ``bites'' and ``man'' will be marked as Green.
+  the individual atomic units ``dog'', ``bites'' and ``man'' will be marked as Green.
 \item A superfluous word or phrase has been inserted into
   the translation. For instance, if ``dog bites man'' is translated into ``dog visciously bites man''.
 \item One of the sub-units is missing from the translation. For instance, if ``dog bites man'' is translated into ``dog bites''.
 \end{compactitem}
 
 \XXX{Could someone review this for Ondrej:}
-Note that for non-configuration languages, the relationship between the
+Note that for non-configurational languages, the relationship between the
 governing and the dependent units is often expressed using morphological
 properties of the dependents instead of their ordering (this holds especially for the verb and its
 modifiers, less so for components of noun phrases). Since errors in morphology
