@@ -264,7 +264,7 @@ indices.}
   \node (ROOT) [label={B}] [fill=blue, circle] {}
   child {node (H3) [label={A}] [fill=yellow,circle] {}
     child {node [label={[red]:R}] {Golf} edge from parent node[left] {}}
-    child {node (H1) [label={O}] [fill=orange,circle] {}
+    child {node (H1) [label={[orange]:O}] [fill=orange,circle] {}
       child {node [label={}] {became} edge from parent node[left]  {}}
       child {node [label={}] {a} edge from parent node[left]  {}}
       child {node [label={}] {passion} edge from parent node[left]  {}}
@@ -274,24 +274,25 @@ indices.}
       child {node {} edge from parent[draw=none] {}}
       child {node {} edge from parent[draw=none] {}}
       child {node {} edge from parent[draw=none] {}}
-      child {node [label={}] {for} edge from parent node[left]  {}}
-      child {node [label={}] {his} edge from parent node[left]  {}}
-      child {node [label={}] {oldest} edge from parent node[left]  {}}
-      child {node [label={}] {daughter} edge from parent node[left]  {}}
+      child {node [label={[red]:R}] {for} edge from parent node[left]  {}}
+      child {node [label={[green]:G}] {his} edge from parent node[left]  {}}
+      child {node [label={[orange]:O}] {oldest} edge from parent node[left]  {}}
+      child {node [label={[green]:G}] {daughter} edge from parent node[left]  {}}
     }
   }
   child {node {} edge from parent[draw=none] {}}
   child {node (H4) [label={A}] [fill=yellow,circle] {}
-    child {node [label={}] {she} edge from parent node[left]  {}}
-      child {node [label={}] {attended} edge from parent node[left]  {}}
-      child {node [label={}] {daily} edge from parent node[left]  {}}
-      child {node [label={}] {lesssons} edge from parent node[left]  {}}
+    child {node (she) [label={[green]:G}] {she} edge from parent node[left]  {}}
+    child {node [label={[green]:G}] {attended} edge from parent node[left]  {}}
+    child {node [label={[green]:G}] {daily} edge from parent node[left]  {}}
+    child {node [label={[green]:G}] {lessons} edge from parent node[left]  {}}
   }
-  child {node [label={}] {and} edge from parent node[left]  {}}
+  child {node [label={[red]:R}] {and} edge from parent node[left]  {}}
   child {node (H5) [label={A}] [fill=yellow,circle] {}  
-    child {node [label={}] {greatly} edge from parent node[left] {}}
-    child {node [label={}] {improved} edge from parent node[left] {}}
+    child {node [label={[red]:R}] {greatly} edge from parent node[left] {}}
+    child {node [label={[orange]:O}] {improved} edge from parent node[left] {}}
   };
+  \draw[dashed] (H5) -> (she) ;
 
   \com{
   child {node (H1) [label={\#8}] [fill=black,circle] {}
