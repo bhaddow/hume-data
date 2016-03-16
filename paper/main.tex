@@ -1,5 +1,6 @@
 \documentclass[11pt]{article}
 \usepackage{acl2016}
+\usepackage{amsmath}
 \usepackage{paralist}
 \usepackage{subfig}
 \usepackage{times}
@@ -25,6 +26,15 @@
 \def\inparcite#1{\newcite{#1}}
 
 \newcommand\BibTeX{B{\sc ib}\TeX}
+
+
+% better maths typography
+\def\setsize#1{\lvert #1 \rvert}
+\def\func#1{\text{\it #1}}  % much better kerning within function names
+\def\HUME{\func{HUME}}
+\def\Correct{\func{Correct}}
+\def\Partial{\func{Partial}}
+\def\Units{\func{Units}}
 
 
 \title{HUME: Human UCCA-Based Evaluation of Machine Translation}
@@ -339,7 +349,7 @@ Given a sentence $s = (w_1, \ldots,w_n)$, the UCCA annotation is a DAG $G=(V,E,\
 where $\ell: V \rightarrow L$, and where $W = \{w_1,\ldots,w_n\}$ correspond to the leaves of $G$.
 For every node $v \in V$, we define its {\it yield} $yld(v)$ as $v$'s descendants in $W$.
 The semantic units for a sentence $s$, induced by the annotation $G$
-is the set of yields of nodes in $V$. We denote it with $Units(s)$ for brevity.
+is the set of yields of nodes in $V$. We denote it with $\Units(s)$ for brevity.
 We note that the translation need not be annotated.
 
 \paragraph{Translation Evaluation.}
@@ -422,20 +432,22 @@ as their relation in $t$ is reversed.
 
 We proceed to detailing how judgements on the semantic units
 of the source are aggregated into a composite score.
-While future extensive empirical evaluation with HUME, and using it to
-tune MT systems may suggest more complex measure,
+While future extensive empirical evaluation with HUME and its application to MT
+system tuning may suggest more complex definition,
 as a starting point we take a parsimonious approach
-and define aggregation of the judgements.
+and simply aggregate the judgements.
 
-Let $Correct(s,t)$ be the number of atomic units in $s$ marked as Green relative to $t$ plus
+
+Let $\Correct(s,t)$ be the number of atomic units in $s$ marked as Green relative to $t$ plus
 the number of structural units in $s$ marked as Adequate relative to $t$.
-Let $Partial(s,t)$ be the number of atomic units in $s$ marked as Orange relative
+Let $\Partial(s,t)$ be the number of atomic units in $s$ marked as Orange relative
 to $t$. Then HUME's composite score is:
+
 
 \vspace{-.5cm}
 \begin{equation}
   \small
-  HUME(s,t) = \frac{Correct(s,t) + 0.5\cdot Partial(s,t)}{|Units(s)|}
+  \HUME(s,t) = \frac{\Correct(s,t) + 0.5\cdot \Partial(s,t)}{\setsize{\Units(s)}}
 \end{equation}
 
 
