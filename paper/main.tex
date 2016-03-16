@@ -332,15 +332,15 @@ an interpretable MT evaluation on.
 
 \subsection{Annotation Procedure}\label{sec:guidelines}
 
-This section summarises the manual annotation procedure performed in order
+This section summarises the manual annotation procedure performed in order 
 to compute the HUME measure. 
 We mark the source sentence as $s$ and the translation sentence as $t$. 
 The procedure involves two manual steps: (1) UCCA-annotating $s$, 
 (2) human judgements as to the translation quality of each semantic unit of $s$,
 defined by its UCCA annotation, relative to $t$.
-We note that UCCA annotation is performed once for every source sentence, irrespective
-of the number of its translations we wish to evaluate\footnote{Instead of
-relying on the source,
+We note that UCCA annotation is performed once for every source sentence,
+irrespective of the number of its translations we wish
+to evaluate\footnote{Instead of relying on the source,
 the evaluation could be based on the UCCA structure for the \emph{reference}
 translation. This would allow monolingual annotators to take part in the
 evaluation. On the downside, the translation would have to be aligned to the
@@ -432,9 +432,9 @@ label a unit as Adequate if its translation is understandable and preserves
 the meaning of the source unit, even if its fluency is impaired.
 
 For example, consider the sentence ``After graduation, Tom moved
-to NYC'' as the source $s$, see \figref{fig:ucca_example}. The atomic units are the individual words,
-nodes \#1--6 and the structural nodes are \#7--10. Assume that the translation
-$t$
+to NYC'' as the source $s$, see \figref{fig:ucca_example}.
+The atomic units are the individual words,
+nodes \#1--6 and the structural nodes are \#7--10. Assume that the translation $t$
 is ``After Tom will move to Paris, graduation''\footnote{We take $t$ to
   be in English for presentation purposes. In our experiments, $t$ is in German,
   Czech, Polish or Romanian.}.
@@ -454,7 +454,6 @@ in $t$, and thus its sub-units, ``became'', ``a'' and ``passion'' are not evalua
 individually.\oa{I'm not sure I agree with the UCCA annotation;
 also, translation annotation for ``she'' is missing. and for ``very good'' is wrong}
 
-
 \subsection{Composite Score}\label{sec:score}
 
 We proceed to detailing how judgements on the semantic units
@@ -470,7 +469,6 @@ the number of structural units in $s$ marked as Adequate relative to $t$.
 Let $\Partial(s,t)$ be the number of atomic units in $s$ marked as Orange relative
 to $t$. Then HUME's composite score is:
 
-
 \vspace{-.5cm}
 \begin{equation}
   \small
@@ -482,9 +480,9 @@ to $t$. Then HUME's composite score is:
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Annotation Interface}
 
-We turn to discuss the interface for collecting human judgements on the semantic units of the source,
-relating to the translation. UCCA annotations of the source are done offline, using the UCCA web
-application\footnote{See UCCA webpage.}.
+We turn to discuss the interface for collecting human judgements on the semantic units
+of the source, relating to the translation. UCCA annotations of the source are done offline,
+using the UCCA web application\footnote{See UCCA webpage.}.
 
 \figref{fig:interface} presents the user interface of HUME. The sentence at the top
 shows the complete MT system output. The source sentence appears at the top, and
