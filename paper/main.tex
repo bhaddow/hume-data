@@ -7,7 +7,6 @@
 \usepackage{latexsym}
 \usepackage{graphicx}
 \usepackage{url}
-%\usepackage{subfigure}
 \usepackage{pgfplotstable}
 \usepackage{hyperref}
 \usepackage{color}
@@ -254,36 +253,36 @@ indices.}
 
 
 \paragraph{Semantic Representation.}
-UCCA (Universal Conceptual Cognitive Annotation, \inparcite{abend2013universal}) is a cross-linguistically applicable, lightweight
+UCCA (Universal Conceptual Cognitive Annotation, \inparcite{abend2013universal}) is a
+cross-linguistically applicable, lightweight
 scheme for semantic annotation. Formally, a UCCA structure is a directed acyclic graph (DAG),
 whose leaves correspond to the words of the text.
-The graph’s nodes, called {\sc units}, are either terminals or several elements jointly
+The graph's nodes, called {\sc units}, are either terminals or several elements jointly
 viewed as a single entity according to some semantic or cognitive consideration. Edges bear
-a category, indicating the role of the sub-unit in the relation the unit
-represents. \XXX{Ondrej suggests to avoid the word 'relation' here. I usually use the
-term 'relation' for what is called 'role' here, so I got confused for a while.}
-UCCA
-currently focuses on annotating argument structures (adjectival, nominal, verbal and others) and
-relations between them. The most basic notion is the {\sc scene}, which describes a movement, an
+a category, indicating the role of the sub-unit in the structure the unit
+represents.
+
+UCCA's current inventory of distinctions focuses on annotating argument structures
+(adjectival, nominal, verbal and others) and relations between them.
+The most basic notion is the {\sc scene}, which describes a movement, an
 action or a state which is persistent in time. Each Scene contains one main relation, as well
-as one or more participants. For example, the sentence ``After graduating, Tom moved to NYC''
-contains two Scenes, whose main relations are ``graduating'' and ``John''\bh{Don't you mean ``graduating'' and
-``moved''? And where did ``John'' come from?}. The participant ``John''
-is a part of both Scenes, while ``NYC'' only of the latter. Further categories account for
+as one or more participants. For example, the sentence ``After graduation, Tom moved to NYC''
+contains two Scenes, whose main relations are ``graduation'' and ``Tom''.
+The participant ``John'' is a part of both Scenes, while ``NYC'' only of the
+latter. Further categories account for
 relations between Scenes and the internal structures of complex participants and relations.
 See \figref{fig:ucca_example}.
 
 % UCCA Motivation
 UCCA is a natural candidate for defining a semantic
 MT evaluation measure for a number of reasons. 
-First, it defines a coarse-grained and intuitive set of categories,
-and consequently can be reliably annotated by non-experts, after as little as two hours
+First, it defines an intuitive set of categories
+that can be reliably annotated by non-experts, after as little as two hours
 of training \cite{marinotti2014}.
-Second, UCCA is a cross-linguistically applicable scheme, seeking to represent what is shared between languages,
+Second, UCCA is a cross-linguistically applicable scheme, seeking to
+represent what is shared between languages
 by building on linguistic typological theory, and specifically on ``Basic Linguistic Theory''
 \cite{Dixon:10a,Dixon:10b,Dixon:12}, one of the most widely used frameworks for linguistic description.
-%Indeed, UCCA's cross-linguistic applicability has been demonstrated through its
-%application to annotation in English, French, German and Czech\oa{Did we do experiments on Czech?}. 
 The cross-linguistic applicability of UCCA has been tested in annotations of
 English, French, German and Czech.
 Third, the scheme has been shown to be semantically stable
@@ -291,26 +290,27 @@ in translation: UCCA annotations of translated text usually contain the same set
 \cite{sulem2015conceptual}. This is an indication that the scheme reflects
 a common layer of representation that in a correct translation
 is mostly shared between the translation and the source. 
+
 We note that verbal argument structures are less stable in this sense, as a verbal
 argument structure may be translated or paraphrased to a nominal or adjectival
 argument structure, and are thus less suitable as a basis for a semantic measure.
 For example, ``after he graduated, Tom moved to NYC''
 conveys a similar meaning to ``after graduation, Tom moved to NYC''. 
 
-\oa{explain how semantic units represent relations}
+% While most broad-coverage semantic work focused on shallow semantic structures,
+% predominantly argument structures annotated with their semantic roles, much recent
+% interest has been devoted to defining more complete semantic representation schemes.
+% \oa{should we
+% add that it is less cross-linguistically stable? maybe that's an overkill..
+%  OB: AMR has been applied to more languages, including Chinese, so I would not
+%  dare saying that it is less stable.}
 
-While most broad-coverage semantic work focused on shallow semantic structures,
-predominantly argument structures annotated with their semantic roles, much recent
-interest has been devoted to defining more complete semantic representation schemes.
 The Abstract Meaning Representation (AMR) scheme \cite{banarescu2013abstract}
 shares much of UCCA's motivation for defining a more complete semantic annotation.
 However, using AMR is not optimal for defining a decomposition of a sentence into semantic
 units as it does not ground its semantic symbols in the text,
 thus not straightwardly allowing a decomposition of the sentence into sub-units.
-Moreover, AMR is more fine-grained than UCCA and consequently more difficult to annotate.\oa{should we
-  add that it is less cross-linguistically stable? maybe that's an overkill..
-  OB: AMR has been applied to more languages, including Chinese, so I would not
-  dare saying that it is less stable.}
+Moreover, AMR is more fine-grained than UCCA and consequently more difficult to annotate.
 
 Other approaches have been proposed for semantic representation, which are grounded in the words
 and phrases of the text, and have generally represented semantic structures as bi-lexical dependencies.
@@ -321,6 +321,7 @@ Nevertheless, despite their appeal as deep and intuitive means for semantic repr
 these approaches require linguistic expertise for their annotation, due to the intricate and
 fine-grained distinctions they provide, and are thus in our view less suitable for basing
 an interpretable MT evaluation on. 
+
 %\newcite{Basile:12} attempted to make some aspects of the semantic annotation more accessible,
 %but to our knowledge no results of this brand have been reported.
 
@@ -328,36 +329,43 @@ an interpretable MT evaluation on.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{The HUME Measure}\label{sec:hume}
 
-%We do not distinguish fluency and adequacy judgements, as they are correlated anyway \cite{ccb}.
 
 \subsection{Annotation Procedure}\label{sec:guidelines}
 
-This section summarises the procedure for annotation involved in computing HUME.
+This section summarises the manual annotation procedure performed in order
+to compute the HUME measure. 
 We mark the source sentence as $s$ and the translation sentence as $t$. 
 The procedure involves two manual steps: (1) UCCA-annotating $s$, 
-(2) human judgements for each semantic unit of $s$,
-defined by its UCCA annotation, of whether its meaning has been preserved in $t$.
-We note that (1) is performed once for every source sentence, irrespective
-of the number of its translations we wish to evaluate.\footnote{Instead of
+(2) human judgements as to the translation quality of each semantic unit of $s$,
+defined by its UCCA annotation, relative to $t$.
+We note that UCCA annotation is performed once for every source sentence, irrespective
+of the number of its translations we wish to evaluate\footnote{Instead of
 relying on the source,
 the evaluation could be based on the UCCA structure for the \emph{reference}
 translation. This would allow monolingual annotators to take part in the
 evaluation. On the downside, the translation would have to be aligned to the
 reference and more importantly, we would risk inaccurate judgements due to
 the naturally occurring differences between the source and its reference
-translations.}
+translations.}.
 
 \paragraph{UCCA Annotation.}
 We begin by creating UCCA annotations for the source sentence, following the
 UCCA guidelines\footnote{All UCCA-related resources can be found
   here: \url{http://www.cs.huji.ac.il/~oabend/ucca.html}}.
 Let $L$ be the set of possible UCCA labels.
-Given a sentence $s = (w_1, \ldots,w_n)$, the UCCA annotation is a DAG $G=(V,E,\ell)$,
+Given a sentence $s = (w_1, \ldots,w_n)$, its UCCA annotation is a DAG $G=(V,E,\ell)$,
 where $\ell: V \rightarrow L$, and where $W = \{w_1,\ldots,w_n\}$ correspond to the leaves of $G$.
 For every node $v \in V$, we define its {\it yield} $yld(v)$ as $v$'s descendants in $W$.
-The semantic units for a sentence $s$, induced by the annotation $G$
-is the set of yields of nodes in $V$. We denote it with $\Units(s)$ for brevity.
-We note that the translation need not be annotated.
+The semantic units for a sentence $s$ induced by the annotation $G$,
+is the set of yields of nodes in $V$. %We denote it with $Units(s)$ for brevity.
+We note that the translation is not UCCA-annotated.
+
+\begin{figure*}[t]
+    \includegraphics[width=1\textwidth]{ucca-tree-mteval}
+    \caption{UCCA Tree evaluated in comparison to an aligned ``translation'' (an
+	English paraphrase).}
+    \label{fig:ucca-tree-hume}
+\end{figure*}
 
 \paragraph{Translation Evaluation.}
 The basic strategy for computing HUME is to traverse
@@ -367,9 +375,9 @@ semantic relations expressed in the text and the inter-relations between them,
 HUME effectively aggregates the judgements of the users into a composite score.
 
 Human annotation of the semantic units requires first deciding whether
-a unit is an {\it atomic unit}, i.e., that it has no meaning-bearing
-sub-units, or a {\it structural unit}. In most cases, atomic units would
-correspond to individual words, but they may also correspond to opaque
+a unit is {\it atomic}, i.e., that it has no meaning-bearing
+sub-units, or {\it structural}. In most cases, atomic units 
+correspond to individual words, but they may also correspond to unanalyzable
 multi-word expressions, i.e., expressions that do not have meaningful sub-units.
 When a multi-word unit is labeled as atomic, all its sub-units' annotations are discarded
 from the evaluation.
@@ -385,11 +393,13 @@ A Red label means that the essential meaning of the unit has not been captured.
 
 Structural units have sub-units (children in the UCCA graph), which may either be
 atomic or structural, and represent the relation between the sub-units.
-For instance, a Scene unit 
-represents the relation between the main relation, participants and secondary
-relations in it\XXX{again, could we avoid the word ``relation'' here? Would
-``event'' be an acceptable synonym?}. Structural units are labeled as ``Adequate'' or ``Bad'', meaning
+For instance, a Scene unit represents the relation between the
+Scene elements, such as the predicate (main relation), participants and adverbials.
+Structural units are labeled as ``Adequate'' or ``Bad'', meaning
 that the relation between the sub-units went wrong.
+We make a three-way distinction between translation qualities with structural
+nodes, as opposed to the two-way distinction with atomic units, as lexical units
+often can have slight errors, in which cases we do want to provide partial credit.
 
 There are many ways that the relationship between the children might go
 wrong in translation:
@@ -402,19 +412,21 @@ wrong in translation:
   the individual atomic units ``dog'', ``bites'' and ``man'' will be marked as Green.
 \item A superfluous word or phrase has been inserted into
   the translation. For instance, if ``dog bites man'' is translated into ``dog visciously bites man''.
-\item One of the sub-units is missing from the translation. For instance, if ``dog bites man'' is translated into ``dog bites''.
+\item One of the sub-units is missing from the translation.
+  For instance, if ``dog bites man'' is translated into ``dog bites''.
 \end{compactitem}
 
-\XXX{Could someone review this for Ondrej:}
+\XXX{Could someone review this for Ondrej.}
 Note that for non-configurational languages, the relationship between the
 governing and the dependent units is often expressed using morphological
 properties of the dependents instead of their ordering (this holds especially for the verb and its
 modifiers, less so for components of noun phrases). Since errors in morphology
-should be expressed using the traffic lights on the dependent nodes, we would expect
+should be expressed on the atomic units, we would expect
 a higher proportion of ``Adequate'' structural units for Czech and Polish
-compared to German and Romanian.
+compared to German and Romanian\oa{is this because that error would already be marked
+  in the atomic units, and thus not in the structural ones?}.
 
-We defined the labels to reflect more adequacy,
+We defined the labels to reflect adequacy,
 rather than fluency judgements. Specifically, annotators are instructed to
 label a unit as Adequate if its translation is understandable and preserves
 the meaning of the source unit, even if its fluency is impaired.
@@ -433,6 +445,14 @@ as the Scene of Tom moving is properly reflected in the translation. Node \#10, 
 expresses the relation between the graduation and moving Scenes, is marked Bad,
 as their relation in $t$ is reversed.
 
+Another example is given in \figref{fig:ucca-tree-hume}.
+%``Golf became an obsession for his oldest daughter, she took daily lessons and became very good'',
+The figure shows an annotation of a UCCA tree, and an example annotation for
+each of the units.
+We see that ``became a passion'' is deemed atomic, as it is translated as a single unit
+in $t$, and thus its sub-units, ``became'', ``a'' and ``passion'' are not evaluated
+individually.\oa{I'm not sure I agree with the UCCA annotation;
+also, translation annotation for ``she'' is missing. and for ``very good'' is wrong}
 
 
 \subsection{Composite Score}\label{sec:score}
@@ -459,91 +479,81 @@ to $t$. Then HUME's composite score is:
 
 
 
-%composite score (uniform, sub-sets, weighted rather not -- according to categories [or empirically according to agreement])
-
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Annotation Interface}
 
-As translations may be long, we provide assistance to the annotator.
-Where the annotator is asked to judge the translation quality of a unit $u$,
-the part of by highlighting the part of the translation which is likely to be
-most relevant for the semantic unit in question.
-This is done by highlighting the words in the translation which are aligned 
+We turn to discuss the interface for collecting human judgements on the semantic units of the source,
+relating to the translation. UCCA annotations of the source are done offline, using the UCCA web
+application\footnote{See UCCA webpage.}.
 
-using automatically derived word-to-word  in order to project
-this annotation to the MT output.
+\figref{fig:interface} presents the user interface of HUME. The sentence at the top
+shows the complete MT system output. The source sentence appears at the top, and
+the source translation directly below it. Underneath the source sentence appears
+its list of semantic units. For each semantic unit, including the one for the
+entire source sentence, there is a textbox, displaying the yield of that unit.
+Information on the category of the unit (e.g., whether it is a Scene, participant etc.).
+The user is asked to select a label for each unit,
+by clicking the ``A'', ``B'', Green, Orange, or Red buttons to the left of the unit's box.
+
+The interface presents, for each unit, the segment of the translation which aligns to it.
+This allows the user, especially in long sentences, to focus her attention on the parts
+mostly likely to be relevant for her judgement. As the alignments are automatically derived,
+and therefore noisy, the annotator is instructed to treat the aligned text is a cue, but to ignore
+it and make a judgement according to the full translation sentence, in cases where the alignment
+is misleading.
+
+Concretely, let $s = (w_1,\ldots,w_n)$ be a source sentence, $t = (w'_1,\ldots,w'_n)$ a translation,
+and $A \subset 2^{s \times t}$ a many-to-many word alignment between them.
+If $u$ is a semantic unit in $s$, whose yield is $yld(u)$, we define the aligned text in
+$t$ to be $a(u)=\bigcup_{(x_s,x_t) \in A \wedge x_s \cap yld(u) \neq \emptyset} x_t \subset t$.
+In the event that $a(u)$ is discontiguous in the text, we mark words between the left
+and right boundaries of $a(u)$ which are not contained in it (intervening words)
+in a smaller red font. Intervening words are likely change the meaning of the translation
+of $u$, and thus should be paid attention to when considering whether the translation
+is correct or not.
+
+For example, consider the sentence $s=$``The man watched the dog'' and the German
+translation ``t=Der Mann sieht den Hund an''. Then ``watched'' will be aligned to
+``sieht ... an'', and ``den Hund'' will be marked as intervening word. Another example
+can be seen in \figref{fig:interface}, where ``ongoing pregnancy'' is translated to
+``Schwangerschaft ... laufenden'' (lit. ``pregnancy ... ongoing'').
 
 
-looking at the translation via the word alignments, and marking
-on the source structure which parts have been correctly translated.
-There are two kinds of components (nodes): a word or basic semantic unit, and a structural component
-which contains one or more sub-components. 
-
-In order 
-, and use native speakers of the target
-language to annotate this output.
-
-
-Since these annotators have to judge the quality of the translation,
-they also needed to be fluent in English.
 % Ondrej did the following in a footnote in Section 3.1 Annotation Procedure
 %\bh{Somewhere we could explain that we
 %could do a similar annotation with monolinguals, although it entails aligning
 %reference and MT output}
 
 
+%There are cases where we cannot usefully compare individual words in the source to words in the target.
+%We often need to compare translation at the phrase level. If this is the case, then we can 
+% treat the structural node as a lexical unit, and mark it with the traffic light labels. This 
+%means that none of the children of this node will be examined in order determine the semantic score
+%for this sentence. 
+%In Figure~\ref{ucca-tree-mteval}, we can see that the phrase ``became a passion'' has been labelled as a lexical
+%node and it has been evaluated as ``Orange'', or partially correct, as the translation of this phrase ``loved'' 
+%only partially capture the semantics of the source.
 
-
-If any of these changes have occurred and this damages the meaning of the aligned translation, then we mark the 
-structural node as ``Bad''. 
-However if the arrangement of the child nodes is essentially correct, except that one or
-more of the child nodes has themselves been translated wrongly (and so is marked
-orange or red), then the structural node should be 
-annotated as ``Acceptable''.
-
-\begin{figure*}[t]
-    \includegraphics[width=1\textwidth]{ucca-tree-mteval}
-    \caption{UCCA Tree evaluated in comparison to an aligned ``translation'' (an
-	English paraphrase).}
-    \label{ucca-tree-mteval}
-\end{figure*}
-
-%TODO describe figure 2 here
-
-There are cases where we cannot usefully compare individual words in the source to words in the target.
-We often need to compare translation at the phrase level. If this is the case, then we can 
- treat the structural node as a lexical unit, and mark it with the traffic light labels. This 
-means that none of the children of this node will be examined in order determine the semantic score
-for this sentence. 
-In Figure~\ref{ucca-tree-mteval}, we can see that the phrase ``became a passion'' has been labelled as a lexical
-node and it has been evaluated as ``Orange'', or partially correct, as the translation of this phrase ``loved'' 
-only partially capture the semantics of the source.
-
-We are separating lexical and structural evaluation in order to simplify evaluation and to localise errors
-to their point of origin. For this reason, if a word has been translated incorrectly,
-the parent node should still be correct if the number and relationship between its children are the same
-as in the source. 
-In Figure~\ref{ucca-tree-mteval}, we can see that even though an important child of the first scene is 
-incorrectly translated (``Golf''), and the children of are ordered differently, 
-the scene itself is marked as ``Acceptable''. The translation of the scene retains the structural 
-relationships between the children.
-\\
 
 \begin{figure*}[t]
     \begin{center}
-    \includegraphics[width=1\textwidth]{interface-annotations}
-    \caption{The HUME annotation tool, based on the UCCA tool}
-    \label{mttool}
+    \includegraphics[width=1\textwidth]{hume_interface.png}
+    \caption{The HUME annotation tool, based on the UCCA tool. The faded orange box at the top
+      presents the translation, the large box below it presents the source. The tree of semantic units
+      for the source is given underneath, where the aligned text appears in italics, and intervening words
+      appear in red with a smaller font (e.g., in the first box).}
+    \label{fig:interface}
     \end{center}
 \end{figure*}
 
+\com{
 In Figure~\ref{mttool} you we show the MT evaluation tool. The sentence at the top shows the complete MT system output. Underneath the MT output is the  source sentence.  Underneath the source sentence we see its expandable semantic tree structure with both lexical and structural nodes. Lexical nodes only have traffic light annotation, whereas a structural node would normally be labelled ``A'' or ``B'' but could also be labelled as a lexical node, in the case where there is no word to word correspondence for the translation of its children.
 
  The child components of a structural node are marked with different coloured rectangles. When navigating through the different source sentence nodes, one can see the relevant sections of the translation because the aligned words in the translation are highlighted in the complete sentence above. Aligned translations are also shown in black alongside the source node. If the node is aligned to a set of discontiguous words in the translation, then the unaligned words that appear in between the aligned words are shown in red. Even if these words are not directly aligned to the source node, they 
 will likely change the meaning of the translation and must be considered when marking 
 the translation as correct or not. The alignments are meant just as a guide. The annotator should  look at the complete translation when deciding on the evaluation of a node. The translation could have content added before or after the node which changes its
  structure or meaning. If an extra component is prepended to a structural node, for example, it should be marked as ``Bad''.
-
+}
 
 
 
