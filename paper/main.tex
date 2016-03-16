@@ -622,12 +622,17 @@ and abstracts.\bh{How much more do we need? Perhaps in the intro we could justif
 already public anyway, and Lexi did some selection of examples for use in this expt. -- do we have to explain this?}
 
 \subsection{Annotation Statistics}
+\label{sec:annot_stats}
 
-For the annotation of MT output, we recruited seven annotators, two for each of the target languages apart from Czech. They were
-all native speakers of the target languages and fluent in English. For Czech, we also recruited a  group of additional annotators
-to annotate small numbers of sentences each for the purpose of calculating inter-annotator agreement. In \tabref{tab:annot}
-we show the total number of sentences and nodes annotated by each annotator, where we consider the additional Czech
-annotators as a single annotator. Note that not all nodes in all sentences were annotated. Sometimes this was because the
+For the annotation of the MT output, we recruited two annotators for each of German, Romanian
+and Polish and one main annotator for Czech. In order to allow us to calculate IAA also for
+the Czech annotations we recruited several further annotators to work on a small number of 
+sentences each. We treat these further annotators as one annotator, giving us two annotators
+for each language pair.
+The annotators were all native  speakers of the target languages and fluent in English.
+
+In \tabref{tab:annot}
+we show the total number of sentences and nodes annotated by each annotator. Note that not all nodes in all sentences were annotated. Sometimes this was because the
 annotator did not finish a node, or accidentally missed a node, but in many cases it was also because it was an implicit 
 UCCA node, which was not shown to the annotators since there is no corresponding source segment.
 \begin{table}
@@ -637,10 +642,10 @@ UCCA node, which was not shown to the annotators since there is no corresponding
 & & cs & de & pl & ro \\
 \hline
 Sentences &  Annot. 1 & 324   & 339  & 351  & 230  \\
- & Annot. 2 & -- & 104  & 340  & 337 \\
+ & Annot. 2 & 205 & 104  & 340  & 337 \\
 \hline
 Nodes & Annot. 1 & 8794  & 9253 & 9557  & 6152 \\
- &Annot. 2 & -- & 2906  & 9303  & 9228  \\
+ &Annot. 2 & 5553 & 2906  & 9303  & 9228  \\
 \end{tabular}
 }
 \caption{Total numbers of sentences and nodes annotated on the MT output.}
@@ -648,7 +653,32 @@ Nodes & Annot. 1 & 8794  & 9253 & 9557  & 6152 \\
 \end{center}
 \end{table}
 
-\emph{Timing of annotations}
+The annotators worked remotely, at their own pace, so we did not collect precise timing
+information. Nevertheless we are able to estimate the annotation time using the timestamps
+provided by the annotation tool, which are recorded whenever an annotated sentence is
+submitted. Annotators are not able to re-open a sentence once submitted. 
+
+To estimate the annotation time, we calculate the time difference between successive 
+sentences, and discard outlying times since we assume there was a break taken. From inspection
+of histograms of annotation times, we set the upper threshold at 500 seconds. We
+show median annotation times in Table~\ref{tab:annot_times}, indicating that the annotation
+of a sentence takes around 2--4 minutes, with some variation between annotators.
+
+\begin{table}
+\begin{center}
+\begin{tabular}{l|cccc}
+& cs & de & pl & ro \\
+\hline
+Annot. 1 & 255 & 140  & 138 & 96 \\
+Annot. 2 & -- & 162 & 229 & 207 \\
+\end{tabular}
+\caption{Median annotation times per sentence, in seconds.
+We do not give times for the second Czech 
+``annotator'', since this was a collection of annotators, working in parallel.}
+\label{tab:annot_times}
+\end{center}
+\end{table}
+
 
 \emph{Describe the UCCA annotation}
 
@@ -660,12 +690,6 @@ Nodes & Annot. 1 & 8794  & 9253 & 9557  & 6152 \\
 
 \subsection{Inter-Annotator Agreement}
 \label{sec:iaa}
-\begin{itemize}
-  \item Multiple annotation stats
-  \item Kappas -- ROG, AB
-  \item Kappa versus length
-  \item Kappa versus bleu?
-\end{itemize}
 
 \oa{what is the purpose of the BLEU binning? is it because low quality and high
 quality translations often diverge in their agreement scores?}
@@ -674,32 +698,33 @@ quality translations often diverge in their agreement scores?}
 
 In order to assess the consistency of the annotation, we measure the Inter-Annotator
 Agreement (IAA) using Cohen's Kappa on the multiply-annotated portions of the data.
-For German, Polish and Romanian we used two annotators, so we report IAA on the overlap
-between these annotators. For Czech we used one main annotator, plus several other extra
-annotators to provide IAA. 
+For German, Polish and Romanian we used two annotators, with a significant overlap
+between the sentences they annotated. For Czech we had one main annotator, plus
+several second annotators, so we treat all these second annotators as a single
+annotator. 
 
 To calculate Kappa, we consider the annotation task as a classification task on 
-nodes. We only consider nodes where there are at least two annotations from different
-annotators and we treat nodes with more than two annotations as a set of paired
-annotations\bh{This may not be correct, so should/could we do Kappa across the 
-variable multiple annotations on Czech}. We consider Kappa separately on the lexical
+nodes, and consider all nodes where there are two annotations from different
+annotators We report the overall Kappa, as well as separate Kappas on lexical
 nodes (annotated as red, orange or green) and the structural nodes (annotated
-as acceptable or bad) since there should not be any confusion between these two types of
-nodes. The small number of nodes which one annotator had labelled as structural and 
-the other as lexical were ignored for the purposes of IAA, since such cases of annotator 
-error could be caught by improved tool support.  The Kappas are shown in \tabref{tab:iaa}
+as acceptable or bad). In general there should not be confusion between the two
+types of nodes, and in future work the separation between the nodes should be enforced
+by the tool.  The Kappas are shown in \tabref{tab:iaa}
 \begin{table}[!ht]
 \begin{center}
 \begin{tabular}{l|cccc}
  & cs & de & pl & ro \\
 \hline
-Sentences & -- & 102 & 334 & 217 \\
+Sentences & 181 & 102 & 334 & 217 \\
 \hline
-Lexical nodes & -- & 1724 & 5386 & 3570 \\
-Kappa & -- & 0.29 & 0.54 & 0.50 \\
+All nodes & 4686   & 2793   & 8384   & 5604  \\
+Kappa & 0.64   & 0.61   & 0.58   & 0.69  \\
 \hline
-Structural nodes & & 1040 & 2655 & 1989 \\
-Kappa & -- & 0.44 & 0.33 & 0.58 \\
+Lexical nodes & 2982 & 1724 & 5386 & 3570 \\
+Kappa & 0.54 & 0.29 & 0.54 & 0.50 \\
+\hline
+Structural nodes & 1602 & 1040 & 2655 & 1989 \\
+Kappa & 0.31 & 0.44 & 0.33 & 0.58 \\
 \end{tabular}
 \caption{Inter-annotator agreement for the multiply-annotated portions of the data, as
 measured by Cohen's Kappa. }
@@ -710,7 +735,7 @@ measured by Cohen's Kappa. }
 
 To assess whether, as we hoped, HUME would make it easier to reliably annotate long sentences,
 we binned the sentences according to length and measured Kappa on each of the bins. Each bin covers
-a length range of 10, and we show the variance of kappa with length in \figref{fig:iaalength}.\bh{Note that cs is missing}
+a length range of 10, and we show the variance of kappa with length in \figref{fig:iaalength}.
 
 \def\iaafig #1{\includegraphics[width=7cm]{iaa_length_#1.png}}
 
@@ -719,7 +744,7 @@ a length range of 10, and we show the variance of kappa with length in \figref{f
 
 
 \subfloat[English-Czech]{
-  \iaafig{de}
+  \iaafig{cs}
 }
 &
 \subfloat[English-German]{
@@ -740,7 +765,7 @@ a length range of 10, and we show the variance of kappa with length in \figref{f
 \end{tabular}
 \caption{Inter-annotator Agreement (Kappa) versus sentence length, separately for
 structural and lexical nodes. }
-\label{fig:iaallength}
+\label{fig:iaalength}
 
 
 \end{figure*}

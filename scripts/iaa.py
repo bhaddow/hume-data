@@ -9,7 +9,7 @@ import pandas
 import numpy as np
 from  pandas_confusion import ConfusionMatrix
 
-LANGCODES = ("Romanian","ro"), ("Polish", "pl"), ("German", "de")
+LANGCODES = ("Romanian","ro"), ("Polish", "pl"), ("German", "de"), ("Czech", "cs")
 
 def get_kappa(cm):
   # The pandas_confusion kappa implementation crashes on some platforms,
@@ -39,7 +39,7 @@ def print_overall_stats(by_lang,args):
 def print_overall_iaa(by_lang, args):
   groups = (("A", "B", "R", "O", "G"),)
   if args.separate_label_groups:
-    groups = (("A", "B"), ("R", "O", "G"),("A", "B","R", "O", "G"))
+    groups = (("A", "B"), ("R", "O", "G"), ("R", "G"),("A", "B","R", "O", "G"))
   for group in groups:
     print("Considering labels: " +  str(group))
     by_label = by_lang[\

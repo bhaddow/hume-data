@@ -34,6 +34,8 @@ def parse_pairs(line):
 
 def get_sentences(filenames):
   if not filenames: filenames = glob.glob("data/raw/*dump")
+  filenames.sort()
+  cs2_ids = set() # Record sentence ids annotated by cs2, since we only keep the first cs2 annotation on each sentence
   for filename in filenames:
     LOG.info("Reading from {}".format(filename))
     with open(filename) as dfh:
@@ -42,11 +44,19 @@ def get_sentences(filenames):
         if not line.startswith("==="):
           break # end of file
         filename = read_string(dfh)
-        # hack to remove end of file name in de2
         if filename.endswith("_b4"):
-          filename = filename[:-3]
-        lang = filename[-3:-1]
-        annot_id = filename[-3:]
+          # hack to remove end of file name in de2
+          lang = filename[-6:-4]
+          annot_id = filename[-6:-3]
+        elif filename.startswith("mteval_cs") \
+          or filename.startswith("mteval_cz")  or \
+          filename.startswith("new_mteval_en_cs"):
+          # One of Ondrej's students
+          lang = "cs"
+          annot_id = "cs2"
+        else:
+          lang = filename[-3:-1]
+          annot_id = filename[-3:]
         sent_id = eval(dfh.readline())
         if int(sent_id) < 0:
           sent_id = str(int(sent_id) + 1600)
@@ -63,6 +73,13 @@ def get_sentences(filenames):
         source = read_string(dfh)
         ucca_annot = read_string(dfh)
         timestamp = dfh.readline()[:-1]
+
+        if annot_id == "cs2":
+          print("cs2 annotated " + str(sent_id))
+          if sent_id in cs2_ids:
+             print("Already seen, skipping")
+             continue
+          cs2_ids.add(sent_id)
 
         #decode mt annotation
         invert_id_map = {int(v):k for k,v in idMap.items()}
