@@ -253,34 +253,36 @@ indices.}
 
 
 \paragraph{Semantic Representation.}
-UCCA (Universal Conceptual Cognitive Annotation, \inparcite{abend2013universal}) is a cross-linguistically applicable, lightweight
+UCCA (Universal Conceptual Cognitive Annotation, \inparcite{abend2013universal}) is a
+cross-linguistically applicable, lightweight
 scheme for semantic annotation. Formally, a UCCA structure is a directed acyclic graph (DAG),
 whose leaves correspond to the words of the text.
-The graph’s nodes, called {\sc units}, are either terminals or several elements jointly
+The graph's nodes, called {\sc units}, are either terminals or several elements jointly
 viewed as a single entity according to some semantic or cognitive consideration. Edges bear
 a category, indicating the role of the sub-unit in the structure the unit
-represents. 
-UCCA currently focuses on annotating argument structures (adjectival, nominal, verbal and others) and
-relations between them. The most basic notion is the {\sc scene}, which describes a movement, an
+represents.
+
+UCCA's current inventory of distinctions focuses on annotating argument structures
+(adjectival, nominal, verbal and others) and relations between them.
+The most basic notion is the {\sc scene}, which describes a movement, an
 action or a state which is persistent in time. Each Scene contains one main relation, as well
-as one or more participants. For example, the sentence ``After graduating, Tom moved to NYC''
-contains two Scenes, whose main relations are ``graduating'' and ``John''\bh{Don't you mean ``graduating'' and
-``moved''? And where did ``John'' come from?}. The participant ``John''
-is a part of both Scenes, while ``NYC'' only of the latter. Further categories account for
+as one or more participants. For example, the sentence ``After graduation, Tom moved to NYC''
+contains two Scenes, whose main relations are ``graduation'' and ``Tom''.
+The participant ``John'' is a part of both Scenes, while ``NYC'' only of the
+latter. Further categories account for
 relations between Scenes and the internal structures of complex participants and relations.
 See \figref{fig:ucca_example}.
 
 % UCCA Motivation
 UCCA is a natural candidate for defining a semantic
 MT evaluation measure for a number of reasons. 
-First, it defines a coarse-grained and intuitive set of categories,
-and consequently can be reliably annotated by non-experts, after as little as two hours
+First, it defines an intuitive set of categories
+that can be reliably annotated by non-experts, after as little as two hours
 of training \cite{marinotti2014}.
-Second, UCCA is a cross-linguistically applicable scheme, seeking to represent what is shared between languages,
+Second, UCCA is a cross-linguistically applicable scheme, seeking to
+represent what is shared between languages
 by building on linguistic typological theory, and specifically on ``Basic Linguistic Theory''
 \cite{Dixon:10a,Dixon:10b,Dixon:12}, one of the most widely used frameworks for linguistic description.
-%Indeed, UCCA's cross-linguistic applicability has been demonstrated through its
-%application to annotation in English, French, German and Czech\oa{Did we do experiments on Czech?}. 
 The cross-linguistic applicability of UCCA has been tested in annotations of
 English, French, German and Czech.
 Third, the scheme has been shown to be semantically stable
@@ -288,26 +290,27 @@ in translation: UCCA annotations of translated text usually contain the same set
 \cite{sulem2015conceptual}. This is an indication that the scheme reflects
 a common layer of representation that in a correct translation
 is mostly shared between the translation and the source. 
+
 We note that verbal argument structures are less stable in this sense, as a verbal
 argument structure may be translated or paraphrased to a nominal or adjectival
 argument structure, and are thus less suitable as a basis for a semantic measure.
 For example, ``after he graduated, Tom moved to NYC''
 conveys a similar meaning to ``after graduation, Tom moved to NYC''. 
 
-\oa{explain how semantic units represent relations}
+% While most broad-coverage semantic work focused on shallow semantic structures,
+% predominantly argument structures annotated with their semantic roles, much recent
+% interest has been devoted to defining more complete semantic representation schemes.
+% \oa{should we
+% add that it is less cross-linguistically stable? maybe that's an overkill..
+%  OB: AMR has been applied to more languages, including Chinese, so I would not
+%  dare saying that it is less stable.}
 
-While most broad-coverage semantic work focused on shallow semantic structures,
-predominantly argument structures annotated with their semantic roles, much recent
-interest has been devoted to defining more complete semantic representation schemes.
 The Abstract Meaning Representation (AMR) scheme \cite{banarescu2013abstract}
 shares much of UCCA's motivation for defining a more complete semantic annotation.
 However, using AMR is not optimal for defining a decomposition of a sentence into semantic
 units as it does not ground its semantic symbols in the text,
 thus not straightwardly allowing a decomposition of the sentence into sub-units.
-Moreover, AMR is more fine-grained than UCCA and consequently more difficult to annotate.\oa{should we
-  add that it is less cross-linguistically stable? maybe that's an overkill..
-  OB: AMR has been applied to more languages, including Chinese, so I would not
-  dare saying that it is less stable.}
+Moreover, AMR is more fine-grained than UCCA and consequently more difficult to annotate.
 
 Other approaches have been proposed for semantic representation, which are grounded in the words
 and phrases of the text, and have generally represented semantic structures as bi-lexical dependencies.
@@ -318,6 +321,7 @@ Nevertheless, despite their appeal as deep and intuitive means for semantic repr
 these approaches require linguistic expertise for their annotation, due to the intricate and
 fine-grained distinctions they provide, and are thus in our view less suitable for basing
 an interpretable MT evaluation on. 
+
 %\newcite{Basile:12} attempted to make some aspects of the semantic annotation more accessible,
 %but to our knowledge no results of this brand have been reported.
 
@@ -408,7 +412,8 @@ wrong in translation:
   the individual atomic units ``dog'', ``bites'' and ``man'' will be marked as Green.
 \item A superfluous word or phrase has been inserted into
   the translation. For instance, if ``dog bites man'' is translated into ``dog visciously bites man''.
-\item One of the sub-units is missing from the translation. For instance, if ``dog bites man'' is translated into ``dog bites''.
+\item One of the sub-units is missing from the translation.
+  For instance, if ``dog bites man'' is translated into ``dog bites''.
 \end{compactitem}
 
 \XXX{Could someone review this for Ondrej.}
