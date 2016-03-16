@@ -338,7 +338,14 @@ The procedure involves two manual steps: (1) UCCA-annotating $s$,
 (2) human judgements for each semantic unit of $s$,
 defined by its UCCA annotation, of whether its meaning has been preserved in $t$.
 We note that (1) is performed once for every source sentence, irrespective
-of the number of its translations we wish to evaluate.
+of the number of its translations we wish to evaluate.\footnote{Instead of
+relying on the source,
+the evaluation could be based on the UCCA structure for the \emph{reference}
+translation. This would allow monolingual annotators to take part in the
+evaluation. On the downside, the translation would have to be aligned to the
+reference and more importantly, we would risk inaccurate judgements due to
+the naturally occurring differences between the source and its reference
+translations.}
 
 \paragraph{UCCA Annotation.}
 We begin by creating UCCA annotations for the source sentence, following the
@@ -478,8 +485,11 @@ language to annotate this output.
 
 
 Since these annotators have to judge the quality of the translation,
-they also needed to be fluent in English.\bh{Somewhere we could explain that we
-could do a similar annotation with monolinguals, although it entails aligning reference and MT output}
+they also needed to be fluent in English.
+% Ondrej did the following in a footnote in Section 3.1 Annotation Procedure
+%\bh{Somewhere we could explain that we
+%could do a similar annotation with monolinguals, although it entails aligning
+%reference and MT output}
 
 
 
