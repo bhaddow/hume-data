@@ -550,6 +550,25 @@ the translation as correct or not. The alignments are meant just as a guide. The
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Comparison with HMEANT}\label{sec:hmeant_comp}
 
+\subsection{One vs. Two Structures}
+
+
+\subsection{Verbal Structures Only?}
+
+\subsection{Monolingual vs. Bilingual Evaluation}
++/- expects to cover the whole hypothesis with annotations, whereas HMEANT 'gives up' when the
+hypothesis is not intelligible, giving a zero score to the bad frame/whole sentence.
+This can be a good decision for HMEANT, since our way may artificially boost the chances of
+understanding the sentence.
+
+\subsection{Technical Differences}
+
++ allows for multi-word and even non-contiguous elements
+
++ allows to indicate the quality of the predicates ("Actions")
+
+\subsection{XXX to be moved}
+
 HMEANT shares much of HUME's motivation for providing a
 measure that decomposes over semantic units, rather than strings. On the other
 hand, HMEANT focuses on verbal
@@ -602,6 +621,47 @@ The coverage of
 these and other phenomena by HUME will allow to determine empirically
 (rather than stipulate), which semantic structures are important
 to preserve for MT evaluation, and which are less important.
+
+
+\subsection{from e-mails}
+
+UCCA-Eval in contrast to HMEANT:
+
+- needs *very* trained UCCA annotators
+- we were not very quick at explaining even the Eval annotations, but I guess we could have done better
++ relies only on one structure
++ relies on automatic alignment (in the form of hints only)
+These two positive design decisions are in line with what Dekai observed for HMEANT
+(see the abstract of http://repository.ust.hk/ir/Record/1783.1-66107): IAA of SRL drops from 90
+to 61 when the two aligned structures are from two different annotators.
+
+
+
+
+Actually, I think this is a +/- . UCCA-Eval only needs the semantic evaluation done once for a given test source, whereas for the HMEANT set-up you have to keep annotating MT output. That's a + for UCCA-Eval. However we need bilingual annotators, which should be a -. Of course we could align translation and reference using monolingual annotators, but then we have the problem of alignment.
+In the *MEANT papers they mainly test by either
+A) correlating the metric to ranking judgements; or
+B) using automated versions of the metric for tuning MT systems
+
+I think neither is particularly convincing, but I'm not sure at the moment what we replace them with. Dekai also made a claim about the *MEANT metrics being "interpretable" in the sense that they could guide you towards semantic errors that the MT system may be making, however I don't recall seeing this done in his papers. 
+
+
+By the claim that HMEANT explains things, Dekai probably means that the score is decomposable, but so is UCCA-Eval and even BLEU. And UCCA-Eval has one benefit over HMEANT: it points to words in the MT output that are aligned with something but do not convey the meaning well (and we know which part of the source meaning). Pure HMEANT might say only that some part of the MT output has no clear frames whatsover (and we do not know which part of the source/reference, unless we add the word alignments).
+
+
+
+
+Differences of our approach:
+
+The annotation experiment that we just conducted differs in two main ways from HMEANT:
+1) The semantic framework is different - UCCA vs SRL - and SRL has problems which Omri lists below, some of which Dekai dismissed when they were brought up. Maybe these problems do not matter for MT evaluation or tuning, but I think this would have to be determined empirically.
+2) The annotation process is different. We semantically annotate the source, then automatically project it to the translation, and ask bilingual annotators to assess whether this projection shows a good or bad translation. In HMEANT they semantically annotate both the reference and the translation, then align these manually, and assess to what extent they match.
+
+Advatages of our approach:
+Here is an additional argument to support the need for target-only intelligibility:
+http://www.aclweb.org/anthology/W14-4005
+see Table  3 and the text in Section 5.2.
+The more frames can people annotate in the hypothesis, the better the hypothesis overall.
 
 
 
@@ -975,55 +1035,6 @@ a minimal set of labels. It provides a complete semantic tree which does not rel
  Even though the set of UCCA labels are fairly restricted,  nevertheless they allow us to determine the most important components of the graph (for example it defines centres and linkers which would be likely to carry more weight than elaborators), and we can use this to better calculate the score. 
 We think that UCCA is the
 most promising representation for evaluating translation. 
-
-\subsection{Copied from emails}
-
-
-UCCA-Eval in contrast to HMEANT:
-
-- needs *very* trained UCCA annotators
-- we were not very quick at explaining even the Eval annotations, but I guess we could have done better
-+ relies only on one structure
-+ relies on automatic alignment (in the form of hints only)
-These two positive design decisions are in line with what Dekai observed for HMEANT
-(see the abstract of http://repository.ust.hk/ir/Record/1783.1-66107): IAA of SRL drops from 90
-to 61 when the two aligned structures are from two different annotators.
-
-+ allows for multi-word and even non-contiguous elements
-+ allows to indicate the quality of the predicates ("Actions")
-+/- expects to cover the whole hypothesis with annotations, whereas HMEANT 'gives up' when the
-hypothesis is not intelligible, giving a zero score to the bad frame/whole sentence.
-This can be a good decision for HMEANT, since our way may artificially boost the chances of
-understanding the sentence.
-
-
-HMEAN disadvantages:
-. Importantly: it disregards copula clauses, nominalizations (which are often translated to verbal clauses), inter-clause relations (discourse markers, complement clauses etc.). UCCA-Eval addresses these.
-
-Actually, I think this is a +/- . UCCA-Eval only needs the semantic evaluation done once for a given test source, whereas for the HMEANT set-up you have to keep annotating MT output. That's a + for UCCA-Eval. However we need bilingual annotators, which should be a -. Of course we could align translation and reference using monolingual annotators, but then we have the problem of alignment.
-In the *MEANT papers they mainly test by either
-A) correlating the metric to ranking judgements; or
-B) using automated versions of the metric for tuning MT systems
-
-I think neither is particularly convincing, but I'm not sure at the moment what we replace them with. Dekai also made a claim about the *MEANT metrics being "interpretable" in the sense that they could guide you towards semantic errors that the MT system may be making, however I don't recall seeing this done in his papers. 
-
-
-By the claim that HMEANT explains things, Dekai probably means that the score is decomposable, but so is UCCA-Eval and even BLEU. And UCCA-Eval has one benefit over HMEANT: it points to words in the MT output that are aligned with something but do not convey the meaning well (and we know which part of the source meaning). Pure HMEANT might say only that some part of the MT output has no clear frames whatsover (and we do not know which part of the source/reference, unless we add the word alignments).
-
-
-
-
-Differences of our approach:
-
-The annotation experiment that we just conducted differs in two main ways from HMEANT:
-1) The semantic framework is different - UCCA vs SRL - and SRL has problems which Omri lists below, some of which Dekai dismissed when they were brought up. Maybe these problems do not matter for MT evaluation or tuning, but I think this would have to be determined empirically.
-2) The annotation process is different. We semantically annotate the source, then automatically project it to the translation, and ask bilingual annotators to assess whether this projection shows a good or bad translation. In HMEANT they semantically annotate both the reference and the translation, then align these manually, and assess to what extent they match.
-
-Advatages of our approach:
-Here is an additional argument to support the need for target-only intelligibility:
-http://www.aclweb.org/anthology/W14-4005
-see Table  3 and the text in Section 5.2.
-The more frames can people annotate in the hypothesis, the better the hypothesis overall.
 
 
 \section{Conclusion}
