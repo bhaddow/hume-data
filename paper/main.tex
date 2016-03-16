@@ -657,9 +657,9 @@ and Polish and one main annotator for Czech. In order to allow us to calculate I
 the Czech annotations we recruited several further annotators to work on a small number of 
 sentences each. We treat these further annotators as one annotator, giving us two annotators
 for each language pair.
-The annotators were all native  speakers of the target languages and fluent in English.
+The annotators were all native  speakers of the respective target languages and fluent in English.
 
-In \tabref{tab:annot}
+In \tabref{tab:annot},
 we show the total number of sentences and nodes annotated by each annotator. Note that not all nodes in all sentences were annotated. Sometimes this was because the
 annotator did not finish a node, or accidentally missed a node, but in many cases it was also because it was an implicit 
 UCCA node, which was not shown to the annotators since there is no corresponding source segment.
@@ -733,7 +733,8 @@ annotator.
 
 To calculate Kappa, we consider the annotation task as a classification task on 
 nodes, and consider all nodes where there are two annotations from different
-annotators We report the overall Kappa, as well as separate Kappas on lexical
+annotators \XXX{unfinished sentence?}
+We report the overall Kappa, as well as separate Kappas on lexical
 nodes (annotated as red, orange or green) and the structural nodes (annotated
 as acceptable or bad). In general there should not be confusion between the two
 types of nodes, and in future work the separation between the nodes should be enforced
@@ -764,6 +765,8 @@ measured by Cohen's Kappa. }
 To assess whether, as we hoped, HUME would make it easier to reliably annotate long sentences,
 we binned the sentences according to length and measured Kappa on each of the bins. Each bin covers
 a length range of 10, and we show the variance of kappa with length in \figref{fig:iaalength}.
+\XXX{We need to report the number of sentences in each bin, the last German bin
+seems to be an unstable result.}
 
 \def\iaafig #1{\includegraphics[width=7cm]{iaa_length_#1.png}}
 
