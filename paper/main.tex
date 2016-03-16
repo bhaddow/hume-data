@@ -513,10 +513,6 @@ translation ``t=Der Mann sieht den Hund an''. Then ``watched'' will be aligned t
 can be seen in \figref{fig:interface}, where ``ongoing pregnancy'' is translated to
 ``Schwangerschaft ... laufenden'' (lit. ``pregnancy ... ongoing'').
 
-\com{
-Since these annotators have to judge the quality of the translation,
-they also needed to be fluent in English.
-}
 
 % Ondrej did the following in a footnote in Section 3.1 Annotation Procedure
 %\bh{Somewhere we could explain that we
@@ -560,41 +556,57 @@ the translation as correct or not. The alignments are meant just as a guide. The
 \section{Comparison with HMEANT}\label{sec:hmeant_comp}
 
 HMEANT shares much of HUME's motivation for providing a
-measure that decomposes over semantic units, rather than strings, but focuses on verbal
+measure that decomposes over semantic units, rather than strings. On the other
+hand, HMEANT focuses on verbal
 argument structures, ignoring other pervasive phenomena such as nominal predicates, inter-clause
 relations and copula clauses.
-HUME further diverges from both MEANT and the shallower BLEU and
-METEOR measures, in not requiring a reference.
+HUME further diverges from both HMEANT (as well as the shallow automatic BLEU and
+METEOR measures) in not requiring a reference.
 Instead, it compares the source directly with the output
 translation. We see this difference as crucial where semantic analysis is concerned, as it
 is often impossible to assign a semantic structure to a low quality MT output sentence.
-See \secref{sec:hmeant_comp} for a more elaborate discussion of the differences between HUME
-and HMEANT.
+
+%See \secref{sec:hmeant_comp} for a more elaborate discussion of the differences
+%between HUME
+%and HMEANT.
+% This is here!
 
 
 For instance, consider the sentence ``A coronary angioplasty may not be technically possible'',
 which was translated by one of the systems we experimented with as
 ``Eine koronare Angioplastie kann nicht technisch m{\"o}glich'', i.e., the main verb ``sein'' (``be'') is omitted.
 While this may be interpreted is a minor error, HMEANT will assign it a very low score, as it failed to
-translate the main verb. 
+translate the main verb. We understand that this is a design feature of HMEANT:
+if the translation per se cannot be annotated with verbal argument structure
+(for whatever reason, including incomprehensibility), it cannot convey the meaning.
+HMEANT thus makes a stricter check of whether the translation can be understood
+than we do.
 
+Several experiments with HMEANT applied to languages other than English
+\parcite{bojar:wu:ssst:2012,birch-EtAl:2013:WMT,chuchunkov-tarelkin-galinskaya:2014:SSST-8}
+indicated that HMEANT does not address some important phenomena.
 We conducted an analysis of the English UCCA Wikipedia
 corpus, comprising
 of 5324 sentences,
-in order to assess the frequency of some of the major phenomena HMEANT fails to address,
-Coppula cluases are treated in HMEANT simply as instances of the main verb ``be'', which
+in order to assess their frequency: \begin{inparadesc}
+\item[Copula clauses] are treated in HMEANT simply as instances of the main verb ``be'', which
 generally does not convey the meaning of these clauses. They appear in 21.7\% of the sentences,
 according to a conservative estimates that only considers non-auxilliary instances of ``be''.
-Nominative argument structures, which are completely ignored under HMEANT are in fact highly
-pervasive, appearing in 48.7\% of the sentences. Linkers expressing an inter-relation between
+\item[Nominative argument structures,] which are completely ignored under HMEANT are in fact highly
+pervasive, appearing in 48.7\% of the sentences.
+\item[Linkers] expressing an inter-relation between
 clauses (mainly discourse markers and coordinating conjunctions) appear in 56\% of the
 sentences\footnote{Argument structures and linkers are explicitly marked in UCCA. We identified
   non-auxilliary instances of ``be'' and nouns using the NLTK standard tagger.}.
+\end{inparadesc}
+
+
 We are not aware of any empirical evaluation that demonstrates that verb argument structure,
-taken alone, capture the crux of the sentence semantics meanings, and so the coverage of
-further phenomena by HUME will first allow to determine empirically
-(rather than stipulate), what semantic structures are important
-to preserve for MT translation, and which are less important
+taken alone, captures the crux of the sentence semantics meanings.
+The coverage of
+these and other phenomena by HUME will allow to determine empirically
+(rather than stipulate), which semantic structures are important
+to preserve for MT evaluation, and which are less important.
 
 
 
@@ -602,9 +614,6 @@ to preserve for MT translation, and which are less important
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Experiments}\label{sec:experiments}
 
-\paragraph{Annotation.}
-Source sentences are all in English, and the UCCA annotation was performed by four
-computational linguists\oa{were there no other annotators from Prague?}.
 
 In order to validate the HUME metric, we ran an annotation experiment with one source language (English), and four 
 target languages (Czech, German, Polish and Romanian), using text from the public health domain. We are 
@@ -613,15 +622,21 @@ information for speakers of languages other than English, and in this domain acc
 paramount.
 
 Our annotation experiment sought to address the following questions:
-\begin{itemize}
-\item Can HUME be annotated quickly and reliably, and does the reliability still hold for longer sentences.
-\item Can HUME capture translation issues that other annotation schemes (such as adequacy judgements and HMEANT
-cannot)?
-\item What can HUME annotation tell us about the strengths and weaknesses of MT?
-\end{itemize}
+\begin{compactitem}
+\item Can HUME be annotated quickly and reliably, and does the reliability still hold for longer sentences?
+\item Can HUME capture translation issues that other annotation schemes (such as
+adequacy judgements and HMEANT)
+cannot?
+%\item What can HUME annotation tell us about the strengths and weaknesses of MT?
+%\bh{Maybe we should remove the third one, we
+%probably don't address it in this paper}
+\end{compactitem}
 
-\bh{Maybe we should remove the third one, we
-probably don't address it in this paper}
+\subsection{UCCA Annotation}
+Source sentences are all in English, and the UCCA annotation was performed by four
+computational linguists\oa{were there no other annotators from Prague? Ondrej
+does not remember! Was it just Ondrej+Jana Sindlerova? Then it would be one
+computer scientist and one linguist for Czech.}.
 
 \subsection{Data Sets and Translation Systems}
 
@@ -647,9 +662,9 @@ and Polish and one main annotator for Czech. In order to allow us to calculate I
 the Czech annotations we recruited several further annotators to work on a small number of 
 sentences each. We treat these further annotators as one annotator, giving us two annotators
 for each language pair.
-The annotators were all native  speakers of the target languages and fluent in English.
+The annotators were all native  speakers of the respective target languages and fluent in English.
 
-In \tabref{tab:annot}
+In \tabref{tab:annot},
 we show the total number of sentences and nodes annotated by each annotator. Note that not all nodes in all sentences were annotated. Sometimes this was because the
 annotator did not finish a node, or accidentally missed a node, but in many cases it was also because it was an implicit 
 UCCA node, which was not shown to the annotators since there is no corresponding source segment.
@@ -723,7 +738,8 @@ annotator.
 
 To calculate Kappa, we consider the annotation task as a classification task on 
 nodes, and consider all nodes where there are two annotations from different
-annotators We report the overall Kappa, as well as separate Kappas on lexical
+annotators \XXX{unfinished sentence?}
+We report the overall Kappa, as well as separate Kappas on lexical
 nodes (annotated as red, orange or green) and the structural nodes (annotated
 as acceptable or bad). In general there should not be confusion between the two
 types of nodes, and in future work the separation between the nodes should be enforced
@@ -754,6 +770,8 @@ measured by Cohen's Kappa. }
 To assess whether, as we hoped, HUME would make it easier to reliably annotate long sentences,
 we binned the sentences according to length and measured Kappa on each of the bins. Each bin covers
 a length range of 10, and we show the variance of kappa with length in \figref{fig:iaalength}.
+\XXX{We need to report the number of sentences in each bin, the last German bin
+seems to be an unstable result.}
 
 \def\iaafig #1{\includegraphics[width=7cm]{iaa_length_#1.png}}
 
