@@ -253,27 +253,46 @@ indices.}
 
 
 \begin{figure*}
-\begin{tikzpicture}[semithick, x=2.4cm,y=0.8cm, >=latex, baseline=7ex,
-      inner sep=.3ex, outer sep=.7ex, minimum size=1.2ex,->]
-  \node (ROOT) [label={G}] [fill=green, circle] {}
-  child {node [label={R}] {Golf} edge from parent node[left]  {$L$}}
-  child {node [label={\#1}] {became} edge from parent node[left]  {$L$}}
-  child {node [label={\#1}] {a} edge from parent node[left]  {$L$}}
-  child {node [label={\#1}] {passion} edge from parent node[left]  {$L$}}
-  child {node [label={\#1}] {for} edge from parent node[left]  {$L$}}
-  child {node [label={\#1}] {his} edge from parent node[left]  {$L$}}
-  child {node [label={\#1}] {oldest} edge from parent node[left]  {$L$}}
-  child {node [label={\#1}] {daughter} edge from parent node[left]  {$L$}}
-  child {node [label={\#1}] {,} edge from parent node[left]  {$L$}}
-  child {node [label={\#1}] {she} edge from parent node[left]  {$L$}}
-  child {node [label={\#1}] {attended} edge from parent node[left]  {$L$}}
-  child {node [label={\#1}] {daily} edge from parent node[left]  {$L$}}
-  child {node [label={\#1}] {lesssons} edge from parent node[left]  {$L$}}
-  child {node [label={\#1}] {and} edge from parent node[left]  {$L$}}
-  child {node [label={\#1}] {greatly} edge from parent node[left]  {$L$}}
-  child {node [label={\#1}] {improved} edge from parent node[left]  {$L$}};
 
-  
+  \begin{tikzpicture}
+    [level 1/.style={sibling distance=7.5em},
+      level 2/.style={sibling distance=5em},
+      level 3/.style={sibling distance=5em},
+      level 4/.style={sibling distance=3em}]
+    %[semithick, x=2.4cm,y=0.8cm, >=latex, baseline=7ex,
+    %  inner sep=.3ex, outer sep=.7ex, minimum size=1.2ex,->]
+  \node (ROOT) [label={B}] [fill=blue, circle] {}
+  child {node (H3) [label={A}] [fill=yellow,circle] {}
+    child {node [label={[red]:R}] {Golf} edge from parent node[left] {}}
+    child {node (H1) [label={O}] [fill=orange,circle] {}
+      child {node [label={}] {became} edge from parent node[left]  {}}
+      child {node [label={}] {a} edge from parent node[left]  {}}
+      child {node [label={}] {passion} edge from parent node[left]  {}}
+    }
+    child {node (H2) [label={A}] [fill=yellow,circle] {}
+      child {node {} edge from parent[draw=none] {}}
+      child {node {} edge from parent[draw=none] {}}
+      child {node {} edge from parent[draw=none] {}}
+      child {node {} edge from parent[draw=none] {}}
+      child {node [label={}] {for} edge from parent node[left]  {}}
+      child {node [label={}] {his} edge from parent node[left]  {}}
+      child {node [label={}] {oldest} edge from parent node[left]  {}}
+      child {node [label={}] {daughter} edge from parent node[left]  {}}
+    }
+  }
+  child {node {} edge from parent[draw=none] {}}
+  child {node (H4) [label={A}] [fill=yellow,circle] {}
+    child {node [label={}] {she} edge from parent node[left]  {}}
+      child {node [label={}] {attended} edge from parent node[left]  {}}
+      child {node [label={}] {daily} edge from parent node[left]  {}}
+      child {node [label={}] {lesssons} edge from parent node[left]  {}}
+  }
+  child {node [label={}] {and} edge from parent node[left]  {}}
+  child {node (H5) [label={A}] [fill=yellow,circle] {}  
+    child {node [label={}] {greatly} edge from parent node[left] {}}
+    child {node [label={}] {improved} edge from parent node[left] {}}
+  };
+
   \com{
   child {node (H1) [label={\#8}] [fill=black,circle] {}
     child {node [label={\#2}] {graduation} edge from parent node[right] {$P$}}
