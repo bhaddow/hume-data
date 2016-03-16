@@ -416,10 +416,47 @@ to $t$. Then HUME's composite score is:
 
 
 
-%composite score (uniform, sub-sets, weighted rather not -- according to categories [or empirically according to agreement])
-
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Annotation Interface.}
+
+We turn to discuss the interface for collecting human judgements on the semantic units of the source,
+relating to the translation. UCCA annotations of the source are done offline, using the UCCA web
+application\footnote{See UCCA webpage.}.
+
+\figref{fig:interface} presents the user interface of HUME. The sentence at the top
+shows the complete MT system output. The source sentence appears at the top, and
+the source translation directly below it. Underneath the source sentence appears
+its list of semantic units. For each semantic unit, including the one for the
+entire source sentence, there is a textbox, displaying the yield of that unit.
+Information on the category of the unit (e.g., whether it is a Scene, participant etc.).
+The user is asked to select a label for each unit,
+by clicking the ``A'', ``B'', Green, Orange, or Red buttons to the left of the unit's box.
+
+The interface presents, for each unit, the segment of the translation which aligns to it.
+This allows the user, especially in long sentences, to focus her attention on the parts
+mostly likely to be relevant for her judgement. As the alignments are automatically derived,
+and therefore noisy, the annotator is instructed to treat the aligned text is a cue, but to ignore
+it and make a judgement according to the full translation sentence, in cases where the alignment
+is misleading.
+
+Concretely, let $s = (w_1,\ldots,w_n)$ be a source sentence, $t = (w'_1,\ldots,w'_n)$ a translation,
+and $A \subset 2^{s \times t}$ a many-to-many word alignment between them.
+If $u$ is a semantic unit in $s$, whose yield is $yld(u)$, we define the aligned text in
+$t$ to be $a(u)=\bigcup_{(x_s,x_t) \in A \wedge x_s \cap yld(u) \neq \emptyset} x_t$.
+As $a(u)$ may not be contiguous in the text, we mark all intervening units in red.
+
+
+
+The child components of a structural node are marked with different coloured rectangles.
+When navigating through the different
+source sentence nodes, one can see the relevant sections of the translation because the aligned words in the translation are
+highlighted in the complete sentence above. Aligned translations are also shown in black alongside the source node. If the node
+is aligned to a set of discontiguous words in the translation, then the unaligned words that appear in between the aligned words
+are shown in red. Even if these words are not directly aligned to the source node, they will likely change the meaning of the
+translation and must be considered when marking the translation as correct or not. The alignments are just meant as a guide. The
+annotator should look at the complete translation when deciding on the evaluation of a node. The translation could have content
+added before or after the node which changes its structure or meaning. If an extra component is prepended to a structural node,
+for example, it should be marked as “Bad”.
 
 As translations may be long, we provide assistance to the annotator.
 Where the annotator is asked to judge the translation quality of a unit $u$,
