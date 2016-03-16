@@ -18,7 +18,8 @@ from iaa import get_kappa, LANGCODES
 
 LOG = logging.getLogger(__name__)
 
-def do_bins(agree, first_bin_start, bin_size, field_name, csv_file, graph_file, name):
+
+def do_bins(agree, bins, field_name, csv_file, graph_file, name):
   LOG.info("Calculating kappas, binning by " +name)
   #groups = (("ab", ("A", "B")), ("rog", ("R", "O", "G")), ("all", ("A", "B","R", "O", "G")))
   groups = (("struct", ("A", "B")), ("lex", ("R", "O", "G")))
@@ -31,13 +32,8 @@ def do_bins(agree, first_bin_start, bin_size, field_name, csv_file, graph_file, 
       max_length = max(by_lang[field_name])
       #min_length = min(agree[agree['lang'] == lang][field_name])
       kappas = { g: [] for g,_ in groups}
-      bins = []
-      bin_start = first_bin_start
-      while bin_start < max_length:
-        bin_end = bin_start + bin_size
-        if len(by_lang[by_lang[field_name] >= bin_start]) == 0: break
-        while len(by_lang[(by_lang[field_name] >= bin_start) & (by_lang[field_name] < bin_end)]) == 0:
-          bin_end += bin_size
+      counts = { g: [] for g,_ in groups}
+      for bin_start, bin_end in bins:
         LOG.debug("Bin start: {}; Bin end: {}".format(bin_start,bin_end))
         for group_name, group in groups:
           selected = by_lang[ \
@@ -61,8 +57,7 @@ def do_bins(agree, first_bin_start, bin_size, field_name, csv_file, graph_file, 
           LOG.debug("Kappa: {}".format(kappa))
           writer.writerow((lang, group_name, str(bin_start), str(bin_end), len(selected), kappa))
           kappas[group_name].append(kappa)
-        bins.append((bin_start,bin_end))
-        bin_start = bin_end
+          counts[group_name].append(len(selected))
 
       # Plotting to file
       fig,ax = plt.subplots()
@@ -74,26 +69,32 @@ def do_bins(agree, first_bin_start, bin_size, field_name, csv_file, graph_file, 
       for (group,_),col in zip(groups,cols):
         rects.append(ax.bar(index + offset, kappas[group], width=width, color = col))
         offset += width
+        for rect, count in zip(rects[-1], counts[group]):
+          ax.text(rect.get_x() + rect.get_width()/2, rect.get_height(), str(count), 
+              ha='center', va='bottom')
       ax.set_yticks(np.arange(0,1.1,0.1))
       ax.set_xticks(index + 0.5)
+      ax.set_xlim(0,len(bins))
       ax.set_xticklabels(["{}-{}".format(n,m) for n,m in bins])
       lgd = ax.legend([r[0] for r in rects],[g for g,_ in groups], loc='upper right')#, bbox_to_anchor=(1.0,1.1))
       ax.set_title("Kappa by {}: {}".format(name, lang_name))
       ax.set_ylabel("Kappa")
       ax.set_xlabel(name)
-      graph_file_name = "{}.{}.png".format(graph_file, lang)
+      graph_file_name = "{}_{}.png".format(graph_file, lang)
       plt.savefig(graph_file_name)#, bbox_extra_artists=(lgd,), bbox_inches='tight')
       plt.clf()
    
 
 def do_bleu_bins(sentences, agree, args):
-  agree = agree.merge(sentences[['sent_id', 'bleu']], on="sent_id")
-  do_bins(agree, args.bleu_bins_start,  args.bleu_bins_size, "bleu", args.bleu_bins_file, args.bleu_bins_plot, "Sentence Bleu") 
+  bins = ((0,0.2), (0.2, 0.4), (0.4, 0.6), (0.6, 0.8), (0.8, 1.0))
+  agree = agree.merge(sentences[['sent_id', 'bleu']].drop_duplicates(), on="sent_id")
+  do_bins(agree, bins, "bleu", args.bleu_bins_file, args.bleu_bins_plot, "Sentence Bleu") 
 
 def do_length_bins(sentences, agree, args):
+  bins = ((5,15), (15, 25), (25, 35), (35, 45), (45, 65))
   sentences['src_length'] = sentences['source'].str.split().apply(len)
-  agree = agree.merge(sentences[['sent_id', 'src_length']], on="sent_id")
-  do_bins(agree, args.length_bins_start,  args.length_bins_size, "src_length", args.length_bins_file, args.length_bins_plot, "length") 
+  agree = agree.merge(sentences[['sent_id', 'src_length']].drop_duplicates(),  on="sent_id")
+  do_bins(agree, bins, "src_length", args.length_bins_file, args.length_bins_plot, "length") 
    
 def main():
   logging.basicConfig(format='%(asctime)s %(levelname)s: %(name)s: %(message)s', datefmt='%Y-%m-%d %H:%M:%S', level=logging.DEBUG)
@@ -103,10 +104,6 @@ def main():
 
   parser.add_argument("-l", "--length-bins-file", help="Output file for length bins", default="iaa_length.csv")
   parser.add_argument("-b", "--bleu-bins-file", help="Output file for bleu bins", default="iaa_bleu.csv")
-  parser.add_argument("--bleu-bins-size", type=float, default=0.2)
-  parser.add_argument("--bleu-bins-start", type=float, default=0)
-  parser.add_argument("--length-bins-size", type=int, default=10)
-  parser.add_argument("--length-bins-start", type=int, default=5)
   parser.add_argument("--length-bins-plot", help = "Plot to file stem", default = "iaa_length")
   parser.add_argument("--bleu-bins-plot", help="Plot to file stem", default = "iaa_bleu")
   args = parser.parse_args()

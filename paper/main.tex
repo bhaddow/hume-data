@@ -116,7 +116,7 @@ argument structures and the inter-relations between them.
 HUME operates by aggregating human assessments of the translation quality of individual
 semantic units in the source sentence.
 Importantly, HUME only requires semantically annotating the source sentence,
-thus avoiding the annotatation of machine-generated text 
+thus avoiding the annotation of machine-generated text 
 and allowing re-use of the source semantic annotation for measuring the quality
 of different translations of the same source sentence.
 By basing the measure on a direct comparison
@@ -629,34 +629,25 @@ the translation as correct or not. The alignments are meant just as a guide. The
 
 HMEANT shares much of HUME's motivation for providing a
 measure that decomposes over semantic units, rather than strings. On the other
-hand, HMEANT focuses on verbal
+hand, there are important differences in design decisions, which we summarize in this
+section.
+
+First of all, the annotation process is different. We semantically annotate the
+source, then automatically project it to the translation, and ask bilingual
+annotators to assess whether this projection shows a good or bad translation. In
+HMEANT, they semantically annotate both the reference and the translation, then
+align these manually, and assess to what extent they match.
+
+
+\subsection{Verbal Structures Only?}
+
+HMEANT focuses on verbal
 argument structures, ignoring other pervasive phenomena such as nominal predicates, inter-clause
-relations and copula clauses.
-HUME further diverges from both HMEANT (as well as the shallow automatic BLEU and
-METEOR measures) in not requiring a reference.
-Instead, it compares the source directly with the output
-translation. We see this difference as crucial where semantic analysis is concerned, as it
-is often impossible to assign a semantic structure to a low quality MT output sentence.
+relations and copula clauses. Some of the uncovered cases were already observed
+in previous applications of HMEANT to languages other than English (see \perscite{birch-EtAl:2013:WMT} for German, \perscite{bojar:wu:ssst:2012} for
+Czech and by \perscite{chuchunkov-tarelkin-galinskaya:2014:SSST-8} for Russian)
+but the problems are apparent in English as well.
 
-%See \secref{sec:hmeant_comp} for a more elaborate discussion of the differences
-%between HUME
-%and HMEANT.
-% This is here!
-
-
-For instance, consider the sentence ``A coronary angioplasty may not be technically possible'',
-which was translated by one of the systems we experimented with as
-``Eine koronare Angioplastie kann nicht technisch m{\"o}glich'', i.e., the main verb ``sein'' (``be'') is omitted.
-While this may be interpreted is a minor error, HMEANT will assign it a very low score, as it failed to
-translate the main verb. We understand that this is a design feature of HMEANT:
-if the translation per se cannot be annotated with verbal argument structure
-(for whatever reason, including incomprehensibility), it cannot convey the meaning.
-HMEANT thus makes a stricter check of whether the translation can be understood
-than we do.
-
-Several experiments with HMEANT applied to languages other than English
-\parcite{bojar:wu:ssst:2012,birch-EtAl:2013:WMT,chuchunkov-tarelkin-galinskaya:2014:SSST-8}
-indicated that HMEANT does not address some important phenomena.
 We conducted an analysis of the English UCCA Wikipedia
 corpus, comprising
 of 5324 sentences,
@@ -679,6 +670,114 @@ The coverage of
 these and other phenomena by HUME will allow to determine empirically
 (rather than stipulate), which semantic structures are important
 to preserve for MT evaluation, and which are less important.
+
+
+\subsection{Cost of Structural Annotation}
+
+HMEANT structural annotation (semantic role labelling, SRL), similar to e.g.
+PropBank
+\parcite{palmer2010semantic}, is designed to be very simple and easy to explain
+to lay annotators.
+HUME relies on UCCA, which is arguably more abstract, harder to
+explain, and thus more expensive to obtain.
+
+On the other hand, HUME 
+needs the semantic annotation
+done once for a given source sentence, whereas for the HMEANT set-up, every new
+MT output has to be structurally annotated.
+
+\subsection{One vs. Two Structures}
+
+HUME uses just one structural annotation (for the source) while HMEANT relies on
+two independently constructed structural annotations (for both the reference and
+the candidate translation).
+
+We see this difference as crucial where semantic analysis is concerned, as it
+is often impossible to assign a semantic structure to a low quality MT output sentence.
+
+For instance, consider the sentence ``A coronary angioplasty may not be technically possible'',
+which was translated by one of the systems we experimented with as
+``Eine koronare Angioplastie kann nicht technisch m{\"o}glich'', i.e., the main verb ``sein'' (``be'') is omitted.
+While this may be interpreted is a minor error, HMEANT will assign it a very low score, as it failed to
+translate the main verb.
+
+We understand that this is a design feature of HMEANT:
+if the translation per se cannot be annotated with verbal argument structure
+(for whatever reason, including incomprehensibility), it cannot convey the meaning.
+
+HMEANT thus makes a stricter check of whether the translation can be understood
+than we do. HUME may be artificially boosting the perceived understandability of
+the sentence by providing the source.
+
+
+\subsection{Importance of Alignment}
+
+In HMEANT, the alignment between the (source and candidate) structures is a key
+part of the manual annotation. If the alignment cannot be created, the candidate
+translation is heavily penalized in score.
+Previous experiments with HMEANT
+\parcite{bojar:wu:ssst:2012,chuchunkov-tarelkin-galinskaya:2014:SSST-8} have
+suggested that modifications to the two structures are desirable and appropriate
+at the alignment stage, to avoid unduly penalization due to spurious diverges in
+the structures.
+The same issue was observed by HMEANT authors themselves \parcite{XXXcite}
+\XXX{cite this: http://repository.ust.hk/ir/Record/1783.1-66107}: the
+inter-annotator agreement on SRL dropped from 90\% to 61\% 
+when the two aligned structures were from two different annotators.
+
+HUME uses only automatic (word-level) alignment, and it's only purpose is to
+make the annotation process easier. The alignment is indicative only and the
+user is expected to mentally correct the alignment as needed.
+
+
+\subsection{Monolingual vs. Bilingual Evaluation}
+HUME diverges from HMEANT (and also from the shallow automatic measures
+like BLEU or
+METEOR) in not requiring a reference.
+Instead, it compares the source directly with the output
+translation.
+
+This requires us to employ bilingual annotators, but has the benefit of avoiding
+the reference translation. It is known that the reference translations are not
+always literal enough and the MT output semantics can be composed differently
+than the semantics of the reference. While this is in principle not a problem
+for HUME (the whole sentence can be labelled as ``Green''), it prevents learning
+any fine-grained information about the MT output.
+
+Perhaps even more importantly,
+the reference translations were often not created by translating the source
+sentences. In some cases, the manual translation was reversed, or both the
+``source'' and ``reference'' are actually independent translations from a third
+language. The ``reference'' can thus easily contain more information than the
+``source''.
+
+
+
+\subsection{Technical Differences}
+
++ allows for multi-word and even non-contiguous elements
+
++ allows to indicate the quality of the predicates ("Actions")
+
+
+\subsection{XXX to be removed}
+
+In the *MEANT papers they mainly test by either
+A) correlating the metric to ranking judgements; or
+B) using automated versions of the metric for tuning MT systems
+
+I think neither is particularly convincing, but I'm not sure at the moment what we replace them with. Dekai also made a claim about the *MEANT metrics being "interpretable" in the sense that they could guide you towards semantic errors that the MT system may be making, however I don't recall seeing this done in his papers. 
+
+By the claim that HMEANT explains things, Dekai probably means that the score is decomposable, but so is UCCA-Eval and even BLEU. And UCCA-Eval has one benefit over HMEANT: it points to words in the MT output that are aligned with something but do not convey the meaning well (and we know which part of the source meaning). Pure HMEANT might say only that some part of the MT output has no clear frames whatsover (and we do not know which part of the source/reference, unless we add the word alignments).
+
+
+
+
+
+%Here is an additional argument to support the need for target-only intelligibility:
+%http://www.aclweb.org/anthology/W14-4005
+%see Table  3 and the text in Section 5.2.
+%The more frames can people annotate in the hypothesis, the better the hypothesis overall.
 
 
 
@@ -1052,55 +1151,6 @@ a minimal set of labels. It provides a complete semantic tree which does not rel
  Even though the set of UCCA labels are fairly restricted,  nevertheless they allow us to determine the most important components of the graph (for example it defines centres and linkers which would be likely to carry more weight than elaborators), and we can use this to better calculate the score. 
 We think that UCCA is the
 most promising representation for evaluating translation. 
-
-\subsection{Copied from emails}
-
-
-UCCA-Eval in contrast to HMEANT:
-
-- needs *very* trained UCCA annotators
-- we were not very quick at explaining even the Eval annotations, but I guess we could have done better
-+ relies only on one structure
-+ relies on automatic alignment (in the form of hints only)
-These two positive design decisions are in line with what Dekai observed for HMEANT
-(see the abstract of http://repository.ust.hk/ir/Record/1783.1-66107): IAA of SRL drops from 90
-to 61 when the two aligned structures are from two different annotators.
-
-+ allows for multi-word and even non-contiguous elements
-+ allows to indicate the quality of the predicates ("Actions")
-+/- expects to cover the whole hypothesis with annotations, whereas HMEANT 'gives up' when the
-hypothesis is not intelligible, giving a zero score to the bad frame/whole sentence.
-This can be a good decision for HMEANT, since our way may artificially boost the chances of
-understanding the sentence.
-
-
-HMEAN disadvantages:
-. Importantly: it disregards copula clauses, nominalizations (which are often translated to verbal clauses), inter-clause relations (discourse markers, complement clauses etc.). UCCA-Eval addresses these.
-
-Actually, I think this is a +/- . UCCA-Eval only needs the semantic evaluation done once for a given test source, whereas for the HMEANT set-up you have to keep annotating MT output. That's a + for UCCA-Eval. However we need bilingual annotators, which should be a -. Of course we could align translation and reference using monolingual annotators, but then we have the problem of alignment.
-In the *MEANT papers they mainly test by either
-A) correlating the metric to ranking judgements; or
-B) using automated versions of the metric for tuning MT systems
-
-I think neither is particularly convincing, but I'm not sure at the moment what we replace them with. Dekai also made a claim about the *MEANT metrics being "interpretable" in the sense that they could guide you towards semantic errors that the MT system may be making, however I don't recall seeing this done in his papers. 
-
-
-By the claim that HMEANT explains things, Dekai probably means that the score is decomposable, but so is UCCA-Eval and even BLEU. And UCCA-Eval has one benefit over HMEANT: it points to words in the MT output that are aligned with something but do not convey the meaning well (and we know which part of the source meaning). Pure HMEANT might say only that some part of the MT output has no clear frames whatsover (and we do not know which part of the source/reference, unless we add the word alignments).
-
-
-
-
-Differences of our approach:
-
-The annotation experiment that we just conducted differs in two main ways from HMEANT:
-1) The semantic framework is different - UCCA vs SRL - and SRL has problems which Omri lists below, some of which Dekai dismissed when they were brought up. Maybe these problems do not matter for MT evaluation or tuning, but I think this would have to be determined empirically.
-2) The annotation process is different. We semantically annotate the source, then automatically project it to the translation, and ask bilingual annotators to assess whether this projection shows a good or bad translation. In HMEANT they semantically annotate both the reference and the translation, then align these manually, and assess to what extent they match.
-
-Advatages of our approach:
-Here is an additional argument to support the need for target-only intelligibility:
-http://www.aclweb.org/anthology/W14-4005
-see Table  3 and the text in Section 5.2.
-The more frames can people annotate in the hypothesis, the better the hypothesis overall.
 
 
 \section{Conclusion}
