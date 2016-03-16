@@ -298,12 +298,15 @@ However, using AMR is not optimal for defining a decomposition of a sentence int
 units as it does not ground its semantic symbols in the text,
 thus not straightwardly allowing a decomposition of the sentence into sub-units.
 Moreover, AMR is more fine-grained than UCCA and consequently more difficult to annotate.\oa{should we
-  add that it is less cross-linguistically stable? maybe that's an overkill..}
+  add that it is less cross-linguistically stable? maybe that's an overkill..
+  OB: AMR has been applied to more languages, including Chinese, so I would not
+  dare saying that it is less stable.}
 
 Other approaches have been proposed for semantic representation, which are grounded in the words
 and phrases of the text, and have generally represented semantic structures as bi-lexical dependencies.
-Examples include the Prague Treebank tectogrammatical layer \cite{hajic2012announcing}, as well
-as dependencies derived from Minimal Recursion Semantics representations \cite{oepen2006discriminant}.
+Examples include the tectogrammatical layer \parcite{sgallhp:1986} used in the Prague dependency
+treebanks, e.g. the Czech-English one \parcite{hajic2012announcing}, as well
+as dependencies derived from Minimal Recursion Semantics representations \parcite{oepen2006discriminant}.
 Nevertheless, despite their appeal as deep and intuitive means for semantic representation,
 these approaches require linguistic expertise for their annotatation, due to the intricate and
 fine-grained distinctions they provide, and are thus in our view less suitable for basing
