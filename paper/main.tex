@@ -16,13 +16,18 @@
 \newcommand{\secref}[1]{Section~\ref{#1}}
 \newcommand{\figref}[1]{Figure~\ref{#1}}
 \newcommand{\tabref}[1]{Table~\ref{#1}}
+\newcommand{\XXX}[1]{{\color{red}XXX #1}} % a general todo or comment
 \newcommand{\oa}[1]{\footnote{\color{red}OA: #1}}
 \newcommand{\bh}[1]{\footnote{\color{blue}BH: #1}}
+
+\def\perscite#1{\newcite{#1}}
+\def\parcite#1{\cite{#1}}
+\def\inparcite#1{\newcite{#1}}
 
 \newcommand\BibTeX{B{\sc ib}\TeX}
 
 
-\title{HUME: Human UCCA-based Machine-Translation Evaluation}
+\title{HUME: Human UCCA-Based Evaluation of Machine Translation}
 
 \author{Author 1\\
 	    XYZ Company\\
@@ -82,8 +87,8 @@ quantifying the overlap of its sub-parts relative a reference translation.
 More recent work on MT evaluation proposed measures
 that decompose over semantically defined units,
 quantifying the similarity of the output and the reference in terms of
-their verb argument structure (the most notable of these measures is
-HMEANT \cite{lo2011structured}).
+their verb argument structure; the most notable of these measures is
+HMEANT \cite{lo2011structured}.
 While allowing to localize semantic errors in the translation,
 these measures' focus on verb argument structures misses out on many pervasive semantic phenomena,
 such as inter-clause linkage and nominal argument structures, and thus only provides
@@ -202,9 +207,9 @@ capturing the overlap between the output and reference in terms of their
 semantic (predicate-argument structures), lexical and morphosyntactic features.
 
 Perhaps the most notable attempt at semantic MT evaluation is MEANT and
-its human variant HMEANT, which quantifies the similarity between
+its human variant HMEANT \parcite{lo2011structured}, which quantifies the similarity between
 the reference and translation in terms of the overlap in
-their verbal argument structures structures, and associated semantic roles.
+their verbal argument structures structures and associated semantic roles.
 We discuss the differences between HMEANT and HUME in \secref{sec:hmeant_comp}.
 
 \begin{figure}
@@ -233,18 +238,21 @@ We discuss the differences between HMEANT and HUME in \secref{sec:hmeant_comp}.
     \draw (H1) -> (Tom) node[midway, right] {$A$ \hspace{0.2cm}};
   \end{tikzpicture}
 \caption{\label{fig:ucca_example}
-  Sample UCCA annotation. Edge labels mark UCCA categories. \#<index> marks the node
+  Sample UCCA annotation. Edge labels mark UCCA categories. \#$<$index$>$ marks the node
 indices.}
 \end{figure}
 
 
 \paragraph{Semantic Representation.}
-UCCA (Universal Conceptual Cognitive Annotation) is a cross-linguistically applicable, lightweight
+UCCA (Universal Conceptual Cognitive Annotation, \inparcite{abend2013universal}) is a cross-linguistically applicable, lightweight
 scheme for semantic annotation. Formally, a UCCA structure is a directed acyclic graph (DAG),
 whose leaves correspond to the words of the text.
 The graph’s nodes, called {\sc units}, are either terminals or several elements jointly
 viewed as a single entity according to some semantic or cognitive consideration. Edges bear
-a category, indicating the role of the sub-unit in the relation the unit represents. UCCA
+a category, indicating the role of the sub-unit in the relation the unit
+represents. \XXX{Ondrej suggests to avoid the word 'relation' here. I usually use the
+term 'relation' for what is called 'role' here, so I got confused for a while.}
+UCCA
 currently focuses on annotating argument structures (adjectival, nominal, verbal and others) and
 relations between them. The most basic notion is the {\sc scene}, which describes a movement, an
 action or a state which is persistent in time. Each Scene contains one main relation, as well
@@ -374,7 +382,7 @@ wrong in translation:
 \item One of the sub-units is missing from the translation. For instance, if ``dog bites man'' is translated into ``dog bites''.
 \end{compactitem}
 
-XXX: Could someone review this for Ondrej:
+\XXX{Could someone review this for Ondrej:}
 Note that for non-configuration languages, the relationship between the
 governing and the dependent units is often expressed using morphological
 properties of the dependents instead of their ordering (this holds especially for the verb and its
