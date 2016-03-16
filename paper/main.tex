@@ -251,6 +251,56 @@ We discuss the differences between HMEANT and HUME in \secref{sec:hmeant_comp}.
 indices.}
 \end{figure}
 
+\begin{figure}
+
+  
+\begin{tikzpicture}[semithick, x=2.4cm,y=0.8cm, >=latex, baseline=7ex,
+      inner sep=.3ex, outer sep=.7ex, minimum size=1.2ex,->]
+  \node (ROOT) [label={G}] [fill=green, circle] {}
+  child {node [label={R}] {Golf} edge from parent node[left]  {$L$}}
+  child {node [label={\#1}] {became} edge from parent node[left]  {$L$}}
+  child {node [label={\#1}] {a} edge from parent node[left]  {$L$}}
+  child {node [label={\#1}] {passion} edge from parent node[left]  {$L$}}
+  child {node [label={\#1}] {for} edge from parent node[left]  {$L$}}
+  child {node [label={\#1}] {his} edge from parent node[left]  {$L$}}
+  child {node [label={\#1}] {oldest} edge from parent node[left]  {$L$}}
+  child {node [label={\#1}] {daughter} edge from parent node[left]  {$L$}}
+  child {node [label={\#1}] {,} edge from parent node[left]  {$L$}}
+  child {node [label={\#1}] {she} edge from parent node[left]  {$L$}}
+  child {node [label={\#1}] {attended} edge from parent node[left]  {$L$}}
+  child {node [label={\#1}] {daily} edge from parent node[left]  {$L$}}
+  child {node [label={\#1}] {lesssons} edge from parent node[left]  {$L$}}
+  child {node [label={\#1}] {and} edge from parent node[left]  {$L$}}
+  child {node [label={\#1}] {greatly} edge from parent node[left]  {$L$}}
+  child {node [label={\#1}] {improved} edge from parent node[left]  {$L$}};
+
+  
+  \com{
+  child {node (H1) [label={\#8}] [fill=black,circle] {}
+    child {node [label={\#2}] {graduation} edge from parent node[right] {$P$}}
+      %child {node {to Paris} edge from parent node[right] {$A$}}
+      edge from parent node[left] {$H$}
+    }
+    child {node (H2) [label={\#9}] [fill=black,circle] {}
+      child {node  {} edge from parent[draw=none]}
+      child {node  {} edge from parent[draw=none]}
+      child {node [label={\#3}] (Tom) {Tom} edge from parent node[right] {$A$}}
+      child {node [label={\#4}] {moved} edge from parent node[right] {$P$}}
+      child {node [label={\#10}] [fill=black,circle] {}
+        child {node [label={\#5}] {to} edge from parent node[right] {$R$}}
+        child {node [label={\#6}] {NYC} edge from parent node[right] {$C$}}
+        edge from parent node[right] {$A$}}
+      %child {node {to Paris} edge from parent node[right] {$A$}}
+      edge from parent node[left] {$H$}
+    };
+    \draw (H1) -> (Tom) node[midway, right] {$A$ \hspace{0.2cm}};
+    }
+  \end{tikzpicture}
+\caption{\label{fig:ucca_example2}
+  Sample UCCA annotation. Edge labels mark UCCA categories. \#$<$index$>$ marks the node
+indices.}
+\end{figure}
+
 
 \paragraph{Semantic Representation.}
 UCCA (Universal Conceptual Cognitive Annotation, \inparcite{abend2013universal}) is a
