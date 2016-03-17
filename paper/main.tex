@@ -988,6 +988,37 @@ structural and lexical nodes. The numbers are the node counts in each bin. }
 \label{fig:iaalength}
 \end{figure*}
 
+\def\iaafig #1{\includegraphics[width=7cm]{iaa_heatmap_#1.png}}
+
+\begin{figure*}[ht!]
+\begin{tabular}{cc}
+
+
+\subfloat[English-Czech]{
+  \iaafig{cs}
+}
+&
+\subfloat[English-German]{
+  \iaafig{de}
+
+}
+\\
+
+\subfloat[English-Polish]{
+  \iaafig{pl}
+  
+}
+&
+\subfloat[English-Romanian]{
+  \iaafig{ro}
+
+}
+\end{tabular}
+\caption{Confusion matrices for each of the language pairs, plotted as heatmaps.}
+\label{fig:heatmap}
+\end{figure*}
+
+
 We see from \figref{fig:iaalength} that there is no reduction of IAA with sentence
 length, except perhaps in German. Also, from \tabref{tab:iaa} the overall IAA
 is quite similar (0.6-0.7) for all languages, showing good agreement, but there are
