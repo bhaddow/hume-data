@@ -36,7 +36,7 @@ def print_overall_stats(by_lang,args):
   sentence_count = len(by_lang['sent_id'].value_counts())
   print("Sentence count: {}; Node count: {}".format(sentence_count, node_count))
 
-def print_overall_iaa(by_lang, args):
+def print_overall_iaa(by_lang, lang, args):
   groups = (("A", "B", "R", "O", "G"),)
   if args.separate_label_groups:
     groups = (("A", "B"), ("R", "O", "G"), ("R", "G"),("A", "B","R", "O", "G"))
@@ -55,6 +55,12 @@ def print_overall_iaa(by_lang, args):
     #print(cm.to_dataframe())
     #print(cm.stats())
     print("Kappa: %7.5f; P_o: %7.5f; P_e: %7.5f" % (kappa, p_o, p_e))
+    if args.create_heatmaps and group == ("A", "B","R", "O", "G"):
+      import matplotlib.pyplot as plt
+      import seaborn
+      heatmap = seaborn.heatmap(df)
+      plt.savefig("iaa_heatmap_{}.png".format(lang))
+      plt.clf()
 
 def print_iaa_sentence_detail(agree, detail_file):
 #TODO sentence id, matches per sentence, pc a/b, pc r/o/g. src, tgt, ucca stats
@@ -78,6 +84,7 @@ def main():
     help="CSV file containing the node data")
   parser.add_argument("--exclude-missing", default=True, action="store_true",
     help="Excluding nodes that either annotator has missed")
+  parser.add_argument("--create-heatmaps", default=False, action="store_true")
   parser.add_argument("--separate-label-groups", default=True, action="store_true",
     help="Treat A,B and R,G,O separately")
   parser.add_argument("--iaa-sentence-detail", help="Write detailed IAA for each sentence to the given file")
@@ -105,7 +112,7 @@ def main():
     by_lang = agree[agree['lang'] == code]
     print ("************{}*************".format(lang))
     print_overall_stats(by_lang,args)
-    print_overall_iaa(by_lang, args)
+    print_overall_iaa(by_lang, code, args)
     print ()
 
 
