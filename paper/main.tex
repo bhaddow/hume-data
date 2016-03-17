@@ -655,7 +655,7 @@ HMEANT, they semantically annotate both the reference and the translation, then
 align these manually, and assess to what extent they match.
 
 
-\subsection{Verbal Structures Only?}
+\paragraph{Verbal Structures Only?}
 
 HMEANT focuses on verbal
 argument structures, ignoring other pervasive phenomena such as nominal predicates, inter-clause
@@ -688,7 +688,7 @@ these and other phenomena by HUME will allow to determine empirically
 to preserve for MT evaluation, and which are less important.
 
 
-\subsection{Cost of Structural Annotation}
+\paragraph{Cost of Structural Annotation}
 
 HMEANT structural annotation (semantic role labelling, SRL), similar to e.g.
 PropBank
@@ -706,7 +706,7 @@ MT output has to be structurally annotated.\oa{we can give some empirical data h
   UCCA annotation by trained annotators is about 700 tokens/hour (we didn't
   check it for individual sentences), but that's done only once so it should be amortized.}
 
-\subsection{One vs. Two Structures}
+\paragraph{One vs. Two Structures}
 
 HUME uses just one structural annotation (for the source) while HMEANT relies on
 two independently constructed structural annotations (for both the reference and
@@ -731,18 +731,22 @@ of whether the translation can be understood
 than we do. HUME may be artificially boosting the perceived understandability of
 the sentence by allowing access to the source.
 
-\subsection{Importance of Alignment}
+\paragraph{Importance of Alignment}
 
-In HMEANT, the alignment between the (source and candidate) structures is a key
+In HMEANT, the alignment between the (reference and candidate) structures is a key
 part of the manual annotation. If the alignment cannot be created, the candidate
 translation is heavily penalized in score.
 Previous experiments with HMEANT
 \parcite{bojar:wu:ssst:2012,chuchunkov-tarelkin-galinskaya:2014:SSST-8} have
-suggested that modifications to the two structures are desirable and appropriate
-at the alignment stage, to avoid unduly penalization due to spurious diverges in
-the structures.\oa{I didn't understand this}
-The same issue was observed by HMEANT authors themselves \parcite{XXXcite}
-\XXX{cite this: http://repository.ust.hk/ir/Record/1783.1-66107}: the 
+suggested that sometimes, the structures of the reference and candidate
+translations diverge without any good reason, for instance due to a different
+interpretation of a PP-attachment, the verb can have one additional modifier in
+one of the structures. It would be desirable to allow updates to the structural
+annotations also at the alignment stage
+to avoid unduly penalization due to such a spurious diverge.
+The same issue was observed by HMEANT authors themselves
+\parcite{lo:wu:reliability:2014}:
+the 
 inter-annotator agreement on SRL dropped from 90\% to 61\% 
 when the two aligned structures were from two different annotators.
 
@@ -751,7 +755,7 @@ the attention of the annotators.
 The user is expected to mentally correct the alignment as needed.
 
 
-\subsection{Monolingual vs. Bilingual Evaluation}
+\paragraph{Monolingual vs. Bilingual Evaluation}
 HUME diverges from HMEANT (and also from the shallow automatic measures
 like BLEU or METEOR) in not requiring a reference.
 Instead, it compares the source directly with the output translation.
@@ -770,24 +774,24 @@ from a third language. ``References'' can thus easily contain information
 that does not appear in the ``source''.
 
 
-\subsection{Technical Differences}
+\paragraph{Technical Differences}
 
 + allows for multi-word and even non-contiguous elements
 
 + allows to indicate the quality of the predicates ("Actions")
 
 
-\subsection{XXX to be removed}
-
-In the *MEANT papers they mainly test by either
-A) correlating the metric to ranking judgements; or
-B) using automated versions of the metric for tuning MT systems
-
-I think neither is particularly convincing, but I'm not sure at the moment what we replace them with. Dekai also made a claim about the *MEANT metrics being "interpretable" in the sense that they could guide you towards semantic errors that the MT system may be making, however I don't recall seeing this done in his papers. 
-
-By the claim that HMEANT explains things, Dekai probably means that the score is decomposable, but so is UCCA-Eval and even BLEU. And UCCA-Eval has one benefit over HMEANT: it points to words in the MT output that are aligned with something but do not convey the meaning well (and we know which part of the source meaning). Pure HMEANT might say only that some part of the MT output has no clear frames whatsover (and we do not know which part of the source/reference, unless we add the word alignments).
-
-
+% \subsection{ to be removed}
+% 
+% In the *MEANT papers they mainly test by either
+% A) correlating the metric to ranking judgements; or
+% B) using automated versions of the metric for tuning MT systems
+% 
+% I think neither is particularly convincing, but I'm not sure at the moment what we replace them with. Dekai also made a claim about the *MEANT metrics being "interpretable" in the sense that they could guide you towards semantic errors that the MT system may be making, however I don't recall seeing this done in his papers. 
+% 
+% By the claim that HMEANT explains things, Dekai probably means that the score is decomposable, but so is UCCA-Eval and even BLEU. And UCCA-Eval has one benefit over HMEANT: it points to words in the MT output that are aligned with something but do not convey the meaning well (and we know which part of the source meaning). Pure HMEANT might say only that some part of the MT output has no clear frames whatsover (and we do not know which part of the source/reference, unless we add the word alignments).
+% 
+% 
 
 
 
