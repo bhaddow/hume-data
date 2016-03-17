@@ -27,6 +27,7 @@
 
 \newcommand\BibTeX{B{\sc ib}\TeX}
 
+\listfiles
 
 % better maths typography
 \def\setsize#1{\lvert #1 \rvert}
@@ -255,6 +256,76 @@ We discuss the differences between HMEANT and HUME in \secref{sec:hmeant_comp}.
 
 
 
+\begin{figure*}
+  \begin{adjustbox}{trim=2.3cm 0 0 0}
+%%BH: Not compiling for me, commented out
+%  \begin{tikzpicture}
+%    [level 1/.style={sibling distance=7.5em},
+%      level 2/.style={sibling distance=5em},
+%      level 3/.style={sibling distance=5em},
+%      level 4/.style={sibling distance=3em}]
+%    %[semithick, x=2.4cm,y=0.8cm, >=latex, baseline=7ex,
+%    %  inner sep=.3ex, outer sep=.7ex, minimum size=1.2ex,->]
+%  \node (ROOT) [label={B}] [fill=blue, circle] {}
+%  child {node (H3) [label={A}] [fill=yellow,circle] {}
+%    child {node [label={[red]:R}] {Golf} edge from parent node[left] {}}
+%    child {node (H1) [label={[orange]30:O}] [fill=orange,circle] {}
+%      child {node [label={}] {became} edge from parent node[left]  {}}
+%      child {node [label={}] {a} edge from parent node[left]  {}}
+%      child {node [label={}] {passion} edge from parent node[left]  {}}
+%    }
+%    child {node (H2) [label={A}] [fill=yellow,circle] {}
+%      child {node {} edge from parent[draw=none] {}}
+%      child {node {} edge from parent[draw=none] {}}
+%      child {node {} edge from parent[draw=none] {}}
+%      child {node {} edge from parent[draw=none] {}}
+%      child {node [label={[red]:R}] {for} edge from parent node[left]  {}}
+%      child {node [label={[green]:G}] {his} edge from parent node[left]  {}}
+%      child {node [label={[orange]:O}] {oldest} edge from parent node[left]  {}}
+%      child {node [label={[green]:G}] {daughter} edge from parent node[left]  {}}
+%    }
+%  }
+%  child {node {} edge from parent[draw=none] {}}
+%  child {node (H4) [label={[]30:A}] [fill=yellow,circle] {}
+%    child {node (she) [label={[green]:G}] {she} edge from parent node[left]  {}}
+%    child {node [label={[green]:G}] {attended} edge from parent node[left]  {}}
+%    child {node [label={[green]:G}] {daily} edge from parent node[left]  {}}
+%    child {node [label={[green]:G}] {lessons} edge from parent node[left]  {}}
+%  }
+%  child {node [label={[red]:R}] {and} edge from parent node[left]  {}}
+%  child {node (H5) [label={A}] [fill=yellow,circle] {}  
+%    child {node [label={[red]:R}] {greatly} edge from parent node[left] {}}
+%    child {node [label={[orange]:O}] {improved} edge from parent node[left] {}}
+%  };
+%  \draw[dashed] (H5) -> (she) ;
+%
+%  \com{
+%  child {node (H1) [label={\#8}] [fill=black,circle] {}
+%    child {node [label={\#2}] {graduation} edge from parent node[right] {$P$}}
+%      %child {node {to Paris} edge from parent node[right] {$A$}}
+%      edge from parent node[left] {$H$}
+%    }
+%    child {node (H2) [label={\#9}] [fill=black,circle] {}
+%      child {node  {} edge from parent[draw=none]}
+%      child {node  {} edge from parent[draw=none]}
+%      child {node [label={\#3}] (Tom) {Tom} edge from parent node[right] {$A$}}
+%      child {node [label={\#4}] {moved} edge from parent node[right] {$P$}}
+%      child {node [label={\#10}] [fill=black,circle] {}
+%        child {node [label={\#5}] {to} edge from parent node[right] {$R$}}
+%        child {node [label={\#6}] {NYC} edge from parent node[right] {$C$}}
+%        edge from parent node[right] {$A$}}
+%      %child {node {to Paris} edge from parent node[right] {$A$}}
+%      edge from parent node[left] {$H$}
+%    };
+%    \draw (H1) -> (Tom) node[midway, right] {$A$ \hspace{0.2cm}};
+%    }
+%  \end{tikzpicture}
+  \end{adjustbox}
+\caption{\label{fig:ucca_example2}
+  Sample UCCA annotation. Edge labels mark UCCA categories. \#$<$index$>$ marks the node
+indices.}
+\end{figure*}
+
 
 \paragraph{Semantic Representation.}
 UCCA (Universal Conceptual Cognitive Annotation, \inparcite{abend2013universal}) is a
@@ -372,67 +443,67 @@ We note that the translation is not UCCA-annotated.
 
 \begin{figure*}
   \begin{adjustbox}{trim=2.3cm 0 0 0}
-  \begin{tikzpicture}
-    [level 1/.style={sibling distance=7.5em},
-      level 2/.style={sibling distance=5em},
-      level 3/.style={sibling distance=5em},
-      level 4/.style={sibling distance=3em}]
-    %[semithick, x=2.4cm,y=0.8cm, >=latex, baseline=7ex,
-    %  inner sep=.3ex, outer sep=.7ex, minimum size=1.2ex,->]
-  \node (ROOT) [label={B}] [fill=blue, circle] {}
-  child {node (H3) [label={A}] [fill=yellow,circle] {}
-    child {node [label={[red]:R}] {Golf} edge from parent node[left] {}}
-    child {node (H1) [label={[orange]30:O}] [fill=orange,circle] {}
-      child {node [label={}] {became} edge from parent node[left]  {}}
-      child {node [label={}] {a} edge from parent node[left]  {}}
-      child {node [label={}] {passion} edge from parent node[left]  {}}
-    }
-    child {node (H2) [label={A}] [fill=yellow,circle] {}
-      child {node {} edge from parent[draw=none] {}}
-      child {node {} edge from parent[draw=none] {}}
-      child {node {} edge from parent[draw=none] {}}
-      child {node {} edge from parent[draw=none] {}}
-      child {node [label={[red]:R}] {for} edge from parent node[left]  {}}
-      child {node [label={[green]:G}] {his} edge from parent node[left]  {}}
-      child {node [label={[orange]:O}] {oldest} edge from parent node[left]  {}}
-      child {node [label={[green]:G}] {daughter} edge from parent node[left]  {}}
-    }
-  }
-  child {node {} edge from parent[draw=none] {}}
-  child {node (H4) [label={[]30:A}] [fill=yellow,circle] {}
-    child {node (she) [label={[green]:G}] {she} edge from parent node[left]  {}}
-    child {node [label={[green]:G}] {attended} edge from parent node[left]  {}}
-    child {node [label={[green]:G}] {daily} edge from parent node[left]  {}}
-    child {node [label={[green]:G}] {lessons} edge from parent node[left]  {}}
-  }
-  child {node [label={[red]:R}] {and} edge from parent node[left]  {}}
-  child {node (H5) [label={A}] [fill=yellow,circle] {}  
-    child {node [label={[red]:R}] {greatly} edge from parent node[left] {}}
-    child {node [label={[orange]:O}] {improved} edge from parent node[left] {}}
-  };
-  \draw[dashed] (H5) -> (she) ;
-
-  \com{
-  child {node (H1) [label={\#8}] [fill=black,circle] {}
-    child {node [label={\#2}] {graduation} edge from parent node[right] {$P$}}
-      %child {node {to Paris} edge from parent node[right] {$A$}}
-      edge from parent node[left] {$H$}
-    }
-    child {node (H2) [label={\#9}] [fill=black,circle] {}
-      child {node  {} edge from parent[draw=none]}
-      child {node  {} edge from parent[draw=none]}
-      child {node [label={\#3}] (Tom) {Tom} edge from parent node[right] {$A$}}
-      child {node [label={\#4}] {moved} edge from parent node[right] {$P$}}
-      child {node [label={\#10}] [fill=black,circle] {}
-        child {node [label={\#5}] {to} edge from parent node[right] {$R$}}
-        child {node [label={\#6}] {NYC} edge from parent node[right] {$C$}}
-        edge from parent node[right] {$A$}}
-      %child {node {to Paris} edge from parent node[right] {$A$}}
-      edge from parent node[left] {$H$}
-    };
-    \draw (H1) -> (Tom) node[midway, right] {$A$ \hspace{0.2cm}};
-    }
-  \end{tikzpicture}
+%  \begin{tikzpicture}
+%    [level 1/.style={sibling distance=7.5em},
+%      level 2/.style={sibling distance=5em},
+%      level 3/.style={sibling distance=5em},
+%      level 4/.style={sibling distance=3em}]
+%    %[semithick, x=2.4cm,y=0.8cm, >=latex, baseline=7ex,
+%    %  inner sep=.3ex, outer sep=.7ex, minimum size=1.2ex,->]
+%  \node (ROOT) [label={B}] [fill=blue, circle] {}
+%  child {node (H3) [label={A}] [fill=yellow,circle] {}
+%    child {node [label={[red]:R}] {Golf} edge from parent node[left] {}}
+%    child {node (H1) [label={[orange]30:O}] [fill=orange,circle] {}
+%      child {node [label={}] {became} edge from parent node[left]  {}}
+%      child {node [label={}] {a} edge from parent node[left]  {}}
+%      child {node [label={}] {passion} edge from parent node[left]  {}}
+%    }
+%    child {node (H2) [label={A}] [fill=yellow,circle] {}
+%      child {node {} edge from parent[draw=none] {}}
+%      child {node {} edge from parent[draw=none] {}}
+%      child {node {} edge from parent[draw=none] {}}
+%      child {node {} edge from parent[draw=none] {}}
+%      child {node [label={[red]:R}] {for} edge from parent node[left]  {}}
+%      child {node [label={[green]:G}] {his} edge from parent node[left]  {}}
+%      child {node [label={[orange]:O}] {oldest} edge from parent node[left]  {}}
+%      child {node [label={[green]:G}] {daughter} edge from parent node[left]  {}}
+%    }
+%  }
+%  child {node {} edge from parent[draw=none] {}}
+%  child {node (H4) [label={[]30:A}] [fill=yellow,circle] {}
+%    child {node (she) [label={[green]:G}] {she} edge from parent node[left]  {}}
+%    child {node [label={[green]:G}] {attended} edge from parent node[left]  {}}
+%    child {node [label={[green]:G}] {daily} edge from parent node[left]  {}}
+%    child {node [label={[green]:G}] {lessons} edge from parent node[left]  {}}
+%  }
+%  child {node [label={[red]:R}] {and} edge from parent node[left]  {}}
+%  child {node (H5) [label={A}] [fill=yellow,circle] {}  
+%    child {node [label={[red]:R}] {greatly} edge from parent node[left] {}}
+%    child {node [label={[orange]:O}] {improved} edge from parent node[left] {}}
+%  };
+%  \draw[dashed] (H5) -> (she) ;
+%
+%  \com{
+%  child {node (H1) [label={\#8}] [fill=black,circle] {}
+%    child {node [label={\#2}] {graduation} edge from parent node[right] {$P$}}
+%      %child {node {to Paris} edge from parent node[right] {$A$}}
+%      edge from parent node[left] {$H$}
+%    }
+%    child {node (H2) [label={\#9}] [fill=black,circle] {}
+%      child {node  {} edge from parent[draw=none]}
+%      child {node  {} edge from parent[draw=none]}
+%      child {node [label={\#3}] (Tom) {Tom} edge from parent node[right] {$A$}}
+%      child {node [label={\#4}] {moved} edge from parent node[right] {$P$}}
+%      child {node [label={\#10}] [fill=black,circle] {}
+%        child {node [label={\#5}] {to} edge from parent node[right] {$R$}}
+%        child {node [label={\#6}] {NYC} edge from parent node[right] {$C$}}
+%        edge from parent node[right] {$A$}}
+%      %child {node {to Paris} edge from parent node[right] {$A$}}
+%      edge from parent node[left] {$H$}
+%    };
+%    \draw (H1) -> (Tom) node[midway, right] {$A$ \hspace{0.2cm}};
+%    }
+%  \end{tikzpicture}
   \\
   \end{adjustbox}
   \adjustbox{width=\textwidth,center,margin=.5em}{\it His old daughter loved tennis, and took daily lessons however good he was}
@@ -922,8 +993,8 @@ several second annotators, so we treat all these second annotators as a single
 annotator. 
 
 To calculate Kappa, we consider the annotation task as a classification task on 
-nodes, and consider all nodes where there are two annotations from different
-annotators \XXX{unfinished sentence?}
+nodes, and consider those nodes which have two annotations from different
+annotators.
 We report the overall Kappa, as well as separate Kappas on lexical
 nodes (annotated as red, orange or green) and the structural nodes (annotated
 as acceptable or bad). In general there should not be confusion between the two
@@ -955,8 +1026,6 @@ measured by Cohen's Kappa. }
 To assess whether, as we hoped, HUME would make it easier to reliably annotate long sentences,
 we binned the sentences according to length and measured Kappa on each of the bins. Each bin covers
 a length range of 10, and we show the variance of kappa with length in \figref{fig:iaalength}.
-\XXX{We need to report the number of sentences in each bin, the last German bin
-seems to be an unstable result.}
 
 \def\iaafig #1{\includegraphics[width=7cm]{iaa_length_#1.png}}
 
@@ -985,17 +1054,24 @@ seems to be an unstable result.}
 }
 \end{tabular}
 \caption{Inter-annotator Agreement (Kappa) versus sentence length, separately for
-structural and lexical nodes. }
+structural and lexical nodes. The numbers are the node counts in each bin. }
 \label{fig:iaalength}
-
-
 \end{figure*}
 
+We see from \figref{fig:iaalength} that there is no reduction of IAA with sentence
+length, except perhaps in German. Also, from \tabref{tab:iaa} the overall IAA
+is quite similar (0.6-0.7) for all languages, showing good agreement, but there are
+differences observed when we break down by node type.  In particular, we see a contrast  between
+Czech and Polish (where the IAA is higher for lexical nodes than structural nodes) and German and Romanian
+(where the reverse  is true). We also observe low IAA (around 0.3) in some cases, for instance 
+in German lexical nodes, and for Polish and Czech structural nodes.
 
-\subsection{Discussion of Disagreements}\label{sec:disagreements}
+\XXX{Discussion of the disagreements}
+
+%\subsection{Discussion of Disagreements}\label{sec:disagreements}
 
 
-\subsection{Comparison with Crowdsourced Adequacy Judgements}\label{sec:adequacy}
+%\subsection{Comparison with Crowdsourced Adequacy Judgements}\label{sec:adequacy}
 
 
 

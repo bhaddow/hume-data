@@ -48,6 +48,9 @@ def print_overall_iaa(by_lang, args):
     cm = ConfusionMatrix(by_label['mt_label_x'], by_label['mt_label_y'], \
       true_name="annot_1", pred_name="annot_2")
     print(cm)
+    df = cm.to_dataframe()
+    print("Normalised confusion matrix")
+    print (df / df.sum().sum())
     kappa, p_o, p_e = get_kappa(cm)
     #print(cm.to_dataframe())
     #print(cm.stats())
