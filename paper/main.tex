@@ -809,10 +809,11 @@ that does not appear in the ``source''.
 \section{Experiments}\label{sec:experiments}
 
 
-In order to validate the HUME metric, we ran an annotation experiment with one source language (English), and four 
-target languages (Czech, German, Polish and Romanian), using text from the public health domain.
-The domain is particularly suitable for experimenting on MT evaluation, as being able to determine
-whether the translation accurately conveys the same information as the source is here paramount.
+In order to validate the HUME metric, we ran an annotation experiment with one source language (English),
+and four target languages (Czech, German, Polish and Romanian), using text from the public health domain.
+The domain is particularly suitable for experimenting on MT evaluation, as semantically
+accurate translation is paramount here, underscoring the importance of accurate
+semantic evaluation measures.
 
 %particularly interested in this domain since our ultimate goal is to provide high-quality translations of health
 %information for speakers of languages other than English, and in this domain accurate transfer of meaning is
@@ -909,11 +910,6 @@ We do not give times for the second Czech
 
 
 \emph{Describe the UCCA annotation}
-
-%\subsection{Data}\label{sec:data}
-
-%\subsection{Efficiency of Annotation}\label{sec:efficiency}
-
 
 
 \subsection{Inter-Annotator Agreement}
@@ -1051,7 +1047,6 @@ one annotator marked correct, and the other (a Cochrane employee)  as incorrect.
 
 %\subsection{Discussion of Disagreements}\label{sec:disagreements}
 
-
 %\subsection{Comparison with Crowdsourced Adequacy Judgements}\label{sec:adequacy}
 
 
@@ -1071,6 +1066,7 @@ fully-automatic variants of HUME.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\com{
 \section{Human Semantic Evaluation}
 
 \oa{mention TER: using insertions, deletions, substitutions and shift of the entire sentence}
@@ -1224,14 +1220,14 @@ a minimal set of labels. It provides a complete semantic tree which does not rel
  Even though the set of UCCA labels are fairly restricted,  nevertheless they allow us to determine the most important components of the graph (for example it defines centres and linkers which would be likely to carry more weight than elaborators), and we can use this to better calculate the score. 
 We think that UCCA is the
 most promising representation for evaluating translation. 
-
+}
 
 \section{Conclusion}
 
-\section*{Acknowledgments}
+%\section*{Acknowledgments}
 
-Do not number the acknowledgment section.
-This section should not be presented for the submission version.
+%Do not number the acknowledgment section.
+%This section should not be presented for the submission version.
 
 \bibliography{main}
 \bibliographystyle{acl2016}
