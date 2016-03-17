@@ -642,7 +642,7 @@ the translation as correct or not. The alignments are meant just as a guide. The
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Comparison with HMEANT}\label{sec:hmeant_comp}
 
-HMEANT shares much of HUME's motivation for providing a
+HMEANT shares much of HUME's motivation in defining a
 measure that decomposes over semantic units, rather than strings. On the other
 hand, there are important differences in design decisions, which we summarize in this
 section.
@@ -699,7 +699,11 @@ explain, and thus more expensive to obtain.
 On the other hand, HUME 
 needs the semantic annotation
 done once for a given source sentence, whereas for the HMEANT set-up, every new
-MT output has to be structurally annotated.
+MT output has to be structurally annotated.\oa{we can give some empirical data here.
+  In the WMT 13 experiment, Lexi and Barry report a little over 3 mins of annotation
+  per sentence + 3 translations. HUME annotation is about 2-4 minutes per sentence.
+  UCCA annotation by trained annotators is about 700 tokens/hour (we didn't
+  check it for individual sentences), but that's done only once so it should be amortized.}
 
 \subsection{One vs. Two Structures}
 
