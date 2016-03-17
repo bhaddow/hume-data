@@ -100,9 +100,9 @@ that decompose over semantically defined units,
 quantifying the similarity of the output and the reference in terms of
 their verb argument structure; the most notable of these measures is
 HMEANT \cite{lo2011structured}.
-While allowing to localize semantic errors in the translation,
-these measures' focus on verb argument structures misses out on many pervasive semantic phenomena,
-such as inter-clause linkage and nominal argument structures, and thus only provides
+These measures can localize semantic errors in the translation, but
+their focus on verb argument structures misses many pervasive semantic phenomena
+(such as inter-clause linkage and nominal argument structures) and thus they only provide
 a limited perspective on the semantic similarity between the output and reference.
 Moreover, assigning semantic structure to MT output, especially when low in quality,
 is difficult and arguably ill-defined.
@@ -129,12 +129,10 @@ See \secref{sec:hmeant_comp}.
 
 We conduct experiments with four language pairs: English-German, English-Polish,
 English-Romanian and English-Czech, and report efficiency (time of annotation) and
-inter-annotator agreement scores, as well as qualitative comparison of the resulting
-HUME scores with crowd-sourced adequacy judgements. The results show that HUME obtains 
+inter-annotator agreement scores, as well showing how HUME can address a range of 
+semantic phenomena\bh{Do we?}. The results show that HUME obtains 
 agreement scores which are on par with those of standard sentence-level ranking measures,
-but unlike them, HUME's scores do not decrease with longer sentences.\bh{We may
-  have to focus more on qualitative aspects, if we just try to sell
-  the measure on IAA, then the figures are not stunning.}
+but unlike them, HUME's scores do not decrease with longer sentences.
 The paper concludes by outlining ongoing work to construct semi- and
 fully-automatic variants of HUME.
 
