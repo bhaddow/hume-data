@@ -1032,15 +1032,18 @@ Czech and Polish (where the IAA is higher for lexical nodes than structural node
 (where the reverse  is true). We also observe low IAA (around 0.3) in some cases, for instance 
 in German lexical nodes, and for Polish and Czech structural nodes.
 
-\XXX{Discussion of the disagreements}
-
-\begin{compactitem}
-  \item German has low overall proportion of orange annotation (1.2\% compared with 4.5-8.6)
-  \item German annotators give a lot of green (so skewed classes, high expected agreement), but 
-        differ more significantly on what should be green. 
-  \item For Polish, big difference in number of As (2000 vs 1500) given by each annotator
-  \item For Czech structural, both annotators give higher proportion of As, raising the expected agreement.
-\end{compactitem}
+Looking more closely at the areas of disagreement, we see that for the Polish structural nodes, the 
+proportion of As was quite different between the two annotators (53\% vs. 71\%), whereas for other
+languages the annotators agree in the proportions. We believe that this was because one of the Polish
+annotators did not fully understand the guidelines for structural nodes, and percolated
+errors up the tree, creating more Bs. For the German lexical nodes, and Czech structural nodes, where
+Kappa is also around 0.3, the proportion of such nodes being marked as ``correct'' is relatively 
+high, meaning that the class distribution is more skewed, so the expected agreement used in the
+Kappa calculation is high, lowering Kappa. Essentially, the annotation problem is harder when the classes
+are more skewed. Finally we note some evidence of domain-specific disagreements, for instance the German
+MT system normally translated ``review'' (as in ``systematic review'' -- a frequent term in the 
+Cochrane texts) as ``\"uberpr\"ufung'', which 
+one annotator marked correct, and the other (a Cochrane employee)  as incorrect.
 
 %\subsection{Discussion of Disagreements}\label{sec:disagreements}
 
