@@ -22,6 +22,8 @@ def get_kappa(cm):
   sum_row = df.sum(axis=0)
   sum_col = df.sum(axis=1)
   p_e = float(sum(sum_row*sum_col)) / (N*N)
+  print("normalised sum_row x sum_col")
+  print(((sum_row*sum_col) / (N*N)))
   #print(sum_row)
   #print(sum_col)
   #print (p_e)
