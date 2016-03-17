@@ -100,9 +100,9 @@ that decompose over semantically defined units,
 quantifying the similarity of the output and the reference in terms of
 their verb argument structure; the most notable of these measures is
 HMEANT \cite{lo2011structured}.
-While allowing to localize semantic errors in the translation,
-these measures' focus on verb argument structures misses out on many pervasive semantic phenomena,
-such as inter-clause linkage and nominal argument structures, and thus only provides
+These measures can localize semantic errors in the translation, but
+their focus on verb argument structures misses many pervasive semantic phenomena
+(such as inter-clause linkage and nominal argument structures) and thus they only provide
 a limited perspective on the semantic similarity between the output and reference.
 Moreover, assigning semantic structure to MT output, especially when low in quality,
 is difficult and arguably ill-defined.
@@ -173,23 +173,22 @@ HUME's scores do not decrease with longer sentences.\bh{We may
 %MT evaluation has been traditionally pursued through human-based
 %evaluation that quantifies the adequacy of the translation in preserving the meaning 
 %of the source sentence, and its fluency as a sentence in the target language \cite{lopez2008statistical}.
-Human evaluation is generally determined
-either according to the relative ranking of the outputs of multiple systems
+Human evaluation is generally done by ranking the outputs of multiple systems
 e.g., in the WMT shared tasks \cite{bojar2015findings}, or by assigning
 individual adequacy/fluency scores to each translation, a procedure recently improved
 by \newcite{graham2015improving}.
 However, while providing the gold standard for MT evaluation, human evaluation is not a scalable solution,
-and is unfeasible where a wide variety of systems or parameter settings are to be evaluated.
+and is infeasible where a wide variety of systems or parameter settings are to be evaluated.
 % has motivated the construction of cheaper methods that correlate with human
 %judgement.
 
 Scalability is addressed by employing automatic and semi-automatic approximations of human
 judgements. Most commonly, such scores decompose over the sub-parts of
-the translation, and quantify how many of these sub-parts appear in a reference translation,
-whose validity has been manually confirmed. This decomposition further allows system developers
-to localize the errors or at least unconfirmed parts within the translation.
+the translation, and quantify how many of these sub-parts appear in a manually created reference translation.
+This decomposition further allows system developers
+to localize the errors, or at least unconfirmed parts within the translation.
 The most commonly used measures decompose over n-grams or individual words, e.g., 
-the BLEU \cite{Papineni:2002}, NIST \cite{Doddington:2002} and METEOR measures \cite{Banerjee:2005}.
+BLEU \cite{Papineni:2002}, NIST \cite{Doddington:2002} and METEOR  \cite{Banerjee:2005}.
 Another common approach is to determine the similarity between the reference and translation
 by applying string edit distance \cite{snover2006study}.
 While these measures stimulated much progress in MT research by allowing
@@ -272,8 +271,8 @@ UCCA's current inventory of distinctions focuses on argument structures
 The most basic notion is the Scene, which describes a movement, an
 action or a state which is persistent in time. Each Scene contains one main relation, as well
 as one or more participants. For example, the sentence ``After graduation, Tom moved to NYC''
-contains two Scenes, whose main relations are ``graduation'' and ``Tom''.
-The participant ``John'' is a part of both Scenes, while ``NYC'' only of the
+contains two Scenes, whose main relations are ``graduation'' and ``moved''.
+The participant ``Tom'' is a part of both Scenes, while ``NYC'' only of the
 latter (\figref{fig:ucca_example}). Further categories account for
 relations between Scenes and the internal structures of complex participants and relations.
 
@@ -373,67 +372,67 @@ We note that the translation is not UCCA-annotated.
 
 \begin{figure*}
   \begin{adjustbox}{trim=2.3cm 0 0 0}
-%   \begin{tikzpicture}
-%     [level 1/.style={sibling distance=7.5em},
-%       level 2/.style={sibling distance=5em},
-%       level 3/.style={sibling distance=5em},
-%       level 4/.style={sibling distance=3em}]
-%     %[semithick, x=2.4cm,y=0.8cm, >=latex, baseline=7ex,
-%     %  inner sep=.3ex, outer sep=.7ex, minimum size=1.2ex,->]
-%   \node (ROOT) [label={B}] [fill=blue, circle] {}
-%   child {node (H3) [label={A}] [fill=yellow,circle] {}
-%     child {node [label={[red]:R}] {Golf} edge from parent node[left] {}}
-%     child {node (H1) [label={[orange]30:O}] [fill=orange,circle] {}
-%       child {node [label={}] {became} edge from parent node[left]  {}}
-%       child {node [label={}] {a} edge from parent node[left]  {}}
-%       child {node [label={}] {passion} edge from parent node[left]  {}}
-%     }
-%     child {node (H2) [label={A}] [fill=yellow,circle] {}
-%       child {node {} edge from parent[draw=none] {}}
-%       child {node {} edge from parent[draw=none] {}}
-%       child {node {} edge from parent[draw=none] {}}
-%       child {node {} edge from parent[draw=none] {}}
-%       child {node [label={[red]:R}] {for} edge from parent node[left]  {}}
-%       child {node [label={[green]:G}] {his} edge from parent node[left]  {}}
-%       child {node [label={[orange]:O}] {oldest} edge from parent node[left]  {}}
-%       child {node [label={[green]:G}] {daughter} edge from parent node[left]  {}}
-%     }
-%   }
-%   child {node {} edge from parent[draw=none] {}}
-%   child {node (H4) [label={[]30:A}] [fill=yellow,circle] {}
-%     child {node (she) [label={[green]:G}] {she} edge from parent node[left]  {}}
-%     child {node [label={[green]:G}] {attended} edge from parent node[left]  {}}
-%     child {node [label={[green]:G}] {daily} edge from parent node[left]  {}}
-%     child {node [label={[green]:G}] {lessons} edge from parent node[left]  {}}
-%   }
-%   child {node [label={[red]:R}] {and} edge from parent node[left]  {}}
-%   child {node (H5) [label={A}] [fill=yellow,circle] {}  
-%     child {node [label={[red]:R}] {greatly} edge from parent node[left] {}}
-%     child {node [label={[orange]:O}] {improved} edge from parent node[left] {}}
-%   };
-%   \draw[dashed] (H5) -> (she) ;
-% 
-%   \com{
-%   child {node (H1) [label={\#8}] [fill=black,circle] {}
-%     child {node [label={\#2}] {graduation} edge from parent node[right] {$P$}}
-%       %child {node {to Paris} edge from parent node[right] {$A$}}
-%       edge from parent node[left] {$H$}
-%     }
-%     child {node (H2) [label={\#9}] [fill=black,circle] {}
-%       child {node  {} edge from parent[draw=none]}
-%       child {node  {} edge from parent[draw=none]}
-%       child {node [label={\#3}] (Tom) {Tom} edge from parent node[right] {$A$}}
-%       child {node [label={\#4}] {moved} edge from parent node[right] {$P$}}
-%       child {node [label={\#10}] [fill=black,circle] {}
-%         child {node [label={\#5}] {to} edge from parent node[right] {$R$}}
-%         child {node [label={\#6}] {NYC} edge from parent node[right] {$C$}}
-%         edge from parent node[right] {$A$}}
-%       %child {node {to Paris} edge from parent node[right] {$A$}}
-%       edge from parent node[left] {$H$}
-%     };
-%     \draw (H1) -> (Tom) node[midway, right] {$A$ \hspace{0.2cm}};
-%     }
-%   \end{tikzpicture}
+   \begin{tikzpicture}
+     [level 1/.style={sibling distance=7.5em},
+       level 2/.style={sibling distance=5em},
+       level 3/.style={sibling distance=5em},
+       level 4/.style={sibling distance=3em}]
+     %[semithick, x=2.4cm,y=0.8cm, >=latex, baseline=7ex,
+     %  inner sep=.3ex, outer sep=.7ex, minimum size=1.2ex,->]
+   \node (ROOT) [label={B}] [fill=blue, circle] {}
+   child {node (H3) [label={A}] [fill=yellow,circle] {}
+     child {node [label={[red]:R}] {Golf} edge from parent node[left] {}}
+     child {node (H1) [label={[orange]30:O}] [fill=orange,circle] {}
+       child {node [label={}] {became} edge from parent node[left]  {}}
+       child {node [label={}] {a} edge from parent node[left]  {}}
+       child {node [label={}] {passion} edge from parent node[left]  {}}
+     }
+     child {node (H2) [label={A}] [fill=yellow,circle] {}
+       child {node {} edge from parent[draw=none] {}}
+       child {node {} edge from parent[draw=none] {}}
+       child {node {} edge from parent[draw=none] {}}
+       child {node {} edge from parent[draw=none] {}}
+       child {node [label={[red]:R}] {for} edge from parent node[left]  {}}
+       child {node [label={[green]:G}] {his} edge from parent node[left]  {}}
+       child {node [label={[orange]:O}] {oldest} edge from parent node[left]  {}}
+       child {node [label={[green]:G}] {daughter} edge from parent node[left]  {}}
+     }
+   }
+   child {node {} edge from parent[draw=none] {}}
+   child {node (H4) [label={[]30:A}] [fill=yellow,circle] {}
+     child {node (she) [label={[green]:G}] {she} edge from parent node[left]  {}}
+     child {node [label={[green]:G}] {attended} edge from parent node[left]  {}}
+     child {node [label={[green]:G}] {daily} edge from parent node[left]  {}}
+     child {node [label={[green]:G}] {lessons} edge from parent node[left]  {}}
+   }
+   child {node [label={[red]:R}] {and} edge from parent node[left]  {}}
+   child {node (H5) [label={A}] [fill=yellow,circle] {}  
+     child {node [label={[red]:R}] {greatly} edge from parent node[left] {}}
+     child {node [label={[orange]:O}] {improved} edge from parent node[left] {}}
+   };
+   \draw[dashed] (H5) -> (she) ;
+ 
+   \com{
+   child {node (H1) [label={\#8}] [fill=black,circle] {}
+     child {node [label={\#2}] {graduation} edge from parent node[right] {$P$}}
+       %child {node {to Paris} edge from parent node[right] {$A$}}
+       edge from parent node[left] {$H$}
+     }
+     child {node (H2) [label={\#9}] [fill=black,circle] {}
+       child {node  {} edge from parent[draw=none]}
+       child {node  {} edge from parent[draw=none]}
+       child {node [label={\#3}] (Tom) {Tom} edge from parent node[right] {$A$}}
+       child {node [label={\#4}] {moved} edge from parent node[right] {$P$}}
+       child {node [label={\#10}] [fill=black,circle] {}
+         child {node [label={\#5}] {to} edge from parent node[right] {$R$}}
+         child {node [label={\#6}] {NYC} edge from parent node[right] {$C$}}
+         edge from parent node[right] {$A$}}
+       %child {node {to Paris} edge from parent node[right] {$A$}}
+       edge from parent node[left] {$H$}
+     };
+     \draw (H1) -> (Tom) node[midway, right] {$A$ \hspace{0.2cm}};
+     }
+   \end{tikzpicture}
   \\
   \end{adjustbox}
   \adjustbox{width=\textwidth,center,margin=.5em}{\it His old daughter loved tennis, and took daily lessons however good he was}
