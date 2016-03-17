@@ -372,67 +372,67 @@ We note that the translation is not UCCA-annotated.
 
 \begin{figure*}
   \begin{adjustbox}{trim=2.3cm 0 0 0}
-  \begin{tikzpicture}
-    [level 1/.style={sibling distance=7.5em},
-      level 2/.style={sibling distance=5em},
-      level 3/.style={sibling distance=5em},
-      level 4/.style={sibling distance=3em}]
-    %[semithick, x=2.4cm,y=0.8cm, >=latex, baseline=7ex,
-    %  inner sep=.3ex, outer sep=.7ex, minimum size=1.2ex,->]
-  \node (ROOT) [label={B}] [fill=blue, circle] {}
-  child {node (H3) [label={A}] [fill=yellow,circle] {}
-    child {node [label={[red]:R}] {Golf} edge from parent node[left] {}}
-    child {node (H1) [label={[orange]30:O}] [fill=orange,circle] {}
-      child {node [label={}] {became} edge from parent node[left]  {}}
-      child {node [label={}] {a} edge from parent node[left]  {}}
-      child {node [label={}] {passion} edge from parent node[left]  {}}
-    }
-    child {node (H2) [label={A}] [fill=yellow,circle] {}
-      child {node {} edge from parent[draw=none] {}}
-      child {node {} edge from parent[draw=none] {}}
-      child {node {} edge from parent[draw=none] {}}
-      child {node {} edge from parent[draw=none] {}}
-      child {node [label={[red]:R}] {for} edge from parent node[left]  {}}
-      child {node [label={[green]:G}] {his} edge from parent node[left]  {}}
-      child {node [label={[orange]:O}] {oldest} edge from parent node[left]  {}}
-      child {node [label={[green]:G}] {daughter} edge from parent node[left]  {}}
-    }
-  }
-  child {node {} edge from parent[draw=none] {}}
-  child {node (H4) [label={[]30:A}] [fill=yellow,circle] {}
-    child {node (she) [label={[green]:G}] {she} edge from parent node[left]  {}}
-    child {node [label={[green]:G}] {attended} edge from parent node[left]  {}}
-    child {node [label={[green]:G}] {daily} edge from parent node[left]  {}}
-    child {node [label={[green]:G}] {lessons} edge from parent node[left]  {}}
-  }
-  child {node [label={[red]:R}] {and} edge from parent node[left]  {}}
-  child {node (H5) [label={A}] [fill=yellow,circle] {}  
-    child {node [label={[red]:R}] {greatly} edge from parent node[left] {}}
-    child {node [label={[orange]:O}] {improved} edge from parent node[left] {}}
-  };
-  \draw[dashed] (H5) -> (she) ;
-
-  \com{
-  child {node (H1) [label={\#8}] [fill=black,circle] {}
-    child {node [label={\#2}] {graduation} edge from parent node[right] {$P$}}
-      %child {node {to Paris} edge from parent node[right] {$A$}}
-      edge from parent node[left] {$H$}
-    }
-    child {node (H2) [label={\#9}] [fill=black,circle] {}
-      child {node  {} edge from parent[draw=none]}
-      child {node  {} edge from parent[draw=none]}
-      child {node [label={\#3}] (Tom) {Tom} edge from parent node[right] {$A$}}
-      child {node [label={\#4}] {moved} edge from parent node[right] {$P$}}
-      child {node [label={\#10}] [fill=black,circle] {}
-        child {node [label={\#5}] {to} edge from parent node[right] {$R$}}
-        child {node [label={\#6}] {NYC} edge from parent node[right] {$C$}}
-        edge from parent node[right] {$A$}}
-      %child {node {to Paris} edge from parent node[right] {$A$}}
-      edge from parent node[left] {$H$}
-    };
-    \draw (H1) -> (Tom) node[midway, right] {$A$ \hspace{0.2cm}};
-    }
-  \end{tikzpicture}
+%   \begin{tikzpicture}
+%     [level 1/.style={sibling distance=7.5em},
+%       level 2/.style={sibling distance=5em},
+%       level 3/.style={sibling distance=5em},
+%       level 4/.style={sibling distance=3em}]
+%     %[semithick, x=2.4cm,y=0.8cm, >=latex, baseline=7ex,
+%     %  inner sep=.3ex, outer sep=.7ex, minimum size=1.2ex,->]
+%   \node (ROOT) [label={B}] [fill=blue, circle] {}
+%   child {node (H3) [label={A}] [fill=yellow,circle] {}
+%     child {node [label={[red]:R}] {Golf} edge from parent node[left] {}}
+%     child {node (H1) [label={[orange]30:O}] [fill=orange,circle] {}
+%       child {node [label={}] {became} edge from parent node[left]  {}}
+%       child {node [label={}] {a} edge from parent node[left]  {}}
+%       child {node [label={}] {passion} edge from parent node[left]  {}}
+%     }
+%     child {node (H2) [label={A}] [fill=yellow,circle] {}
+%       child {node {} edge from parent[draw=none] {}}
+%       child {node {} edge from parent[draw=none] {}}
+%       child {node {} edge from parent[draw=none] {}}
+%       child {node {} edge from parent[draw=none] {}}
+%       child {node [label={[red]:R}] {for} edge from parent node[left]  {}}
+%       child {node [label={[green]:G}] {his} edge from parent node[left]  {}}
+%       child {node [label={[orange]:O}] {oldest} edge from parent node[left]  {}}
+%       child {node [label={[green]:G}] {daughter} edge from parent node[left]  {}}
+%     }
+%   }
+%   child {node {} edge from parent[draw=none] {}}
+%   child {node (H4) [label={[]30:A}] [fill=yellow,circle] {}
+%     child {node (she) [label={[green]:G}] {she} edge from parent node[left]  {}}
+%     child {node [label={[green]:G}] {attended} edge from parent node[left]  {}}
+%     child {node [label={[green]:G}] {daily} edge from parent node[left]  {}}
+%     child {node [label={[green]:G}] {lessons} edge from parent node[left]  {}}
+%   }
+%   child {node [label={[red]:R}] {and} edge from parent node[left]  {}}
+%   child {node (H5) [label={A}] [fill=yellow,circle] {}  
+%     child {node [label={[red]:R}] {greatly} edge from parent node[left] {}}
+%     child {node [label={[orange]:O}] {improved} edge from parent node[left] {}}
+%   };
+%   \draw[dashed] (H5) -> (she) ;
+% 
+%   \com{
+%   child {node (H1) [label={\#8}] [fill=black,circle] {}
+%     child {node [label={\#2}] {graduation} edge from parent node[right] {$P$}}
+%       %child {node {to Paris} edge from parent node[right] {$A$}}
+%       edge from parent node[left] {$H$}
+%     }
+%     child {node (H2) [label={\#9}] [fill=black,circle] {}
+%       child {node  {} edge from parent[draw=none]}
+%       child {node  {} edge from parent[draw=none]}
+%       child {node [label={\#3}] (Tom) {Tom} edge from parent node[right] {$A$}}
+%       child {node [label={\#4}] {moved} edge from parent node[right] {$P$}}
+%       child {node [label={\#10}] [fill=black,circle] {}
+%         child {node [label={\#5}] {to} edge from parent node[right] {$R$}}
+%         child {node [label={\#6}] {NYC} edge from parent node[right] {$C$}}
+%         edge from parent node[right] {$A$}}
+%       %child {node {to Paris} edge from parent node[right] {$A$}}
+%       edge from parent node[left] {$H$}
+%     };
+%     \draw (H1) -> (Tom) node[midway, right] {$A$ \hspace{0.2cm}};
+%     }
+%   \end{tikzpicture}
   \\
   \end{adjustbox}
   \adjustbox{width=\textwidth,center,margin=.5em}{\it His old daughter loved tennis, and took daily lessons however good he was}
@@ -723,11 +723,11 @@ and the translation ``eine koronare Angioplastie kann nicht technisch m{\"o}glic
 (lit. ``a coronary angioplasty can not technically possible''),
 produced by an MT system in our experiments.
 The translation is correct, except that the main verb ``sein'' (``be'') is omitted.
-While this may be interpreted is a minor error, HMEANT will assign it a very low score,
+While this may be interpreted as a minor error, HMEANT will assign it a very low score,
 as it failed to translate the main verb.
 
 However, HMEANT's independent annotation of the source and translation makes a stricter check
-of whether the translation can be understood.
+of whether the translation can be understood
 than we do. HUME may be artificially boosting the perceived understandability of
 the sentence by allowing access to the source.
 
