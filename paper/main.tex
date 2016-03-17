@@ -8,7 +8,7 @@
 \usepackage{graphicx}
 \usepackage{url}
 \usepackage{pgfplotstable}
-\usepackage{hyperref}
+%\usepackage{hyperref}
 \usepackage{color}
 \usepackage{lipsum,adjustbox}
 
@@ -222,24 +222,24 @@ their verbal argument structures structures and associated semantic roles.
 We discuss the differences between HMEANT and HUME in \secref{sec:hmeant_comp}.
 
 \begin{figure}
-  
+
 \begin{tikzpicture}[semithick, x=2.4cm,y=0.8cm, >=latex, baseline=7ex,
-      inner sep=.3ex, outer sep=.7ex, minimum size=1.2ex,->]
-  \node (ROOT) [label={\#7}] [fill=black, circle] {}
-  child {node [label={\#1}] {After} edge from parent node[left]  {$L$\hspace{1.5cm}}}
-  child {node (H1) [label={\#8}] [fill=black,circle] {}
-    child {node [label={\#2}] {graduation} edge from parent node[right] {$P$}}
+    inner sep=.3ex, outer sep=.7ex, minimum size=1.2ex,->]
+  \node (ROOT) [fill=black, circle] {}
+  child {node {After} edge from parent node[left]  {$L$\hspace{1.5cm}}}
+  child {node (H1)  [fill=black,circle] {}
+    child {node {graduation} edge from parent node[right] {$P$}}
       %child {node {to Paris} edge from parent node[right] {$A$}}
       edge from parent node[left] {$H$}
     }
-    child {node (H2) [label={\#9}] [fill=black,circle] {}
+    child {node (H2)  [fill=black,circle] {}
       child {node  {} edge from parent[draw=none]}
       child {node  {} edge from parent[draw=none]}
-      child {node [label={\#3}] (Tom) {Tom} edge from parent node[right] {$A$}}
-      child {node [label={\#4}] {moved} edge from parent node[right] {$P$}}
-      child {node [label={\#10}] [fill=black,circle] {}
-        child {node [label={\#5}] {to} edge from parent node[right] {$R$}}
-        child {node [label={\#6}] {NYC} edge from parent node[right] {$C$}}
+      child {node  (Tom) {Tom} edge from parent node[right] {$A$}}
+      child {node  {moved} edge from parent node[right] {$P$}}
+      child {node  [fill=black,circle] {}
+        child {node  {to} edge from parent node[right] {$R$}}
+        child {node  {NYC} edge from parent node[right] {$C$}}
         edge from parent node[right] {$A$}}
       %child {node {to Paris} edge from parent node[right] {$A$}}
       edge from parent node[left] {$H$}
@@ -247,13 +247,13 @@ We discuss the differences between HMEANT and HUME in \secref{sec:hmeant_comp}.
     \draw (H1) -> (Tom) node[midway, right] {$A$ \hspace{0.2cm}};
   \end{tikzpicture}
 \caption{\label{fig:ucca_example}
-  Sample UCCA annotation. Edge labels mark UCCA categories. \#$<$index$>$ marks the node
-indices.}
+  Sample UCCA annotation. Edge labels mark UCCA categories. }
 \end{figure}
 
 
-\begin{figure*}
 
+\begin{figure*}
+  \begin{adjustbox}{trim=2.3cm 0 0 0}
   \begin{tikzpicture}
     [level 1/.style={sibling distance=7.5em},
       level 2/.style={sibling distance=5em},
@@ -264,7 +264,7 @@ indices.}
   \node (ROOT) [label={B}] [fill=blue, circle] {}
   child {node (H3) [label={A}] [fill=yellow,circle] {}
     child {node [label={[red]:R}] {Golf} edge from parent node[left] {}}
-    child {node (H1) [label={[orange]:O}] [fill=orange,circle] {}
+    child {node (H1) [label={[orange]30:O}] [fill=orange,circle] {}
       child {node [label={}] {became} edge from parent node[left]  {}}
       child {node [label={}] {a} edge from parent node[left]  {}}
       child {node [label={}] {passion} edge from parent node[left]  {}}
@@ -281,7 +281,7 @@ indices.}
     }
   }
   child {node {} edge from parent[draw=none] {}}
-  child {node (H4) [label={A}] [fill=yellow,circle] {}
+  child {node (H4) [label={[]30:A}] [fill=yellow,circle] {}
     child {node (she) [label={[green]:G}] {she} edge from parent node[left]  {}}
     child {node [label={[green]:G}] {attended} edge from parent node[left]  {}}
     child {node [label={[green]:G}] {daily} edge from parent node[left]  {}}
@@ -315,6 +315,7 @@ indices.}
     \draw (H1) -> (Tom) node[midway, right] {$A$ \hspace{0.2cm}};
     }
   \end{tikzpicture}
+  \end{adjustbox}
 \caption{\label{fig:ucca_example2}
   Sample UCCA annotation. Edge labels mark UCCA categories. \#$<$index$>$ marks the node
 indices.}
@@ -381,6 +382,7 @@ units as it does not ground its semantic symbols in the text,
 thus not straightwardly allowing a decomposition of the sentence into sub-units.
 Moreover, AMR is more fine-grained than UCCA and consequently more difficult to annotate.
 
+
 Other approaches have been proposed for semantic representation, which are grounded in the words
 and phrases of the text, and have generally represented semantic structures as bi-lexical dependencies.
 Examples include the tectogrammatical layer \parcite{sgallhp:1986} used in the Prague dependency
@@ -405,8 +407,8 @@ This section summarises the manual annotation procedure performed in order
 to compute the HUME measure. 
 We mark the source sentence as $s$ and the translation sentence as $t$. 
 The procedure involves two manual steps: (1) UCCA-annotating $s$, 
-(2) human judgements as to the translation quality of each semantic unit of $s$,
-defined by its UCCA annotation, relative to $t$.
+(2) human judgements as to the translation quality of each semantic unit of $s$ relative to $t$,
+where units are defined according to the UCCA annotation.
 We note that UCCA annotation is performed once for every source sentence,
 irrespective of the number of its translations we wish
 to evaluate\footnote{Instead of relying on the source,
@@ -430,7 +432,7 @@ is the set of yields of nodes in $V$. %We denote it with $Units(s)$ for brevity.
 We note that the translation is not UCCA-annotated.
 
 \begin{figure*}[t]
-    \includegraphics[width=1\textwidth]{ucca-tree-mteval}
+    \includegraphics[width=1\textwidth]{ucca-tree-mteval.jpg}
     \caption{UCCA Tree evaluated in comparison to an aligned ``translation'' (an
 	English paraphrase).}
     \label{fig:ucca-tree-hume}
@@ -444,10 +446,11 @@ semantic relations expressed in the text and the inter-relations between them,
 HUME effectively aggregates the judgements of the users into a composite score.
 
 Human annotation of the semantic units requires first deciding whether
-a unit is {\it atomic}, i.e., that it has no meaning-bearing
-sub-units, or {\it structural}. In most cases, atomic units 
+a unit is {\it structural}, i.e., has meaning-bearing sub-units,
+or {\it atomic}. In most cases, atomic units
 correspond to individual words, but they may also correspond to unanalyzable
-multi-word expressions, i.e., expressions that do not have meaningful sub-units.
+multi-word expressions, i.e., expressions that do not have meaningful sub-units
+(e.g., idioms like ``takes two to tango'').
 When a multi-word unit is labeled as atomic, all its sub-units' annotations are discarded
 from the evaluation.
 
@@ -461,7 +464,8 @@ or the wrong morphology, in a way that impacts little on the understandability o
 A Red label means that the essential meaning of the unit has not been captured.
 
 Structural units have sub-units (children in the UCCA graph), which may either be
-atomic or structural, and represent the relation between the sub-units.
+atomic or structural. The labels assigned to such nodes reflect the extent to which
+the relation between the sub-units.
 For instance, a Scene unit represents the relation between the
 Scene elements, such as the predicate (main relation), participants and adverbials.
 Structural units are labeled as ``Adequate'' or ``Bad'', meaning
@@ -500,19 +504,19 @@ rather than fluency judgements. Specifically, annotators are instructed to
 label a unit as Adequate if its translation is understandable and preserves
 the meaning of the source unit, even if its fluency is impaired.
 
-For example, consider the sentence ``After graduation, Tom moved
-to NYC'' as the source $s$, see \figref{fig:ucca_example}.
-The atomic units are the individual words,
-nodes \#1--6 and the structural nodes are \#7--10. Assume that the translation $t$
-is ``After Tom will move to Paris, graduation''\footnote{We take $t$ to
-  be in English for presentation purposes. In our experiments, $t$ is in German,
-  Czech, Polish or Romanian.}.
-Then ``after'', ``graduation'', ``Tom'' and ``to'' are marked Green, ``moved'' is marked
-Orange (as it corresponds to ``will move'' in $t$), and ``NYC''
-is marked as Red, as it was mistranslated to ``Paris''. Node \#9 is marked Adequate,
-as the Scene of Tom moving is properly reflected in the translation. Node \#10, which
-expresses the relation between the graduation and moving Scenes, is marked Bad,
-as their relation in $t$ is reversed.
+%For example, consider the sentence ``After graduation, Tom moved
+%to NYC'' as the source $s$, see \figref{fig:ucca_example}.
+%The atomic units are the individual words,
+%nodes \#1--6 and the structural nodes are \#7--10. Assume that the translation $t$
+%is ``After Tom will move to Paris, graduation''\footnote{We take $t$ to
+%  be in English for presentation purposes. In our experiments, $t$ is in German,
+%  Czech, Polish or Romanian.}.
+%Then ``after'', ``graduation'', ``Tom'' and ``to'' are marked Green, ``moved'' is marked
+%Orange (as it corresponds to ``will move'' in $t$), and ``NYC''
+%is marked as Red, as it was mistranslated to ``Paris''. Node \#9 is marked Adequate,
+%as the Scene of Tom moving is properly reflected in the translation. Node \#10, which
+%expresses the relation between the graduation and moving Scenes, is marked Bad,
+%as their relation in $t$ is reversed.
 
 Another example is given in \figref{fig:ucca-tree-hume}.
 %``Golf became an obsession for his oldest daughter, she took daily lessons and became very good'',
@@ -520,8 +524,7 @@ The figure shows an annotation of a UCCA tree, and an example annotation for
 each of the units.
 We see that ``became a passion'' is deemed atomic, as it is translated as a single unit
 in $t$, and thus its sub-units, ``became'', ``a'' and ``passion'' are not evaluated
-individually.\oa{I'm not sure I agree with the UCCA annotation;
-also, translation annotation for ``she'' is missing. and for ``very good'' is wrong}
+individually.
 
 \subsection{Composite Score}\label{sec:score}
 
@@ -553,18 +556,18 @@ We turn to discuss the interface for collecting human judgements on the semantic
 of the source, relating to the translation. UCCA annotations of the source are done offline,
 using the UCCA web application\footnote{See UCCA webpage.}.
 
-\figref{fig:interface} presents the user interface of HUME. The sentence at the top
-shows the complete MT system output. The source sentence appears at the top, and
-the source translation directly below it. Underneath the source sentence appears
+\figref{fig:interface} presents the user interface of HUME. 
+The translation appears at the top, and
+the source sentence directly below it. Underneath the source sentence appears
 its list of semantic units. For each semantic unit, including the one for the
 entire source sentence, there is a textbox, displaying the yield of that unit.
 Information on the category of the unit (e.g., whether it is a Scene, participant etc.).
 The user is asked to select a label for each unit,
 by clicking the ``A'', ``B'', Green, Orange, or Red buttons to the left of the unit's box.
 
-The interface presents, for each unit, the segment of the translation which aligns to it.
+The interface presents, for each unit, the translation segment aligned with it.
 This allows the user, especially in long sentences, to focus her attention on the parts
-mostly likely to be relevant for her judgement. As the alignments are automatically derived,
+most likely to be relevant for her judgement. As the alignments are automatically derived,
 and therefore noisy, the annotator is instructed to treat the aligned text is a cue, but to ignore
 it and make a judgement according to the full translation sentence, in cases where the alignment
 is misleading.
@@ -573,9 +576,10 @@ Concretely, let $s = (w_1,\ldots,w_n)$ be a source sentence, $t = (w'_1,\ldots,w
 and $A \subset 2^{s \times t}$ a many-to-many word alignment between them.
 If $u$ is a semantic unit in $s$, whose yield is $yld(u)$, we define the aligned text in
 $t$ to be $a(u)=\bigcup_{(x_s,x_t) \in A \wedge x_s \cap yld(u) \neq \emptyset} x_t \subset t$.
-In the event that $a(u)$ is discontiguous in the text, we mark words between the left
+In the event that $a(u)$ is discontiguous in the text, words between the left
 and right boundaries of $a(u)$ which are not contained in it (intervening words)
-in a smaller red font. Intervening words are likely change the meaning of the translation
+are presented in a smaller red font.
+Intervening words are likely change the meaning of the translation
 of $u$, and thus should be paid attention to when considering whether the translation
 is correct or not.
 
@@ -1073,7 +1077,7 @@ UCCA views the text as a collection of scenes (or events)
 and their inter-relations and participants. 
 
 \begin{figure*}[t]
-    \includegraphics[width=1\textwidth]{ucca-tree}
+    \includegraphics[width=1\textwidth]{ucca-tree.jpg}
     \caption{UCCA Tree with scenes}
     \label{ucca-tree}
 \end{figure*}
