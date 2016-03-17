@@ -804,12 +804,16 @@ By the claim that HMEANT explains things, Dekai probably means that the score is
 
 
 In order to validate the HUME metric, we ran an annotation experiment with one source language (English), and four 
-target languages (Czech, German, Polish and Romanian), using text from the public health domain. We are 
-particularly interested in this domain since our ultimate goal is to provide high-quality translations of health
-information for speakers of languages other than English, and in this domain accurate transfer of meaning is
-paramount.
+target languages (Czech, German, Polish and Romanian), using text from the public health domain.
+The domain is particularly suitable for experimenting on MT evaluation, as being able to determine
+whether the translation accurately conveys the same information as the source is here paramount.
 
-Our annotation experiment sought to address the following questions:
+%particularly interested in this domain since our ultimate goal is to provide high-quality translations of health
+%information for speakers of languages other than English, and in this domain accurate transfer of meaning is
+%paramount.
+
+The experiment seeks to address two questions:
+
 \begin{compactitem}
 \item Can HUME be annotated quickly and reliably, and does the reliability still hold for longer sentences?
 \item Can HUME capture translation issues that other annotation schemes (such as
@@ -831,7 +835,8 @@ computer scientist and one linguist for Czech.}.
 For each of the four language pairs under consideration  we built phrase-based MT systems
 using Moses \cite{Koehn:2007}. We used large training sets extracted from OPUS \cite{tiedemann:2009}, and
 the data sets released for the WMT14 medical translation task \cite{bojar-EtAl:2014:W14-33}, to provide between
-45 and 85 million sentences of training data, depending on language pair.
+45 and 85 million sentences of training data, depending on language pair\oa{I think we should probably
+  say how much in each.}.
 
 These translation systems were used to translate texts derived from both NHS 24\footnote{\url{http://www.nhs24.com/}} and 
 Cochrane\footnote{\url{http://www.cochrane.org/}} into the four languages. The first organisation is a public body
