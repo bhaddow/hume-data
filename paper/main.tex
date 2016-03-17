@@ -655,7 +655,7 @@ HMEANT, they semantically annotate both the reference and the translation, then
 align these manually, and assess to what extent they match.
 
 
-\subsection{Verbal Structures Only?}
+\paragraph{Verbal Structures Only?}
 
 HMEANT focuses on verbal
 argument structures, ignoring other pervasive phenomena such as nominal predicates, inter-clause
@@ -688,7 +688,7 @@ these and other phenomena by HUME will allow to determine empirically
 to preserve for MT evaluation, and which are less important.
 
 
-\subsection{Cost of Structural Annotation}
+\paragraph{Cost of Structural Annotation}
 
 HMEANT structural annotation (semantic role labelling, SRL), similar to e.g.
 PropBank
@@ -706,7 +706,7 @@ MT output has to be structurally annotated.\oa{we can give some empirical data h
   UCCA annotation by trained annotators is about 700 tokens/hour (we didn't
   check it for individual sentences), but that's done only once so it should be amortized.}
 
-\subsection{One vs. Two Structures}
+\paragraph{One vs. Two Structures}
 
 HUME uses just one structural annotation (for the source) while HMEANT relies on
 two independently constructed structural annotations (for both the reference and
@@ -731,18 +731,22 @@ of whether the translation can be understood
 than we do. HUME may be artificially boosting the perceived understandability of
 the sentence by allowing access to the source.
 
-\subsection{Importance of Alignment}
+\paragraph{Importance of Alignment}
 
-In HMEANT, the alignment between the (source and candidate) structures is a key
+In HMEANT, the alignment between the (reference and candidate) structures is a key
 part of the manual annotation. If the alignment cannot be created, the candidate
 translation is heavily penalized in score.
 Previous experiments with HMEANT
 \parcite{bojar:wu:ssst:2012,chuchunkov-tarelkin-galinskaya:2014:SSST-8} have
-suggested that modifications to the two structures are desirable and appropriate
-at the alignment stage, to avoid unduly penalization due to spurious diverges in
-the structures.\oa{I didn't understand this}
-The same issue was observed by HMEANT authors themselves \parcite{XXXcite}
-\XXX{cite this: http://repository.ust.hk/ir/Record/1783.1-66107}: the 
+suggested that sometimes, the structures of the reference and candidate
+translations diverge without any good reason, for instance due to a different
+interpretation of a PP-attachment, the verb can have one additional modifier in
+one of the structures. It would be desirable to allow updates to the structural
+annotations also at the alignment stage
+to avoid unduly penalization due to such a spurious diverge.
+The same issue was observed by HMEANT authors themselves
+\parcite{lo:wu:reliability:2014}:
+the 
 inter-annotator agreement on SRL dropped from 90\% to 61\% 
 when the two aligned structures were from two different annotators.
 
@@ -751,7 +755,7 @@ the attention of the annotators.
 The user is expected to mentally correct the alignment as needed.
 
 
-\subsection{Monolingual vs. Bilingual Evaluation}
+\paragraph{Monolingual vs. Bilingual Evaluation}
 HUME diverges from HMEANT (and also from the shallow automatic measures
 like BLEU or METEOR) in not requiring a reference.
 Instead, it compares the source directly with the output translation.
@@ -770,24 +774,24 @@ from a third language. ``References'' can thus easily contain information
 that does not appear in the ``source''.
 
 
-\subsection{Technical Differences}
+\paragraph{Technical Differences}
 
 + allows for multi-word and even non-contiguous elements
 
 + allows to indicate the quality of the predicates ("Actions")
 
 
-\subsection{XXX to be removed}
-
-In the *MEANT papers they mainly test by either
-A) correlating the metric to ranking judgements; or
-B) using automated versions of the metric for tuning MT systems
-
-I think neither is particularly convincing, but I'm not sure at the moment what we replace them with. Dekai also made a claim about the *MEANT metrics being "interpretable" in the sense that they could guide you towards semantic errors that the MT system may be making, however I don't recall seeing this done in his papers. 
-
-By the claim that HMEANT explains things, Dekai probably means that the score is decomposable, but so is UCCA-Eval and even BLEU. And UCCA-Eval has one benefit over HMEANT: it points to words in the MT output that are aligned with something but do not convey the meaning well (and we know which part of the source meaning). Pure HMEANT might say only that some part of the MT output has no clear frames whatsover (and we do not know which part of the source/reference, unless we add the word alignments).
-
-
+% \subsection{ to be removed}
+% 
+% In the *MEANT papers they mainly test by either
+% A) correlating the metric to ranking judgements; or
+% B) using automated versions of the metric for tuning MT systems
+% 
+% I think neither is particularly convincing, but I'm not sure at the moment what we replace them with. Dekai also made a claim about the *MEANT metrics being "interpretable" in the sense that they could guide you towards semantic errors that the MT system may be making, however I don't recall seeing this done in his papers. 
+% 
+% By the claim that HMEANT explains things, Dekai probably means that the score is decomposable, but so is UCCA-Eval and even BLEU. And UCCA-Eval has one benefit over HMEANT: it points to words in the MT output that are aligned with something but do not convey the meaning well (and we know which part of the source meaning). Pure HMEANT might say only that some part of the MT output has no clear frames whatsover (and we do not know which part of the source/reference, unless we add the word alignments).
+% 
+% 
 
 
 
@@ -1030,15 +1034,18 @@ Czech and Polish, where the IAA is higher for atomic than for structural nodes, 
 where the reverse is true. We also observe low IAA (around 0.3) in the cases of
 German atomic nodes, and Polish and Czech structural nodes.
 
-\XXX{Discussion of the disagreements}
-
-\begin{compactitem}
-  \item German has low overall proportion of orange annotation (1.2\% compared with 4.5-8.6)
-  \item German annotators give a lot of green (so skewed classes, high expected agreement), but 
-        differ more significantly on what should be green. 
-  \item For Polish, big difference in number of As (2000 vs 1500) given by each annotator
-  \item For Czech structural, both annotators give higher proportion of As, raising the expected agreement.
-\end{compactitem}
+Looking more closely at the areas of disagreement, we see that for the Polish structural nodes, the 
+proportion of As was quite different between the two annotators (53\% vs. 71\%), whereas for other
+languages the annotators agree in the proportions. We believe that this was because one of the Polish
+annotators did not fully understand the guidelines for structural nodes, and percolated
+errors up the tree, creating more Bs. For the German lexical nodes, and Czech structural nodes, where
+Kappa is also around 0.3, the proportion of such nodes being marked as ``correct'' is relatively 
+high, meaning that the class distribution is more skewed, so the expected agreement used in the
+Kappa calculation is high, lowering Kappa. Essentially, the annotation problem is harder when the classes
+are more skewed. Finally we note some evidence of domain-specific disagreements, for instance the German
+MT system normally translated ``review'' (as in ``systematic review'' -- a frequent term in the 
+Cochrane texts) as ``\"uberpr\"ufung'', which 
+one annotator marked correct, and the other (a Cochrane employee)  as incorrect.
 
 %\subsection{Discussion of Disagreements}\label{sec:disagreements}
 
