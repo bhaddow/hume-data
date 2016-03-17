@@ -548,7 +548,8 @@ and compute an accuracy score.
 Let $\Correct(s,t)$ be the number of atomic units in $s$ marked as Green relative to $t$ plus
 the number of structural units in $s$ marked as Adequate relative to $t$.
 Let $\Partial(s,t)$ be the number of atomic units in $s$ marked as Orange relative
-to $t$. Then HUME's composite score is:
+to $t$. Let $\Units(s)$ be the total number of units marked with any of the five labels.
+Then HUME's composite score is:
 
 \vspace{-.5cm}
 \begin{equation}
@@ -739,38 +740,34 @@ Previous experiments with HMEANT
 \parcite{bojar:wu:ssst:2012,chuchunkov-tarelkin-galinskaya:2014:SSST-8} have
 suggested that modifications to the two structures are desirable and appropriate
 at the alignment stage, to avoid unduly penalization due to spurious diverges in
-the structures.
+the structures.\oa{I didn't understand this}
 The same issue was observed by HMEANT authors themselves \parcite{XXXcite}
-\XXX{cite this: http://repository.ust.hk/ir/Record/1783.1-66107}: the
+\XXX{cite this: http://repository.ust.hk/ir/Record/1783.1-66107}: the 
 inter-annotator agreement on SRL dropped from 90\% to 61\% 
 when the two aligned structures were from two different annotators.
 
-HUME uses only automatic (word-level) alignment, and it's only purpose is to
-make the annotation process easier. The alignment is indicative only and the
-user is expected to mentally correct the alignment as needed.
+HUME uses only automatic (word-level) alignment, which only serves as a cue for directing
+the attention of the annotators.
+The user is expected to mentally correct the alignment as needed.
 
 
 \subsection{Monolingual vs. Bilingual Evaluation}
 HUME diverges from HMEANT (and also from the shallow automatic measures
-like BLEU or
-METEOR) in not requiring a reference.
-Instead, it compares the source directly with the output
-translation.
+like BLEU or METEOR) in not requiring a reference.
+Instead, it compares the source directly with the output translation.
 
 This requires us to employ bilingual annotators, but has the benefit of avoiding
 the reference translation. It is known that the reference translations are not
 always literal enough and the MT output semantics can be composed differently
-than the semantics of the reference. While this is in principle not a problem
-for HUME (the whole sentence can be labelled as ``Green''), it prevents learning
-any fine-grained information about the MT output.
+than the semantics of the reference. While HUME avoids this problem,
+imposing a structure only on the source does prevent any fine-grained semantic
+analysis of the translation.
 
-Perhaps even more importantly,
-the reference translations were often not created by translating the source
-sentences. In some cases, the manual translation was reversed, or both the
-``source'' and ``reference'' are actually independent translations from a third
-language. The ``reference'' can thus easily contain more information than the
-``source''.
-
+Perhaps more importantly, references are often not created by translating the source
+sentences. In some cases, the manual translation was reversed\oa{what does that mean?},
+and in others the ``source'' and ``reference'' are actually independent translations
+from a third language. ``References'' can thus easily contain information
+that does not appear in the ``source''.
 
 
 \subsection{Technical Differences}
