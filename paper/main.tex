@@ -358,8 +358,8 @@ Let $L$ be the set of possible UCCA labels.
 Given a sentence $s = (w_1, \ldots,w_n)$, its UCCA annotation is a DAG $G=(V,E,\ell)$,
 where $\ell: V \rightarrow L$, and where $W = \{w_1,\ldots,w_n\}$ correspond to the leaves of $G$.
 For every node $v \in V$, we define its {\it yield} $yld(v)$ as $v$'s descendants in $W$.
-The semantic units for a sentence $s$ according to $G$,
-is the set of yields of nodes in $V$. %We denote it with $Units(s)$ for brevity.
+The semantic units for a sentence $s$ according to $G$
+is the set of yields of nodes in $V$. 
 We note that the translation is not UCCA-annotated.
 
 %\begin{figure*}[t]
@@ -449,11 +449,11 @@ We note that the translation is not UCCA-annotated.
 
 
 \paragraph{Translation Evaluation.}
-The basic strategy for computing HUME is to traverse
-the semantic units of the source sentence, and to mark the extent to which
-they have been correctly translated. As semantic units correspond to the
-semantic relations expressed in the text and the inter-relations between them,
-HUME effectively aggregates the judgements of the users into a composite score.
+The basic strategy for computing HUME is to traverse the semantic units
+of the source sentence, which correspond to the different arguments and relations expressed
+in the text, and to mark the extent to which they have been correctly translated.
+HUME aggregates the judgements of the users into a composite score, 
+which reflects the overall extent to which the semantic content of $s$ is preserved in $t$.
 
 Human annotation of the semantic units requires first deciding whether
 a unit is {\it structural}, i.e., has meaning-bearing sub-units,
