@@ -483,7 +483,7 @@ Structural units are labeled as ``Adequate'' or ``Bad'', meaning
 that the relation between the sub-units went wrong.
 We use a three label system with atomic units, as
 opposed to a two label one in structural units,
-as lexical units often have slight errors, in which cases we do want to provide partial credit.
+as atomic units often have slight errors, in which cases we do want to provide partial credit.
 
 There are many ways that the relationship between the children might go
 wrong in translation
@@ -495,9 +495,11 @@ wrong in translation
   the semantic unit corresponding to the Scene will be marked as Bad, while
   the individual atomic units ``dog'', ``bites'' and ``man'' will be marked as Green.
 \item A superfluous word or phrase has been inserted into
-  the translation. For instance, if ``dog bites man'' is translated into ``dog visciously bites man''.
+  the translation. For instance, if ``dog bites man'' is translated into ``dog viciously bites man''.
 \item One of the sub-units is missing from the translation.
-  For instance, if ``dog bites man'' is translated into ``dog bites''.
+  For instance, if ``dog bites man'' is translated into ``dog bites''. \bh{Note that in this case we also 
+  get an error in the atomic unit, assuming that ``man'' is a semantic unit in the source, but for the other
+  two cases there is no atomic unit error.}
 \end{compactitem}
 
 We note that HUME labels reflect adequacy, rather than fluency judgements.
@@ -516,7 +518,7 @@ compared to German and Romanian\oa{but doesn't German also have a case system? O
   could you pinpoint what the difference exactly is?}.
 
 An example HUME annotation is given in \figref{fig:hume_tree},
-which presents an annotation of a UCCA tree, and a corresponding translation.
+which presents an annotation of an UCCA tree, and a corresponding translation.
 We see that ``became a passion'' is deemed atomic, as it is translated as a single unit
 in $t$, and thus its sub-units, ``became'', ``a'' and ``passion'' are not evaluated
 individually. 
