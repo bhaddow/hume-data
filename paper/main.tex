@@ -185,7 +185,7 @@ judgements. Most commonly, such scores decompose over the sub-parts of
 the translation, and quantify how many of these sub-parts appear in a reference translation,
 whose validity has been manually confirmed. This decomposition further allows system developers
 to localize the errors or at least unconfirmed parts within the translation.
-The most commonly used measures decompose over n-grams or even individual words, e.g., 
+The most commonly used measures decompose over n-grams or individual words, e.g., 
 the BLEU \cite{Papineni:2002}, NIST \cite{Doddington:2002} and METEOR measures \cite{Banerjee:2005}.
 Another common approach is to determine the similarity between the reference and translation
 by applying string edit distance \cite{snover2006study}.
@@ -208,7 +208,7 @@ nature of the errors.
 
 In order to address this shortcoming, more recent work quantified
 the similarity of the reference and translation in terms
-of their {\it semantic structure}. \newcite{liu2005syntactic} took a syntactic approach, 
+of their structure. \newcite{liu2005syntactic} took a syntactic approach, 
 quantifying the similarity between the syntactic structures of the reference and translation.
 \newcite{owczarzak2007evaluating} took a similar approach using lexical-functional grammar structures.
 \newcite{gimenez2007linguistic} proposed to aggregate multiple types of information,
@@ -247,10 +247,127 @@ We discuss the differences between HMEANT and HUME in \secref{sec:hmeant_comp}.
     \draw (H1) -> (Tom) node[midway, right] {$A$ \hspace{0.2cm}};
   \end{tikzpicture}
 \caption{\label{fig:ucca_example}
-  Sample UCCA annotation. Edge labels mark UCCA categories. }
+  Sample UCCA annotation of the sentence ``After graduation, Tom moved
+  to NYC''. Leaves correspond to words, whereas nodes correspond to units.
+  Edge labels mark UCCA categories, which are largely ignored in this work.}
 \end{figure}
 
 
+
+
+\paragraph{Semantic Representation.}
+UCCA (Universal Conceptual Cognitive Annotation, \inparcite{abend2013universal}) is a
+cross-linguistically applicable, lightweight
+scheme for semantic annotation. Formally, a UCCA structure is a directed acyclic graph (DAG),
+whose leaves correspond to the words of the text.
+The graph's nodes, called {\sc units}, are either terminals or several elements jointly
+viewed as a single entity according to some semantic or cognitive consideration. Edges bear
+a category, indicating the role of the sub-unit in the structure the unit
+represents.
+
+UCCA's current inventory of distinctions focuses on argument structures
+(adjectival, nominal, verbal and others) and relations between them.
+The most basic notion is the Scene, which describes a movement, an
+action or a state which is persistent in time. Each Scene contains one main relation, as well
+as one or more participants. For example, the sentence ``After graduation, Tom moved to NYC''
+contains two Scenes, whose main relations are ``graduation'' and ``Tom''.
+The participant ``John'' is a part of both Scenes, while ``NYC'' only of the
+latter (\figref{fig:ucca_example}). Further categories account for
+relations between Scenes and the internal structures of complex participants and relations.
+
+% UCCA Motivation
+UCCA is a natural candidate for defining a semantic
+MT evaluation measure for a number of reasons. 
+First, it defines an intuitive set of categories
+that can be reliably annotated by non-experts, after as little as two hours
+of training \cite{marinotti2014}.
+Second, UCCA is a cross-linguistically applicable scheme, seeking to
+represent what is shared between languages
+by building on linguistic typological theory, and specifically on ``Basic Linguistic Theory''
+\cite{Dixon:10a,Dixon:10b,Dixon:12}, one of the most widely used frameworks for linguistic description.
+The cross-linguistic applicability of UCCA has been tested in annotations of
+English, French, German and Czech.
+Third, the scheme has been shown to be semantically stable
+in translation: UCCA annotations of translated text usually contain the same set of relationships
+\cite{sulem2015conceptual}. This is an indication that the scheme reflects
+a common layer of representation that in a correct translation
+is mostly shared between the translation and the source. 
+
+We note that verbal argument structures are less stable in this sense, as a verbal
+argument structure may be translated or paraphrased to a nominal or adjectival
+argument structure, and are thus less suitable as a basis for a semantic measure.
+E.g., ``after he graduated, Tom moved to NYC'' contains two verbs,
+but is similar in meaning to the one-verbed
+``after graduation, Tom moved to NYC''. 
+
+% While most broad-coverage semantic work focused on shallow semantic structures,
+% predominantly argument structures annotated with their semantic roles, much recent
+% interest has been devoted to defining more complete semantic representation schemes.
+% \oa{should we
+% add that it is less cross-linguistically stable? maybe that's an overkill..
+%  OB: AMR has been applied to more languages, including Chinese, so I would not
+%  dare saying that it is less stable.}
+
+The Abstract Meaning Representation (AMR) scheme \cite{banarescu2013abstract}
+shares much of UCCA's motivation for defining a more complete semantic annotation.
+However, using AMR is not optimal for defining a decomposition of a sentence into semantic
+units as it does not ground its semantic symbols in the text,
+thus not straightwardly allowing a decomposition of the sentence into sub-units.
+Moreover, AMR is more fine-grained than UCCA and consequently more difficult to annotate.
+Other approaches pursued a grounded representation of semantics,
+and have generally represented semantic structures as bi-lexical dependencies.
+Examples include the tectogrammatical layer \parcite{sgallhp:1986} used in the Prague dependency
+treebanks, e.g. the Czech-English one \parcite{hajic2012announcing}, as well
+as dependencies derived from Minimal Recursion Semantics representations \parcite{oepen2006discriminant}.
+Nevertheless, despite their appeal as deep and intuitive means for semantic representation,
+these approaches require linguistic expertise for their annotation, due to the intricate and
+fine-grained distinctions they provide, and are thus in our view less suitable for basing
+an interpretable MT evaluation on. 
+
+%\newcite{Basile:12} attempted to make some aspects of the semantic annotation more accessible,
+%but to our knowledge no results of this brand have been reported.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{The HUME Measure}\label{sec:hume}
+
+
+\subsection{Annotation Procedure}\label{sec:guidelines}
+
+This section summarises the manual annotation procedure performed in order 
+to compute the HUME measure. 
+We mark the source sentence as $s$ and the translation sentence as $t$. 
+The procedure involves two manual steps: (1) UCCA-annotating $s$, 
+(2) human judgements as to the translation quality of each semantic unit of $s$ relative to $t$,
+where units are defined according to the UCCA annotation.
+We note that UCCA annotation is performed once for every source sentence,
+irrespective of the number of its translations we wish
+to evaluate\footnote{Instead of relying on the source,
+the evaluation could be based on the UCCA structure for the \emph{reference}
+translation. This would allow monolingual annotators to take part in the
+evaluation. On the downside, the translation would have to be aligned to the
+reference and more importantly, we would risk inaccurate judgements due to
+the naturally occurring differences between the source and its reference
+translations.}.
+
+\paragraph{UCCA Annotation.}
+We begin by creating UCCA annotations for the source sentence, following the
+UCCA guidelines\footnote{All UCCA-related resources can be found
+  here: \url{http://www.cs.huji.ac.il/~oabend/ucca.html}}.
+Let $L$ be the set of possible UCCA labels.
+Given a sentence $s = (w_1, \ldots,w_n)$, its UCCA annotation is a DAG $G=(V,E,\ell)$,
+where $\ell: V \rightarrow L$, and where $W = \{w_1,\ldots,w_n\}$ correspond to the leaves of $G$.
+For every node $v \in V$, we define its {\it yield} $yld(v)$ as $v$'s descendants in $W$.
+The semantic units for a sentence $s$ induced by the annotation $G$,
+is the set of yields of nodes in $V$. %We denote it with $Units(s)$ for brevity.
+We note that the translation is not UCCA-annotated.
+
+%\begin{figure*}[t]
+%    \includegraphics[width=1\textwidth]{ucca-tree-mteval.jpg}
+%    \caption{UCCA Tree evaluated in comparison to an aligned ``translation'' (an
+%	English paraphrase).}
+%    \label{fig:ucca-tree-hume}
+%\end{figure*}
 
 \begin{figure*}
   \begin{adjustbox}{trim=2.3cm 0 0 0}
@@ -315,128 +432,21 @@ We discuss the differences between HMEANT and HUME in \secref{sec:hmeant_comp}.
     \draw (H1) -> (Tom) node[midway, right] {$A$ \hspace{0.2cm}};
     }
   \end{tikzpicture}
+  \\
   \end{adjustbox}
-\caption{\label{fig:ucca_example2}
-  Sample UCCA annotation. Edge labels mark UCCA categories. \#$<$index$>$ marks the node
-indices.}
+  \adjustbox{width=\textwidth,center,margin=.5em}{\it His old daughter loved tennis, and took daily lessons however good he was}
+
+  \caption{\label{fig:ucca_example2}
+    Sample UCCA annotation of a source sentence, translation (below in italics), 
+    and translation judgements over the source units, marked with A,B,R,O,G labels. Yellow/blue marks
+    nodes annotated with A/B, respectively.
+    In our experiments, the translation is in German, Romaninan, Polish or Czech.
+    ``became a passion'' is marked as atomic, as it is a multi-word expression.
+    The dashed line indicates that ``she'' is also a child of the unit ``greatly improved''.
+    UCCA categories, and alignment between source and translation are omitted for brevity.}
+  
 \end{figure*}
 
-
-\paragraph{Semantic Representation.}
-UCCA (Universal Conceptual Cognitive Annotation, \inparcite{abend2013universal}) is a
-cross-linguistically applicable, lightweight
-scheme for semantic annotation. Formally, a UCCA structure is a directed acyclic graph (DAG),
-whose leaves correspond to the words of the text.
-The graph's nodes, called {\sc units}, are either terminals or several elements jointly
-viewed as a single entity according to some semantic or cognitive consideration. Edges bear
-a category, indicating the role of the sub-unit in the structure the unit
-represents.
-
-UCCA's current inventory of distinctions focuses on annotating argument structures
-(adjectival, nominal, verbal and others) and relations between them.
-The most basic notion is the {\sc scene}, which describes a movement, an
-action or a state which is persistent in time. Each Scene contains one main relation, as well
-as one or more participants. For example, the sentence ``After graduation, Tom moved to NYC''
-contains two Scenes, whose main relations are ``graduation'' and ``Tom''.
-The participant ``John'' is a part of both Scenes, while ``NYC'' only of the
-latter. Further categories account for
-relations between Scenes and the internal structures of complex participants and relations.
-See \figref{fig:ucca_example}.
-
-% UCCA Motivation
-UCCA is a natural candidate for defining a semantic
-MT evaluation measure for a number of reasons. 
-First, it defines an intuitive set of categories
-that can be reliably annotated by non-experts, after as little as two hours
-of training \cite{marinotti2014}.
-Second, UCCA is a cross-linguistically applicable scheme, seeking to
-represent what is shared between languages
-by building on linguistic typological theory, and specifically on ``Basic Linguistic Theory''
-\cite{Dixon:10a,Dixon:10b,Dixon:12}, one of the most widely used frameworks for linguistic description.
-The cross-linguistic applicability of UCCA has been tested in annotations of
-English, French, German and Czech.
-Third, the scheme has been shown to be semantically stable
-in translation: UCCA annotations of translated text usually contain the same set of relationships
-\cite{sulem2015conceptual}. This is an indication that the scheme reflects
-a common layer of representation that in a correct translation
-is mostly shared between the translation and the source. 
-
-We note that verbal argument structures are less stable in this sense, as a verbal
-argument structure may be translated or paraphrased to a nominal or adjectival
-argument structure, and are thus less suitable as a basis for a semantic measure.
-For example, ``after he graduated, Tom moved to NYC''
-conveys a similar meaning to ``after graduation, Tom moved to NYC''. 
-
-% While most broad-coverage semantic work focused on shallow semantic structures,
-% predominantly argument structures annotated with their semantic roles, much recent
-% interest has been devoted to defining more complete semantic representation schemes.
-% \oa{should we
-% add that it is less cross-linguistically stable? maybe that's an overkill..
-%  OB: AMR has been applied to more languages, including Chinese, so I would not
-%  dare saying that it is less stable.}
-
-The Abstract Meaning Representation (AMR) scheme \cite{banarescu2013abstract}
-shares much of UCCA's motivation for defining a more complete semantic annotation.
-However, using AMR is not optimal for defining a decomposition of a sentence into semantic
-units as it does not ground its semantic symbols in the text,
-thus not straightwardly allowing a decomposition of the sentence into sub-units.
-Moreover, AMR is more fine-grained than UCCA and consequently more difficult to annotate.
-
-
-Other approaches have been proposed for semantic representation, which are grounded in the words
-and phrases of the text, and have generally represented semantic structures as bi-lexical dependencies.
-Examples include the tectogrammatical layer \parcite{sgallhp:1986} used in the Prague dependency
-treebanks, e.g. the Czech-English one \parcite{hajic2012announcing}, as well
-as dependencies derived from Minimal Recursion Semantics representations \parcite{oepen2006discriminant}.
-Nevertheless, despite their appeal as deep and intuitive means for semantic representation,
-these approaches require linguistic expertise for their annotation, due to the intricate and
-fine-grained distinctions they provide, and are thus in our view less suitable for basing
-an interpretable MT evaluation on. 
-
-%\newcite{Basile:12} attempted to make some aspects of the semantic annotation more accessible,
-%but to our knowledge no results of this brand have been reported.
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{The HUME Measure}\label{sec:hume}
-
-
-\subsection{Annotation Procedure}\label{sec:guidelines}
-
-This section summarises the manual annotation procedure performed in order 
-to compute the HUME measure. 
-We mark the source sentence as $s$ and the translation sentence as $t$. 
-The procedure involves two manual steps: (1) UCCA-annotating $s$, 
-(2) human judgements as to the translation quality of each semantic unit of $s$ relative to $t$,
-where units are defined according to the UCCA annotation.
-We note that UCCA annotation is performed once for every source sentence,
-irrespective of the number of its translations we wish
-to evaluate\footnote{Instead of relying on the source,
-the evaluation could be based on the UCCA structure for the \emph{reference}
-translation. This would allow monolingual annotators to take part in the
-evaluation. On the downside, the translation would have to be aligned to the
-reference and more importantly, we would risk inaccurate judgements due to
-the naturally occurring differences between the source and its reference
-translations.}.
-
-\paragraph{UCCA Annotation.}
-We begin by creating UCCA annotations for the source sentence, following the
-UCCA guidelines\footnote{All UCCA-related resources can be found
-  here: \url{http://www.cs.huji.ac.il/~oabend/ucca.html}}.
-Let $L$ be the set of possible UCCA labels.
-Given a sentence $s = (w_1, \ldots,w_n)$, its UCCA annotation is a DAG $G=(V,E,\ell)$,
-where $\ell: V \rightarrow L$, and where $W = \{w_1,\ldots,w_n\}$ correspond to the leaves of $G$.
-For every node $v \in V$, we define its {\it yield} $yld(v)$ as $v$'s descendants in $W$.
-The semantic units for a sentence $s$ induced by the annotation $G$,
-is the set of yields of nodes in $V$. %We denote it with $Units(s)$ for brevity.
-We note that the translation is not UCCA-annotated.
-
-\begin{figure*}[t]
-    \includegraphics[width=1\textwidth]{ucca-tree-mteval.jpg}
-    \caption{UCCA Tree evaluated in comparison to an aligned ``translation'' (an
-	English paraphrase).}
-    \label{fig:ucca-tree-hume}
-\end{figure*}
 
 \paragraph{Translation Evaluation.}
 The basic strategy for computing HUME is to traverse
