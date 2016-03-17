@@ -710,24 +710,25 @@ MT output has to be structurally annotated.\oa{we can give some empirical data h
 HUME uses just one structural annotation (for the source) while HMEANT relies on
 two independently constructed structural annotations (for both the reference and
 the candidate translation).
-
 We see this difference as crucial where semantic analysis is concerned, as it
 is often impossible to assign a semantic structure to a low quality MT output sentence.
 
-For instance, consider the sentence ``A coronary angioplasty may not be technically possible'',
-which was translated by one of the systems we experimented with as
-``Eine koronare Angioplastie kann nicht technisch m{\"o}glich'', i.e., the main verb ``sein'' (``be'') is omitted.
-While this may be interpreted is a minor error, HMEANT will assign it a very low score, as it failed to
-translate the main verb.
+A design principle of HMEANT states that
+if the translation cannot be annotated with verbal argument structure
+(for whatever reason, including incomprehensibility), it cannot convey the meaning,
+while HUME does not share this theoretical commitment.
+For instance, consider the sentence ``a coronary angioplasty may not be technically possible'',
+and the translation ``eine koronare Angioplastie kann nicht technisch m{\"o}glich''
+(lit. ``a coronary angioplasty can not technically possible''),
+produced by an MT system in our experiments.
+The translation is correct, except that the main verb ``sein'' (``be'') is omitted.
+While this may be interpreted is a minor error, HMEANT will assign it a very low score,
+as it failed to translate the main verb.
 
-We understand that this is a design feature of HMEANT:
-if the translation per se cannot be annotated with verbal argument structure
-(for whatever reason, including incomprehensibility), it cannot convey the meaning.
-
-HMEANT thus makes a stricter check of whether the translation can be understood
+However, HMEANT's independent annotation of the source and translation makes a stricter check
+of whether the translation can be understood.
 than we do. HUME may be artificially boosting the perceived understandability of
-the sentence by providing the source.
-
+the sentence by allowing access to the source.
 
 \subsection{Importance of Alignment}
 
