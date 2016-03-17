@@ -11,6 +11,7 @@
 %\usepackage{hyperref}
 \usepackage{color}
 \usepackage{lipsum,adjustbox}
+\listfiles
 
 \newcommand{\com}[1]{}
 \newcommand{\secref}[1]{Section~\ref{#1}}
@@ -436,7 +437,7 @@ We note that the translation is not UCCA-annotated.
   \end{adjustbox}
   \adjustbox{width=\textwidth,center,margin=.5em}{\it His old daughter loved tennis, and took daily lessons however good he was}
 
-  \caption{\label{fig:ucca_example2}
+  \caption{\label{fig:hume_tree}
     Sample UCCA annotation of a source sentence, translation (below in italics), 
     and translation judgements over the source units, marked with A,B,R,O,G labels. Yellow/blue marks
     nodes annotated with A/B, respectively.
@@ -473,19 +474,19 @@ This could often be due to the translated word having the wrong tense,
 or the wrong morphology, in a way that impacts little on the understandability of the sentence.
 A Red label means that the essential meaning of the unit has not been captured.
 
-Structural units have sub-units (children in the UCCA graph), which may either be
-atomic or structural. The labels assigned to such nodes reflect the extent to which
-the relation between the sub-units.
+Structural units have sub-units (children in the UCCA graph), which may themselves
+either be atomic or structural. The labels assigned to such nodes reflect the extent to which
+the relation between the sub-units is preserved in $t$.
 For instance, a Scene unit represents the relation between the
 Scene elements, such as the predicate (main relation), participants and adverbials.
 Structural units are labeled as ``Adequate'' or ``Bad'', meaning
 that the relation between the sub-units went wrong.
-We make a three-way distinction between translation qualities with structural
-nodes, as opposed to the two-way distinction with atomic units, as lexical units
-often can have slight errors, in which cases we do want to provide partial credit.
+We use a three label system with atomic units, as
+opposed to a two label one in structural units,
+as lexical units often have slight errors, in which cases we do want to provide partial credit.
 
 There are many ways that the relationship between the children might go
-wrong in translation:
+wrong in translation
 
 \begin{compactitem}
 \item The components of the translation are ordered differently from the source,
@@ -499,20 +500,26 @@ wrong in translation:
   For instance, if ``dog bites man'' is translated into ``dog bites''.
 \end{compactitem}
 
-\XXX{Could someone review this for Ondrej.}
-Note that for non-configurational languages, the relationship between the
-governing and the dependent units is often expressed using morphological
-properties of the dependents instead of their ordering (this holds especially for the verb and its
-modifiers, less so for components of noun phrases). Since errors in morphology
-should be expressed on the atomic units, we would expect
-a higher proportion of ``Adequate'' structural units for Czech and Polish
-compared to German and Romanian\oa{is this because that error would already be marked
-  in the atomic units, and thus not in the structural ones?}.
-
-We defined the labels to reflect adequacy,
-rather than fluency judgements. Specifically, annotators are instructed to
+We note that HUME labels reflect adequacy, rather than fluency judgements.
+Specifically, annotators are instructed to
 label a unit as Adequate if its translation is understandable and preserves
 the meaning of the source unit, even if its fluency is impaired.
+
+In non-configurational languages, the relationship between the
+governing and the dependent units is often expressed using morphological
+properties of the dependents instead of their ordering
+(this holds especially for the verb and its modifiers,
+less so for components of noun phrases). Since errors in morphology
+should be expressed on the atomic units, we would expect
+a higher proportion of ``Adequate'' structural units for Czech and Polish
+compared to German and Romanian\oa{but doesn't German also have a case system? Ondrej:
+  could you pinpoint what the difference exactly is?}.
+
+An example HUME annotation is given in \figref{fig:hume_tree},
+which presents an annotation of a UCCA tree, and a corresponding translation.
+We see that ``became a passion'' is deemed atomic, as it is translated as a single unit
+in $t$, and thus its sub-units, ``became'', ``a'' and ``passion'' are not evaluated
+individually. 
 
 %For example, consider the sentence ``After graduation, Tom moved
 %to NYC'' as the source $s$, see \figref{fig:ucca_example}.
@@ -528,13 +535,6 @@ the meaning of the source unit, even if its fluency is impaired.
 %expresses the relation between the graduation and moving Scenes, is marked Bad,
 %as their relation in $t$ is reversed.
 
-Another example is given in \figref{fig:ucca-tree-hume}.
-%``Golf became an obsession for his oldest daughter, she took daily lessons and became very good'',
-The figure shows an annotation of a UCCA tree, and an example annotation for
-each of the units.
-We see that ``became a passion'' is deemed atomic, as it is translated as a single unit
-in $t$, and thus its sub-units, ``became'', ``a'' and ``passion'' are not evaluated
-individually.
 
 \subsection{Composite Score}\label{sec:score}
 
