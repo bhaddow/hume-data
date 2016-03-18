@@ -157,19 +157,18 @@ HMEANT \parcite{lo2011structured}.
 % Also, assigning semantic structure to an MT output, especially a poor one,
 % is difficult and arguably ill-defined.
 
-We propose the Human UCCA-based MT Evaluation (HUME) metric,
-a human evaluation measure that decomposes over the semantic units of the sentence.
-Semantic units are defined according to the 
-UCCA scheme \parcite{abend2013universal}, an appealing candidate for semantic analysis,
+We propose the HUME metric,
+a human evaluation measure that decomposes over the UCCA semantic units of the sentence.
+UCCA\parcite{abend2013universal} is an appealing candidate for semantic analysis,
 due to its cross-linguistic applicability, support for rapid annotation, and coverage
 of many fundamental semantic phenomena, such as verbal, nominal and adjectival
 argument structures and their inter-relations.
 
 HUME operates by aggregating human assessments of the translation quality of individual
-semantic units in the source sentence.
-HUME only requires semantically annotating the source sentence,
-thus avoiding the annotation of machine-generated text 
-and allowing re-use of the source semantic annotation for measuring the quality
+semantic units in the source sentence. We 
+%HUME only requires semantically annotating the source sentence,
+thus avoiding the semantic annotation of machine-generated text. 
+This allows the re-use of the source semantic annotation for measuring the quality
 of different translations of the same source sentence.
 By basing the measure on a direct comparison
 of the source and translation we avoid the difficulties created by using
@@ -181,7 +180,7 @@ After a brief review (\secref{sec:background}), we describe HUME in detail
 (\secref{sec:hume}).
 Our experiments with four language pairs: English to Czech, German, Polish and Romanian (\secref{sec:experiments}) document the
 efficiency (time of annotation) and inter-annotator agreement scores for HUME.
-Finally, the differences from HMEANT are discussed 
+Finally, the differences with HMEANT are discussed 
 (\secref{sec:hmeant_comp}).
 
 % We conduct experiments with four language pairs: English-German, English-Polish,
