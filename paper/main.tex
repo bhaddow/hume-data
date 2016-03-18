@@ -230,8 +230,8 @@ efficiency (time of annotation) and inter-annotator agreement scores for HUME.
 %evaluation that quantifies the adequacy of the translation in preserving the meaning 
 %of the source sentence, and its fluency as a sentence in the target language \cite{lopez2008statistical}.
 Human evaluation is generally done by ranking the outputs of multiple systems
-e.g., in the WMT shared tasks \cite{bojar2015findings}, or by assigning
-individual adequacy/fluency scores to each translation, a procedure recently improved
+e.g., in the WMT tasks \cite{bojar2015findings}, or by giving
+adequacy/fluency scores to each translation, a procedure recently improved
 by \newcite{graham2015improving}.
 However, while providing the gold standard for MT evaluation, human evaluation
 is not a scalable solution.
@@ -242,17 +242,16 @@ is not a scalable solution.
 Scalability is addressed by employing automatic and semi-automatic approximations of human
 judgements. Commonly, such scores decompose over the sub-parts of
 the translation, and quantify how many of these sub-parts appear in a manually created reference translation.
-This decomposition further allows system developers
+This decomposition allows system developers
 to localize the errors, or at least unconfirmed parts within the translation.
 The most commonly used measures decompose over n-grams or individual words, e.g., 
 BLEU \cite{Papineni:2002}, NIST \cite{Doddington:2002} and METEOR  \cite{Banerjee:2005}.
 Another common approach is to determine the similarity between the reference and translation
 by applying string edit distance \cite{snover2006study}.
 While these measures stimulated much progress in MT research by allowing
-the evaluation of massive-scale experiments,
-their decomposition over words and n-grams is better suited for localizing errors
-in the output of shallow MT methods, and is less instructive in identifying the semantic
-nature of the errors. 
+the evaluation of massive-scale experiments, the focus on words and n-grams does
+not provide a good estimate of semantic correctness, and may favour shallow string-based
+MT models.
 
 %These methods are most suitable for evaluating shallow MT approaches and are
 %less instructive as to what aspects of the reference's meaning were not preserved
@@ -268,10 +267,10 @@ nature of the errors.
 In order to address this shortcoming, more recent work quantified
 the similarity of the reference and translation in terms
 of their structure. \newcite{liu2005syntactic} took a syntactic approach, 
-quantifying the similarity between the syntactic structures of the reference and translation.
+using dependency grammar, and
 \newcite{owczarzak2007evaluating} took a similar approach using lexical-functional grammar structures.
-\newcite{gimenez2007linguistic} proposed to aggregate multiple types of information,
-capturing the overlap between the output and reference in terms of their
+\newcite{gimenez2007linguistic} proposed to combine multiple types of information,
+capturing the overlap between the translation and reference in terms of their
 semantic (predicate-argument structures), lexical and morphosyntactic features.
 
 Perhaps the most notable attempt at semantic MT evaluation is MEANT and
@@ -317,6 +316,7 @@ We discuss the differences between HMEANT and HUME in \secref{sec:hmeant_comp}.
     \begin{center}
     \includegraphics[width=0.45\textwidth]{ucca-tree-v2.png}
 
+{\small
 \begin{tabular}{|l|l|l|l|}
 \hline
 L & Linker &  A & Participant \\
@@ -324,17 +324,18 @@ H & Scene & R & Relator \\
 P & Process & C & Centre \\
 \hline
 \end{tabular}
+}
     \end{center}
 \caption{\label{fig:ucca_example_v2}
-  Sample UCCA annotation where leaves correspond to words and nodes correspond to units.
-  Edge labels mark UCCA categories, which are described in the table.}
+  Sample UCCA annotation where leaves correspond to words and nodes to units.
+  Edge labels mark UCCA categories, listed  in the table.}
 %which are largely ignored in this work
 \end{figure}
 
 \paragraph{Semantic Representation.}
 UCCA (Universal Conceptual Cognitive Annotation, \inparcite{abend2013universal}) is a
 cross-linguistically applicable, lightweight
-scheme for semantic annotation. Formally, a UCCA structure is a directed acyclic graph (DAG),
+scheme for semantic annotation. Formally, an UCCA structure is a directed acyclic graph (DAG),
 whose leaves correspond to the words of the text.
 The graph's nodes, called {\sc units}, are either terminals or several elements jointly
 viewed as a single entity according to some semantic or cognitive consideration. Edges bear
@@ -344,7 +345,7 @@ represents.
 UCCA's current inventory of distinctions focuses on argument structures
 (adjectival, nominal, verbal and others) and relations between them.
 The most basic notion is the Scene, which describes a movement, an
-action or a state which is persistent in time. Each Scene contains one main
+action or a state which persists in time. Each Scene contains one main
 relation and zero or more participants. For example, the sentence ``After graduation, Tom moved to NYC''
 contains two Scenes, whose main relations are ``graduation'' and ``moved''.
 The participant ``Tom'' is a part of both Scenes, while ``NYC'' only of the
@@ -360,18 +361,18 @@ of training \cite{marinotti2014}.
 Second, UCCA is a cross-linguistically applicable scheme, seeking to
 represent what is shared between languages
 by building on linguistic typological theory, and specifically on ``Basic Linguistic Theory''
-\cite{Dixon:10a,Dixon:10b,Dixon:12}, one of the most widely used frameworks for linguistic description.
+\cite{Dixon:10a,Dixon:10b,Dixon:12}.
 The cross-linguistic applicability of UCCA has been tested in annotations of
 English, French, German and Czech.
 Third, the scheme has been shown to be semantically stable
 in translation: UCCA annotations of translated text usually contain the same set of relationships
-\cite{sulem2015conceptual}. This is an indication that the scheme reflects
+\cite{sulem2015conceptual}. This indicates that the scheme reflects
 a common layer of representation that in a correct translation
 is mostly shared between the translation and the source. 
 
 We note that verbal argument structures are less stable in this sense, as a verbal
 argument structure may be translated or paraphrased to a nominal or adjectival
-argument structure, and are thus less suitable as a basis for a semantic measure.
+argument structure, and is thus less suitable as a basis for a semantic measure.
 E.g., ``after he graduated, Tom moved to NYC'' contains two verbs,
 but is similar in meaning to the one-verbed
 ``after graduation, Tom moved to NYC''. 
@@ -389,7 +390,7 @@ shares much of UCCA's motivation for defining a more complete semantic annotatio
 However, using AMR is not optimal for defining a decomposition of a sentence into semantic
 units as it does not ground its semantic symbols in the text,
 thus does not provide clear decomposition of the sentence into sub-units.
-Also, AMR is more fine-grained than UCCA and consequently more difficult to annotate.
+Also, AMR is more fine-grained than UCCA and consequently harder to annotate.
 Other approaches pursued a grounded representation of semantics,
 and have generally represented semantic structures as bi-lexical dependencies.
 Examples include the tectogrammatical layer \parcite{sgallhp:1986} used in the Prague dependency
@@ -397,8 +398,8 @@ treebanks, e.g. the Czech-English one \parcite{hajic2012announcing}, as well
 as dependencies derived from Minimal Recursion Semantics representations \parcite{oepen2006discriminant}.
 Nevertheless, despite their appeal as deep and intuitive means for semantic representation,
 these approaches require linguistic expertise for their annotation, due to the intricate and
-fine-grained distinctions they provide, and are thus in our view less suitable for basing
-an interpretable MT evaluation on. 
+fine-grained distinctions they provide, and so we argue they are less suitable as a basis
+for an interpretable MT evaluation.
 
 %\newcite{Basile:12} attempted to make some aspects of the semantic annotation more accessible,
 %but to our knowledge no results of this brand have been reported.
@@ -410,9 +411,9 @@ an interpretable MT evaluation on.
 
 \subsection{Annotation Procedure}\label{sec:guidelines}
 
-This section summarises the manual annotation procedure performed in order 
+This section summarises the manual annotation procedure used
 to compute the HUME measure. 
-We denote the source sentence as $s$ and the translation sentence as $t$. 
+We denote the source sentence as $s$ and the translation as $t$. 
 The procedure involves two manual steps: (1) UCCA-annotating $s$, 
 (2) human judgements as to the translation quality of each semantic unit of $s$ relative to $t$,
 where units are defined according to the UCCA annotation.
