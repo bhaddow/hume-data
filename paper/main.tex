@@ -805,8 +805,12 @@ the data sets released for the WMT14 medical translation task \parcite{bojar-EtA
 %  say how many in each.}.
 % ... if someone asks us to do so...
 
-These translation systems were used to translate texts derived from both NHS 24\footnote{\url{http://www.nhs24.com/}} and Cochrane\footnote{\url{http://www.cochrane.org/}} into the four languages.
-The first organisation is a public body providing healthcare and health-service related information in Scotland, whereas the second is an international NGO which 
+These translation systems were used to translate texts derived from both NHS
+24\footnote{\url{http://www.nhs24.com/}} and
+Cochrane\footnote{\url{http://www.cochrane.org/}} into the four languages.
+NHS~24 is a public body providing healthcare and health-service
+related information in Scotland, Cochrane is an international NGO
+which 
 provides independent systematic reviews on health-related research. From NHS 24, we selected the segments from their
 ``Health A-Z'' in the NHS Inform website, and the Cochrane texts come from their plain language summaries
 and abstracts.
@@ -826,7 +830,7 @@ For the annotation of the MT output, we recruited two annotators for each of Ger
 and Polish and one main annotator for Czech.
 %In order to allow us to calculate
 For IAA also for
-the Czech, we recruited several further annotators to work on a small number of 
+Czech, several further annotators worked on a small number of 
 sentences each. We treat these further annotators as one annotator, giving us two annotators
 for each language pair.
 The annotators were all native  speakers of the respective target languages and fluent in English.
@@ -1008,7 +1012,7 @@ a length range of 10, and we show the variance of kappa with length in \figref{f
 
 }
 \end{tabular}
-\caption{Inter-annotator Agreement (Kappa) versus sentence length, separately for
+\caption{Kappa versus sentence length, separately for
 structural and atomic nodes. The numbers are the node counts in each bin. }
 \label{fig:iaalength}
 \end{figure}
@@ -1059,7 +1063,15 @@ in previous applications of HMEANT to languages other than English (see \perscit
 Czech and by \perscite{chuchunkov-tarelkin-galinskaya:2014:SSST-8} for Russian)
 but the problems are also seen in English.
 
-This focus on verbal predicates has a number of unfortunate consequences. We show an example below:
+%This focus on verbal predicates has a number of unfortunate consequences. We show an example below:
+Consider the example:
+
+% \noindent
+% \begin{inparadesc}
+% \item[Source ] a coronary angioplasty may not be technically possible \\
+% \item[Transl.] eine koronare Angioplastie kann nicht technisch m{\"o}glich \\
+% \item[Gloss ]  a coronary angioplasty can not technically possible \\
+% \end{inparadesc}
 
 \begin{center}
 \begin{tabular}{lp{5.4cm}}
@@ -1076,8 +1088,7 @@ sentence a very low score, as it failed to translate the main verb.
 
 There are however a number of other serious consequences on focussing on verbal
 predicates. We conducted an analysis of the English UCCA Wikipedia
-corpus, comprising
-of 5324 sentences,
+corpus (5324 sentences)
 in order to assess the impact of the following problems: 
 \\
 \begin{inparadesc}
@@ -1085,7 +1096,7 @@ in order to assess the impact of the following problems:
 generally does not convey the meaning of these clauses. They appear in 21.7\% of the sentences,
 according to conservative estimates that only considers non-auxilliary instances of ``be''.
 \\
-\item[Nominative argument structures,] which are ignored by  HMEANT are in fact highly
+\item[Nominal argument structures,] which are ignored by  HMEANT are in fact highly
 pervasive, appearing in 48.7\% of the sentences.
 \\
 \item[Linkers] expressing an inter-relation between
@@ -1181,7 +1192,7 @@ to avoid unduly penalization due to such spurious divergences.
 The same issue was seen by HMEANT authors themselves
 \parcite{lo:wu:reliability:2014}:
 the 
-inter-annotator agreement on SRL dropped from 90\% to 61\% 
+IAA on SRL dropped from 90\% to 61\% 
 when the two aligned structures were from two different annotators.
 
 %HUME uses only automatic (word-level) alignment, which only serves as a cue for directing
@@ -1220,7 +1231,8 @@ with a reference sentence instead of with the source.
 
 \paragraph{Localisation of the Error}
 
-In HMEANT there are no guidelines as to when to propagate and error. In HUME errors are localised as far as possible to where they occur, by the separation of atomic and structural nodes. This allows us to calculate more acurately the total score of the sentence.
+In HMEANT, there are no guidelines as to when to propagate and error. In HUME,
+errors are localised as much as possible to where they occur, by the separation of atomic and structural nodes. This allows us to calculate more acurately the total score of the sentence.
 
 %I see this a falling under the verbal structures point
 %\paragraph{Annotation of Predicates Themselves}
