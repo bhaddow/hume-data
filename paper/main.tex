@@ -19,10 +19,10 @@
 \newcommand{\tabref}[1]{Table~\ref{#1}}
 \newcommand{\XXX}[1]{{\color{red}XXX #1}} % a general todo or comment
 %\newcommand{\XXX}[1]{}
-%\newcommand{\oa}[1]{\footnote{\color{red}OA: #1}}
-\newcommand{\oa}[1]{}
-%\newcommand{\bh}[1]{\footnote{\color{blue}BH: #1}}
-\newcommand{\bh}[1]{}
+\newcommand{\oa}[1]{\footnote{\color{red}OA: #1}}
+%\newcommand{\oa}[1]{}
+\newcommand{\bh}[1]{\footnote{\color{blue}BH: #1}}
+%\newcommand{\bh}[1]{}
 
 \def\perscite#1{\newcite{#1}}
 \def\parcite#1{\cite{#1}}
@@ -555,7 +555,8 @@ HUME aggregates the judgements of the users into a composite score,
 which reflects the overall extent to which the semantic content of $s$ is preserved in $t$.
 
 Annotation of the semantic units requires first deciding whether
-a unit is {\it structural}, i.e., has meaning-bearing sub-units,
+a unit is {\it structural}, i.e., has meaning-bearing sub-units also in the
+target language,
 or {\it atomic}. In most cases, atomic units
 correspond to individual words, but they may also correspond to unanalyzable
 multi-word expressions.
@@ -572,10 +573,12 @@ or the wrong morphology, in a way that impacts little on the understandability o
 A Red label means that the essential meaning of the unit has not been captured.
 
 Structural units have sub-units (children in the UCCA graph), which may themselves
-either be atomic or structural. The labels assigned to such nodes reflect the extent to which
-the relation between the sub-units is preserved in $t$.
-\XXX{(BH: don't follow this) For instance, a Scene unit represents the relation between the
-Scene elements, such as the predicate (main relation), participants and adverbials.}
+either be atomic or structural.
+% Ondrej thinks the following can be simply removed:
+%The labels assigned to such nodes reflect the extent to which
+%the relation between the sub-units is preserved in $t$.
+%\XXX{(BH: don't follow this) For instance, a Scene unit represents the relation between the
+%Scene elements, such as the predicate (main relation), participants and adverbials.}
 Structural units are labeled as ``Adequate'' or ``Bad'', meaning
 that the relation between the sub-units went wrong.
 We use a three label system with atomic units, as
@@ -583,7 +586,7 @@ opposed to a two label one in structural units,
 as atomic units often have slight errors, in which cases we do want to provide partial credit.
 
 There are many ways that the relationship between the children might go
-wrong in translation
+wrong in translation:
 
 \begin{compactitem}
 \item The components of the translation are ordered differently from the source,
