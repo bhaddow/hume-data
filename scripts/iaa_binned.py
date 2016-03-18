@@ -22,7 +22,7 @@ LOG = logging.getLogger(__name__)
 def do_bins(agree, bins, field_name, csv_file, graph_file, name):
   LOG.info("Calculating kappas, binning by " +name)
   #groups = (("ab", ("A", "B")), ("rog", ("R", "O", "G")), ("all", ("A", "B","R", "O", "G")))
-  groups = (("struct", ("A", "B")), ("lex", ("R", "O", "G")))
+  groups = (("struct", ("A", "B")), ("atomic", ("R", "O", "G")))
   with open(csv_file, "w") as ofh:
     writer = csv.writer(ofh)
     writer.writerow(("lang","group","bin_start","bin_end","count","kappa"))
@@ -71,13 +71,13 @@ def do_bins(agree, bins, field_name, csv_file, graph_file, name):
         offset += width
         for rect, count in zip(rects[-1], counts[group]):
           ax.text(rect.get_x() + rect.get_width()/2, rect.get_height(), str(count), 
-              ha='center', va='bottom')
+              ha='center', va='bottom', size='small')
       ax.set_yticks(np.arange(0,1.1,0.1))
       ax.set_xticks(index + 0.5)
       ax.set_xlim(0,len(bins))
       ax.set_xticklabels(["{}-{}".format(n,m) for n,m in bins])
-      lgd = ax.legend([r[0] for r in rects],[g for g,_ in groups], loc='upper right')#, bbox_to_anchor=(1.0,1.1))
-      ax.set_title("Kappa by {}: {}".format(name, lang_name))
+      lgd = ax.legend([r[0] for r in rects],[g for g,_ in groups], loc='upper left', borderpad=0.2)#, bbox_to_anchor=(1.0,1.1))
+      #ax.set_title("Kappa by {}: {}".format(name, lang_name))
       ax.set_ylabel("Kappa")
       ax.set_xlabel(name)
       graph_file_name = "{}_{}.png".format(graph_file, lang)
@@ -108,6 +108,10 @@ def main():
   parser.add_argument("--bleu-bins-plot", help="Plot to file stem", default = "iaa_bleu")
   args = parser.parse_args()
 
+
+  # font size
+  plt.rcParams.update({'font.size': 22})
+  plt.rcParams.update({'figure.autolayout': True})
   
   sentences = pandas.read_csv(args.sentence_file)
   nodes = pandas.read_csv(args.node_file, converters={'node_id': str, 'parent' : str})

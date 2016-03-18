@@ -17,9 +17,12 @@
 \newcommand{\secref}[1]{Section~\ref{#1}}
 \newcommand{\figref}[1]{Figure~\ref{#1}}
 \newcommand{\tabref}[1]{Table~\ref{#1}}
-\newcommand{\XXX}[1]{{\color{red}XXX #1}} % a general todo or comment
-\newcommand{\oa}[1]{\footnote{\color{red}OA: #1}}
-\newcommand{\bh}[1]{\footnote{\color{blue}BH: #1}}
+%\newcommand{\XXX}[1]{{\color{red}XXX #1}} % a general todo or comment
+\newcommand{\XXX}[1]{}
+%\newcommand{\oa}[1]{\footnote{\color{red}OA: #1}}
+\newcommand{\oa}[1]{}
+%\newcommand{\bh}[1]{\footnote{\color{blue}BH: #1}}
+\newcommand{\bh}[1]{}
 
 \def\perscite#1{\newcite{#1}}
 \def\parcite#1{\cite{#1}}
@@ -62,19 +65,38 @@
 
 \begin{abstract}
   
-  Recent interest in semantics-aware MT systems underscores the importance of
-  semantic evaluation for Machine Translation (MT) systems. 
-  A semantic measure, sensitive to possible semantic discrepancies
-  between the translation output and the source, is likely support the construction
-  and tuning of semantics-based MT, much in the same way that string-based measures,
-  such as BLEU, enabled progress in shallower MT.
-  We present a novel human semantic evaluation measure for MT, Human
-  UCCA-based MT Evaluation (HUME), building on the UCCA semantic representation scheme.
-  Making progress over previous work, the proposed measure takes into account
-  a wider range of semantic phenomena and does not rely on semantic annotation
-  of the MT output itself, whose interpretation is often unclear.
-  We experiment with four language pairs, demonstrating HUME's broad applicability,
-  as well as its reliability, reflected in its inter-annotator agreement rates.
+%  Recent interest in semantics-aware MT systems underscores the importance of
+%  semantic evaluation for Machine Translation (MT) systems. 
+%  A semantic measure, sensitive to possible semantic discrepancies
+%  between the translation output and the source, is likely to support the construction
+%  and tuning of semantics-based MT, much in the same way that string-based measures,
+%  such as BLEU, enabled progress in shallower MT.
+%  We present a novel human semantic evaluation measure for MT, Human
+%  UCCA-based MT Evaluation (HUME), building on the UCCA semantic representation scheme.
+%  Making progress over previous work, the proposed measure takes into account
+%  a wider range of semantic phenomena and does not rely on semantic annotation
+%  of the MT output itself, whose interpretation is often unclear.
+%  We experiment with four language pairs, demonstrating HUME's broad applicability,
+%  as well as its reliability, reflected in its inter-annotator agreement rates.
+
+
+Human evaluation of machine translation is a cognitively difficult task and when
+annotators rate or rank complete sentences, we see low levels of agreement especially
+for longer sentences.  
+%In order to extract more reliable annotations, previous research broke down evaluation into smaller components by asking humans to annotate semantic roles on the source and translation, and then to align them. 
+In order to extract more reliable annotations, previous research broke down
+evaluation into smaller components in various ways. 
+We propose a new evaluation method
+HUME
+which is based on semantic annotation called Universal Conceptual Cognitive Annotation (UCCA). UCCA is applicable across many languages, it provides a complete structure over sentences, and it is grounded in the words in the sentence. 
+We apply UCCA only over the source or reference sentence, and not over the
+possibly garbled translation.
+%, 
+%and this makes annotation more reliable and also efficient as we can reuse labor
+%intensive semantic annotations.
+We show that HUME can be reliably applied to
+four different target languages and that sentence level inter-annotator agreement
+does not decrease over longer sentences. 
 
 \end{abstract}
 
@@ -88,20 +110,27 @@ Nevertheless, common measures for MT evaluation, such as adequacy and fluency ju
 or the relative ranking of several possible translations, are problematic in two ways.
 First, as the quality of translation is determined by multiple factors, it is difficult
 to assign a single number that quantifies the quality of the entire sentence. This
-is indeed reflected in the diminishing inter-annotator agreement rates of human ranking measures
-as a function of the sentence length \cite{Bojar:2011}.
+is indeed reflected in the diminishing inter-annotator agreement (IAA) rates of human ranking measures
+%as a function of
+with
+the sentence length \cite{Bojar:2011}.
 Second, a sentence-level quality score does not indicate what parts of the sentence
 are erroneously translated, and hence cannot inform developers in overcoming these errors.
 
-These problems were partially addressed by measures that decompose over sub-parts of the evaluated
-translation sentence (henceforth, {\it translation}),
-most commonly over its words or n-grams,
-quantifying the overlap of its sub-parts relative a reference translation.
-More recent work on MT evaluation proposed measures
-that decompose over semantically defined units,
+These problems are partially addressed by measures that decompose over sub-parts of the evaluated
+translation sentence (henceforth, {\it translation}). For automatic measures,
+these are commonly words or n-grams, for manual measures some structural
+information is taken into account \parcite{machacek:bojar:segranks:2015}.
+% the following is specific to automatic measures:
+%quantifying the overlap of its sub-parts relative a reference translation.
+A promising line of research decomposes
+%More recent work on MT evaluation proposed measures
+%that decompose
+over semantically defined units,
 quantifying the similarity of the output and the reference in terms of
 their verb argument structure; the most notable of these measures is
 HMEANT \cite{lo2011structured}.
+\XXX{Do we want to cut the following shorter?}
 These measures can localize semantic errors in the translation, but
 their focus on verb argument structures misses many pervasive semantic phenomena
 (such as inter-clause linkage and nominal argument structures) and thus they only provide
@@ -225,37 +254,37 @@ the reference and translation in terms of the overlap in
 their verbal argument structures structures and associated semantic roles.
 We discuss the differences between HMEANT and HUME in \secref{sec:hmeant_comp}.
 
-\begin{figure}
-
-\begin{tikzpicture}[semithick, x=2.4cm,y=0.8cm, >=latex, baseline=7ex,
-    inner sep=.3ex, outer sep=.7ex, minimum size=1.2ex,->]
-  \node (ROOT) [fill=black, circle] {}
-  child {node {After} edge from parent node[left]  {$L$\hspace{1.5cm}}}
-  child {node (H1)  [fill=black,circle] {}
-    child {node {graduation} edge from parent node[right] {$P$}}
-      %child {node {to Paris} edge from parent node[right] {$A$}}
-      edge from parent node[left] {$H$}
-    }
-    child {node (H2)  [fill=black,circle] {}
-      child {node  {} edge from parent[draw=none]}
-      child {node  {} edge from parent[draw=none]}
-      child {node  (Tom) {Tom} edge from parent node[right] {$A$}}
-      child {node  {moved} edge from parent node[right] {$P$}}
-      child {node  [fill=black,circle] {}
-        child {node  {to} edge from parent node[right] {$R$}}
-        child {node  {NYC} edge from parent node[right] {$C$}}
-        edge from parent node[right] {$A$}}
-      %child {node {to Paris} edge from parent node[right] {$A$}}
-      edge from parent node[left] {$H$}
-    };
-    \draw (H1) -> (Tom) node[midway, right] {$A$ \hspace{0.2cm}};
-  \end{tikzpicture}
-\caption{\label{fig:ucca_example}
-  Sample UCCA annotation of the sentence ``After graduation, Tom moved
-  to NYC''. Leaves correspond to words, whereas nodes correspond to units.
-  Edge labels mark UCCA categories, which are described in the table.}
-%which are largely ignored in this work
-\end{figure}
+%\begin{figure}
+%
+%\begin{tikzpicture}[semithick, x=2.4cm,y=0.8cm, >=latex, baseline=7ex,
+%    inner sep=.3ex, outer sep=.7ex, minimum size=1.2ex,->]
+%  \node (ROOT) [fill=black, circle] {}
+%  child {node {After} edge from parent node[left]  {$L$\hspace{1.5cm}}}
+%  child {node (H1)  [fill=black,circle] {}
+%    child {node {graduation} edge from parent node[right] {$P$}}
+%      %child {node {to Paris} edge from parent node[right] {$A$}}
+%      edge from parent node[left] {$H$}
+%    }
+%    child {node (H2)  [fill=black,circle] {}
+%      child {node  {} edge from parent[draw=none]}
+%      child {node  {} edge from parent[draw=none]}
+%      child {node  (Tom) {Tom} edge from parent node[right] {$A$}}
+%      child {node  {moved} edge from parent node[right] {$P$}}
+%      child {node  [fill=black,circle] {}
+%        child {node  {to} edge from parent node[right] {$R$}}
+%        child {node  {NYC} edge from parent node[right] {$C$}}
+%        edge from parent node[right] {$A$}}
+%      %child {node {to Paris} edge from parent node[right] {$A$}}
+%      edge from parent node[left] {$H$}
+%    };
+%    \draw (H1) -> (Tom) node[midway, right] {$A$ \hspace{0.2cm}};
+%  \end{tikzpicture}
+%\caption{\label{fig:ucca_example}
+%  Sample UCCA annotation of the sentence ``After graduation, Tom moved
+%  to NYC''. Leaves correspond to words, whereas nodes correspond to units.
+%  Edge labels mark UCCA categories, which are described in the table.}
+%%which are largely ignored in this work
+%\end{figure}
 
 
 \begin{figure}
@@ -419,6 +448,88 @@ the relationship between child nodes is maintained and therefore it is marked
 % propagated in HMEANT either:
 %In HMEANT, it is not clear whether errors should be propegated up the SRL hierarchy. 
 
+
+
+%\begin{figure*}
+%  \begin{adjustbox}{trim=2.3cm 0 0 0}
+%   \begin{tikzpicture}
+%     [ level distance=12mm,
+%	   level 1/.style={sibling distance=7.5em,level distance=7mm},
+%       level 2/.style={sibling distance=5em,level distance=12mm},
+%       level 3/.style={sibling distance=5em},
+%       level 4/.style={sibling distance=3em}]
+%     %[semithick, x=2.4cm,y=0.8cm, >=latex, baseline=7ex,
+%     %  inner sep=.3ex, outer sep=.7ex, minimum size=1.2ex,->]
+%   \node (ROOT) [label={B}] [fill=blue, circle] {}
+%   child {node (H3) [label={A}] [fill=yellow,circle] {}
+%     child {node [label={[red]:R}] {Golf} edge from parent node[left] {}}
+%     child {node (H1) [label={[orange]30:O}] [fill=orange,circle] {}
+%       child {node [label={}] {became} edge from parent node[left]  {}}
+%       child {node [label={}] {a} edge from parent node[left]  {}}
+%       child {node [label={}] {passion} edge from parent node[left]  {}}
+%     }
+%     child {node (H2) [label={A}] [fill=yellow,circle] {}
+%       child {node {} edge from parent[draw=none] {}}
+%       child {node {} edge from parent[draw=none] {}}
+%       child {node {} edge from parent[draw=none] {}}
+%       child {node {} edge from parent[draw=none] {}}
+%       child {node [label={[red]:R}] {for} edge from parent node[left]  {}}
+%       child {node [label={[green]:G}] {his} edge from parent node[left]  {}}
+%       child {node [label={[orange]:O}] {oldest} edge from parent node[left]  {}}
+%       child {node [label={[green]:G}] {daughter} edge from parent node[left]  {}}
+%     }
+%   }
+%   child {node {} edge from parent[draw=none] {}}
+%   child {node (H4) [label={[]30:A}] [fill=yellow,circle] {}
+%     child {node (she) [label={[green]:G}] {she} edge from parent node[left]  {}}
+%     child {node [label={[green]:G}] {attended} edge from parent node[left]  {}}
+%     child {node [label={[green]:G}] {daily} edge from parent node[left]  {}}
+%     child {node [label={[green]:G}] {lessons} edge from parent node[left]  {}}
+%   }
+%   child {node [label={[red]:R}] {and} edge from parent node[left]  {}}
+%   child {node (H5) [label={A}] [fill=yellow,circle] {}  
+%     child {node [label={[red]:R}] {greatly} edge from parent node[left] {}}
+%     child {node [label={[orange]:O}] {improved} edge from parent node[left] {}}
+%   };
+%   \draw[dashed] (H5) -> (she) ;
+% 
+%   \com{
+%   child {node (H1) [label={\#8}] [fill=black,circle] {}
+%     child {node [label={\#2}] {graduation} edge from parent node[right] {$P$}}
+%       %child {node {to Paris} edge from parent node[right] {$A$}}
+%       edge from parent node[left] {$H$}
+%     }
+%     child {node (H2) [label={\#9}] [fill=black,circle] {}
+%       child {node  {} edge from parent[draw=none]}
+%       child {node  {} edge from parent[draw=none]}
+%       child {node [label={\#3}] (Tom) {Tom} edge from parent node[right] {$A$}}
+%       child {node [label={\#4}] {moved} edge from parent node[right] {$P$}}
+%       child {node [label={\#10}] [fill=black,circle] {}
+%         child {node [label={\#5}] {to} edge from parent node[right] {$R$}}
+%         child {node [label={\#6}] {NYC} edge from parent node[right] {$C$}}
+%         edge from parent node[right] {$A$}}
+%       %child {node {to Paris} edge from parent node[right] {$A$}}
+%       edge from parent node[left] {$H$}
+%     };
+%     \draw (H1) -> (Tom) node[midway, right] {$A$ \hspace{0.2cm}};
+%     }
+%   \end{tikzpicture}
+%  \\
+%  \end{adjustbox}
+%    % Ondrej removed the width=\textwidth from the options below to keep font
+%	% unenlarged:
+%  \adjustbox{center,margin=.5em}{\it His old daughter loved tennis, and took daily lessons however good he was}
+%
+%  \caption{\label{fig:hume_tree}
+%    Sample UCCA annotation of a source sentence, translation (below in italics), 
+%    and translation judgements over the source units, marked with A,B,R,O,G labels. Yellow/blue marks
+%    nodes annotated with A/B, respectively.
+%    In our experiments, the translation is in German, Romaninan, Polish or Czech.
+%    ``became a passion'' is marked as atomic, as it is a multi-word expression.
+%    The dashed line indicates that ``she'' is also a child of the unit ``greatly improved''.
+%    UCCA categories, and alignment between source and translation are omitted for brevity.}
+%  
+%\end{figure*}
 
 
 \paragraph{Translation Evaluation.}
@@ -665,7 +776,7 @@ nominalized or vice versa. An example from our dataset:
 
 Here is \XXX{another} example with a missing linker: the source \equo{However,
 this review\dots} was translated as \equo{Diese
-Überprüfung\dots} (lit. \equo{This review}). The omission is not by HMEANT at
+\"Uberpr\"ufung\dots} (lit. \equo{This review}). The omission is not by HMEANT at
 all.
 
 We are not aware of any empirical evaluation that demonstrates that verb argument structure,
@@ -733,7 +844,7 @@ translations diverge without any good reason, for instance due to a different
 interpretation of a PP-attachment, the verb can have one additional modifier in
 one of the structures. It would be desirable to allow updates to the structural
 annotations also at the alignment stage
-to avoid unduly penalization due to such a spurious diverge.
+to avoid unduly penalization due to such a spurious divergence.
 The same issue was observed by HMEANT authors themselves
 \parcite{lo:wu:reliability:2014}:
 the 
@@ -765,7 +876,7 @@ from a third language. ``References'' can thus easily contain information
 that does not appear in the ``source''.
 
 
-\paragraph{Annotation of Predicates}
+\paragraph{Annotation of Predicates Themselves}
 
 HUME allows to annotate multi-word and even
 non-contiguous elements as a single unit. HMEANT, on the other hand, always
@@ -967,9 +1078,10 @@ To assess whether, as we hoped, HUME would make it easier to reliably annotate l
 we binned the sentences according to length and measured Kappa on each of the bins. Each bin covers
 a length range of 10, and we show the variance of kappa with length in \figref{fig:iaalength}.
 
-\def\iaafig #1{\includegraphics[width=7cm]{iaa_length_#1.png}}
+\def\iaafig #1{\includegraphics[width=3.8cm]{iaa_length_#1.png}}
 
-\begin{figure*}[ht!]
+\begin{figure}[ht!]
+\renewcommand{\tabcolsep}{0pt}
 \begin{tabular}{cc}
 
 
@@ -996,11 +1108,34 @@ a length range of 10, and we show the variance of kappa with length in \figref{f
 \caption{Inter-annotator Agreement (Kappa) versus sentence length, separately for
 structural and atomic nodes. The numbers are the node counts in each bin. }
 \label{fig:iaalength}
-\end{figure*}
+\end{figure}
 
-\def\iaafig #1{\includegraphics[width=7cm]{iaa_heatmap_#1.png}}
+We see from \figref{fig:iaalength} that there is no reduction of IAA with sentence
+length, except perhaps in German. Also, from \tabref{tab:iaa} the overall IAA
+is quite similar (0.6-0.7) for all languages, showing good agreement.
+However, there are differences observed when we break down by node type.
+In particular, we see a contrast  between
+Czech and Polish, where the IAA is higher for atomic than for structural nodes, and German and Romanian,
+where the reverse is true. We also observe low IAA (around 0.3) in the cases of
+German atomic nodes, and Polish and Czech structural nodes.
 
-\begin{figure*}[ht!]
+Looking more closely at the areas of disagreement, we see that for the Polish structural nodes, the 
+proportion of As was quite different between the two annotators (53\% vs. 71\%), whereas for other
+languages the annotators agree in the proportions. We believe that this was because one of the Polish
+annotators did not fully understand the guidelines for structural nodes, and percolated
+errors up the tree, creating more Bs. For the German lexical nodes, and Czech structural nodes, where
+Kappa is also around 0.3, the proportion of such nodes being marked as ``correct'' is relatively 
+high, meaning that the class distribution is more skewed, so the expected agreement used in the
+Kappa calculation is high, lowering Kappa. Essentially, the annotation problem is harder when the classes
+are more skewed. Finally we note some evidence of domain-specific disagreements, for instance the German
+MT system normally translated ``review'' (as in ``systematic review'' -- a frequent term in the 
+Cochrane texts) as ``\"uberpr\"ufung'', which 
+one annotator marked correct, and the other (a Cochrane employee)  as incorrect.
+
+\def\iaafig #1{\includegraphics[width=3.8cm]{iaa_heatmap_#1.png}}
+
+\begin{figure}[ht!]
+\renewcommand{\tabcolsep}{0pt}
 \begin{tabular}{cc}
 
 
@@ -1026,30 +1161,9 @@ structural and atomic nodes. The numbers are the node counts in each bin. }
 \end{tabular}
 \caption{Confusion matrices for each of the language pairs, plotted as heatmaps.}
 \label{fig:heatmap}
-\end{figure*}
+\end{figure}
 
 
-We see from \figref{fig:iaalength} that there is no reduction of IAA with sentence
-length, except perhaps in German. Also, from \tabref{tab:iaa} the overall IAA
-is quite similar (0.6-0.7) for all languages, showing good agreement.
-However, there are differences observed when we break down by node type.
-In particular, we see a contrast  between
-Czech and Polish, where the IAA is higher for atomic than for structural nodes, and German and Romanian,
-where the reverse is true. We also observe low IAA (around 0.3) in the cases of
-German atomic nodes, and Polish and Czech structural nodes.
-
-Looking more closely at the areas of disagreement, we see that for the Polish structural nodes, the 
-proportion of As was quite different between the two annotators (53\% vs. 71\%), whereas for other
-languages the annotators agree in the proportions. We believe that this was because one of the Polish
-annotators did not fully understand the guidelines for structural nodes, and percolated
-errors up the tree, creating more Bs. For the German lexical nodes, and Czech structural nodes, where
-Kappa is also around 0.3, the proportion of such nodes being marked as ``correct'' is relatively 
-high, meaning that the class distribution is more skewed, so the expected agreement used in the
-Kappa calculation is high, lowering Kappa. Essentially, the annotation problem is harder when the classes
-are more skewed. Finally we note some evidence of domain-specific disagreements, for instance the German
-MT system normally translated ``review'' (as in ``systematic review'' -- a frequent term in the 
-Cochrane texts) as ``\"uberpr\"ufung'', which 
-one annotator marked correct, and the other (a Cochrane employee)  as incorrect.
 
 %\subsection{Discussion of Disagreements}\label{sec:disagreements}
 
