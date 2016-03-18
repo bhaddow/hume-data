@@ -1104,7 +1104,11 @@ pervasive, appearing in 48.7\% of the sentences.
 \\
 \item[Linkers] expressing an inter-relation between
 clauses (mainly discourse markers and coordinating conjunctions) appear in 56\% of the
-sentences\footnote{Argument structures and linkers are explicitly marked in UCCA. We identified non-auxiliary instances of ``be'' and nouns using the NLTK standard tagger. Nominative argument structures are here defined as Scenes whose main relation is headed by a noun.}.
+sentences, but ignored by HMEANT.
+An example where a linker is omitted in translation in our experiments is
+with the source \equo{However, this review\dots}, which was translated to
+the German \equo{Diese \"Uberpr\"ufung\dots} (lit. \equo{This review}).
+This omission will not be taken into account by HMEANT at all\footnote{Argument structures and linkers are explicitly marked in UCCA. We identified non-auxiliary instances of ``be'' and nouns using the NLTK standard tagger. Nominative argument structures are here defined as Scenes whose main relation is headed by a noun.}.
 \end{inparadesc}
 
 % No space
@@ -1118,12 +1122,7 @@ sentences\footnote{Argument structures and linkers are explicitly marked in UCCA
 %  not totally sure that the meaning is well preserved. So Ondrej would actually
 %  *remove* this example, because it would illustrate HMEANT's problems only if
 %  the meaning was correct.}
-
-%Another example where a linker is omitted in translation:
-%the source \equo{However, this review\dots}, which was translated as \equo{Diese
-%\"Uberpr\"ufung\dots} (lit. \equo{This review}).
-%This omission will not be taken into account by HMEANT at all.
-  
+ 
 We are not aware of any empirical evaluation that demonstrates that verb argument structure,
 taken alone, captures the crux of the sentence semantics meanings.
 % I am not sure that this is true
@@ -1234,8 +1233,10 @@ with a reference sentence instead of with the source.
 
 \paragraph{Localisation of the Error}
 
-In HMEANT, there are no guidelines as to when to propagate and error. In HUME,
-errors are localised as much as possible to where they occur, by the separation of atomic and structural nodes. This allows us to calculate more accurately the total score of the sentence.
+In HMEANT, there are no guidelines as to when to propagate an error. In HUME,
+errors are localised as much as possible to where they occur,
+by the separation of atomic and structural nodes.
+This allows us to calculate more accurately the total score of the sentence.
 
 %I see this a falling under the verbal structures point
 %\paragraph{Annotation of Predicates Themselves}
