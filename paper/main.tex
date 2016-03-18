@@ -651,16 +651,16 @@ on configurational vs. non-configurational languages.
 \subsection{Composite Score}\label{sec:score}
 
 We proceed to detailing how judgements on the semantic units
-of the source are aggregated into a composite score.
-While future extensive empirical evaluation with HUME and its application to MT
-system tuning may suggest more complex definition,
-as a starting point we take a parsimonious approach,
+of the source are aggregated into a composite score. We start by taking a parsiminous approach
+%While future extensive empirical evaluation with HUME and its application to MT
+%system tuning may suggest more complex definition,
+%as a starting point we take a parsimonious approach,
 and compute an accuracy score.
 
 Let $\Correct(s,t)$ be the number of atomic units in $s$ marked as Green relative to $t$ plus
 the number of structural units in $s$ marked as Adequate relative to $t$.
 Let $\Partial(s,t)$ be the number of atomic units in $s$ marked as Orange relative
-to $t$. Let $\Units(s)$ be the total number of units marked with any of the five labels.
+to $t$. Let $\setsize{\Units(s)}$ be the total number of units marked with any of the five labels.
 Then HUME's composite score is:
 
 \vspace{-.5cm}
@@ -675,18 +675,21 @@ Then HUME's composite score is:
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Annotation Interface}
 
-We turn to discuss the interface for collecting human judgements on the semantic units
-of the source, relating to the translation. UCCA annotations of the source are done offline,
+We now describe the HUME annotation interface, shown in Figure~\figref{fig:interface}. 
+%We turn to discuss the interface for collecting human judgements on the semantic units
+%of the source, relating to the translation. 
+UCCA annotations of the source are done offline,
 using the UCCA web application.
-
-\figref{fig:interface} presents the user interface of HUME. 
+%\figref{fig:interface} presents the user interface of HUME. 
 The translation appears at the top, and
 the source sentence directly below it. Underneath the source sentence appears
-its list of semantic units. For each semantic unit, including the one for the
-entire source sentence, there is a textbox, displaying the yield of that unit.
-Information on the category of the unit (e.g., whether it is a Scene, participant etc.).
+its list of semantic units. 
+%For each semantic unit, including the one for the
+%entire source sentence, there is a textbox, displaying the yield of that unit.
+%Information on the category of the unit (e.g., whether it is a Scene, participant etc.).
 The user is asked to select a label for each unit,
-by clicking the ``A'', ``B'', Green, Orange, or Red buttons to the left of the unit's box.
+by clicking the ``A'', ``B'', Green, Orange, or Red buttons to the right of the unit's box.
+Note that the UCCA labels are not shown.
 
 The interface presents, for each unit, the translation segment aligned with it.
 This allows the user, especially in long sentences, to focus her attention on the parts
@@ -706,12 +709,15 @@ Intervening words are likely change the meaning of the translation
 of $u$, and thus should be paid attention to when considering whether the translation
 is correct or not.
 
-For example, consider the sentence $s=$``We're driving back on Friday'' and the German
-translation t=``Am Freitag fahren wir zur\"uck'' (lit. ``on Friday driving we back'').
-``driving back'' will be aligned to ``fahren ... zur\"uck'',
-and ``wir'' will be marked as intervening word. Another example
-appears in \figref{fig:interface}, where ``ongoing pregnancy'' is translated to
-``Schwangerschaft ... laufenden'' (lit. ``pregnancy ... ongoing'').
+For example, 
+%consider the sentence $s=$``We're driving back on Friday'' and the German
+%translation t=``Am Freitag fahren wir zur\"uck'' (lit. ``on Friday driving we back'').
+%``driving back'' will be aligned to ``fahren ... zur\"uck'',
+%and ``wir'' will be marked as intervening word. Another example
+in \figref{fig:interface}, ``ongoing pregnancy'' is translated to
+``Schwangerschaft ... laufenden'' (lit. ``pregnancy ... ongoing''). The interleaving 
+German words shown in red should not occur there, and the annotator should take this
+into account and mark this structural node as ``B'', bad. 
 
 
 % Ondrej did the following in a footnote in Section 3.1 Annotation Procedure
@@ -734,9 +740,8 @@ appears in \figref{fig:interface}, where ``ongoing pregnancy'' is translated to
     \begin{center}
     \includegraphics[width=1\textwidth]{hume_interface2.jpg}
     \caption{The HUME annotation tool, based on the UCCA tool. The faded orange box at the top
-      presents the translation, the large box below it presents the source. The tree of semantic units
-      for the source is given underneath, where the aligned text appears in italics, and intervening words
-      appear in red with a smaller font (e.g., in the first box).}
+      contains the translation, and directly below it is the source sentence. The tree of semantic units
+      is shown below the source. Alignments between the source and translation appear in italics and unaligned intervening words appear in red.}
     \label{fig:interface}
     \end{center}
 \end{figure*}
