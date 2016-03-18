@@ -109,20 +109,27 @@ Nevertheless, common measures for MT evaluation, such as adequacy and fluency ju
 or the relative ranking of several possible translations, are problematic in two ways.
 First, as the quality of translation is determined by multiple factors, it is difficult
 to assign a single number that quantifies the quality of the entire sentence. This
-is indeed reflected in the diminishing inter-annotator agreement rates of human ranking measures
-as a function of the sentence length \cite{Bojar:2011}.
+is indeed reflected in the diminishing inter-annotator agreement (IAA) rates of human ranking measures
+%as a function of
+with
+the sentence length \cite{Bojar:2011}.
 Second, a sentence-level quality score does not indicate what parts of the sentence
 are erroneously translated, and hence cannot inform developers in overcoming these errors.
 
-These problems were partially addressed by measures that decompose over sub-parts of the evaluated
-translation sentence (henceforth, {\it translation}),
-most commonly over its words or n-grams,
-quantifying the overlap of its sub-parts relative a reference translation.
-More recent work on MT evaluation proposed measures
-that decompose over semantically defined units,
+These problems are partially addressed by measures that decompose over sub-parts of the evaluated
+translation sentence (henceforth, {\it translation}). For automatic measures,
+these are commonly words or n-grams, for manual measures some structural
+information is taken into account \parcite{machacek:bojar:segranks:2015}.
+% the following is specific to automatic measures:
+%quantifying the overlap of its sub-parts relative a reference translation.
+A promising line of research decomposes
+%More recent work on MT evaluation proposed measures
+%that decompose
+over semantically defined units,
 quantifying the similarity of the output and the reference in terms of
 their verb argument structure; the most notable of these measures is
 HMEANT \cite{lo2011structured}.
+\XXX{Do we want to cut the following shorter?}
 These measures can localize semantic errors in the translation, but
 their focus on verb argument structures misses many pervasive semantic phenomena
 (such as inter-clause linkage and nominal argument structures) and thus they only provide
