@@ -146,14 +146,15 @@ over semantically defined units,
 quantifying the similarity of the output and the reference in terms of
 their verb argument structure; the most notable of these measures is
 HMEANT \cite{lo2011structured}.
-\XXX{Do we want to cut the following shorter?}
-However, 
-their focus on verb argument structures misses many semantic phenomena
-(such as inter-clause linkage and nominal argument structures), providing
-only
-a limited perspective on the semantic similarity between the translation and reference.
-Also, assigning semantic structure to an MT output, especially a poor one,
-is difficult and arguably ill-defined.
+% SAVING SPACE:
+% \XXX{Do we want to cut the following shorter?}
+% However, 
+% their focus on verb argument structures misses many semantic phenomena
+% (such as inter-clause linkage and nominal argument structures), providing
+% only
+% a limited perspective on the semantic similarity between the translation and reference.
+% Also, assigning semantic structure to an MT output, especially a poor one,
+% is difficult and arguably ill-defined.
 
 We propose the Human UCCA-based MT Evaluation (HUME) metric,
 a human evaluation measure that decomposes over the semantic units of the sentence.
@@ -597,9 +598,11 @@ wrong in translation:
 \item A superfluous word or phrase has been inserted into
   the translation. For instance, if ``dog bites man'' is translated into ``dog viciously bites man''.
 \item One of the sub-units is missing from the translation.
-  For instance, if ``dog bites man'' is translated into ``dog bites''. \bh{Note that in this case we also 
-  get an error in the atomic unit, assuming that ``man'' is a semantic unit in the source, but for the other
-  two cases there is no atomic unit error.}
+  For instance, if ``dog bites man'' is translated into ``dog bites''.
+% XXX let's leave the reviewers to notice this:
+%  \bh{Note that in this case we also 
+%  get an error in the atomic unit, assuming that ``man'' is a semantic unit in the source, but for the other
+%  two cases there is no atomic unit error.}
 \end{compactitem}
 
 HUME labels reflect adequacy, rather than fluency judgements.
@@ -718,7 +721,7 @@ $t$ to be $a(u)=\bigcup_{(x_s,x_t) \in A \wedge x_s \cap yld(u) \neq \emptyset} 
 Where $a(u)$ is discontiguous in the text, words between the left
 and right boundaries of $a(u)$ which are not contained in it (intervening words)
 are presented in a smaller red font.
-Intervening words are likely change the meaning of the translation
+Intervening words are likely to change the meaning of the translation
 of $u$, and thus should be paid attention to when considering whether the translation
 is correct or not.
 
@@ -891,10 +894,13 @@ between the sentences they annotated. For Czech we had the entire batch
 annotated by one main annotator and multiple secondary annotators, 
 each annotating a sub-part of the batch.
 
-In order to compute Kappa, we consider the annotation task as a classification task on 
-nodes, and compute agreement on nodes which have two annotations from different annotators.
+\tabref{tab:iaa} reports the number of nodes which have two annotations from
+different annotators and the corresponding Kappas.
+%
+%In order to compute Kappa, we consider the annotation task as a classification task on 
+%nodes, and compute agreement on nodes which have two annotations from different annotators.
 We report the overall Kappa, as well as separate Kappas on atomic
-nodes (annotated as Red, Orange or Green) and the structural nodes (annotated
+nodes (annotated as Red, Orange or Green) and structural nodes (annotated
 as Adequate or Bad).
 As expected and confirmed by confusion matrices in \figref{fig:heatmap}, there
 is generally little confusion between the two types of nodes.
