@@ -808,12 +808,22 @@ from a third language. ``References'' can thus easily contain information
 that does not appear in the ``source''.
 
 
-\paragraph{Technical Differences}
+\paragraph{Annotation of Predicates}
 
-+ allows for multi-word and even non-contiguous elements
+HUME allows to annotate multi-word and even
+non-contiguous elements as a single unit. HMEANT, on the other hand, always
+required exactly one word to be annotated as the predicate (``Action''), which
+is often linguistically inadequate.
 
-+ allows to indicate the quality of the predicates ("Actions")
+Another problem with HMEANT identified by \parcite{bojar:wu:ssst:2012} was the
 
+inability to indicate that the predicate is somewhat mistranslated (e.g.
+accidentally negated or in a slightly wrong tense). HMEANT
+annotation allows either to mark the source and reference frames as matching
+(which implies that the corresponding predicates are correct translations of each
+other), or as non-matching (which leads to a zero score for the whole frame) but
+nothing in between. In HUME, the verb is still present as a sub-unit of the
+frame and has the traffic-lights annotation.
 
 \oa{I would consider adding further examples from the Google Doc. For instnace ``your risk of falling'' -- ``Ihr Risiko'' or
   ``Two {\bf review} authors assessed the studies independently and extracted outcome data'' -- ``Zwei Autoren bewertete die Studien unabh\"angig zu {\bf \"uberpr\"ufen}''}
