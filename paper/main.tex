@@ -399,7 +399,20 @@ We note that the translation is not UCCA-annotated.
 Atomic units are labelled using traffic lights and structural nodes are marked A or B.}
 \end{figure}
 
-In Figure~\ref{fig:hume_tree_v2} we can see an example of a possible HUME annotation, with the translation shown in English for ease of comprehension. When evaluating ``to NYC'' the annotator looks at the translation and sees the word ``stateside''. This word captures the whole phrase and so we mark the structural node with an atomic label. Here we choose ``Orange'' but the annotator could equally have decided that this translation is wrong and marked it as ``Red''. The ability to mark structural nodes with atomic labels allows the annotator to account for translations which only correspond at the phrase level. Another feature highlighted in this example is that the root node is ``Adequate''. This might seem confusing, as the relationship between the scenes has changed in the translation. However, an important feature of HUME is that penalises errors where they occur. In HUME, the error is caused by a wrong translation of the linker ``After'' which translates as ``by'' and this is marked as ``Red''. The root node still has two scene linked by one linker and there relationship between child nodes is maintained and therefore it is marked ``Adequate''. In HMEANT it is not clear whether errors should be propegated up the SRL hierarchy. 
+In Figure~\ref{fig:hume_tree_v2} we can see an example of a possible HUME
+annotation, with the translation shown in English for ease of comprehension.
+When evaluating ``to NYC'' the annotator looks at the translation and sees the
+word ``stateside''. This word captures the whole phrase and so we mark the
+structural node with an atomic label. Here we choose ``Orange'' but the
+annotator could equally have decided that this translation is wrong and marked
+it as ``Red''. The ability to mark structural nodes with atomic labels allows
+the annotator to account for translations which only correspond at the phrase
+level. Another feature highlighted in this example is that the root node is
+``Adequate''. This might seem confusing, as the relationship between the scenes
+has changed in the translation. However, an important feature of HUME is that
+penalises errors where they occur. In HUME, the error is caused by a wrong
+translation of the linker ``After'' which translates as ``by'' and this is
+marked as ``Red''. The root node still has two scenes linked by one linker and there relationship between child nodes is maintained and therefore it is marked ``Adequate''. In HMEANT it is not clear whether errors should be propegated up the SRL hierarchy. 
 
 
 
