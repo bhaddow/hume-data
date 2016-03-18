@@ -809,19 +809,23 @@ and abstracts.
 \subsection{Annotation Statistics}
 \label{sec:annot_stats}
 
-Source sentences are all in English, and the UCCA annotation was performed by four
+Source sentences are all in English, and their UCCA annotation was performed by four
 computational linguists and one linguist.
 
 For the annotation of the MT output, we recruited two annotators for each of German, Romanian
-and Polish and one main annotator for Czech. In order to allow us to calculate IAA also for
-the Czech annotations we recruited several further annotators to work on a small number of 
+and Polish and one main annotator for Czech.
+%In order to allow us to calculate
+For IAA also for
+the Czech, we recruited several further annotators to work on a small number of 
 sentences each. We treat these further annotators as one annotator, giving us two annotators
 for each language pair.
 The annotators were all native  speakers of the respective target languages and fluent in English.
 
-In \tabref{tab:annot},
-we show the total number of sentences and nodes annotated by each annotator. Note that not all nodes in all sentences were annotated. Sometimes this was because the
-annotator did not finish a node, or accidentally missed a node, but in many cases it was also because it was an implicit 
+\tabref{tab:annot}
+shows the total number of sentences and nodes annotated by each annotator. Note
+that not all nodes in all sentences were annotated. Sometimes,
+%this was because
+the annotator did not finish a sentence or accidentally missed a node, but in many cases it was also because it was an implicit 
 UCCA node, which was not shown to the annotators since there is no corresponding source segment.
 \begin{table}
 \begin{center}
@@ -874,8 +878,8 @@ We do not give times for the second Czech
 \subsection{Inter-Annotator Agreement}
 \label{sec:iaa}
 
-\oa{what is the purpose of the BLEU binning? is it because low quality and high
-quality translations often diverge in their agreement scores?}
+%\oa{what is the purpose of the BLEU binning? is it because low quality and high
+%quality translations often diverge in their agreement scores?}
 
 In order to assess the consistency of the annotation, we measure the Inter-Annotator
 Agreement (IAA) using Cohen's Kappa on the multiply-annotated portions of the data.
@@ -1058,7 +1062,9 @@ nominalized or vice versa. An example from our dataset:
   \"uberpr\"ufen}\dots{}'' (lit. ``Two authors assessed the studies
   independently to review\dots").\XXX{This is Omri's example, with
   Ondrej's gloss for German. Ondrej is
-  not totally sure that the meaning is well preserved.}
+  not totally sure that the meaning is well preserved. So Ondrej would actually
+  *remove* this example, because it would illustrate HMEANT's problems only if
+  the meaning was correct.}
 
 Another example where a linker is omitted in translation:
 the source \equo{However, this review\dots}, which was translated as \equo{Diese
@@ -1191,13 +1197,6 @@ other), or as non-matching (which leads to a zero score for the whole frame) but
 nothing in between. In HUME, the verb is still present as a sub-unit of the
 frame and has the traffic-lights annotation.
 
-\XXX{Omri: I would consider adding further examples from the Google Doc. For instnace
-``your risk of falling'' -- ``Ihr Risiko''.
-Ondrej: I don't see any HMEANT problem here, the whole NP 'your risk of falling'
-is aligned with 'Ihr Risiko' and HMEANT allows to indicate that the match was
-partial, to that's probably what everyone would choose. I've put the other
-example higher, but please have a look, I'm not sure if we should keep it there
-at all.}
   
 % \Subsectionngigngig zu  Zu { to be removed}
 % 
