@@ -17,12 +17,12 @@
 \newcommand{\secref}[1]{Section~\ref{#1}}
 \newcommand{\figref}[1]{Figure~\ref{#1}}
 \newcommand{\tabref}[1]{Table~\ref{#1}}
-%\newcommand{\XXX}[1]{{\color{red}XXX #1}} % a general todo or comment
-\newcommand{\XXX}[1]{}
-%\newcommand{\oa}[1]{\footnote{\color{red}OA: #1}}
-\newcommand{\oa}[1]{}
-%\newcommand{\bh}[1]{\footnote{\color{blue}BH: #1}}
-\newcommand{\bh}[1]{}
+\newcommand{\XXX}[1]{{\color{red}XXX #1}} % a general todo or comment
+%\newcommand{\XXX}[1]{}
+\newcommand{\oa}[1]{\footnote{\color{red}OA: #1}}
+%\newcommand{\oa}[1]{}
+\newcommand{\bh}[1]{\footnote{\color{blue}BH: #1}}
+%\newcommand{\bh}[1]{}
 
 \def\perscite#1{\newcite{#1}}
 \def\parcite#1{\cite{#1}}
@@ -159,18 +159,28 @@ By basing the measure on a direct comparison
 of the source and translation we avoid the difficulties engendered by using
 reference translations, albeit at the cost of imposing the additional requirement
 that the evaluator be proficient in both the source and target languages.
-An elaborate comparision of HUME and HMEANT is given in \secref{sec:hmeant_comp}.
+%An elaborate comparison of HUME and HMEANT is given in \secref{sec:hmeant_comp}.
 
-We conduct experiments with four language pairs: English-German, English-Polish,
-English-Romanian and English-Czech, and report efficiency (time of annotation) and
-inter-annotator agreement scores (\secref{sec:experiments}). Efficiency results that HUME
-can be annotated in 2--4 minutes, once the UCCA annotation of the source is given,
-which is only about five times slower than MEANT, and hence still practical to
-employ on a moderate scale. HUME's agreement results are on par with those
-of standard sentence-level ranking measures, but unlike them,
-HUME's scores do not decrease with longer sentences.\bh{We may
-  have to focus more on qualitative aspects, if we just try to sell
-  the measure on IAA, then the figures are not stunning. OA: is that OK?}
+After a brief review (\secref{sec:background}), we describe HUME in detail
+(\secref{sec:hume}) and highlight its benefits over HMEANT
+(\secref{sec:hmeant_comp}).
+Our experiments with four language pairs: English-German, English-Polish,
+English-Romanian and English-Czech (\secref{sec:experiments}) document the
+efficiency (time of annotation) and inter-annotator agreement scores for HUME.
+
+% We conduct experiments with four language pairs: English-German, English-Polish,
+% English-Romanian and English-Czech, and report efficiency (time of annotation) and
+% inter-annotator agreement scores (\secref{sec:experiments}).
+% 
+% \XXX{The following should go rather to the conclusion}
+% Efficiency results that HUME
+% can be annotated in 2--4 minutes, once the UCCA annotation of the source is given,
+% which is only about five times slower than MEANT, and hence still practical to
+% employ on a moderate scale. HUME's agreement results are on par with those
+% of standard sentence-level ranking measures, but unlike them,
+% HUME's scores do not decrease with longer sentences.\bh{We may
+%   have to focus more on qualitative aspects, if we just try to sell
+%   the measure on IAA, then the figures are not stunning. OA: is that OK?}
 
 
 
@@ -211,13 +221,14 @@ Human evaluation is generally done by ranking the outputs of multiple systems
 e.g., in the WMT shared tasks \cite{bojar2015findings}, or by assigning
 individual adequacy/fluency scores to each translation, a procedure recently improved
 by \newcite{graham2015improving}.
-However, while providing the gold standard for MT evaluation, human evaluation is not a scalable solution,
-and is infeasible where a wide variety of systems or parameter settings are to be evaluated.
+However, while providing the gold standard for MT evaluation, human evaluation
+is not a scalable solution.
+%and is infeasible where a wide variety of systems or parameter settings are to be evaluated.
 % has motivated the construction of cheaper methods that correlate with human
 %judgement.
 
 Scalability is addressed by employing automatic and semi-automatic approximations of human
-judgements. Most commonly, such scores decompose over the sub-parts of
+judgements. Commonly, such scores decompose over the sub-parts of
 the translation, and quantify how many of these sub-parts appear in a manually created reference translation.
 This decomposition further allows system developers
 to localize the errors, or at least unconfirmed parts within the translation.
