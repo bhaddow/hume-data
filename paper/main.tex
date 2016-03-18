@@ -25,6 +25,8 @@
 \def\parcite#1{\cite{#1}}
 \def\inparcite#1{\newcite{#1}}
 
+\def\equo#1{``{#1}''}  % curly quotes
+
 \newcommand\BibTeX{B{\sc ib}\TeX}
 
 \listfiles
@@ -722,6 +724,11 @@ nominalized or vice versa. An example from our dataset:
   Ondrej's gloss for German. Ondrej is
   not totally sure that the meaning is well preserved.}
 
+Here is \XXX{another} example with a missing linker: the source \equo{However,
+this review\dots} was translated as \equo{Diese
+Überprüfung\dots} (lit. \equo{This review}). The omission is not by HMEANT at
+all.
+
 We are not aware of any empirical evaluation that demonstrates that verb argument structure,
 taken alone, captures the crux of the sentence semantics meanings.
 The coverage of
@@ -826,7 +833,7 @@ non-contiguous elements as a single unit. HMEANT, on the other hand, always
 required exactly one word to be annotated as the predicate (``Action''), which
 is often linguistically inadequate.
 
-Another problem with HMEANT identified by \parcite{bojar:wu:ssst:2012} was the
+Another problem with HMEANT identified by \perscite{bojar:wu:ssst:2012} was the
 inability to indicate that the predicate is somewhat mistranslated (e.g.
 accidentally negated or in a slightly wrong tense). HMEANT
 annotation allows either to mark the source and reference frames as matching
