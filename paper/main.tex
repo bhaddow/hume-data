@@ -635,6 +635,17 @@ on configurational vs. non-configurational languages.
 %expresses the relation between the graduation and moving Scenes, is marked Bad,
 %as their relation in $t$ is reversed.
 
+\begin{figure*}[t]
+    \begin{center}
+    \includegraphics[width=1\textwidth]{hume_interface2.jpg}
+    \caption{The HUME annotation tool, based on the UCCA tool. The faded orange box at the top
+      contains the translation, and directly below it is the source sentence. The tree of semantic units
+      is shown below the source. Alignments between the source and translation appear in italics and unaligned intervening words appear in red.}
+    \label{fig:interface}
+    \end{center}
+\end{figure*}
+
+
 
 In Figure~\ref{fig:hume_tree_v2} we can see an example of a possible HUME
 annotation, with the translation shown in English for ease of comprehension.
@@ -676,21 +687,22 @@ Then HUME's composite score is:
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Annotation Interface}
 
-We now describe the HUME annotation interface, shown in \figref{fig:interface}. 
-%We turn to discuss the interface for collecting human judgements on the semantic units
-%of the source, relating to the translation. 
-UCCA annotations of the source are done offline,
-using the UCCA web application.
-%\figref{fig:interface} presents the user interface of HUME. 
-The translation appears at the top, and
-the source sentence directly below it. Underneath the source sentence appears
-its list of semantic units. 
-%For each semantic unit, including the one for the
-%entire source sentence, there is a textbox, displaying the yield of that unit.
-%Information on the category of the unit (e.g., whether it is a Scene, participant etc.).
-The user is asked to select a label for each unit,
+\figref{fig:interface} shows the HUME annotation interface.
+% We now describe the HUME annotation interface, shown in \figref{fig:interface}. 
+% %We turn to discuss the interface for collecting human judgements on the semantic units
+% %of the source, relating to the translation. 
+% UCCA annotations of the source are done offline,
+% using the UCCA web application.
+% %\figref{fig:interface} presents the user interface of HUME. 
+% The translation appears at the top, and
+% the source sentence directly below it. Underneath the source sentence appears
+% its list of semantic units. 
+% %For each semantic unit, including the one for the
+% %entire source sentence, there is a textbox, displaying the yield of that unit.
+% %Information on the category of the unit (e.g., whether it is a Scene, participant etc.).
+The user is asked to select a label for each source semantic unit,
 by clicking the ``A'', ``B'', Green, Orange, or Red buttons to the right of the unit's box.
-Note that the UCCA labels are not shown.
+%Note that the UCCA labels are not shown.
 
 The interface presents, for each unit, the translation segment aligned with it.
 This allows the user, especially in long sentences, to focus her attention on the parts
@@ -741,16 +753,6 @@ and the annotator should mark this structural node as ``B'', bad.
 %node and it has been evaluated as ``Orange'', or partially correct, as the translation of this phrase ``loved'' 
 %only partially capture the semantics of the source.
 
-
-\begin{figure*}[t]
-    \begin{center}
-    \includegraphics[width=1\textwidth]{hume_interface2.jpg}
-    \caption{The HUME annotation tool, based on the UCCA tool. The faded orange box at the top
-      contains the translation, and directly below it is the source sentence. The tree of semantic units
-      is shown below the source. Alignments between the source and translation appear in italics and unaligned intervening words appear in red.}
-    \label{fig:interface}
-    \end{center}
-\end{figure*}
 
 \com{
 In Figure~\ref{mttool} you we show the MT evaluation tool. The sentence at the top shows the complete MT system output. Underneath the MT output is the  source sentence.  Underneath the source sentence we see its expandable semantic tree structure with both lexical and structural nodes. atomic nodes only have traffic light annotation, whereas a structural node would normally be labelled ``A'' or ``B'' but could also be labelled as a lexical node, in the case where there is no word to word correspondence for the translation of its children.
@@ -872,7 +874,8 @@ We do not give times for the second Czech
 \end{table}
 
 
-\emph{Describe the UCCA annotation}
+%\XXX{Describe the UCCA annotation}
+% ... not enough room or time
 
 
 \subsection{Inter-Annotator Agreement}
@@ -884,20 +887,26 @@ We do not give times for the second Czech
 In order to assess the consistency of the annotation, we measure the Inter-Annotator
 Agreement (IAA) using Cohen's Kappa on the multiply-annotated portions of the data.
 For German, Polish and Romanian we used two annotators, with a significant overlap
-between the sentences they annotated. For Czech we had one main annotator, who
-annotated the entire batch, as well multiple secondary annotators, where
-each annotated a sub-part of the batch. \oa{i editted it. is what i wrote correct?}
+between the sentences they annotated. For Czech we had the entire batch
+annotated by one main annotator and multiple secondary annotators, 
+each annotating a sub-part of the batch.
 
 In order to compute Kappa, we consider the annotation task as a classification task on 
 nodes, and compute agreement on nodes which have two annotations from different annotators.
 We report the overall Kappa, as well as separate Kappas on atomic
 nodes (annotated as Red, Orange or Green) and the structural nodes (annotated
-as Adequate or Bad). In general there should be little confusion between the two
-types of nodes, and in future work the separation between the nodes should be enforced
-by the tool\oa{but there may be some disagreement in the margins on what nodes are atomic and
-  what are not}. The Kappas are shown in \tabref{tab:iaa}.
+as Adequate or Bad).
+As expected and confirmed by confusion matrices in \figref{fig:heatmap}, there
+is generally little confusion between the two types of nodes.
 
-\begin{table}[!ht]
+%In general there should be little confusion between the two
+%types of nodes, and in future work the separation between the nodes should be enforced
+%by the tool.
+%\oa{but there may be some disagreement in the margins on what nodes are atomic and
+%  what are not}
+%The Kappas are shown in \tabref{tab:iaa}.
+
+\begin{table}[t]
 \begin{center}
 \begin{tabular}{l|cccc}
  & cs & de & pl & ro \\
@@ -919,6 +928,38 @@ measured by Cohen's Kappa. }
 \end{center}
 \end{table}
 
+\def\iaafig #1{\includegraphics[width=3.8cm]{iaa_heatmap_#1.png}}
+
+\begin{figure}[t]
+\renewcommand{\tabcolsep}{0pt}
+\begin{tabular}{cc}
+
+
+\subfloat[English-Czech]{
+  \iaafig{cs}
+}
+&
+\subfloat[English-German]{
+  \iaafig{de}
+
+}
+\\
+
+\subfloat[English-Polish]{
+  \iaafig{pl}
+  
+}
+&
+\subfloat[English-Romanian]{
+  \iaafig{ro}
+
+}
+\end{tabular}
+\caption{Confusion matrices for each of the language pairs, plotted as heatmaps.}
+\label{fig:heatmap}
+\end{figure}
+
+
 
 To assess whether, as we hoped, HUME would make it easier to reliably annotate long sentences,
 we binned the sentences according to length and measured Kappa on each of the bins. Each bin covers
@@ -926,7 +967,7 @@ a length range of 10, and we show the variance of kappa with length in \figref{f
 
 \def\iaafig #1{\includegraphics[width=3.8cm]{iaa_length_#1.png}}
 
-\begin{figure}[ht!]
+\begin{figure}[t]
 \renewcommand{\tabcolsep}{0pt}
 \begin{tabular}{cc}
 
@@ -977,37 +1018,6 @@ are more skewed. Finally we note some evidence of domain-specific disagreements,
 MT system normally translated ``review'' (as in ``systematic review'' -- a frequent term in the 
 Cochrane texts) as ``\"uberpr\"ufung'', which 
 one annotator marked correct, and the other (a Cochrane employee)  as incorrect.
-
-\def\iaafig #1{\includegraphics[width=3.8cm]{iaa_heatmap_#1.png}}
-
-\begin{figure}[ht!]
-\renewcommand{\tabcolsep}{0pt}
-\begin{tabular}{cc}
-
-
-\subfloat[English-Czech]{
-  \iaafig{cs}
-}
-&
-\subfloat[English-German]{
-  \iaafig{de}
-
-}
-\\
-
-\subfloat[English-Polish]{
-  \iaafig{pl}
-  
-}
-&
-\subfloat[English-Romanian]{
-  \iaafig{ro}
-
-}
-\end{tabular}
-\caption{Confusion matrices for each of the language pairs, plotted as heatmaps.}
-\label{fig:heatmap}
-\end{figure}
 
 
 
