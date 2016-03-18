@@ -713,12 +713,23 @@ sentences\footnote{Argument structures and linkers are explicitly marked in UCCA
 \end{inparadesc}
 
 
+It is also relatively common in translation that verbal constructions get
+nominalized or vice versa. An example from our dataset:
+  ``Two {\bf review} authors assessed the studies independently\dots{}'' --
+  ``Zwei Autoren bewertete die Studien unabh\"angig zu {\bf
+  \"uberpr\"ufen}\dots{}'' (lit. ``Two authors assessed the studies
+  independently to be reviewed\dots").\XXX{This is Omri's example, with
+  Ondrej's gloss for German. Ondrej is
+  not totally sure that the meaning is well preserved.}
+
 We are not aware of any empirical evaluation that demonstrates that verb argument structure,
 taken alone, captures the crux of the sentence semantics meanings.
 The coverage of
 these and other phenomena by HUME will allow to determine empirically
 (rather than stipulate), which semantic structures are important
 to preserve for MT evaluation, and which are less important.
+
+
 
 
 \paragraph{Cost of Structural Annotation}
@@ -816,7 +827,6 @@ required exactly one word to be annotated as the predicate (``Action''), which
 is often linguistically inadequate.
 
 Another problem with HMEANT identified by \parcite{bojar:wu:ssst:2012} was the
-
 inability to indicate that the predicate is somewhat mistranslated (e.g.
 accidentally negated or in a slightly wrong tense). HMEANT
 annotation allows either to mark the source and reference frames as matching
@@ -825,8 +835,13 @@ other), or as non-matching (which leads to a zero score for the whole frame) but
 nothing in between. In HUME, the verb is still present as a sub-unit of the
 frame and has the traffic-lights annotation.
 
-\oa{I would consider adding further examples from the Google Doc. For instnace ``your risk of falling'' -- ``Ihr Risiko'' or
-  ``Two {\bf review} authors assessed the studies independently and extracted outcome data'' -- ``Zwei Autoren bewertete die Studien unabh\"angig zu {\bf \"uberpr\"ufen}''}
+\XXX{Omri: I would consider adding further examples from the Google Doc. For instnace
+``your risk of falling'' -- ``Ihr Risiko''.
+Ondrej: I don't see any HMEANT problem here, the whole NP 'your risk of falling'
+is aligned with 'Ihr Risiko' and HMEANT allows to indicate that the match was
+partial, to that's probably what everyone would choose. I've put the other
+example higher, but please have a look, I'm not sure if we should keep it there
+at all.}
   
 % \Subsectionngigngig zu  Zu { to be removed}
 % 
