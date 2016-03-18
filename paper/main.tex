@@ -338,7 +338,7 @@ We discuss the differences between HMEANT and HUME in \secref{sec:hmeant_comp}.
 \begin{tabular}{|l|l|l|l|}
 \hline
 L & Linker &  A & Participant \\
-H & Scene & R & Relator \\
+H & Scene & R & Relater \\
 P & Process & C & Centre \\
 \hline
 \end{tabular}
@@ -468,17 +468,6 @@ The translation is not UCCA-annotated.
 %    \label{fig:ucca-tree-hume}
 %\end{figure*}
 
-\begin{figure}
-    \begin{center}
-    \includegraphics[width=0.35\textwidth]{ucca-tree-mteval-v2.png}
-    \end{center}
-  \caption{\label{fig:hume_tree_v2}
-     HUME annotation of an UCCA tree with a word aligned example translation shown below. 
-Atomic units are labelled using traffic lights and structural nodes are marked A or B.}
-\end{figure}
-% Ondrej removes the following, he thinks that errors are not supposed to be
-% propagated in HMEANT either:
-%In HMEANT, it is not clear whether errors should be propegated up the SRL hierarchy. 
 
 
 
@@ -654,6 +643,34 @@ on configurational vs. non-configurational languages.
 %expresses the relation between the graduation and moving Scenes, is marked Bad,
 %as their relation in $t$ is reversed.
 
+
+\begin{figure}
+    \begin{center}
+    \includegraphics[width=0.35\textwidth]{ucca-tree-mteval-v2.png}
+    \end{center}
+  \caption{\label{fig:hume_tree_v2}
+     HUME annotation of an UCCA tree with a word aligned example translation shown below. 
+Atomic units are labelled using traffic lights and structural nodes are marked A or B.}
+\end{figure}
+% Ondrej removes the following, he thinks that errors are not supposed to be
+% propagated in HMEANT either:
+%In HMEANT, it is not clear whether errors should be propegated up the SRL hierarchy. 
+
+In Figure~\ref{fig:hume_tree_v2} we can see an example of a possible HUME
+annotation, with the translation shown in English for ease of comprehension.
+When evaluating ``to NYC'' the annotator looks at the translation and sees the
+word ``stateside''. This word captures the whole phrase and so we mark this
+non-leaf node with an atomic label. Here we choose ``Orange'' since
+it approximately captures the meaning
+in this context. The ability to mark non-leaves with atomic labels allows
+the annotator to account for translations which only correspond at the phrase
+level. Another feature highlighted in this example is that by separating structural
+and atomic nodes, we are able to define where an error occurs, and localise
+the error to its point of origin. The linker ``After'' is translated incorrectly as ``by''
+which changes the meaning of the entire sentence. This error is captured at
+the atomic level, and it is labelled Red. The sentence still contains two scenes and
+a linker and therefore we mark the root node as structurally correct, Adequate.
+
 \begin{figure*}[t]
     \begin{center}
     \includegraphics[width=1\textwidth]{hume_interface2.jpg}
@@ -664,21 +681,6 @@ on configurational vs. non-configurational languages.
     \end{center}
 \end{figure*}
 
-
-
-In Figure~\ref{fig:hume_tree_v2} we can see an example of a possible HUME
-annotation, with the translation shown in English for ease of comprehension.
-When evaluating ``to NYC'' the annotator looks at the translation and sees the
-word ``stateside''. This word captures the whole phrase and so we mark this
-non-leaf node with an atomic label. Here we choose ``Orange'' since
-it approximately captures the meaning
-in this context. The ability to mark non-leaves with atomic labels allows
-the annotator to account for translations which only correspond at the phrase
-level. Another feature highlighted in this example is that the root node is
-``Adequate''. This is because the root node still has two Scenes linked by one linker and
-so the relationship between child nodes is maintained. There is an error caused by a wrong
-translation of the linker ``After'' which translates as ``by'' and this is
-marked as ``Red'', but this error is marked at the level at which it occurs.
 
 \subsection{Composite Score}\label{sec:score}
 
@@ -780,7 +782,7 @@ and the annotator should mark this structural node as ``B'', bad.
 \com{
 In Figure~\ref{mttool} you we show the MT evaluation tool. The sentence at the top shows the complete MT system output. Underneath the MT output is the  source sentence.  Underneath the source sentence we see its expandable semantic tree structure with both lexical and structural nodes. atomic nodes only have traffic light annotation, whereas a structural node would normally be labelled ``A'' or ``B'' but could also be labelled as a lexical node, in the case where there is no word to word correspondence for the translation of its children.
 
- The child components of a structural node are marked with different coloured rectangles. When navigating through the different source sentence nodes, one can see the relevant sections of the translation because the aligned words in the translation are highlighted in the complete sentence above. Aligned translations are also shown in black alongside the source node. If the node is aligned to a set of discontiguous words in the translation, then the unaligned words that appear in between the aligned words are shown in red. Even if these words are not directly aligned to the source node, they 
+ The child components of a structural node are marked with different coloured rectangles. When navigating through the different source sentence nodes, one can see the relevant sections of the translation because the aligned words in the translation are highlighted in the complete sentence above. Aligned translations are also shown in black alongside the source node. If the node is aligned to a set of dis-contiguous words in the translation, then the unaligned words that appear in between the aligned words are shown in red. Even if these words are not directly aligned to the source node, they 
 will likely change the meaning of the translation and must be considered when marking 
 the translation as correct or not. The alignments are meant just as a guide. The annotator should  look at the complete translation when deciding on the evaluation of a node. The translation could have content added before or after the node which changes its
  structure or meaning. If an extra component is prepended to a structural node, for example, it should be marked as ``Bad''.
@@ -944,10 +946,10 @@ measured by Cohen's Kappa. }
 
 In order to assess the consistency of the annotation, we measure the Inter-Annotator
 Agreement (IAA) using Cohen's Kappa on the multiply-annotated portions of the data.
-For German, Polish and Romanian we used two annotators, with a significant overlap
-between the sentences they annotated. For Czech we had the entire batch
-annotated by one main annotator and multiple secondary annotators, 
-each annotating a sub-part of the batch.
+%For German, Polish and Romanian we used two annotators, with a significant overlap
+%between the sentences they annotated. For Czech we had the entire batch
+%annotated by one main annotator and multiple secondary annotators, 
+%each annotating a sub-part of the batch.
 
 \tabref{tab:iaa} reports the number of nodes which have two annotations from
 different annotators and the corresponding Kappas.
@@ -1114,14 +1116,14 @@ in order to assess the impact of the following problems:
 \begin{inparadesc}
 \item[Copula clauses] are treated in HMEANT simply as instances of the main verb ``be'', which
 generally does not convey the meaning of these clauses. They appear in 21.7\% of the sentences,
-according to conservative estimates that only considers non-auxiliary instances of ``be''.
+according to conservative estimates that only consider non-auxiliary instances of ``be''.
 \\
 \item[Nominal argument structures,] which are ignored by  HMEANT are in fact highly
 pervasive, appearing in 48.7\% of the sentences.
 \\
 \item[Linkers] expressing an inter-relation between
 clauses (mainly discourse markers and coordinating conjunctions) appear in 56\% of the
-sentences, but ignored by HMEANT.
+sentences, but are ignored by HMEANT.
 An example where a linker is omitted in translation in our experiments is
 with the source \equo{However, this review\dots}, which was translated to
 the German \equo{Diese \"Uberpr\"ufung\dots} (lit. \equo{This review}).
@@ -1250,10 +1252,13 @@ with a reference sentence instead of with the source.
 
 \paragraph{Localisation of the Error}
 
-In HMEANT, there are no guidelines as to when to propagate an error. In HUME,
-errors are localised as much as possible to where they occur,
-by the separation of atomic and structural nodes.
-This allows us to calculate more accurately the total score of the sentence.
+In HMEANT, an error in a child node often results in the parent node
+being penalised as well. This makes it harder to quantify the true scale of  
+the original error, as its effect gets propagated up the tree. 
+In HUME, errors are localised as much as possible to where they occur,
+by the separation of atomic and structural nodes (See Fig \ref{fig:hume_tree_v2} 
+for an example).
+This allows us to calculate the total score of the sentence more accurately.
 
 %I see this a falling under the verbal structures point
 %\paragraph{Annotation of Predicates Themselves}
@@ -1302,9 +1307,10 @@ This allows us to calculate more accurately the total score of the sentence.
 \section{Conclusion}\label{sec:conclusion}
 
 We have introduced HUME, a human semantics based MT evaluation measure which addresses
-a wide range of semantic phenomena. We have shown that it can be reliably annotated in 
+a wide range of semantic phenomena. We have shown that it can be efficiently and 
+reliably annotated in 
 several languages, and that annotation quality is robust to sentence length.
-We believe that HUME and a future automated version of HUME will be able to guide the
+We believe that HUME, and a future automated version of HUME, will be able to guide the
 development of a more semantically aware approach to MT.
 
 
