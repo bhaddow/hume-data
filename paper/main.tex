@@ -17,7 +17,8 @@
 \newcommand{\secref}[1]{Section~\ref{#1}}
 \newcommand{\figref}[1]{Figure~\ref{#1}}
 \newcommand{\tabref}[1]{Table~\ref{#1}}
-\newcommand{\XXX}[1]{{\color{red}XXX #1}} % a general todo or comment
+%\newcommand{\XXX}[1]{{\color{red}XXX #1}} % a general todo or comment
+\newcommand{\XXX}[1]{}
 %\newcommand{\oa}[1]{\footnote{\color{red}OA: #1}}
 \newcommand{\oa}[1]{}
 %\newcommand{\bh}[1]{\footnote{\color{blue}BH: #1}}
@@ -1059,9 +1060,10 @@ To assess whether, as we hoped, HUME would make it easier to reliably annotate l
 we binned the sentences according to length and measured Kappa on each of the bins. Each bin covers
 a length range of 10, and we show the variance of kappa with length in \figref{fig:iaalength}.
 
-\def\iaafig #1{\includegraphics[width=7cm]{iaa_length_#1.png}}
+\def\iaafig #1{\includegraphics[width=3.8cm]{iaa_length_#1.png}}
 
-\begin{figure*}[ht!]
+\begin{figure}[ht!]
+\renewcommand{\tabcolsep}{0pt}
 \begin{tabular}{cc}
 
 
@@ -1088,38 +1090,7 @@ a length range of 10, and we show the variance of kappa with length in \figref{f
 \caption{Inter-annotator Agreement (Kappa) versus sentence length, separately for
 structural and atomic nodes. The numbers are the node counts in each bin. }
 \label{fig:iaalength}
-\end{figure*}
-
-\def\iaafig #1{\includegraphics[width=7cm]{iaa_heatmap_#1.png}}
-
-%\begin{figure*}[ht!]
-%\begin{tabular}{cc}
-%
-%
-%\subfloat[English-Czech]{
-%  \iaafig{cs}
-%}
-%&
-%\subfloat[English-German]{
-%  \iaafig{de}
-%
-%}
-%\\
-%
-%\subfloat[English-Polish]{
-%  \iaafig{pl}
-%  
-%}
-%&
-%\subfloat[English-Romanian]{
-%  \iaafig{ro}
-%
-%}
-%\end{tabular}
-%\caption{Confusion matrices for each of the language pairs, plotted as heatmaps.}
-%\label{fig:heatmap}
-%\end{figure*}
-
+\end{figure}
 
 We see from \figref{fig:iaalength} that there is no reduction of IAA with sentence
 length, except perhaps in German. Also, from \tabref{tab:iaa} the overall IAA
@@ -1142,6 +1113,39 @@ are more skewed. Finally we note some evidence of domain-specific disagreements,
 MT system normally translated ``review'' (as in ``systematic review'' -- a frequent term in the 
 Cochrane texts) as ``\"uberpr\"ufung'', which 
 one annotator marked correct, and the other (a Cochrane employee)  as incorrect.
+
+\def\iaafig #1{\includegraphics[width=3.8cm]{iaa_heatmap_#1.png}}
+
+\begin{figure}[ht!]
+\renewcommand{\tabcolsep}{0pt}
+\begin{tabular}{cc}
+
+
+\subfloat[English-Czech]{
+  \iaafig{cs}
+}
+&
+\subfloat[English-German]{
+  \iaafig{de}
+
+}
+\\
+
+\subfloat[English-Polish]{
+  \iaafig{pl}
+  
+}
+&
+\subfloat[English-Romanian]{
+  \iaafig{ro}
+
+}
+\end{tabular}
+\caption{Confusion matrices for each of the language pairs, plotted as heatmaps.}
+\label{fig:heatmap}
+\end{figure}
+
+
 
 %\subsection{Discussion of Disagreements}\label{sec:disagreements}
 
