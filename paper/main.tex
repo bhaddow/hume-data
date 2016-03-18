@@ -18,8 +18,10 @@
 \newcommand{\figref}[1]{Figure~\ref{#1}}
 \newcommand{\tabref}[1]{Table~\ref{#1}}
 \newcommand{\XXX}[1]{{\color{red}XXX #1}} % a general todo or comment
-\newcommand{\oa}[1]{\footnote{\color{red}OA: #1}}
-\newcommand{\bh}[1]{\footnote{\color{blue}BH: #1}}
+%\newcommand{\oa}[1]{\footnote{\color{red}OA: #1}}
+\newcommand{\oa}[1]{}
+%\newcommand{\bh}[1]{\footnote{\color{blue}BH: #1}}
+\newcommand{\bh}[1]{}
 
 \def\perscite#1{\newcite{#1}}
 \def\parcite#1{\cite{#1}}
@@ -60,19 +62,27 @@
 
 \begin{abstract}
   
-  Recent interest in semantics-aware MT systems underscores the importance of
-  semantic evaluation for Machine Translation (MT) systems. 
-  A semantic measure, sensitive to possible semantic discrepancies
-  between the translation output and the source, is likely support the construction
-  and tuning of semantics-based MT, much in the same way that string-based measures,
-  such as BLEU, enabled progress in shallower MT.
-  We present a novel human semantic evaluation measure for MT, Human
-  UCCA-based MT Evaluation (HUME), building on the UCCA semantic representation scheme.
-  Making progress over previous work, the proposed measure takes into account
-  a wider range of semantic phenomena and does not rely on semantic annotation
-  of the MT output itself, whose interpretation is often unclear.
-  We experiment with four language pairs, demonstrating HUME's broad applicability,
-  as well as its reliability, reflected in its inter-annotator agreement rates.
+%  Recent interest in semantics-aware MT systems underscores the importance of
+%  semantic evaluation for Machine Translation (MT) systems. 
+%  A semantic measure, sensitive to possible semantic discrepancies
+%  between the translation output and the source, is likely to support the construction
+%  and tuning of semantics-based MT, much in the same way that string-based measures,
+%  such as BLEU, enabled progress in shallower MT.
+%  We present a novel human semantic evaluation measure for MT, Human
+%  UCCA-based MT Evaluation (HUME), building on the UCCA semantic representation scheme.
+%  Making progress over previous work, the proposed measure takes into account
+%  a wider range of semantic phenomena and does not rely on semantic annotation
+%  of the MT output itself, whose interpretation is often unclear.
+%  We experiment with four language pairs, demonstrating HUME's broad applicability,
+%  as well as its reliability, reflected in its inter-annotator agreement rates.
+
+
+Human evaluation of machine translation is a cognitively difficult task and when annotators rate or rank complete sentences we see low levels of agreement especially
+for longer sentences.  
+In order to extract more reliable annotations, previous research broke down evaluation into smaller components by asking humans to annotate semantic roles on the source and translation, and then to align them. 
+We propose a new evaluation method which is based on semantic annotation called Universal Conceptual Cognitive Annotation(UCCA). UCCA is applicable across many languages, it provides a complete structure over sentences, and it is grounded in the words in the sentence. 
+We apply UCCA only over the source or reference sentence, and not over the possibly garbled translation, 
+and this makes annotation more reliable and also efficient as we can reuse labor intensive semantic annotations. We show that HUME can be reliably applied to four different target languages and that sentence level inter annotor agreement does not decrease over longer sentences. 
 
 \end{abstract}
 
@@ -223,37 +233,37 @@ the reference and translation in terms of the overlap in
 their verbal argument structures structures and associated semantic roles.
 We discuss the differences between HMEANT and HUME in \secref{sec:hmeant_comp}.
 
-\begin{figure}
-
-\begin{tikzpicture}[semithick, x=2.4cm,y=0.8cm, >=latex, baseline=7ex,
-    inner sep=.3ex, outer sep=.7ex, minimum size=1.2ex,->]
-  \node (ROOT) [fill=black, circle] {}
-  child {node {After} edge from parent node[left]  {$L$\hspace{1.5cm}}}
-  child {node (H1)  [fill=black,circle] {}
-    child {node {graduation} edge from parent node[right] {$P$}}
-      %child {node {to Paris} edge from parent node[right] {$A$}}
-      edge from parent node[left] {$H$}
-    }
-    child {node (H2)  [fill=black,circle] {}
-      child {node  {} edge from parent[draw=none]}
-      child {node  {} edge from parent[draw=none]}
-      child {node  (Tom) {Tom} edge from parent node[right] {$A$}}
-      child {node  {moved} edge from parent node[right] {$P$}}
-      child {node  [fill=black,circle] {}
-        child {node  {to} edge from parent node[right] {$R$}}
-        child {node  {NYC} edge from parent node[right] {$C$}}
-        edge from parent node[right] {$A$}}
-      %child {node {to Paris} edge from parent node[right] {$A$}}
-      edge from parent node[left] {$H$}
-    };
-    \draw (H1) -> (Tom) node[midway, right] {$A$ \hspace{0.2cm}};
-  \end{tikzpicture}
-\caption{\label{fig:ucca_example}
-  Sample UCCA annotation of the sentence ``After graduation, Tom moved
-  to NYC''. Leaves correspond to words, whereas nodes correspond to units.
-  Edge labels mark UCCA categories, which are described in the table.}
-%which are largely ignored in this work
-\end{figure}
+%\begin{figure}
+%
+%\begin{tikzpicture}[semithick, x=2.4cm,y=0.8cm, >=latex, baseline=7ex,
+%    inner sep=.3ex, outer sep=.7ex, minimum size=1.2ex,->]
+%  \node (ROOT) [fill=black, circle] {}
+%  child {node {After} edge from parent node[left]  {$L$\hspace{1.5cm}}}
+%  child {node (H1)  [fill=black,circle] {}
+%    child {node {graduation} edge from parent node[right] {$P$}}
+%      %child {node {to Paris} edge from parent node[right] {$A$}}
+%      edge from parent node[left] {$H$}
+%    }
+%    child {node (H2)  [fill=black,circle] {}
+%      child {node  {} edge from parent[draw=none]}
+%      child {node  {} edge from parent[draw=none]}
+%      child {node  (Tom) {Tom} edge from parent node[right] {$A$}}
+%      child {node  {moved} edge from parent node[right] {$P$}}
+%      child {node  [fill=black,circle] {}
+%        child {node  {to} edge from parent node[right] {$R$}}
+%        child {node  {NYC} edge from parent node[right] {$C$}}
+%        edge from parent node[right] {$A$}}
+%      %child {node {to Paris} edge from parent node[right] {$A$}}
+%      edge from parent node[left] {$H$}
+%    };
+%    \draw (H1) -> (Tom) node[midway, right] {$A$ \hspace{0.2cm}};
+%  \end{tikzpicture}
+%\caption{\label{fig:ucca_example}
+%  Sample UCCA annotation of the sentence ``After graduation, Tom moved
+%  to NYC''. Leaves correspond to words, whereas nodes correspond to units.
+%  Edge labels mark UCCA categories, which are described in the table.}
+%%which are largely ignored in this work
+%\end{figure}
 
 
 \begin{figure}
@@ -401,83 +411,83 @@ In Figure~\ref{fig:hume_tree_v2} we can see an example of a possible HUME annota
 
 
 
-\begin{figure*}
-  \begin{adjustbox}{trim=2.3cm 0 0 0}
-   \begin{tikzpicture}
-     [level 1/.style={sibling distance=7.5em},
-       level 2/.style={sibling distance=5em},
-       level 3/.style={sibling distance=5em},
-       level 4/.style={sibling distance=3em}]
-     %[semithick, x=2.4cm,y=0.8cm, >=latex, baseline=7ex,
-     %  inner sep=.3ex, outer sep=.7ex, minimum size=1.2ex,->]
-   \node (ROOT) [label={B}] [fill=blue, circle] {}
-   child {node (H3) [label={A}] [fill=yellow,circle] {}
-     child {node [label={[red]:R}] {Golf} edge from parent node[left] {}}
-     child {node (H1) [label={[orange]30:O}] [fill=orange,circle] {}
-       child {node [label={}] {became} edge from parent node[left]  {}}
-       child {node [label={}] {a} edge from parent node[left]  {}}
-       child {node [label={}] {passion} edge from parent node[left]  {}}
-     }
-     child {node (H2) [label={A}] [fill=yellow,circle] {}
-       child {node {} edge from parent[draw=none] {}}
-       child {node {} edge from parent[draw=none] {}}
-       child {node {} edge from parent[draw=none] {}}
-       child {node {} edge from parent[draw=none] {}}
-       child {node [label={[red]:R}] {for} edge from parent node[left]  {}}
-       child {node [label={[green]:G}] {his} edge from parent node[left]  {}}
-       child {node [label={[orange]:O}] {oldest} edge from parent node[left]  {}}
-       child {node [label={[green]:G}] {daughter} edge from parent node[left]  {}}
-     }
-   }
-   child {node {} edge from parent[draw=none] {}}
-   child {node (H4) [label={[]30:A}] [fill=yellow,circle] {}
-     child {node (she) [label={[green]:G}] {she} edge from parent node[left]  {}}
-     child {node [label={[green]:G}] {attended} edge from parent node[left]  {}}
-     child {node [label={[green]:G}] {daily} edge from parent node[left]  {}}
-     child {node [label={[green]:G}] {lessons} edge from parent node[left]  {}}
-   }
-   child {node [label={[red]:R}] {and} edge from parent node[left]  {}}
-   child {node (H5) [label={A}] [fill=yellow,circle] {}  
-     child {node [label={[red]:R}] {greatly} edge from parent node[left] {}}
-     child {node [label={[orange]:O}] {improved} edge from parent node[left] {}}
-   };
-   \draw[dashed] (H5) -> (she) ;
- 
-   \com{
-   child {node (H1) [label={\#8}] [fill=black,circle] {}
-     child {node [label={\#2}] {graduation} edge from parent node[right] {$P$}}
-       %child {node {to Paris} edge from parent node[right] {$A$}}
-       edge from parent node[left] {$H$}
-     }
-     child {node (H2) [label={\#9}] [fill=black,circle] {}
-       child {node  {} edge from parent[draw=none]}
-       child {node  {} edge from parent[draw=none]}
-       child {node [label={\#3}] (Tom) {Tom} edge from parent node[right] {$A$}}
-       child {node [label={\#4}] {moved} edge from parent node[right] {$P$}}
-       child {node [label={\#10}] [fill=black,circle] {}
-         child {node [label={\#5}] {to} edge from parent node[right] {$R$}}
-         child {node [label={\#6}] {NYC} edge from parent node[right] {$C$}}
-         edge from parent node[right] {$A$}}
-       %child {node {to Paris} edge from parent node[right] {$A$}}
-       edge from parent node[left] {$H$}
-     };
-     \draw (H1) -> (Tom) node[midway, right] {$A$ \hspace{0.2cm}};
-     }
-   \end{tikzpicture}
-  \\
-  \end{adjustbox}
-  \adjustbox{width=\textwidth,center,margin=.5em}{\it His old daughter loved tennis, and took daily lessons however good he was}
-
-  \caption{\label{fig:hume_tree}
-    Sample UCCA annotation of a source sentence, translation (below in italics), 
-    and translation judgements over the source units, marked with A,B,R,O,G labels. Yellow/blue marks
-    nodes annotated with A/B, respectively.
-    In our experiments, the translation is in German, Romaninan, Polish or Czech.
-    ``became a passion'' is marked as atomic, as it is a multi-word expression.
-    The dashed line indicates that ``she'' is also a child of the unit ``greatly improved''.
-    UCCA categories, and alignment between source and translation are omitted for brevity.}
-  
-\end{figure*}
+%\begin{figure*}
+%  \begin{adjustbox}{trim=2.3cm 0 0 0}
+%   \begin{tikzpicture}
+%     [level 1/.style={sibling distance=7.5em},
+%       level 2/.style={sibling distance=5em},
+%       level 3/.style={sibling distance=5em},
+%       level 4/.style={sibling distance=3em}]
+%     %[semithick, x=2.4cm,y=0.8cm, >=latex, baseline=7ex,
+%     %  inner sep=.3ex, outer sep=.7ex, minimum size=1.2ex,->]
+%   \node (ROOT) [label={B}] [fill=blue, circle] {}
+%   child {node (H3) [label={A}] [fill=yellow,circle] {}
+%     child {node [label={[red]:R}] {Golf} edge from parent node[left] {}}
+%     child {node (H1) [label={[orange]30:O}] [fill=orange,circle] {}
+%       child {node [label={}] {became} edge from parent node[left]  {}}
+%       child {node [label={}] {a} edge from parent node[left]  {}}
+%       child {node [label={}] {passion} edge from parent node[left]  {}}
+%     }
+%     child {node (H2) [label={A}] [fill=yellow,circle] {}
+%       child {node {} edge from parent[draw=none] {}}
+%       child {node {} edge from parent[draw=none] {}}
+%       child {node {} edge from parent[draw=none] {}}
+%       child {node {} edge from parent[draw=none] {}}
+%       child {node [label={[red]:R}] {for} edge from parent node[left]  {}}
+%       child {node [label={[green]:G}] {his} edge from parent node[left]  {}}
+%       child {node [label={[orange]:O}] {oldest} edge from parent node[left]  {}}
+%       child {node [label={[green]:G}] {daughter} edge from parent node[left]  {}}
+%     }
+%   }
+%   child {node {} edge from parent[draw=none] {}}
+%   child {node (H4) [label={[]30:A}] [fill=yellow,circle] {}
+%     child {node (she) [label={[green]:G}] {she} edge from parent node[left]  {}}
+%     child {node [label={[green]:G}] {attended} edge from parent node[left]  {}}
+%     child {node [label={[green]:G}] {daily} edge from parent node[left]  {}}
+%     child {node [label={[green]:G}] {lessons} edge from parent node[left]  {}}
+%   }
+%   child {node [label={[red]:R}] {and} edge from parent node[left]  {}}
+%   child {node (H5) [label={A}] [fill=yellow,circle] {}  
+%     child {node [label={[red]:R}] {greatly} edge from parent node[left] {}}
+%     child {node [label={[orange]:O}] {improved} edge from parent node[left] {}}
+%   };
+%   \draw[dashed] (H5) -> (she) ;
+% 
+%   \com{
+%   child {node (H1) [label={\#8}] [fill=black,circle] {}
+%     child {node [label={\#2}] {graduation} edge from parent node[right] {$P$}}
+%       %child {node {to Paris} edge from parent node[right] {$A$}}
+%       edge from parent node[left] {$H$}
+%     }
+%     child {node (H2) [label={\#9}] [fill=black,circle] {}
+%       child {node  {} edge from parent[draw=none]}
+%       child {node  {} edge from parent[draw=none]}
+%       child {node [label={\#3}] (Tom) {Tom} edge from parent node[right] {$A$}}
+%       child {node [label={\#4}] {moved} edge from parent node[right] {$P$}}
+%       child {node [label={\#10}] [fill=black,circle] {}
+%         child {node [label={\#5}] {to} edge from parent node[right] {$R$}}
+%         child {node [label={\#6}] {NYC} edge from parent node[right] {$C$}}
+%         edge from parent node[right] {$A$}}
+%       %child {node {to Paris} edge from parent node[right] {$A$}}
+%       edge from parent node[left] {$H$}
+%     };
+%     \draw (H1) -> (Tom) node[midway, right] {$A$ \hspace{0.2cm}};
+%     }
+%   \end{tikzpicture}
+%  \\
+%  \end{adjustbox}
+%%  \adjustbox{width=\textwidth,center,margin=.5em}{\it His old daughter loved tennis, and took daily lessons however good he was}
+%
+%  \caption{\label{fig:hume_tree}
+%    Sample UCCA annotation of a source sentence, translation (below in italics), 
+%    and translation judgements over the source units, marked with A,B,R,O,G labels. Yellow/blue marks
+%    nodes annotated with A/B, respectively.
+%    In our experiments, the translation is in German, Romaninan, Polish or Czech.
+%    ``became a passion'' is marked as atomic, as it is a multi-word expression.
+%    The dashed line indicates that ``she'' is also a child of the unit ``greatly improved''.
+%    UCCA categories, and alignment between source and translation are omitted for brevity.}
+%  
+%\end{figure*}
 
 
 \paragraph{Translation Evaluation.}
@@ -1029,33 +1039,33 @@ structural and atomic nodes. The numbers are the node counts in each bin. }
 
 \def\iaafig #1{\includegraphics[width=7cm]{iaa_heatmap_#1.png}}
 
-\begin{figure*}[ht!]
-\begin{tabular}{cc}
-
-
-\subfloat[English-Czech]{
-  \iaafig{cs}
-}
-&
-\subfloat[English-German]{
-  \iaafig{de}
-
-}
-\\
-
-\subfloat[English-Polish]{
-  \iaafig{pl}
-  
-}
-&
-\subfloat[English-Romanian]{
-  \iaafig{ro}
-
-}
-\end{tabular}
-\caption{Confusion matrices for each of the language pairs, plotted as heatmaps.}
-\label{fig:heatmap}
-\end{figure*}
+%\begin{figure*}[ht!]
+%\begin{tabular}{cc}
+%
+%
+%\subfloat[English-Czech]{
+%  \iaafig{cs}
+%}
+%&
+%\subfloat[English-German]{
+%  \iaafig{de}
+%
+%}
+%\\
+%
+%\subfloat[English-Polish]{
+%  \iaafig{pl}
+%  
+%}
+%&
+%\subfloat[English-Romanian]{
+%  \iaafig{ro}
+%
+%}
+%\end{tabular}
+%\caption{Confusion matrices for each of the language pairs, plotted as heatmaps.}
+%\label{fig:heatmap}
+%\end{figure*}
 
 
 We see from \figref{fig:iaalength} that there is no reduction of IAA with sentence
