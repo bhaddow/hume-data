@@ -27,6 +27,8 @@
 \def\parcite#1{\cite{#1}}
 \def\inparcite#1{\newcite{#1}}
 
+\def\equo#1{``{#1}''}  % curly quotes
+
 \newcommand\BibTeX{B{\sc ib}\TeX}
 
 \listfiles
@@ -407,15 +409,34 @@ We note that the translation is not UCCA-annotated.
 Atomic units are labelled using traffic lights and structural nodes are marked A or B.}
 \end{figure}
 
-In Figure~\ref{fig:hume_tree_v2} we can see an example of a possible HUME annotation, with the translation shown in English for ease of comprehension. When evaluating ``to NYC'' the annotator looks at the translation and sees the word ``stateside''. This word captures the whole phrase and so we mark the structural node with an atomic label. Here we choose ``Orange'' but the annotator could equally have decided that this translation is wrong and marked it as ``Red''. The ability to mark structural nodes with atomic labels allows the annotator to account for translations which only correspond at the phrase level. Another feature highlighted in this example is that the root node is ``Adequate''. This might seem confusing, as the relationship between the scenes has changed in the translation. However, an important feature of HUME is that penalises errors where they occur. In HUME, the error is caused by a wrong translation of the linker ``After'' which translates as ``by'' and this is marked as ``Red''. The root node still has two scene linked by one linker and there relationship between child nodes is maintained and therefore it is marked ``Adequate''. In HMEANT it is not clear whether errors should be propegated up the SRL hierarchy. 
+In Figure~\ref{fig:hume_tree_v2} we can see an example of a possible HUME
+annotation, with the translation shown in English for ease of comprehension.
+When evaluating ``to NYC'' the annotator looks at the translation and sees the
+word ``stateside''. This word captures the whole phrase and so we mark the
+structural node with an atomic label. Here we choose ``Orange'' but the
+annotator could equally have decided that this translation is wrong and marked
+it as ``Red''. The ability to mark structural nodes with atomic labels allows
+the annotator to account for translations which only correspond at the phrase
+level. Another feature highlighted in this example is that the root node is
+``Adequate''. This might seem confusing, as the relationship between the scenes
+has changed in the translation. However, an important feature of HUME is that
+penalises errors where they occur. In HUME, the error is caused by a wrong
+translation of the linker ``After'' which translates as ``by'' and this is
+marked as ``Red''. The root node still has two scenes linked by one linker and
+the relationship between child nodes is maintained and therefore it is marked
+``Adequate''.
+% Ondrej removes the following, he thinks that errors are not supposed to be
+% propagated in HMEANT either:
+%In HMEANT, it is not clear whether errors should be propegated up the SRL hierarchy. 
 
 
 
 %\begin{figure*}
 %  \begin{adjustbox}{trim=2.3cm 0 0 0}
 %   \begin{tikzpicture}
-%     [level 1/.style={sibling distance=7.5em},
-%       level 2/.style={sibling distance=5em},
+%     [ level distance=12mm,
+%	   level 1/.style={sibling distance=7.5em,level distance=7mm},
+%       level 2/.style={sibling distance=5em,level distance=12mm},
 %       level 3/.style={sibling distance=5em},
 %       level 4/.style={sibling distance=3em}]
 %     %[semithick, x=2.4cm,y=0.8cm, >=latex, baseline=7ex,
@@ -476,7 +497,9 @@ In Figure~\ref{fig:hume_tree_v2} we can see an example of a possible HUME annota
 %   \end{tikzpicture}
 %  \\
 %  \end{adjustbox}
-%%  \adjustbox{width=\textwidth,center,margin=.5em}{\it His old daughter loved tennis, and took daily lessons however good he was}
+%    % Ondrej removed the width=\textwidth from the options below to keep font
+%	% unenlarged:
+%  \adjustbox{center,margin=.5em}{\it His old daughter loved tennis, and took daily lessons however good he was}
 %
 %  \caption{\label{fig:hume_tree}
 %    Sample UCCA annotation of a source sentence, translation (below in italics), 
@@ -723,12 +746,28 @@ sentences\footnote{Argument structures and linkers are explicitly marked in UCCA
 \end{inparadesc}
 
 
+It is also relatively common in translation that verbal constructions get
+nominalized or vice versa. An example from our dataset:
+  ``Two {\bf review} authors assessed the studies independently\dots{}'' --
+  ``Zwei Autoren bewertete die Studien unabh\"angig zu {\bf
+  \"uberpr\"ufen}\dots{}'' (lit. ``Two authors assessed the studies
+  independently to be reviewed\dots").\XXX{This is Omri's example, with
+  Ondrej's gloss for German. Ondrej is
+  not totally sure that the meaning is well preserved.}
+
+Here is \XXX{another} example with a missing linker: the source \equo{However,
+this review\dots} was translated as \equo{Diese
+Überprüfung\dots} (lit. \equo{This review}). The omission is not by HMEANT at
+all.
+
 We are not aware of any empirical evaluation that demonstrates that verb argument structure,
 taken alone, captures the crux of the sentence semantics meanings.
 The coverage of
 these and other phenomena by HUME will allow to determine empirically
 (rather than stipulate), which semantic structures are important
 to preserve for MT evaluation, and which are less important.
+
+
 
 
 \paragraph{Cost of Structural Annotation}
@@ -818,15 +857,29 @@ from a third language. ``References'' can thus easily contain information
 that does not appear in the ``source''.
 
 
-\paragraph{Technical Differences}
+\paragraph{Annotation of Predicates}
 
-+ allows for multi-word and even non-contiguous elements
+HUME allows to annotate multi-word and even
+non-contiguous elements as a single unit. HMEANT, on the other hand, always
+required exactly one word to be annotated as the predicate (``Action''), which
+is often linguistically inadequate.
 
-+ allows to indicate the quality of the predicates ("Actions")
+Another problem with HMEANT identified by \perscite{bojar:wu:ssst:2012} was the
+inability to indicate that the predicate is somewhat mistranslated (e.g.
+accidentally negated or in a slightly wrong tense). HMEANT
+annotation allows either to mark the source and reference frames as matching
+(which implies that the corresponding predicates are correct translations of each
+other), or as non-matching (which leads to a zero score for the whole frame) but
+nothing in between. In HUME, the verb is still present as a sub-unit of the
+frame and has the traffic-lights annotation.
 
-
-\oa{I would consider adding further examples from the Google Doc. For instnace ``your risk of falling'' -- ``Ihr Risiko'' or
-  ``Two {\bf review} authors assessed the studies independently and extracted outcome data'' -- ``Zwei Autoren bewertete die Studien unabh\"angig zu {\bf \"uberpr\"ufen}''}
+\XXX{Omri: I would consider adding further examples from the Google Doc. For instnace
+``your risk of falling'' -- ``Ihr Risiko''.
+Ondrej: I don't see any HMEANT problem here, the whole NP 'your risk of falling'
+is aligned with 'Ihr Risiko' and HMEANT allows to indicate that the match was
+partial, to that's probably what everyone would choose. I've put the other
+example higher, but please have a look, I'm not sure if we should keep it there
+at all.}
   
 % \Subsectionngigngig zu  Zu { to be removed}
 % 
