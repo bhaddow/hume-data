@@ -17,12 +17,12 @@
 \newcommand{\secref}[1]{Section~\ref{#1}}
 \newcommand{\figref}[1]{Figure~\ref{#1}}
 \newcommand{\tabref}[1]{Table~\ref{#1}}
-\newcommand{\XXX}[1]{{\color{red}XXX #1}} % a general todo or comment
-%\newcommand{\XXX}[1]{}
-\newcommand{\oa}[1]{\footnote{\color{red}OA: #1}}
-%\newcommand{\oa}[1]{}
-\newcommand{\bh}[1]{\footnote{\color{blue}BH: #1}}
-%\newcommand{\bh}[1]{}
+%\newcommand{\XXX}[1]{{\color{red}XXX #1}} % a general todo or comment
+\newcommand{\XXX}[1]{}
+%\newcommand{\oa}[1]{\footnote{\color{red}OA: #1}}
+\newcommand{\oa}[1]{}
+%\newcommand{\bh}[1]{\footnote{\color{blue}BH: #1}}
+\newcommand{\bh}[1]{}
 
 \def\perscite#1{\newcite{#1}}
 \def\parcite#1{\cite{#1}}
@@ -120,10 +120,10 @@ as well as its reliability, reflected in its inter-annotator agreement rates.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Introduction}\label{sec:intro}
 
-Human judgement is the central, and perhaps most fundamental, criterion for
+Human judgement is the most important criterion for
 estimating the quality of an MT system.
-Nevertheless, common measures for MT evaluation, such as adequacy and fluency judgements
-or the relative ranking of several possible translations, are problematic in two ways.
+Nevertheless, common measures for human MT evaluation, such as adequacy and fluency judgements
+or the relative ranking of possible translations, are problematic in two ways.
 First, as the quality of translation is determined by multiple factors, it is difficult
 to assign a single number that quantifies the quality of the entire sentence. This
 is indeed reflected in the diminishing inter-annotator agreement (IAA) rates of human ranking measures
@@ -131,10 +131,10 @@ is indeed reflected in the diminishing inter-annotator agreement (IAA) rates of 
 with
 the sentence length \cite{Bojar:2011}.
 Second, a sentence-level quality score does not indicate what parts of the sentence
-are erroneously translated, and hence cannot inform developers in overcoming these errors.
+are badly translated, and so cannot inform developers in repairing these errors.
 
-These problems are partially addressed by measures that decompose over sub-parts of the evaluated
-translation sentence (henceforth, {\it translation}). For automatic measures,
+These problems are partially addressed by measures that decompose over parts of the evaluated
+translation. For automatic measures,
 these are commonly words or n-grams, for manual measures some structural
 information is taken into account \parcite{machacek:bojar:segranks:2015}.
 % the following is specific to automatic measures:
@@ -147,11 +147,11 @@ quantifying the similarity of the output and the reference in terms of
 their verb argument structure; the most notable of these measures is
 HMEANT \cite{lo2011structured}.
 \XXX{Do we want to cut the following shorter?}
-These measures can localize semantic errors in the translation, but
-their focus on verb argument structures misses many pervasive semantic phenomena
+However, 
+their focus on verb argument structures misses many semantic phenomena
 (such as inter-clause linkage and nominal argument structures) and thus they only provide
-a limited perspective on the semantic similarity between the output and reference.
-Moreover, assigning semantic structure to MT output, especially when low in quality,
+a limited perspective on the semantic similarity between the translation and reference.
+Also, assigning semantic structure to an MT output, especially a poor one,
 is difficult and arguably ill-defined.
 
 We propose the Human UCCA-based MT Evaluation (HUME) metric,
@@ -160,25 +160,24 @@ Semantic units are defined according to the
 UCCA scheme \cite{abend2013universal}, an appealing candidate for semantic analysis,
 due to its cross-linguistic applicability, support for rapid annotation, and coverage
 of many fundamental semantic phenomena, such as verbal, nominal and adjectival
-argument structures and the inter-relations between them.
+argument structures and their inter-relations.
 
 HUME operates by aggregating human assessments of the translation quality of individual
 semantic units in the source sentence.
-Importantly, HUME only requires semantically annotating the source sentence,
+HUME only requires semantically annotating the source sentence,
 thus avoiding the annotation of machine-generated text 
 and allowing re-use of the source semantic annotation for measuring the quality
 of different translations of the same source sentence.
 By basing the measure on a direct comparison
-of the source and translation we avoid the difficulties engendered by using
-reference translations, albeit at the cost of imposing the additional requirement
-that the evaluator be proficient in both the source and target languages.
+of the source and translation we avoid the difficulties created by using
+reference translations, albeit at the cost of requiring the
+evaluator to be proficient in both the source and target languages.
 %An elaborate comparison of HUME and HMEANT is given in \secref{sec:hmeant_comp}.
 
 After a brief review (\secref{sec:background}), we describe HUME in detail
 (\secref{sec:hume}) and highlight its benefits over HMEANT
 (\secref{sec:hmeant_comp}).
-Our experiments with four language pairs: English-German, English-Polish,
-English-Romanian and English-Czech (\secref{sec:experiments}) document the
+Our experiments with four language pairs: English to Czech, German, Polish and Romanian (\secref{sec:experiments}) document the
 efficiency (time of annotation) and inter-annotator agreement scores for HUME.
 
 % We conduct experiments with four language pairs: English-German, English-Polish,
@@ -1368,8 +1367,6 @@ a minimal set of labels. It provides a complete semantic tree which does not rel
 We think that UCCA is the
 most promising representation for evaluating translation. 
 }
-
-\section{Conclusion}
 
 %\section*{Acknowledgments}
 
