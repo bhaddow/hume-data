@@ -1,3 +1,4 @@
+
 \documentclass[11pt]{article}
 \usepackage{acl2016}
 \usepackage[round]{natbib}
@@ -12,6 +13,17 @@
 %\usepackage{hyperref}
 \usepackage{color}
 \usepackage{lipsum,adjustbox}
+
+\makeatletter
+\renewcommand{\paragraph}{
+  \@startsection{paragraph}{4}
+  {\z@}{.3ex \@plus .3ex \@minus .2ex}{-1em}
+  {\normalfont\normalsize\bfseries}
+}
+\makeatother
+
+
+
 \listfiles
 
 \newcommand{\com}[1]{}
@@ -710,6 +722,9 @@ Then HUME's composite score is:
 % %Information on the category of the unit (e.g., whether it is a Scene, participant etc.).
 The user is asked to select a label for each source semantic unit,
 by clicking the ``A'', ``B'', Green, Orange, or Red buttons to the right of the unit's box.
+Units with multiple parents (as with ``Tom'' in \figref{fig:hume_tree_v2}) are displayed
+twice, once under each of their parents, but are only annotatable in one of
+their instances, to avoid double counting.
 %Note that the UCCA labels are not shown.
 
 The interface presents, for each unit, the translation segment aligned with it.
@@ -840,10 +855,12 @@ The annotators were all native  speakers of the respective target languages and 
 
 \tabref{tab:annot}
 shows the total number of sentences and nodes annotated by each annotator. Note
-that not all nodes in all sentences were annotated. Sometimes,
+that not all nodes in all sentences were annotated, often
+due to
 %this was because
-the annotator did not finish a sentence or accidentally missed a node, but in many cases it was also because it was an implicit 
-UCCA node, which was not shown to the annotators since there is no corresponding source segment.
+the annotator not finishing a sentence or accidentally missing a node.
+%, but in many cases it was also because it was an implicit 
+%UCCA node, which was not shown to the annotators since there is no corresponding source segment.
 \begin{table}
 \begin{center}
 {\small
