@@ -79,24 +79,40 @@
 %  We experiment with four language pairs, demonstrating HUME's broad applicability,
 %  as well as its reliability, reflected in its inter-annotator agreement rates.
 
+Human evaluation of machine translation normally uses sentence-level measures such as relative ranking
+or adequacy/fluency scales. However these provide no insight into the MT errors,
+ and do not scale well with sentence 
+length. We argue for a semantics-based evaluation, which aims to capture how much of the meaning
+is retained in the MT output, and can support the construction and tuning of semantics-based MT. 
+We present a novel human semantic evaluation measure for MT, Human
+UCCA-based MT Evaluation (HUME), building on the Universal Conceptual Cognitive Annotation (UCCA) semantic representation scheme.
+Making progress over previous work, the proposed measure takes into account
+a wider range of semantic phenomena and does not rely on semantic annotation
+of the MT output itself, whose interpretation is often unclear.
+We experiment with four language pairs, demonstrating HUME's broad applicability,
+as well as its reliability, reflected in its inter-annotator agreement rates.
 
-Human evaluation of machine translation is a cognitively difficult task and when
-annotators rate or rank complete sentences, we see low levels of agreement especially
-for longer sentences.  
-%In order to extract more reliable annotations, previous research broke down evaluation into smaller components by asking humans to annotate semantic roles on the source and translation, and then to align them. 
-In order to extract more reliable annotations, previous research broke down
-evaluation into smaller components in various ways. 
-We propose a new evaluation method
-HUME
-which is based on semantic annotation called Universal Conceptual Cognitive Annotation (UCCA). UCCA is applicable across many languages, it provides a complete structure over sentences, and it is grounded in the words in the sentence. 
-We apply UCCA only over the source or reference sentence, and not over the
-possibly garbled translation.
+
+%Human evaluation of machine translation is a cognitively difficult task and when
+%annotators rate or rank complete sentences, we see low levels of agreement especially
+%for longer sentences.  
+%In order to extract more reliable annotations, previous research broke down evaluation into smaller 
+%components by asking humans to annotate semantic roles on the source and translation, and then to align them. 
+%In order to extract more reliable annotations, previous research broke down
+%evaluation into smaller components in various ways. 
+%We propose a new evaluation method
+%HUME
+%which is based on semantic annotation called Universal Conceptual Cognitive Annotation (UCCA). UCCA
+%is applicable across many languages, it provides a complete structure over sentences, and it is 
+%grounded in the words in the sentence. 
+%We apply UCCA only over the source or reference sentence, and not over the
+%possibly garbled translation.
 %, 
 %and this makes annotation more reliable and also efficient as we can reuse labor
 %intensive semantic annotations.
-We show that HUME can be reliably applied to
-four different target languages and that sentence level inter-annotator agreement
-does not decrease over longer sentences. 
+%We show that HUME can be reliably applied to
+%four different target languages and that sentence level inter-annotator agreement
+%does not decrease over longer sentences. 
 
 \end{abstract}
 
