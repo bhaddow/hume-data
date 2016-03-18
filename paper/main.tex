@@ -776,7 +776,7 @@ the translation as correct or not. The alignments are meant just as a guide. The
 In order to validate the HUME metric, we ran an annotation experiment with one source language (English),
 and four target languages (Czech, German, Polish and Romanian), using text from the public health domain.
 The domain is particularly suitable for experimenting on MT evaluation, as semantically
-accurate translation is paramount here, underscoring the importance of accurate
+accurate translation is paramount here, underscoring the importance of reliable
 semantic evaluation measures.
 
 %particularly interested in this domain since our ultimate goal is to provide high-quality translations of health
@@ -797,9 +797,10 @@ cannot?
 \subsection{Data Sets and Translation Systems}
 
 For each of the four language pairs under consideration  we built phrase-based MT systems
-using Moses \parcite{Koehn:2007}. We used large training sets extracted from
+using Moses \parcite{Koehn:2007}.  These were trained on large parallel data sets extracted from
 OPUS \parcite{tiedemann:2009}, and
-the data sets released for the WMT14 medical translation task \parcite{bojar-EtAl:2014:W14-33}, to provide between
+the data sets released for the WMT14 medical translation task \parcite{bojar-EtAl:2014:W14-33}, 
+giving between 
 45 and 85 million sentences of training data, depending on language pair.
 %\oa{I think we should probably
 %  say how many in each.}.
@@ -823,7 +824,7 @@ and abstracts.
 \subsection{Annotation Statistics}
 \label{sec:annot_stats}
 
-Source sentences are all in English, and their UCCA annotation was performed by four
+The source sentences are all in English, and their UCCA annotation was performed by four
 computational linguists and one linguist.
 
 For the annotation of the MT output, we recruited two annotators for each of German, Romanian
