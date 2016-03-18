@@ -17,12 +17,12 @@
 \newcommand{\secref}[1]{Section~\ref{#1}}
 \newcommand{\figref}[1]{Figure~\ref{#1}}
 \newcommand{\tabref}[1]{Table~\ref{#1}}
-\newcommand{\XXX}[1]{{\color{red}XXX #1}} % a general todo or comment
-%\newcommand{\XXX}[1]{}
-\newcommand{\oa}[1]{\footnote{\color{red}OA: #1}}
-%\newcommand{\oa}[1]{}
-\newcommand{\bh}[1]{\footnote{\color{blue}BH: #1}}
-%\newcommand{\bh}[1]{}
+%\newcommand{\XXX}[1]{{\color{red}XXX #1}} % a general todo or comment
+\newcommand{\XXX}[1]{}
+%\newcommand{\oa}[1]{\footnote{\color{red}OA: #1}}
+\newcommand{\oa}[1]{}
+%\newcommand{\bh}[1]{\footnote{\color{blue}BH: #1}}
+\newcommand{\bh}[1]{}
 
 \def\perscite#1{\newcite{#1}}
 \def\parcite#1{\cite{#1}}
@@ -844,9 +844,9 @@ Sentences &  Annot. 1 & 324   & 339  & 351  & 230  \\
 Nodes & Annot. 1 & 8794  & 9253 & 9557  & 6152 \\
  &Annot. 2 & 5553 & 2906  & 9303  & 9228  \\
 \end{tabular}
-}
 \caption{Total numbers of sentences and nodes annotated on the MT output.}
 \label{tab:annot}
+}
 \end{center}
 \end{table}
 
@@ -863,6 +863,7 @@ of a sentence takes around 2--4 minutes, with some variation between annotators.
 
 \begin{table}[t]
 \begin{center}
+{\small
 \begin{tabular}{l|cccc}
 & cs & de & pl & ro \\
 \hline
@@ -873,6 +874,7 @@ Annot. 2 & -- & 162 & 229 & 207 \\
 We do not give times for the second Czech 
 ``annotator'', since this was a collection of annotators, working in parallel.}
 \label{tab:annot_times}
+}
 \end{center}
 \end{table}
 
@@ -886,6 +888,7 @@ We do not give times for the second Czech
 
 \begin{table}[t]
 \begin{center}
+{\small
 \begin{tabular}{l|cccc}
  & cs & de & pl & ro \\
 \hline
@@ -903,6 +906,7 @@ Kappa & 0.31 & 0.44 & 0.33 & 0.58 \\
 \caption{Inter-annotator agreement for the multiply-annotated portions of the data, as
 measured by Cohen's Kappa. }
 \label{tab:iaa}
+}
 \end{center}
 \end{table}
 
@@ -1036,15 +1040,15 @@ one annotator marked correct, and the other (a Cochrane employee)  as incorrect.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Comparison with HMEANT}\label{sec:hmeant_comp}
 
-HMEANT shares much of HUME's motivation in defining a
-measure that decomposes over semantic units, rather than strings. On the other
-hand, there are important differences in design decisions, which we summarize in this
+Like HMEANT, HUME defines  a
+measure that decomposes over semantic units, rather than strings. 
+However, there are important differences in design decisions, which we summarize in this
 section.
 
-First of all, the annotation process is different. We semantically annotate the
+First, the annotation process is different. In HUME, we semantically annotate the
 source, then automatically project it to the translation, and ask bilingual
-annotators to assess whether this projection shows a good or bad translation. In
-HMEANT, they semantically annotate both the reference and the translation, then
+annotators to assess the quality of the projected translation. In
+HMEANT, they semantically annotate both the reference and the translation,
 align these manually, and assess to what extent they match.
 
 
@@ -1055,7 +1059,7 @@ argument structures, ignoring other pervasive phenomena such as nominal predicat
 relations and copula clauses. Some of the uncovered cases were already observed
 in previous applications of HMEANT to languages other than English (see \perscite{birch-EtAl:2013:WMT} for German, \perscite{bojar:wu:ssst:2012} for
 Czech and by \perscite{chuchunkov-tarelkin-galinskaya:2014:SSST-8} for Russian)
-but the problems are apparent in English as well.
+but the problems are also seen in English.
 
 We conducted an analysis of the English UCCA Wikipedia
 corpus, comprising
@@ -1089,32 +1093,33 @@ the source \equo{However, this review\dots}, which was translated as \equo{Diese
 This omission will not be taken into account by HMEANT at all.
   
 We are not aware of any empirical evaluation that demonstrates that verb argument structure,
-taken alone, captures the crux of the sentence semantics meanings.
+taken alone, captures the crux of the sentence semantics.
 The coverage of
-these and other phenomena by HUME will allow to empirically determine 
-(rather than stipulate), which semantic structures are important
-to preserve for MT evaluation, and which are less important.
+these and other phenomena by HUME  make it possible to 
+empirically determine 
+(rather than stipulate), the relative importance of 
+semantic structures for MT evaluation.
 
 
 
-
-\paragraph{Cost of Structural Annotation}
-
-HMEANT structural annotation (semantic role labelling, SRL), similar to e.g.
-PropBank
-\parcite{palmer2010semantic}, is designed to be very simple and easy to explain
-to lay annotators.
-HUME relies on UCCA, which is arguably more abstract, harder to
-explain, and thus more expensive to obtain.
-
-On the other hand, HUME 
-needs the semantic annotation
-done once for a given source sentence, whereas for the HMEANT set-up, every new
-MT output has to be structurally annotated.\oa{we can give some empirical data here.
-  In the WMT 13 experiment, Lexi and Barry report a little over 3 mins of annotation
-  per sentence + 3 translations. HUME annotation is about 2-4 minutes per sentence.
-  UCCA annotation by trained annotators is about 700 tokens/hour (we didn't
-  check it for individual sentences), but that's done only once so it should be amortized.}
+%
+%\paragraph{Cost of Structural Annotation}
+%
+%HMEANT structural annotation (semantic role labelling, SRL), similar to e.g.
+%PropBank
+%\parcite{palmer2010semantic}, is designed to be very simple and easy to explain
+%to lay annotators.
+%HUME relies on UCCA, which is arguably more abstract, harder to
+%explain, and thus more expensive to obtain.
+%
+%On the other hand, HUME 
+%needs the semantic annotation
+%done once for a given source sentence, whereas for the HMEANT set-up, every new
+%MT output has to be structurally annotated.\oa{we can give some empirical data here.
+%  In the WMT 13 experiment, Lexi and Barry report a little over 3 mins of annotation
+%  per sentence + 3 translations. HUME annotation is about 2-4 minutes per sentence.
+%  UCCA annotation by trained annotators is about 700 tokens/hour (we didn't
+%  check it for individual sentences), but that's done only once so it should be amortized.}
 
 \paragraph{One vs. Two Structures}
 
@@ -1136,8 +1141,6 @@ The translation is correct, except that the main verb ``sein'' (``be'') is omitt
 While this may be interpreted as a minor error, HMEANT will assign the
 sentence a very low score, as it failed to translate the main verb.
 
-
-
 However, HMEANT's independent annotation of the source and translation makes a stricter check
 of whether the translation can be understood
 than we do. HUME may be artificially boosting the perceived understandability of
@@ -1145,9 +1148,9 @@ the sentence by allowing access to the source.
 
 \paragraph{Importance of Alignment}
 
-In HMEANT, the alignment between the (reference and candidate) structures is a key
-part of the manual annotation. If the alignment cannot be created, the candidate
-translation is heavily penalized in score.
+In HMEANT, the alignment between the (reference and translation) structures is a key
+part of the manual annotation. If the alignment cannot be created, the 
+translation is heavily penalized.
 Previous experiments with HMEANT
 \parcite{bojar:wu:ssst:2012,chuchunkov-tarelkin-galinskaya:2014:SSST-8} have
 suggested that sometimes, the structures of the reference and of an accurate translation
@@ -1161,7 +1164,7 @@ annotations at the alignment stage,
 to avoid unduly penalization due to such spurious divergences.
 %annotations also at the alignment stage
 %to avoid unduly penalization due to such a spurious divergence.
-The same issue was observed by HMEANT authors themselves
+The same issue was seen by HMEANT authors themselves
 \parcite{lo:wu:reliability:2014}:
 the 
 inter-annotator agreement on SRL dropped from 90\% to 61\% 
@@ -1207,11 +1210,10 @@ is often linguistically inadequate.
 
 Another problem with HMEANT identified by \perscite{bojar:wu:ssst:2012} was the
 inability to indicate that the predicate is somewhat mistranslated (e.g.
-accidentally negated or in a slightly wrong tense). HMEANT
-annotation allows either to mark the source and reference frames as matching
-(which implies that the corresponding predicates are correct translations of each
-other), or as non-matching (which leads to a zero score for the whole frame) but
-nothing in between. In HUME, the verb is still present as a sub-unit of the
+accidentally negated or in a slightly wrong tense). HMEANT annotation only allows
+for a match or non-match between reference and translation predicates, with non-match
+giving zero score for the whole frame.
+In HUME, the verb is still present as a sub-unit of the
 frame and has the traffic-lights annotation.
 
   
