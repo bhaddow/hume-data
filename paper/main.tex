@@ -412,7 +412,7 @@ an interpretable MT evaluation on.
 
 This section summarises the manual annotation procedure performed in order 
 to compute the HUME measure. 
-We mark the source sentence as $s$ and the translation sentence as $t$. 
+We denote the source sentence as $s$ and the translation sentence as $t$. 
 The procedure involves two manual steps: (1) UCCA-annotating $s$, 
 (2) human judgements as to the translation quality of each semantic unit of $s$ relative to $t$,
 where units are defined according to the UCCA annotation.
@@ -420,11 +420,14 @@ We note that UCCA annotation is performed once for every source sentence,
 irrespective of the number of its translations we wish
 to evaluate\footnote{Instead of relying on the source,
 the evaluation could be based on the UCCA structure for the \emph{reference}
-translation. This would allow monolingual annotators to take part in the
-evaluation. On the downside, the translation would have to be aligned to the
-reference and more importantly, we would risk inaccurate judgements due to
-the naturally occurring differences between the source and its reference
-translations.}.
+translation.
+More details in the discussion in \secref{src-vs-ref}.
+% This would allow monolingual annotators to take part in the
+% evaluation. On the downside, the translation would have to be aligned to the
+% reference and more importantly, we would risk inaccurate judgements due to
+% the naturally occurring differences between the source and its reference
+% translations.
+}.
 
 \paragraph{UCCA Annotation.}
 We begin by creating UCCA annotations for the source sentence, following the
@@ -620,17 +623,15 @@ In non-configurational languages, the relationship between the
 governing and the dependent units is often expressed using morphological
 properties of the dependents instead of their ordering
 (this holds especially for the verb and its modifiers,
-less so for components of noun phrases). Since errors in morphology
-should be expressed on the atomic units, we would expect
-a higher proportion of ``Adequate'' structural units for Czech and Polish
-compared to German and Romanian\oa{but doesn't German also have a case system? Ondrej:
-  could you pinpoint what the difference exactly is?}.
+less so for components of noun phrases). Errors in morphology
+should be expressed on the atomic units, so HUME can behave slightly differently
+on configurational vs. non-configurational languages.
 
-An example HUME annotation is given in \figref{fig:hume_tree},
-which presents an annotation of an UCCA tree, and a corresponding translation.
-We see that ``became a passion'' is deemed atomic, as it is translated as a single unit
-in $t$, and thus its sub-units, ``became'', ``a'' and ``passion'' are not evaluated
-individually. 
+% An example HUME annotation is given in \figref{fig:hume_tree},
+% which presents an annotation of an UCCA tree, and a corresponding translation.
+% We see that ``became a passion'' is deemed atomic, as it is translated as a single unit
+% in $t$, and thus its sub-units, ``became'', ``a'' and ``passion'' are not evaluated
+% individually. 
 
 %For example, consider the sentence ``After graduation, Tom moved
 %to NYC'' as the source $s$, see \figref{fig:ucca_example}.
@@ -883,6 +884,7 @@ The user is expected to mentally correct the alignment as needed.
 
 
 \paragraph{Monolingual vs. Bilingual Evaluation}
+\label{src-vs-ref}
 HUME diverges from HMEANT (and also from the shallow automatic measures
 like BLEU or METEOR) in not requiring a reference.
 Instead, it compares the source directly with the output translation.
