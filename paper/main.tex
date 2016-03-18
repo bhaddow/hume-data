@@ -406,8 +406,9 @@ In Figure~\ref{fig:hume_tree_v2} we can see an example of a possible HUME annota
 \begin{figure*}
   \begin{adjustbox}{trim=2.3cm 0 0 0}
    \begin{tikzpicture}
-     [level 1/.style={sibling distance=7.5em},
-       level 2/.style={sibling distance=5em},
+     [ level distance=12mm,
+	   level 1/.style={sibling distance=7.5em,level distance=7mm},
+       level 2/.style={sibling distance=5em,level distance=12mm},
        level 3/.style={sibling distance=5em},
        level 4/.style={sibling distance=3em}]
      %[semithick, x=2.4cm,y=0.8cm, >=latex, baseline=7ex,
@@ -468,7 +469,9 @@ In Figure~\ref{fig:hume_tree_v2} we can see an example of a possible HUME annota
    \end{tikzpicture}
   \\
   \end{adjustbox}
-  \adjustbox{width=\textwidth,center,margin=.5em}{\it His old daughter loved tennis, and took daily lessons however good he was}
+    % Ondrej removed the width=\textwidth from the options below to keep font
+	% unenlarged:
+  \adjustbox{center,margin=.5em}{\it His old daughter loved tennis, and took daily lessons however good he was}
 
   \caption{\label{fig:hume_tree}
     Sample UCCA annotation of a source sentence, translation (below in italics), 
