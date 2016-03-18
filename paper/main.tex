@@ -615,7 +615,7 @@ the meaning of the source unit, even if its fluency is impaired.
 
 In non-configurational languages, the relationship between the
 governing and dependent units is often expressed using morphological
-properties of the dependents instead of their ordering
+properties of the dependants instead of their ordering
 (this holds especially for the verb and its modifiers,
 less so for components of noun phrases). Errors in morphology
 should be expressed on the atomic units, so HUME can behave differently
@@ -669,7 +669,7 @@ marked as ``Red'', but this error is marked at the point at which it occurs.
 \subsection{Composite Score}\label{sec:score}
 
 We proceed to detailing how judgements on the semantic units
-of the source are aggregated into a composite score. We start by taking a parsiminous approach
+of the source are aggregated into a composite score. We start by taking a parsimonious approach
 %While future extensive empirical evaluation with HUME and its application to MT
 %system tuning may suggest more complex definition,
 %as a starting point we take a parsimonious approach,
@@ -721,7 +721,7 @@ Concretely, let $s = (w_1,\ldots,w_n)$ be a source sentence, $t = (w'_1,\ldots,w
 and $A \subset 2^{s \times t}$ a many-to-many word alignment between them.
 If $u$ is a semantic unit in $s$, whose yield is $yld(u)$, we define the aligned text in
 $t$ to be $a(u)=\bigcup_{(x_s,x_t) \in A \wedge x_s \cap yld(u) \neq \emptyset} x_t \subset t$.
-Where $a(u)$ is discontiguous in the text, words between the left
+Where $a(u)$ is discontinuous in the text, words between the left
 and right boundaries of $a(u)$ which are not contained in it (intervening words)
 are presented in a smaller red font.
 Intervening words are likely to change the meaning of the translation
@@ -1086,7 +1086,7 @@ is largely correct, except that the main verb ``sein'' (``be'') is omitted.
 While this may be interpreted as a minor error, HMEANT will assign the
 sentence a very low score, as it failed to translate the main verb.
 
-There are however a number of other serious consequences on focussing on verbal
+There are however a number of other serious consequences on focusing on verbal
 predicates. We conducted an analysis of the English UCCA Wikipedia
 corpus (5324 sentences)
 in order to assess the impact of the following problems: 
@@ -1094,14 +1094,14 @@ in order to assess the impact of the following problems:
 \begin{inparadesc}
 \item[Copula clauses] are treated in HMEANT simply as instances of the main verb ``be'', which
 generally does not convey the meaning of these clauses. They appear in 21.7\% of the sentences,
-according to conservative estimates that only considers non-auxilliary instances of ``be''.
+according to conservative estimates that only considers non-auxiliary instances of ``be''.
 \\
 \item[Nominal argument structures,] which are ignored by  HMEANT are in fact highly
 pervasive, appearing in 48.7\% of the sentences.
 \\
 \item[Linkers] expressing an inter-relation between
 clauses (mainly discourse markers and coordinating conjunctions) appear in 56\% of the
-sentences\footnote{Argument structures and linkers are explicitly marked in UCCA. We identified non-auxilliary instances of ``be'' and nouns using the NLTK standard tagger. Nominative argument structures are here defined as Scenes whose main relation is headed by a noun.}.
+sentences\footnote{Argument structures and linkers are explicitly marked in UCCA. We identified non-auxiliary instances of ``be'' and nouns using the NLTK standard tagger. Nominative argument structures are here defined as Scenes whose main relation is headed by a noun.}.
 \end{inparadesc}
 
 % No space
@@ -1232,7 +1232,7 @@ with a reference sentence instead of with the source.
 \paragraph{Localisation of the Error}
 
 In HMEANT, there are no guidelines as to when to propagate and error. In HUME,
-errors are localised as much as possible to where they occur, by the separation of atomic and structural nodes. This allows us to calculate more acurately the total score of the sentence.
+errors are localised as much as possible to where they occur, by the separation of atomic and structural nodes. This allows us to calculate more accurately the total score of the sentence.
 
 %I see this a falling under the verbal structures point
 %\paragraph{Annotation of Predicates Themselves}
