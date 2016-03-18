@@ -17,8 +17,8 @@
 \newcommand{\secref}[1]{Section~\ref{#1}}
 \newcommand{\figref}[1]{Figure~\ref{#1}}
 \newcommand{\tabref}[1]{Table~\ref{#1}}
-%\newcommand{\XXX}[1]{{\color{red}XXX #1}} % a general todo or comment
-\newcommand{\XXX}[1]{}
+\newcommand{\XXX}[1]{{\color{red}XXX #1}} % a general todo or comment
+%\newcommand{\XXX}[1]{}
 %\newcommand{\oa}[1]{\footnote{\color{red}OA: #1}}
 \newcommand{\oa}[1]{}
 %\newcommand{\bh}[1]{\footnote{\color{blue}BH: #1}}
@@ -135,7 +135,7 @@ are badly translated, and so cannot inform developers in repairing these errors.
 
 These problems are partially addressed by measures that decompose over parts of the evaluated
 translation. For automatic measures,
-these are commonly words or n-grams, for manual measures some structural
+these are often words or n-grams, for manual measures some structural
 information is taken into account \parcite{machacek:bojar:segranks:2015}.
 % the following is specific to automatic measures:
 %quantifying the overlap of its sub-parts relative a reference translation.
@@ -149,7 +149,8 @@ HMEANT \cite{lo2011structured}.
 \XXX{Do we want to cut the following shorter?}
 However, 
 their focus on verb argument structures misses many semantic phenomena
-(such as inter-clause linkage and nominal argument structures) and thus they only provide
+(such as inter-clause linkage and nominal argument structures), providing
+only
 a limited perspective on the semantic similarity between the translation and reference.
 Also, assigning semantic structure to an MT output, especially a poor one,
 is difficult and arguably ill-defined.
@@ -175,10 +176,11 @@ evaluator to be proficient in both the source and target languages.
 %An elaborate comparison of HUME and HMEANT is given in \secref{sec:hmeant_comp}.
 
 After a brief review (\secref{sec:background}), we describe HUME in detail
-(\secref{sec:hume}) and highlight its benefits over HMEANT
-(\secref{sec:hmeant_comp}).
+(\secref{sec:hume}).
 Our experiments with four language pairs: English to Czech, German, Polish and Romanian (\secref{sec:experiments}) document the
 efficiency (time of annotation) and inter-annotator agreement scores for HUME.
+Finally, the differences from HMEANT are discussed 
+(\secref{sec:hmeant_comp}).
 
 % We conduct experiments with four language pairs: English-German, English-Polish,
 % English-Romanian and English-Czech, and report efficiency (time of annotation) and
@@ -314,7 +316,7 @@ We discuss the differences between HMEANT and HUME in \secref{sec:hmeant_comp}.
 
 \begin{figure}
     \begin{center}
-    \includegraphics[width=0.45\textwidth]{ucca-tree-v2.png}
+    \includegraphics[width=0.35\textwidth]{ucca-tree-v2.png}
 
 {\small
 \begin{tabular}{|l|l|l|l|}
@@ -451,7 +453,7 @@ The translation is not UCCA-annotated.
 
 \begin{figure}
     \begin{center}
-    \includegraphics[width=0.45\textwidth]{ucca-tree-mteval-v2.png}
+    \includegraphics[width=0.35\textwidth]{ucca-tree-mteval-v2.png}
     \end{center}
   \caption{\label{fig:hume_tree_v2}
      HUME annotation of an UCCA tree with a word aligned example translation shown below. 
