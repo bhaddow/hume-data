@@ -1,5 +1,6 @@
 \documentclass[11pt]{article}
 \usepackage{acl2016}
+\usepackage[round]{natbib}
 \usepackage{amsmath}
 \usepackage{paralist}
 \usepackage{subfig}
@@ -24,9 +25,9 @@
 \newcommand{\bh}[1]{\footnote{\color{blue}BH: #1}}
 %\newcommand{\bh}[1]{}
 
-\def\perscite#1{\newcite{#1}}
-\def\parcite#1{\cite{#1}}
-\def\inparcite#1{\newcite{#1}}
+\def\perscite#1{\citet{#1}}
+\def\parcite#1{\citep{#1}}
+\def\inparcite#1{\citealp{#1}}
 
 \def\equo#1{``{#1}''}  % curly quotes
 
@@ -129,7 +130,7 @@ to assign a single number that quantifies the quality of the entire sentence. Th
 is indeed reflected in the diminishing inter-annotator agreement (IAA) rates of human ranking measures
 %as a function of
 with
-the sentence length \cite{Bojar:2011}.
+the sentence length \parcite{Bojar:2011}.
 Second, a sentence-level quality score does not indicate what parts of the sentence
 are badly translated, and so cannot inform developers in repairing these errors.
 
@@ -145,7 +146,7 @@ A promising line of research decomposes
 over semantically defined units,
 quantifying the similarity of the output and the reference in terms of
 their verb argument structure; the most notable of these measures is
-HMEANT \cite{lo2011structured}.
+HMEANT \parcite{lo2011structured}.
 % SAVING SPACE:
 % \XXX{Do we want to cut the following shorter?}
 % However, 
@@ -159,7 +160,7 @@ HMEANT \cite{lo2011structured}.
 We propose the Human UCCA-based MT Evaluation (HUME) metric,
 a human evaluation measure that decomposes over the semantic units of the sentence.
 Semantic units are defined according to the 
-UCCA scheme \cite{abend2013universal}, an appealing candidate for semantic analysis,
+UCCA scheme \parcite{abend2013universal}, an appealing candidate for semantic analysis,
 due to its cross-linguistic applicability, support for rapid annotation, and coverage
 of many fundamental semantic phenomena, such as verbal, nominal and adjectival
 argument structures and their inter-relations.
@@ -212,7 +213,7 @@ Finally, the differences from HMEANT are discussed
 %These difficulties have motivated the definition of a human measure that decomposes over
 %the semantic structure of the sentence, rather than its n-grams. The most notable attempt of
 %this type is the MEANT measure, and its human variant HMEANT
-%\cite{lo2010evaluating,lo2011structured,Lo2011meant,lo2013meant}, which quantifies the
+%\parcite{lo2010evaluating,lo2011structured,Lo2011meant,lo2013meant}, which quantifies the
 %similarity between the output translation and a reference translation in terms of the similarity
 %between their verbal argument structures
 %While the measure addresses the two major shortcomings
@@ -225,17 +226,18 @@ Finally, the differences from HMEANT are discussed
 %reference translation
 %are necessarily incomplete, as they compare to a small number of references
 %out of the the huge number of possible translations a sentence may have
-%\cite{dreyer2012hyter}.
+%\parcite{dreyer2012hyter}.
 
 
 \paragraph{Machine Translation Evaluation.}
 %MT evaluation has been traditionally pursued through human-based
 %evaluation that quantifies the adequacy of the translation in preserving the meaning 
-%of the source sentence, and its fluency as a sentence in the target language \cite{lopez2008statistical}.
+%of the source sentence, and its fluency as a sentence in the target language
+%\parcite{lopez2008statistical}.
 Human evaluation is generally done by ranking the outputs of multiple systems
-e.g., in the WMT tasks \cite{bojar2015findings}, or by giving
+e.g., in the WMT tasks \parcite{bojar2015findings}, or by giving
 adequacy/fluency scores to each translation, a procedure recently improved
-by \newcite{graham2015improving}.
+by \perscite{graham2015improving}.
 However, while providing the gold standard for MT evaluation, human evaluation
 is not a scalable solution.
 %and is infeasible where a wide variety of systems or parameter settings are to be evaluated.
@@ -248,9 +250,10 @@ the translation, and quantify how many of these sub-parts appear in a manually c
 This decomposition allows system developers
 to localize the errors, or at least unconfirmed parts within the translation.
 The most commonly used measures decompose over n-grams or individual words, e.g., 
-BLEU \cite{Papineni:2002}, NIST \cite{Doddington:2002} and METEOR  \cite{Banerjee:2005}.
+BLEU \parcite{Papineni:2002}, NIST \parcite{Doddington:2002} and METEOR
+\parcite{Banerjee:2005}.
 Another common approach is to determine the similarity between the reference and translation
-by applying string edit distance \cite{snover2006study}.
+by applying string edit distance \parcite{snover2006study}.
 While these measures stimulated much progress in MT research by allowing
 the evaluation of massive-scale experiments, the focus on words and n-grams does
 not provide a good estimate of semantic correctness, and may favour shallow string-based
@@ -269,10 +272,10 @@ MT models.
 
 In order to address this shortcoming, more recent work quantified
 the similarity of the reference and translation in terms
-of their structure. \newcite{liu2005syntactic} took a syntactic approach, 
+of their structure. \perscite{liu2005syntactic} took a syntactic approach, 
 using dependency grammar, and
-\newcite{owczarzak2007evaluating} took a similar approach using lexical-functional grammar structures.
-\newcite{gimenez2007linguistic} proposed to combine multiple types of information,
+\perscite{owczarzak2007evaluating} took a similar approach using lexical-functional grammar structures.
+\perscite{gimenez2007linguistic} proposed to combine multiple types of information,
 capturing the overlap between the translation and reference in terms of their
 semantic (predicate-argument structures), lexical and morphosyntactic features.
 
@@ -360,16 +363,16 @@ UCCA is a natural candidate for defining a semantic
 MT evaluation measure for a number of reasons. 
 First, it defines an intuitive set of categories
 that can be reliably annotated by non-experts, after as little as two hours
-of training \cite{marinotti2014}.
+of training \parcite{marinotti2014}.
 Second, UCCA is a cross-linguistically applicable scheme, seeking to
 represent what is shared between languages
 by building on linguistic typological theory, and specifically on ``Basic Linguistic Theory''
-\cite{Dixon:10a,Dixon:10b,Dixon:12}.
+\parcite{Dixon:10a,Dixon:10b,Dixon:12}.
 The cross-linguistic applicability of UCCA has been tested in annotations of
 English, French, German and Czech.
 Third, the scheme has been shown to be semantically stable
 in translation: UCCA annotations of translated text usually contain the same set of relationships
-\cite{sulem2015conceptual}. This indicates that the scheme reflects
+\parcite{sulem2015conceptual}. This indicates that the scheme reflects
 a common layer of representation that in a correct translation
 is mostly shared between the translation and the source. 
 
@@ -388,7 +391,7 @@ but is similar in meaning to the one-verbed
 %  OB: AMR has been applied to more languages, including Chinese, so I would not
 %  dare saying that it is less stable.}
 
-The Abstract Meaning Representation (AMR) scheme \cite{banarescu2013abstract}
+The Abstract Meaning Representation (AMR) scheme \parcite{banarescu2013abstract}
 shares much of UCCA's motivation for defining a more complete semantic annotation.
 However, using AMR is not optimal for defining a decomposition of a sentence into semantic
 units as it does not ground its semantic symbols in the text,
@@ -404,7 +407,7 @@ these approaches require linguistic expertise for their annotation, due to the i
 fine-grained distinctions they provide, and so we argue they are less suitable as a basis
 for an interpretable MT evaluation.
 
-%\newcite{Basile:12} attempted to make some aspects of the semantic annotation more accessible,
+%\perscite{Basile:12} attempted to make some aspects of the semantic annotation more accessible,
 %but to our knowledge no results of this brand have been reported.
 
 
@@ -794,8 +797,9 @@ cannot?
 \subsection{Data Sets and Translation Systems}
 
 For each of the four language pairs under consideration  we built phrase-based MT systems
-using Moses \cite{Koehn:2007}. We used large training sets extracted from OPUS \cite{tiedemann:2009}, and
-the data sets released for the WMT14 medical translation task \cite{bojar-EtAl:2014:W14-33}, to provide between
+using Moses \parcite{Koehn:2007}. We used large training sets extracted from
+OPUS \parcite{tiedemann:2009}, and
+the data sets released for the WMT14 medical translation task \parcite{bojar-EtAl:2014:W14-33}, to provide between
 45 and 85 million sentences of training data, depending on language pair.
 %\oa{I think we should probably
 %  say how many in each.}.
@@ -1126,11 +1130,13 @@ explain, and thus more expensive to obtain.
 On the other hand, HUME 
 needs the semantic annotation
 done once for a given source sentence, whereas for the HMEANT set-up, every new
-MT output has to be structurally annotated.\oa{we can give some empirical data here.
-  In the WMT 13 experiment, Lexi and Barry report a little over 3 mins of annotation
-  per sentence + 3 translations. HUME annotation is about 2-4 minutes per sentence.
-  UCCA annotation by trained annotators is about 700 tokens/hour (we didn't
-  check it for individual sentences), but that's done only once so it should be amortized.}
+MT output has to be structurally annotated.
+
+%\oa{we can give some empirical data here.
+%  In the WMT 13 experiment, Lexi and Barry report a little over 3 mins of annotation
+%  per sentence + 3 translations. HUME annotation is about 2-4 minutes per sentence.
+%  UCCA annotation by trained annotators is about 700 tokens/hour (we didn't
+%  check it for individual sentences), but that's done only once so it should be amortized.}
 
 \paragraph{One vs. Two Structures}
 
@@ -1374,7 +1380,7 @@ One of such alternative formalisms is
 Abstract Meaning Representation 
 %%% Macro broken?
 %(AMR; \inparcite{banarescu2013amr}). 
-\cite{banarescu2013amr}. 
+\parcite{banarescu2013amr}. 
 AMR is being actively developed with 
 %the view to 
 a view towards
@@ -1393,8 +1399,8 @@ Czech AMRs.
 Another possible semantic framework for this kind of MT evaluation is Semantic
 Role Labelling 
 %(SRL; \inparcite{palmer2010semantic}).
-\cite{palmer2010semantic}.
-SRL has been used in a human translation metric called HMEANT~\cite{lo2011structured}. 
+\parcite{palmer2010semantic}.
+SRL has been used in a human translation metric called HMEANT~\parcite{lo2011structured}. 
 HMEANT uses semantic role labels
 to measure how much of the “who, why, when,
 where” has been preserved in translation. Annotators are instructed to identify verbs as
@@ -1417,7 +1423,8 @@ considered and prepositional phrases which attach to nouns are not marked.
 experiencer, locative etc.) is problematic because we cannot assume that these roles will 
  remain stable across different languages. 
  When looking at an automatically parsed  English-Chinese  parallel corpora,
- it was shown that 8.7\% of the arguments do not preserve their semantic roles~\cite{fung2006automatic}. 
+ it was shown that 8.7\% of the arguments do not preserve their semantic
+ roles~\parcite{fung2006automatic}. 
 \end{itemize}
 
 UCCA provides universal semantic structures which 
@@ -1435,7 +1442,7 @@ most promising representation for evaluating translation.
 %This section should not be presented for the submission version.
 
 \bibliography{main}
-\bibliographystyle{acl2016}
+\bibliographystyle{acl_natbib}
 
 
 \end{document}
