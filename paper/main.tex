@@ -413,7 +413,7 @@ for an interpretable MT evaluation.
 
 This section summarises the manual annotation procedure used
 to compute the HUME measure. 
-We mark the source sentence as $s$ and the translation as $t$. 
+We denote the source sentence as $s$ and the translation as $t$. 
 The procedure involves two manual steps: (1) UCCA-annotating $s$, 
 (2) human judgements as to the translation quality of each semantic unit of $s$ relative to $t$,
 where units are defined according to the UCCA annotation.
@@ -421,11 +421,14 @@ We note that UCCA annotation is performed once for every source sentence,
 irrespective of the number of its translations we wish
 to evaluate\footnote{Instead of relying on the source,
 the evaluation could be based on the UCCA structure for the \emph{reference}
-translation. This would allow monolingual annotators to take part in the
-evaluation. On the downside, the translation would have to be aligned to the
-reference and more importantly, we would risk inaccurate judgements due to
-the naturally occurring differences between the source and its reference
-translations.}.
+translation.
+More details in the discussion in \secref{src-vs-ref}.
+% This would allow monolingual annotators to take part in the
+% evaluation. On the downside, the translation would have to be aligned to the
+% reference and more importantly, we would risk inaccurate judgements due to
+% the naturally occurring differences between the source and its reference
+% translations.
+}.
 
 \paragraph{UCCA Annotation.}
 We begin by creating UCCA annotations for the source sentence, following the
@@ -621,17 +624,15 @@ In non-configurational languages, the relationship between the
 governing and the dependent units is often expressed using morphological
 properties of the dependents instead of their ordering
 (this holds especially for the verb and its modifiers,
-less so for components of noun phrases). Since errors in morphology
-should be expressed on the atomic units, we would expect
-a higher proportion of ``Adequate'' structural units for Czech and Polish
-compared to German and Romanian\oa{but doesn't German also have a case system? Ondrej:
-  could you pinpoint what the difference exactly is?}.
+less so for components of noun phrases). Errors in morphology
+should be expressed on the atomic units, so HUME can behave slightly differently
+on configurational vs. non-configurational languages.
 
-An example HUME annotation is given in \figref{fig:hume_tree},
-which presents an annotation of an UCCA tree, and a corresponding translation.
-We see that ``became a passion'' is deemed atomic, as it is translated as a single unit
-in $t$, and thus its sub-units, ``became'', ``a'' and ``passion'' are not evaluated
-individually. 
+% An example HUME annotation is given in \figref{fig:hume_tree},
+% which presents an annotation of an UCCA tree, and a corresponding translation.
+% We see that ``became a passion'' is deemed atomic, as it is translated as a single unit
+% in $t$, and thus its sub-units, ``became'', ``a'' and ``passion'' are not evaluated
+% individually. 
 
 %For example, consider the sentence ``After graduation, Tom moved
 %to NYC'' as the source $s$, see \figref{fig:ucca_example}.
@@ -782,13 +783,12 @@ of 5324 sentences,
 in order to assess their frequency: \begin{inparadesc}
 \item[Copula clauses] are treated in HMEANT simply as instances of the main verb ``be'', which
 generally does not convey the meaning of these clauses. They appear in 21.7\% of the sentences,
-according to a conservative estimates that only considers non-auxilliary instances of ``be''.
+according to conservative estimates that only considers non-auxilliary instances of ``be''.
 \item[Nominative argument structures,] which are completely ignored under HMEANT are in fact highly
 pervasive, appearing in 48.7\% of the sentences.
 \item[Linkers] expressing an inter-relation between
 clauses (mainly discourse markers and coordinating conjunctions) appear in 56\% of the
-sentences\footnote{Argument structures and linkers are explicitly marked in UCCA. We identified
-  non-auxilliary instances of ``be'' and nouns using the NLTK standard tagger.}.
+sentences\footnote{Argument structures and linkers are explicitly marked in UCCA. We identified non-auxilliary instances of ``be'' and nouns using the NLTK standard tagger. Nominative argument structures are here defined as Scenes whose main relation is headed by a noun.}.
 \end{inparadesc}
 
 
@@ -797,19 +797,19 @@ nominalized or vice versa. An example from our dataset:
   ``Two {\bf review} authors assessed the studies independently\dots{}'' --
   ``Zwei Autoren bewertete die Studien unabh\"angig zu {\bf
   \"uberpr\"ufen}\dots{}'' (lit. ``Two authors assessed the studies
-  independently to be reviewed\dots").\XXX{This is Omri's example, with
+  independently to review\dots").\XXX{This is Omri's example, with
   Ondrej's gloss for German. Ondrej is
   not totally sure that the meaning is well preserved.}
 
-Here is \XXX{another} example with a missing linker: the source \equo{However,
-this review\dots} was translated as \equo{Diese
-\"Uberpr\"ufung\dots} (lit. \equo{This review}). The omission is not by HMEANT at
-all.
-
+Another example where a linker is omitted in translation:
+the source \equo{However, this review\dots}, which was translated as \equo{Diese
+\"Uberpr\"ufung\dots} (lit. \equo{This review}).
+This omission will not be taken into account by HMEANT at all.
+  
 We are not aware of any empirical evaluation that demonstrates that verb argument structure,
 taken alone, captures the crux of the sentence semantics meanings.
 The coverage of
-these and other phenomena by HUME will allow to determine empirically
+these and other phenomena by HUME will allow to empirically determine 
 (rather than stipulate), which semantic structures are important
 to preserve for MT evaluation, and which are less important.
 
@@ -851,8 +851,10 @@ and the translation ``eine koronare Angioplastie kann nicht technisch m{\"o}glic
 (lit. ``a coronary angioplasty can not technically possible''),
 produced by an MT system in our experiments.
 The translation is correct, except that the main verb ``sein'' (``be'') is omitted.
-While this may be interpreted as a minor error, HMEANT will assign it a very low score,
-as it failed to translate the main verb.
+While this may be interpreted as a minor error, HMEANT will assign the
+sentence a very low score, as it failed to translate the main verb.
+
+
 
 However, HMEANT's independent annotation of the source and translation makes a stricter check
 of whether the translation can be understood
@@ -866,24 +868,35 @@ part of the manual annotation. If the alignment cannot be created, the candidate
 translation is heavily penalized in score.
 Previous experiments with HMEANT
 \parcite{bojar:wu:ssst:2012,chuchunkov-tarelkin-galinskaya:2014:SSST-8} have
-suggested that sometimes, the structures of the reference and candidate
-translations diverge without any good reason, for instance due to a different
-interpretation of a PP-attachment, the verb can have one additional modifier in
+suggested that sometimes, the structures of the reference and of an accurate translation
+still diverge, for instance due to a different
+interpretation of a PP-attachment, or the verb having an additional modifier in
+%suggested that sometimes, the structures of the reference and candidate
+%translations diverge without any good reason, for instance due to a different
+%interpretation of a PP-attachment, the verb can have one additional modifier in
 one of the structures. It would be desirable to allow updates to the structural
-annotations also at the alignment stage
-to avoid unduly penalization due to such a spurious divergence.
+annotations at the alignment stage,
+to avoid unduly penalization due to such spurious divergences.
+%annotations also at the alignment stage
+%to avoid unduly penalization due to such a spurious divergence.
 The same issue was observed by HMEANT authors themselves
 \parcite{lo:wu:reliability:2014}:
 the 
 inter-annotator agreement on SRL dropped from 90\% to 61\% 
 when the two aligned structures were from two different annotators.
 
-HUME uses only automatic (word-level) alignment, which only serves as a cue for directing
-the attention of the annotators.
-The user is expected to mentally correct the alignment as needed.
+%HUME uses only automatic (word-level) alignment, which only serves as a cue for directing
+%the attention of the annotators.
+%The user is expected to mentally correct the alignment as needed.
+HUME uses automatic (word-level) alignment, which only
+serves as a cue for directing the attention of the annotators.
+The user is expected to mentally correct the
+alignment as needed, thus circumventing this difficulty.
+
 
 
 \paragraph{Monolingual vs. Bilingual Evaluation}
+\label{src-vs-ref}
 HUME diverges from HMEANT (and also from the shallow automatic measures
 like BLEU or METEOR) in not requiring a reference.
 Instead, it compares the source directly with the output translation.
