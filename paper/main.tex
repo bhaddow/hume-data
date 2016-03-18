@@ -218,13 +218,14 @@ Human evaluation is generally done by ranking the outputs of multiple systems
 e.g., in the WMT shared tasks \cite{bojar2015findings}, or by assigning
 individual adequacy/fluency scores to each translation, a procedure recently improved
 by \newcite{graham2015improving}.
-However, while providing the gold standard for MT evaluation, human evaluation is not a scalable solution,
-and is infeasible where a wide variety of systems or parameter settings are to be evaluated.
+However, while providing the gold standard for MT evaluation, human evaluation
+is not a scalable solution.
+%and is infeasible where a wide variety of systems or parameter settings are to be evaluated.
 % has motivated the construction of cheaper methods that correlate with human
 %judgement.
 
 Scalability is addressed by employing automatic and semi-automatic approximations of human
-judgements. Most commonly, such scores decompose over the sub-parts of
+judgements. Commonly, such scores decompose over the sub-parts of
 the translation, and quantify how many of these sub-parts appear in a manually created reference translation.
 This decomposition further allows system developers
 to localize the errors, or at least unconfirmed parts within the translation.
