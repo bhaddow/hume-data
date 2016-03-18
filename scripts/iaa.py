@@ -60,7 +60,11 @@ def print_overall_iaa(by_lang, lang, args):
     if args.create_heatmaps and group == ("A", "B","R", "O", "G"):
       import matplotlib.pyplot as plt
       import seaborn
+      seaborn.set(font_scale=2.2)
+      plt.rcParams.update({'figure.autolayout': True})
       heatmap = seaborn.heatmap(df)
+      heatmap.set_xlabel("Annotator 1")
+      heatmap.set_ylabel("Annotator 2")
       plt.savefig("iaa_heatmap_{}.png".format(lang))
       plt.clf()
 
