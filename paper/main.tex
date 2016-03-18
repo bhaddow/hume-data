@@ -334,7 +334,8 @@ P & Process & C & Centre \\
     \end{center}
 \caption{\label{fig:ucca_example_v2}
   Sample UCCA annotation where leaves correspond to words and nodes to units.
-  Edge labels mark UCCA categories, listed  in the table.}
+  The dashed edge indicates that ``Tom'' is also a participant in the ``moved to NYC''
+  Scene. Edge labels mark UCCA categories, listed  in the table.}
 %which are largely ignored in this work
 \end{figure}
 
@@ -656,15 +657,16 @@ on configurational vs. non-configurational languages.
 In Figure~\ref{fig:hume_tree_v2} we can see an example of a possible HUME
 annotation, with the translation shown in English for ease of comprehension.
 When evaluating ``to NYC'' the annotator looks at the translation and sees the
-word ``stateside''. This word captures the whole phrase and so we mark the
-structural node with an atomic label. Here we choose ``Orange'' since it approximately captures the meaning
-in this context. The ability to mark structural nodes with atomic labels allows
+word ``stateside''. This word captures the whole phrase and so we mark this
+non-leaf node with an atomic label. Here we choose ``Orange'' since
+it approximately captures the meaning
+in this context. The ability to mark non-leaves with atomic labels allows
 the annotator to account for translations which only correspond at the phrase
 level. Another feature highlighted in this example is that the root node is
-``Adequate''. This is because the root node still has two scenes linked by one linker and
+``Adequate''. This is because the root node still has two Scenes linked by one linker and
 so the relationship between child nodes is maintained. There is an error caused by a wrong
 translation of the linker ``After'' which translates as ``by'' and this is
-marked as ``Red'', but this error is marked at the point at which it occurs.
+marked as ``Red'', but this error is marked at the level at which it occurs.
 
 \subsection{Composite Score}\label{sec:score}
 
