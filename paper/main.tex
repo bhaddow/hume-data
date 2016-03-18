@@ -417,7 +417,7 @@ We denote the source sentence as $s$ and the translation as $t$.
 The procedure involves two manual steps: (1) UCCA-annotating $s$, 
 (2) human judgements as to the translation quality of each semantic unit of $s$ relative to $t$,
 where units are defined according to the UCCA annotation.
-We note that UCCA annotation is performed once for every source sentence,
+Note that UCCA annotation is performed once for every source sentence,
 irrespective of the number of its translations we wish
 to evaluate\footnote{Instead of relying on the source,
 the evaluation could be based on the UCCA structure for the \emph{reference}
@@ -440,7 +440,7 @@ where $\ell: V \rightarrow L$, and where $W = \{w_1,\ldots,w_n\}$ correspond to 
 For every node $v \in V$, we define its {\it yield} $yld(v)$ as $v$'s descendants in $W$.
 The semantic units for a sentence $s$ according to $G$
 is the set of yields of nodes in $V$. 
-We note that the translation is not UCCA-annotated.
+The translation is not UCCA-annotated.
 
 %\begin{figure*}[t]
 %    \includegraphics[width=1\textwidth]{ucca-tree-mteval.jpg}
@@ -457,23 +457,6 @@ We note that the translation is not UCCA-annotated.
      HUME annotation of an UCCA tree with a word aligned example translation shown below. 
 Atomic units are labelled using traffic lights and structural nodes are marked A or B.}
 \end{figure}
-
-In Figure~\ref{fig:hume_tree_v2} we can see an example of a possible HUME
-annotation, with the translation shown in English for ease of comprehension.
-When evaluating ``to NYC'' the annotator looks at the translation and sees the
-word ``stateside''. This word captures the whole phrase and so we mark the
-structural node with an atomic label. Here we choose ``Orange'' but the
-annotator could equally have decided that this translation is wrong and marked
-it as ``Red''. The ability to mark structural nodes with atomic labels allows
-the annotator to account for translations which only correspond at the phrase
-level. Another feature highlighted in this example is that the root node is
-``Adequate''. This might seem confusing, as the relationship between the scenes
-has changed in the translation. However, an important feature of HUME is that
-penalises errors where they occur. In HUME, the error is caused by a wrong
-translation of the linker ``After'' which translates as ``by'' and this is
-marked as ``Red''. The root node still has two scenes linked by one linker and
-the relationship between child nodes is maintained and therefore it is marked
-``Adequate''.
 % Ondrej removes the following, he thinks that errors are not supposed to be
 % propagated in HMEANT either:
 %In HMEANT, it is not clear whether errors should be propegated up the SRL hierarchy. 
@@ -563,19 +546,19 @@ the relationship between child nodes is maintained and therefore it is marked
 
 
 \paragraph{Translation Evaluation.}
-The basic strategy for computing HUME is to traverse the semantic units
-of the source sentence, which correspond to the different arguments and relations expressed
+The basic strategy for annotating HUME is to traverse the semantic units
+of the source sentence, which correspond to the arguments and relations expressed
 in the text, and to mark the extent to which they have been correctly translated.
 HUME aggregates the judgements of the users into a composite score, 
 which reflects the overall extent to which the semantic content of $s$ is preserved in $t$.
 
-Human annotation of the semantic units requires first deciding whether
+Annotation of the semantic units requires first deciding whether
 a unit is {\it structural}, i.e., has meaning-bearing sub-units,
 or {\it atomic}. In most cases, atomic units
 correspond to individual words, but they may also correspond to unanalyzable
 multi-word expressions, i.e., expressions that do not have meaningful sub-units
 (e.g., idioms like ``takes two to tango'').
-When a multi-word unit is labeled as atomic, all its sub-units' annotations are discarded
+When a multi-word unit is labeled as atomic, its sub-units' annotations are discarded
 from the evaluation.
 
 Atomic units can be labelled as ``Green'' (correct), ``Orange'' (partially correct)
@@ -590,8 +573,8 @@ A Red label means that the essential meaning of the unit has not been captured.
 Structural units have sub-units (children in the UCCA graph), which may themselves
 either be atomic or structural. The labels assigned to such nodes reflect the extent to which
 the relation between the sub-units is preserved in $t$.
-For instance, a Scene unit represents the relation between the
-Scene elements, such as the predicate (main relation), participants and adverbials.
+\XXX{(BH: don't follow this) For instance, a Scene unit represents the relation between the
+Scene elements, such as the predicate (main relation), participants and adverbials.}
 Structural units are labeled as ``Adequate'' or ``Bad'', meaning
 that the relation between the sub-units went wrong.
 We use a three label system with atomic units, as
@@ -603,7 +586,7 @@ wrong in translation
 
 \begin{compactitem}
 \item The components of the translation are ordered differently from the source,
-  such that the relation between them changes. For instance, where
+  such that the relation between them changes. For instance, if
   the sentence ``man bites dog'' is translated into a sentence meaning ``dog bites man'',
   the semantic unit corresponding to the Scene will be marked as Bad, while
   the individual atomic units ``dog'', ``bites'' and ``man'' will be marked as Green.
@@ -615,17 +598,17 @@ wrong in translation
   two cases there is no atomic unit error.}
 \end{compactitem}
 
-We note that HUME labels reflect adequacy, rather than fluency judgements.
+HUME labels reflect adequacy, rather than fluency judgements.
 Specifically, annotators are instructed to
 label a unit as Adequate if its translation is understandable and preserves
 the meaning of the source unit, even if its fluency is impaired.
 
 In non-configurational languages, the relationship between the
-governing and the dependent units is often expressed using morphological
+governing and dependent units is often expressed using morphological
 properties of the dependents instead of their ordering
 (this holds especially for the verb and its modifiers,
 less so for components of noun phrases). Errors in morphology
-should be expressed on the atomic units, so HUME can behave slightly differently
+should be expressed on the atomic units, so HUME can behave differently
 on configurational vs. non-configurational languages.
 
 % An example HUME annotation is given in \figref{fig:hume_tree},
@@ -648,6 +631,19 @@ on configurational vs. non-configurational languages.
 %expresses the relation between the graduation and moving Scenes, is marked Bad,
 %as their relation in $t$ is reversed.
 
+
+In Figure~\ref{fig:hume_tree_v2} we can see an example of a possible HUME
+annotation, with the translation shown in English for ease of comprehension.
+When evaluating ``to NYC'' the annotator looks at the translation and sees the
+word ``stateside''. This word captures the whole phrase and so we mark the
+structural node with an atomic label. Here we choose ``Orange'' since it approximately captures the meaning
+in this context. The ability to mark structural nodes with atomic labels allows
+the annotator to account for translations which only correspond at the phrase
+level. Another feature highlighted in this example is that the root node is
+``Adequate''. This is because the root node still has two scenes linked by one linker and
+so the relationship between child nodes is maintained. There is an error caused by a wrong
+translation of the linker ``After'' which translates as ``by'' and this is
+marked as ``Red'', but this error is marked at the point at which it occurs.
 
 \subsection{Composite Score}\label{sec:score}
 
