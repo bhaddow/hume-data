@@ -16,8 +16,8 @@ def extract(alldata):
     print ("Lang: " , lang)
     lang_pair = "en-" + lang
 
-    ftrans = open(prefix + "." + lang_pair + ".ref." + lang, 'w')
-    fref = open(prefix + "." + lang_pair + ".trans." + lang, 'w')
+    fref = open(prefix + "." + lang_pair + ".ref." + lang, 'w')
+    ftrans = open(prefix + "." + lang_pair + ".trans." + lang, 'w')
     fid = open(prefix + "." + lang_pair + ".uccaids" , 'w')
     fsource = open(prefix + "." + lang_pair + ".en", 'w')
 
