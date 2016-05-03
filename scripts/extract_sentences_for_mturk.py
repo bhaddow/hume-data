@@ -6,7 +6,7 @@ import pandas
 from  pandas_confusion import ConfusionMatrix
 
 
-prefix="himl2015"
+prefix="data/mturkDA/himl2015"
 
 def extract(alldata):
   print ("Stats \n\n")

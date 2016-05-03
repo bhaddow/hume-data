@@ -6,7 +6,7 @@ import pandas
 from  pandas_confusion import ConfusionMatrix
 
 
-prefix="himl2015"
+prefix="data/wmtmetrics/himl2015"
 
 def main():
   nodedata = pandas.read_csv("nodes.csv", converters={'node_id': str, 'parent' : str})
