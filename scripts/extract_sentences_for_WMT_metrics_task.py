@@ -20,7 +20,8 @@ def main():
 
 def score(nodedata):
   results = {}
-  for lang in ('ro','de','cs','pl'):
+  #for lang in ('ro','de','cs','pl'):
+  for lang in ('ro'):
     langDict = {}
     data = nodedata.loc[nodedata["lang"] == lang]
     ids = data['sent_id'].unique()
