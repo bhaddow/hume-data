@@ -28,7 +28,7 @@ def main():
     for judgements in 5, 10, 15:
 
       UCCAfileName = HUME_dir + "/himl2015.en-" + code + ".uccascores" 
-      DAfileName = DA_dir + "/ad-raw-seg-scores-" + str(judgements) + ".en-" + code + ".csv" 
+      DAfileName = HUME_dir + "/ad-raw-seg-scores-" + str(judgements) + ".en-" + code + ".csv" 
 
       UCCAresults = pandas.read_csv(UCCAfileName, header=None)
       DAresults = pandas.read_csv(DAfileName, sep='\s+', converters={'SID': int, 'SCR' : float})
