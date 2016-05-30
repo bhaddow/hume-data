@@ -1,7 +1,6 @@
-
-\documentclass[11pt]{article}
-\usepackage{acl2016}
-\usepackage[round]{natbib}
+\documentclass[11pt,letterpaper]{article}
+%\usepackage[round]{natbib}
+\usepackage{emnlp2016}
 \usepackage{amsmath}
 \usepackage{paralist}
 \usepackage{subfig}
@@ -13,6 +12,8 @@
 %\usepackage{hyperref}
 \usepackage{color}
 \usepackage{lipsum,adjustbox}
+
+\def\emnlppaperid{***}
 
 \makeatletter
 \renewcommand{\paragraph}{
@@ -37,9 +38,9 @@
 \newcommand{\bh}[1]{\footnote{\color{blue}BH: #1}}
 %\newcommand{\bh}[1]{}
 
-\def\perscite#1{\citet{#1}}
-\def\parcite#1{\citep{#1}}
-\def\inparcite#1{\citealp{#1}}
+\def\perscite#1{\newcite{#1}}
+\def\parcite#1{\cite{#1}}
+\def\inparcite#1{\cite{#1}}
 
 \def\equo#1{``{#1}''}  % curly quotes
 
@@ -1483,7 +1484,7 @@ most promising representation for evaluating translation.
 %This section should not be presented for the submission version.
 
 \bibliography{main}
-\bibliographystyle{acl_natbib}
+\bibliographystyle{emnlp2016}
 
 
 \end{document}
