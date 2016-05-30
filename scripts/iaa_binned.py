@@ -75,7 +75,7 @@ def do_bins(agree, bins, field_name, csv_file, graph_file, name):
       ax.set_yticks(np.arange(0,1.1,0.1))
       ax.set_xticks(index + 0.5)
       ax.set_xlim(0,len(bins))
-      ax.set_xticklabels(["{}-{}".format(n,m) for n,m in bins])
+      ax.set_xticklabels(["{}-{}".format(n,m) for n,m in bins[:-1] + ((bins[-1][0],""),)])
       lgd = ax.legend([r[0] for r in rects],[g for g,_ in groups], loc='upper left', borderpad=0.2)#, bbox_to_anchor=(1.0,1.1))
       #ax.set_title("Kappa by {}: {}".format(name, lang_name))
       ax.set_ylabel("Kappa")
@@ -91,7 +91,7 @@ def do_bleu_bins(sentences, agree, args):
   do_bins(agree, bins, "bleu", args.bleu_bins_file, args.bleu_bins_plot, "Sentence Bleu") 
 
 def do_length_bins(sentences, agree, args):
-  bins = ((5,15), (15, 25), (25, 35), (35, 45), (45, 65))
+  bins = ((0,15), (15, 20), (20, 25), (25, 80))
   sentences['src_length'] = sentences['source'].str.split().apply(len)
   agree = agree.merge(sentences[['sent_id', 'src_length']].drop_duplicates(),  on="sent_id")
   do_bins(agree, bins, "src_length", args.length_bins_file, args.length_bins_plot, "length") 
