@@ -20,6 +20,8 @@ LANGCODES = ("Romanian","ro"),("German", "de"),
 HUME_dir = "data/mturkDA"
 DA_dir = "/Users/alexandrabirch/work/2016-YvetteGraham/segment-mteval/proc-hits/analysis"
 fileVersion = "5"
+TYPE = "raw"
+TYPE = "stnd"
 
 
 def main():
@@ -28,7 +30,7 @@ def main():
     for judgements in 5, 10, 15:
 
       UCCAfileName = HUME_dir + "/himl2015.en-" + code + ".uccascores" 
-      DAfileName = HUME_dir + "/ad-raw-seg-scores-" + str(judgements) + ".en-" + code + ".csv" 
+      DAfileName = HUME_dir + "/ad-" + TYPE + "-seg-scores-" + str(judgements) + ".en-" + code + ".csv" 
 
       UCCAresults = pandas.read_csv(UCCAfileName, header=None)
       DAresults = pandas.read_csv(DAfileName, sep='\s+', converters={'SID': int, 'SCR' : float})
