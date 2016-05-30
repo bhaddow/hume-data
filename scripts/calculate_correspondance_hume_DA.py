@@ -55,12 +55,18 @@ def main():
 
       print ("Correference HUME DA for " + str(judgements) + " judge, en-" + code + ", size " + str(len(df['DA'].tolist())) + ": " 
                    + str(np.corrcoef(df['UCCA'].tolist(), df['DA'].tolist())[1,0]))
+
+      A = np.vstack([  df['UCCA'].tolist()  , np.ones(len(df['UCCA'].tolist()))]).T
+      m,c = np.linalg.lstsq(A, df['DA'].tolist())[0]
+      print (str(m) + " " + str(c))
+
       
       #print(df.head())
       plt.plot(df['UCCA'], df['DA'], '.')
       plt.xlabel('HUME scores')
       plt.ylabel('Averaged Direct Assesment scores')
-      plt.title('Human judgements for English-' + lang + ' system output')
+      plt.title('Human judgements for English-' + lang)
+      plt.plot(df['UCCA'], m*df['UCCA'] + c, 'r', label='Fitted line')
 
       
       fname=HUME_dir + '/humevsDA.' + str(judgements) + 'en-' + code + '.pdf'
