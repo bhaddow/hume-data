@@ -20,6 +20,8 @@ LANGCODES = ("Romanian","ro"),("German", "de"),
 HUME_dir = "data/mturkDA"
 DA_dir = "/Users/alexandrabirch/work/2016-YvetteGraham/segment-mteval/proc-hits/analysis"
 fileVersion = "5"
+TYPE = "raw"
+TYPE = "stnd"
 
 
 def main():
@@ -28,7 +30,7 @@ def main():
     for judgements in 5, 10, 15:
 
       UCCAfileName = HUME_dir + "/himl2015.en-" + code + ".uccascores" 
-      DAfileName = HUME_dir + "/ad-raw-seg-scores-" + str(judgements) + ".en-" + code + ".csv" 
+      DAfileName = HUME_dir + "/ad-" + TYPE + "-seg-scores-" + str(judgements) + ".en-" + code + ".csv" 
 
       UCCAresults = pandas.read_csv(UCCAfileName, header=None)
       DAresults = pandas.read_csv(DAfileName, sep='\s+', converters={'SID': int, 'SCR' : float})
@@ -55,12 +57,18 @@ def main():
 
       print ("Correference HUME DA for " + str(judgements) + " judge, en-" + code + ", size " + str(len(df['DA'].tolist())) + ": " 
                    + str(np.corrcoef(df['UCCA'].tolist(), df['DA'].tolist())[1,0]))
+
+      A = np.vstack([  df['UCCA'].tolist()  , np.ones(len(df['UCCA'].tolist()))]).T
+      m,c = np.linalg.lstsq(A, df['DA'].tolist())[0]
+      print (str(m) + " " + str(c))
+
       
       #print(df.head())
       plt.plot(df['UCCA'], df['DA'], '.')
       plt.xlabel('HUME scores')
       plt.ylabel('Averaged Direct Assesment scores')
-      plt.title('Human judgements for English-' + lang + ' system output')
+      plt.title('Human judgements for English-' + lang)
+      plt.plot(df['UCCA'], m*df['UCCA'] + c, 'r', label='Fitted line')
 
       
       fname=HUME_dir + '/humevsDA.' + str(judgements) + 'en-' + code + '.pdf'
