@@ -1,7 +1,7 @@
 import sys, pdb, math
 import numpy as np
 import scipy.stats
-
+import scipy.spatial.distance as distance
 
 def find_bin(threshs,val):
     """
@@ -112,12 +112,13 @@ if __name__ == "__main__":
                     print('\t'.join([str(x) for x in t]))
     """
     
-    # All sentences
+    # All sentences, ordinal outliers
     ordinal_thresh = 0.5
     all_sents = []
     for bin in bins_source_len:
         all_sents.extend(bin)
-    #print('===== All Bins ======== '+str(len(all_sents)))
+    
+    #print('===== All Bins Ordinal Outliers ======== '+str(len(all_sents)))
     ords1 = np.array([x[1] for x in all_sents]).argsort().argsort()
     ords2 = np.array([x[2] for x in all_sents]).argsort().argsort()
     print('\t'.join(['ordinal by DA', 'ordinal by HUME', 'source sentnece', 'translation','SID','DA score','HUME score','UCCA ID']))
@@ -127,3 +128,19 @@ if __name__ == "__main__":
             print('\t'.join([str(z) for z in t]))
 
 
+    # All sentences, 3-NN outliers
+
+    # compute the 3 NNs for each point (self excluded), and their average distance
+    # find the points with the highest / lowest distance
+    print('\nk-NN analysis\n')
+    k = 3
+    X = np.transpose(np.array([[x[1] for x in all_sents],[x[2] for x in all_sents]]))
+    D = distance.squareform(distance.pdist(X, 'euclidean'))
+    proximity = np.sum(np.partition(D,k+1)[:,:(k+1)],axis=1)
+    proximity_ords = proximity.argsort().argsort()
+    num_outliers = 5
+    for outlier_ind in range(num_outliers):
+        list_index = list(proximity_ords).index(outlier_ind)
+        x = all_sents[list_index]
+        t = (source_sents[x[0]],trans_sents[x[0]],x[0],x[1],x[2],x[3])
+        print('\t'.join([str(z) for z in t]))
