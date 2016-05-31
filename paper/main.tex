@@ -104,7 +104,8 @@ Making progress over previous work, the proposed measure takes into account
 a wider range of semantic phenomena and does not rely on semantic annotation
 of the MT output itself, whose interpretation is often unclear.
 We experiment with four language pairs, demonstrating HUME's broad applicability,
-as well as its reliability, reflected in its inter-annotator agreement rates.
+as well as its reliability, reflected in its inter-annotator agreement rates and 
+good correlation with human adequacy scores.
 
 
 %Human evaluation of machine translation is a cognitively difficult task and when
@@ -193,7 +194,9 @@ evaluator to be proficient in both the source and target languages.
 After a brief review (\secref{sec:background}), we describe HUME in detail
 (\secref{sec:hume}).
 Our experiments with four language pairs: English to Czech, German, Polish and Romanian (\secref{sec:experiments}) document the
-efficiency (time of annotation) and inter-annotator agreement scores for HUME.
+efficiency (time of annotation) and inter-annotator agreement scores for HUME. 
+We also report on the correlation scores of HUME with direct assesment of human 
+adequacy ratings. 
 Finally, the differences with HMEANT are discussed 
 (\secref{sec:hmeant_comp}).
 
@@ -1064,10 +1067,44 @@ Cochrane texts) as ``\"uberpr\"ufung'', which
 one annotator marked correct, and the other (a Cochrane employee)  as incorrect.
 
 
+\subsection{Comparison with Crowdsourced Adequacy Judgements}\label{sec:adequacy}
+
+\def\iaafig #1{\includegraphics[width=0.4\textwidth]{humevsDA_10en-#1.pdf}}
+
+\begin{figure}[t]
+\renewcommand{\tabcolsep}{0pt}
+\begin{tabular}{c}
+\subfloat[English-German]{
+  \iaafig{de}
+}
+\\
+\subfloat[English-Romanian]{
+  \iaafig{ro}
+}
+\end{tabular}
+\caption{Plots of HUME scores vs Direct Assesment scores which have been standardised for each crowdsourcing annotator. The regression is calculated using linear least squares.}
+\label{fig:dacorrelation}
+\end{figure}
+Recent research~\cite{TODO} has proposed a new method for collecting 
+accuracy ratings. The idea is that collecting a large number of adequacy judgements along a 
+scale of 0 to 100 allows us to apply statistical measures which make them reliable. 
+It has been shown that mean  judgements correlate very strongly with each other. 
+We followed~\cite{TODO} and collected up to 15 adequacy judgements on most of the
+HUME annotated translations for German and Romainian. To ensure high quality judgments
+we restricted the IP of the annotators to those of the relevant country. We found that there were too
+few Czech and Polish annotators, and removing the IP restriction led to very poor quality results. 
+We can see that HUME and Direct Assesment scores do correlate. 
+We also removed unreliable crowdsourcing annotators
+according to the method discussed in ~\cite{TODO}. The Pearsons correlation for en-de is 0.58 and for en-ro is 0.70 which shows that they two measures do correlate. This confirms that 
+the HUME metric is consistent with previously published methods in human evaluation, even though these
+two approaches are very different in their conception.
+We argue that although annotating HUME requires more expertise and effort, 
+the results are more valuable because a HUME evaluation can tell you what parts
+of the source sentence have been retained. Direct assesment scores require a crowd, which is sometimes not available or reliable, and it returns a single number which gives little insight into the quality of
+the translated sentence.  
 
 %\subsection{Discussion of Disagreements}\label{sec:disagreements}
 
-%\subsection{Comparison with Crowdsourced Adequacy Judgements}\label{sec:adequacy}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
