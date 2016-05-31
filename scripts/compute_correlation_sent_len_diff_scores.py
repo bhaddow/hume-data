@@ -11,9 +11,12 @@ def find_bin(threshs,val):
     
 
 if __name__ == "__main__":
-    if len(sys.argv) != 7:
-        print("compute_correlation_sent_len_diff_scores.py <uccaids> <hume scores> <source sents> <trans sents> <DA scores> <length thresholds (:-delimited)>")
+    if len(sys.argv) != 9:
+        print("compute_correlation_sent_len_diff_scores.py <uccaids> <hume scores> <source sents> <trans sents> <DA scores> <length thresholds (:-delimited)> <ordinal threshold> <num outliers>")
         sys.exit(-1)
+
+    ordinal_thresh = float(sys.argv[7])
+    num_outliers = int(sys.argv[8])
     
     ucca_ids = [int(x.strip()) for x in open(sys.argv[1]).readlines()]
     hume = [float(x.strip()) for x in open(sys.argv[2]).readlines()]
@@ -27,7 +30,8 @@ if __name__ == "__main__":
         if ind == 0:
             continue
         fields = l.strip().split()
-        da_scores.append((int(fields[0]),float(fields[2])))
+        da_scores.append((int(fields[0]),float(fields[2]))) # (sid,da score)
+        #da_scores.append((int(fields[8]),float(fields[9])))
 
     threshs = [int(x) for x in sys.argv[6].split(':')]
 
@@ -42,8 +46,8 @@ if __name__ == "__main__":
             pearson_by_bins_source.append((None,0))
         else:
             pearson_by_bins_source.append((\
-                scipy.stats.spearmanr([x[1] for x in bin], [x[2] for x in bin])[0],len(bin)))
-
+                scipy.stats.pearsonr([x[1] for x in bin], [x[2] for x in bin])[0],len(bin)))
+            
     bins_trans_len = [[] for x in threshs] + [[]]
     for sid, score in da_scores:
         bins_trans_len[find_bin(threshs,trans_sent_lens[sid])].append((sid,score,hume[sid],ucca_ids[sid]))
@@ -54,16 +58,11 @@ if __name__ == "__main__":
             pearson_by_bins_trans.append((None,0))
         else:
             pearson_by_bins_trans.append((\
-                scipy.stats.spearmanr([x[1] for x in bin], [x[2] for x in bin])[0],len(bin)))
+                scipy.stats.pearsonr([x[1] for x in bin], [x[2] for x in bin])[0],len(bin)))
     
-    print(pearson_by_bins_source)
+    #print(pearson_by_bins_source)
+    #print(pearson_by_bins_trans)
     
-    print(pearson_by_bins_trans)
-    
-    
-    
-    dist_thresh = 0.4
-
     # find outliers: vertical distnace
     """
     for index,bin in enumerate(bins_source_len):
@@ -113,7 +112,6 @@ if __name__ == "__main__":
     """
     
     # All sentences, ordinal outliers
-    ordinal_thresh = 0.5
     all_sents = []
     for bin in bins_source_len:
         all_sents.extend(bin)
@@ -133,14 +131,18 @@ if __name__ == "__main__":
     # compute the 3 NNs for each point (self excluded), and their average distance
     # find the points with the highest / lowest distance
     print('\nk-NN analysis\n')
-    k = 3
+    k=3
     X = np.transpose(np.array([[x[1] for x in all_sents],[x[2] for x in all_sents]]))
     D = distance.squareform(distance.pdist(X, 'euclidean'))
     proximity = np.sum(np.partition(D,k+1)[:,:(k+1)],axis=1)
     proximity_ords = proximity.argsort().argsort()
-    num_outliers = 5
-    for outlier_ind in range(num_outliers):
+    print('\t'.join(['source sentnece', 'translation','SID','DA score','HUME score','UCCA ID']))
+    
+    for outlier_ind in range(len(proximity_ords)-num_outliers,len(proximity_ords)):
         list_index = list(proximity_ords).index(outlier_ind)
         x = all_sents[list_index]
         t = (source_sents[x[0]],trans_sents[x[0]],x[0],x[1],x[2],x[3])
+        print(proximity[list_index])
         print('\t'.join([str(z) for z in t]))
+
+
