@@ -11,8 +11,8 @@ def find_bin(threshs,val):
     
 
 if __name__ == "__main__":
-    if len(sys.argv) != 9:
-        print("compute_correlation_sent_len_diff_scores.py <uccaids> <hume scores> <source sents> <trans sents> <DA scores> <length thresholds (:-delimited)> <ordinal threshold> <num outliers>")
+    if len(sys.argv) not in [9,10]:
+        print("compute_correlation_sent_len_diff_scores.py <uccaids> <hume scores> <source sents> <trans sents> <DA scores> <length thresholds (:-delimited)> <ordinal threshold> <num outliers> <overlap sents>")
         sys.exit(-1)
 
     ordinal_thresh = float(sys.argv[7])
@@ -24,6 +24,10 @@ if __name__ == "__main__":
     trans_sents = [x.strip() for x in open(sys.argv[4]).readlines()]
     source_sent_lens = [len(x.split()) for x in source_sents]
     trans_sent_lens = [len(x.split()) for x in trans_sents]
+    if len(sys.argv) > 9:
+        overlap_sentids = [int(x.strip()) for x in open(sys.argv[9]).readlines()]
+    else:
+        overlap_sentids = None
     
     da_scores = []
     for ind,l in enumerate(open(sys.argv[5])):
@@ -31,14 +35,15 @@ if __name__ == "__main__":
             continue
         fields = l.strip().split()
         da_scores.append((int(fields[0]),float(fields[2]))) # (sid,da score)
-        #da_scores.append((int(fields[8]),float(fields[9])))
+
 
     threshs = [int(x) for x in sys.argv[6].split(':')]
 
     # bin the sents by sent length
     bins_source_len = [[] for x in threshs] + [[]]
     for sid, score in da_scores:
-        bins_source_len[find_bin(threshs,source_sent_lens[sid])].append((sid,score,hume[sid],ucca_ids[sid])) # (sid, DA score, hume score, ucca ID)
+        if overlap_sentids is None or ucca_ids[sid] in overlap_sentids :
+            bins_source_len[find_bin(threshs,source_sent_lens[sid])].append((sid,score,hume[sid],ucca_ids[sid])) # (sid, DA score, hume score, ucca ID)
 
     pearson_by_bins_source = []
     for bin in bins_source_len:
@@ -50,7 +55,8 @@ if __name__ == "__main__":
             
     bins_trans_len = [[] for x in threshs] + [[]]
     for sid, score in da_scores:
-        bins_trans_len[find_bin(threshs,trans_sent_lens[sid])].append((sid,score,hume[sid],ucca_ids[sid]))
+        if overlap_sentids is None or ucca_ids[sid] in overlap_sentids:
+            bins_trans_len[find_bin(threshs,trans_sent_lens[sid])].append((sid,score,hume[sid],ucca_ids[sid]))
 
     pearson_by_bins_trans = []
     for bin in bins_trans_len:
@@ -60,8 +66,8 @@ if __name__ == "__main__":
             pearson_by_bins_trans.append((\
                 scipy.stats.pearsonr([x[1] for x in bin], [x[2] for x in bin])[0],len(bin)))
     
-    #print(pearson_by_bins_source)
-    #print(pearson_by_bins_trans)
+    print(pearson_by_bins_source)
+    print(pearson_by_bins_trans)
     
     # find outliers: vertical distnace
     """
@@ -115,6 +121,10 @@ if __name__ == "__main__":
     all_sents = []
     for bin in bins_source_len:
         all_sents.extend(bin)
+
+    print(scipy.stats.pearsonr([x[1] for x in all_sents], \
+                               [x[2] for x in all_sents]))
+
     
     #print('===== All Bins Ordinal Outliers ======== '+str(len(all_sents)))
     ords1 = np.array([x[1] for x in all_sents]).argsort().argsort()
@@ -131,18 +141,17 @@ if __name__ == "__main__":
     # compute the 3 NNs for each point (self excluded), and their average distance
     # find the points with the highest / lowest distance
     print('\nk-NN analysis\n')
-    k=3
+    k = 3
     X = np.transpose(np.array([[x[1] for x in all_sents],[x[2] for x in all_sents]]))
     D = distance.squareform(distance.pdist(X, 'euclidean'))
     proximity = np.sum(np.partition(D,k+1)[:,:(k+1)],axis=1)
     proximity_ords = proximity.argsort().argsort()
     print('\t'.join(['source sentnece', 'translation','SID','DA score','HUME score','UCCA ID']))
     
-    for outlier_ind in range(len(proximity_ords)-num_outliers,len(proximity_ords)):
+    for outlier_ind in reversed(range(len(proximity_ords)-num_outliers,len(proximity_ords))):
         list_index = list(proximity_ords).index(outlier_ind)
         x = all_sents[list_index]
         t = (source_sents[x[0]],trans_sents[x[0]],x[0],x[1],x[2],x[3])
-        print(proximity[list_index])
         print('\t'.join([str(z) for z in t]))
 
 
