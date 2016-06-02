@@ -702,7 +702,7 @@ of the source are aggregated into a composite score.
 %as a starting point we take a parsimonious approach,
 We start by taking a very simple approach and compute an accuracy score.
 Let $\Green(s,t)$, $\Adequate(s,t)$ and $\Orange(s,t)$ be the number of Green, Adequate and Orange
-units respectively. Let $\Units(s)$ be the number of units marked with any of the labels.
+units, respectively. Let $\Units(s)$ be the number of units marked with any of the labels.
 Then HUME's composite score is:
 
 \vspace{-.5cm}
@@ -787,7 +787,7 @@ The annotator should thus mark this structural node as Bad.
 
 
 \com{
-In Figure~\ref{mttool} you we show the MT evaluation tool. The sentence at the top shows the complete MT system output. Underneath the MT output is the  source sentence.  Underneath the source sentence we see its expandable semantic tree structure with both lexical and structural nodes. atomic nodes only have traffic light annotation, whereas a structural node would normally be labelled ``A'' or ``B'' but could also be labelled as a lexical node, in the case where there is no word to word correspondence for the translation of its children.
+In Figure~\ref{mttool}, we show the MT evaluation tool. The sentence at the top shows the complete MT system output. Underneath the MT output is the  source sentence.  Underneath the source sentence we see its expandable semantic tree structure with both lexical and structural nodes. atomic nodes only have traffic light annotation, whereas a structural node would normally be labelled ``A'' or ``B'' but could also be labelled as a lexical node, in the case where there is no word to word correspondence for the translation of its children.
 
  The child components of a structural node are marked with different coloured rectangles. When navigating through the different source sentence nodes, one can see the relevant sections of the translation because the aligned words in the translation are highlighted in the complete sentence above. Aligned translations are also shown in black alongside the source node. If the node is aligned to a set of dis-contiguous words in the translation, then the unaligned words that appear in between the aligned words are shown in red. Even if these words are not directly aligned to the source node, they 
 will likely change the meaning of the translation and must be considered when marking 
