@@ -3,8 +3,12 @@ from __future__ import print_function, division
 
 import sys, string
 import pandas
+import numpy
 from  pandas_confusion import ConfusionMatrix
 
+SCORE_TYPES = ['all','atomic','struct','P','S','C','H','E','A','L']
+LANGS = ['ro','de','cs','pl']
+#LANGS = ['ro']
 
 prefix="data/wmtmetrics/himl2015"
 
@@ -20,32 +24,50 @@ def main():
 
 def score(nodedata):
   results = {}
-  #for lang in ('ro','de','cs','pl'):
-  for lang in ('ro'):
+  for lang in LANGS:
+    #print ("HERE " + lang)
     langDict = {}
     data = nodedata.loc[nodedata["lang"] == lang]
     ids = data['sent_id'].unique()
   
     for id in sorted(ids):
-      datasent = data.loc[data["sent_id"] == id]
+      score_all = {}
+      score_mult = {}
+      for score_type in SCORE_TYPES:
+        datasent = data.loc[data["sent_id"] == id]
+        annotids = datasent['annot_id'].unique()
+        datacurr = datasent
       
-      g = 0
-      o = 0
-      a = 0
-      for row_index, row in datasent.iterrows():
-        
-        good = datasent.loc[(datasent["mt_label"]=="A") | (data["mt_label"]=="G") ]
-        ok = datasent.loc[(datasent["mt_label"]=="O")]
-        all = datasent.loc[(datasent["mt_label"]!="M")]
-        g += good["node_id"].count()
-        o += ok["node_id"].count()
-        a += all["node_id"].count()
-
+        if (score_type == 'all'):
+          datacurr = datasent
+        elif (score_type == 'atomic'):
+          datacurr = datasent.loc[(data["mt_label"] == "G")|(data["mt_label"] == "R")|(data["mt_label"] == "O")]
+        elif (score_type == 'struct'):
+          datacurr = datasent.loc[ (data["mt_label"] == "A")|(data["mt_label"] == "B") ]
+        else:
+          datacurr = datasent.loc[(data["ucca_label"] == score_type) ]
+          
       
-      score = (g + o/2) / a
-      print ("Lang:", lang, " Sent:", id, " Plain Score: " , score) 
+        anodes = datacurr.loc[(datacurr["mt_label"]=="A")].count()[0]
+        bnodes = datacurr.loc[(datacurr["mt_label"]=="B")].count()[0]
+        gnodes = datacurr.loc[(datacurr["mt_label"]=="G")].count()[0]
+        onodes = datacurr.loc[(datacurr["mt_label"]=="O")].count()[0]
+        rnodes = datacurr.loc[(datacurr["mt_label"]=="R")].count()[0]
 
-      langDict[id] = score
+        div = (anodes+bnodes+gnodes+rnodes+onodes)
+        if div == 0:
+          scr = 0
+        else: 
+          scr = (anodes + gnodes + onodes/2)*1.0 / div
+        #print ("HERE: ",scr," from ",anodes," ",bnodes," ",gnodes," ",onodes," ",rnodes)
+        score_all[score_type] = scr
+        flag = 0
+        if (len(annotids) >=2):
+          flag = 1
+          score_mult[score_type] = scr
+        print ("Lang:", lang, " Sent:", id, " Score type: " , score_type, " score: ", score_all[score_type], " score mult:", flag ) 
+
+      langDict[id] = [score_all, score_mult]
 
     results[lang] = langDict
 

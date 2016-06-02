@@ -8,12 +8,13 @@ from  pandas_confusion import ConfusionMatrix
 import extract_sentences_for_WMT_metrics_task
 
 
+LANGS = ['ro','de','cs','pl']
+#LANGS = ['ro']
 prefix="data/mturkDA/himl2015"
 
 def extract(alldata, scores):
   print ("Stats \n\n")
-  #for lang in ('ro','de','cs','pl'):
-  for lang in ('ro'):
+  for lang in LANGS:
     data = alldata.loc[alldata["lang"] == lang]
     ids = alldata['sent_id'].unique()
     print ("Lang: " , lang)
@@ -23,6 +24,9 @@ def extract(alldata, scores):
     ftrans = open(prefix + "." + lang_pair + ".trans." + lang, 'w')
     fid = open(prefix + "." + lang_pair + ".uccaids" , 'w')
     fscore = open(prefix + "." + lang_pair + ".uccascores" , 'w')
+    fscore.write(",".join(extract_sentences_for_WMT_metrics_task.SCORE_TYPES)
+    fmultscore = open(prefix + "." + lang_pair + ".multuccascores" , 'w')
+    fmultscore.write(",".join(extract_sentences_for_WMT_metrics_task.SCORE_TYPES)
     fsource = open(prefix + "." + lang_pair + ".en", 'w')
 
     for id in sorted(ids):
@@ -34,16 +38,22 @@ def extract(alldata, scores):
       for row_index, row in datasent.iterrows():
         found = 1
 
-        score = ""
-        if row.sent_id in scores[lang].keys():
-          score = scores[lang][row.sent_id]
-          print ("Found " + str(row.sent_id) + " score " + str(score))
 
 
         fid.write('%s\n' % (row.sent_id))
         fsource.write('%s\n' % (row.source))
         fref.write('%s\n' % (row.reference))
-        fscore.write('%s\n' % score)
+        if row.sent_id in scores[lang].keys():
+          score = scores[lang][row.sent_id]
+          #print ("Found " + str(row.sent_id) + " score " + str(score))
+          for score_type in extract_sentences_for_WMT_metrics_task.SCORE_TYPES:
+            fscore.write('%s,' % score[0][score_type])
+            if score[1]: #if not empty
+              fmultscore.write('%s,' % score[1][score_type])
+        else:
+          print ("Not Found")
+        fscore.write('\n')
+        fmultscore.write('\n')
         ftrans.write('%s\n' % (row.target))
         break
       
@@ -53,6 +63,7 @@ def extract(alldata, scores):
 
     ftrans.close()
     fscore.close()
+    fmultscore.close()
     fsource.close()
     fref.close()
     fid.close()
