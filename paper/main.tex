@@ -9,17 +9,25 @@
 \usepackage{graphicx}
 \usepackage{url}
 \usepackage{pgfplotstable}
+\usepackage{titlesec}
 %\usepackage{hyperref}
 \usepackage{color}
 \usepackage{lipsum,adjustbox}
 \usepackage[font={small}]{caption}
 
 \def\emnlppaperid{***}
+\setlength{\belowcaptionskip}{-10pt}
 
 \makeatletter
+
+\titlespacing*{\section}
+{0pt}{1ex plus 1ex minus .2ex}{1ex plus .2ex}
+\titlespacing*{\subsection}
+{0pt}{1ex plus 1ex minus .2ex}{1ex plus .2ex}
+
 \renewcommand{\paragraph}{
   \@startsection{paragraph}{4}
-  {\z@}{.3ex \@plus .3ex \@minus .2ex}{-1em}
+  {\z@}{.1ex \@plus .1ex \@minus .1ex}{-1.5em}
   {\normalfont\normalsize\bfseries}
 }
 \makeatother
@@ -435,8 +443,10 @@ as they require linguistic expertise for their annotation.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{The HUME Measure}\label{sec:hume}
 
+\vspace{-.1em}
+\section{The HUME Measure}\label{sec:hume}
+\vspace{-.2em}
 
 \subsection{Annotation Procedure}\label{sec:guidelines}
 
@@ -673,7 +683,7 @@ a linker and therefore we mark the root node as structurally correct, Adequate.
 
 \begin{figure*}[t]
     \begin{center}
-    \includegraphics[width=1\textwidth]{hume_interface2.jpg}
+    \includegraphics[width=.8\textwidth]{hume_interface2.jpg}
     \caption{The HUME annotation tool. The top orange box
       contains the translation. The source sentence is directly below it, followed by the tree of the source
       semantic units. Alignments between the source and translation are in italics and
@@ -816,22 +826,20 @@ with crowd-sourced adequacy judgements).
 
 For each of the four language pairs under consideration  we built phrase-based MT systems
 using Moses \parcite{Koehn:2007}.  These were trained on large parallel data sets extracted from
-OPUS \parcite{tiedemann:2009}, and
-the data sets released for the WMT14 medical translation task \parcite{bojar-EtAl:2014:W14-33}, 
-giving between 
-45 and 85 million sentences of training data, depending on language pair.
+OPUS \parcite{tiedemann:2009}, and the data sets released for the WMT14
+medical translation task \parcite{bojar-EtAl:2014:W14-33}, 
+giving between 45 and 85 million sentences of training data, depending on language pair.
 %\oa{I think we should probably
 %  say how many in each.}.
 % ... if someone asks us to do so...
-
 These translation systems were used to translate texts derived from both NHS
 24\footnote{\url{http://www.nhs24.com/}} and
 Cochrane\footnote{\url{http://www.cochrane.org/}} into the four languages.
 NHS~24 is a public body providing healthcare and health-service
 related information in Scotland, Cochrane is an international NGO
-which 
-provides independent systematic reviews on health-related research. From NHS 24, we selected the segments from their
-``Health A-Z'' in the NHS Inform website, and the Cochrane texts come from their plain language summaries
+which provides independent systematic reviews on health-related research.
+NHS~24 texts come from the ``Health A-Z'' section in the NHS Inform
+website, and Cochrane texts come from their plain language summaries
 and abstracts.
 
 %\bh{How much more do we need? Perhaps in the intro we could justify our focus on public health text
@@ -850,13 +858,13 @@ several further annotators worked on a small number of
 sentences each. We treat these further annotators as one annotator, resulting in two annotators
 for each language pair.
 The annotators were all native speakers of the respective target languages and fluent in English.
+\oa{maybe we should put in what training they've received}
 
 \tabref{tab:annot}
-shows the total number of sentences and units annotated by each annotator. Note
-that not all units in all sentences were annotated, often
-due to
-%this was because
-the annotator not finishing a sentence or accidentally missing a node.
+shows the total number of sentences and units annotated by each annotator.
+Not all units in all sentences were annotated, often due to
+the annotator %not finishing a sentence or
+accidentally missing a node.
 %, but in many cases it was also because it was an implicit 
 %UCCA node, which was not shown to the annotators since there is no corresponding source segment.
 \begin{table}
@@ -865,13 +873,13 @@ the annotator not finishing a sentence or accidentally missing a node.
 \begin{tabular}{ll|cccc}
 & & cs & de & pl & ro \\
 \hline
-Sentences &  Annot. 1 & 324   & 339  & 351  & 230  \\
+\#Sentences &  Annot. 1 & 324   & 339  & 351  & 230  \\
  & Annot. 2 & 205 & 104  & 340  & 337 \\
 \hline
-Units & Annot. 1 & 8794  & 9253 & 9557  & 6152 \\
+\#Units & Annot. 1 & 8794  & 9253 & 9557  & 6152 \\
  &Annot. 2 & 5553 & 2906  & 9303  & 9228  \\
 \end{tabular}
-\caption{Number of HUME-annotated sentences and units.}
+\caption{HUME-annotated \#sentences and \#units.}
 \label{tab:annot}
 }
 \end{center}
@@ -934,7 +942,7 @@ Kappa & 0.54 & 0.29 & 0.54 & 0.50 \\
 Structural units & 1602 & 1040 & 2655 & 1989 \\
 Kappa & 0.31 & 0.44 & 0.33 & 0.58 \\
 \end{tabular}
-\caption{Inter-annotator agreement for the multiply-annotated portions of the data,
+\caption{IAA for the multiply-annotated units,
 measured by Cohen's Kappa. }
 \label{tab:iaa}
 }
@@ -945,7 +953,7 @@ measured by Cohen's Kappa. }
 %quality translations often diverge in their agreement scores?}
 
 In order to assess the consistency of the annotation, we measure the Inter-Annotator
-Agreement (IAA) using Cohen's Kappa on the multiply-annotated portions of the data.
+Agreement (IAA) using Cohen's Kappa on the multiply-annotated units.
 %For German, Polish and Romanian we used two annotators, with a significant overlap
 %between the sentences they annotated. For Czech we had the entire batch
 %annotated by one main annotator and multiple secondary annotators, 
@@ -1061,7 +1069,7 @@ Kappa calculation is high, lowering Kappa. Essentially, the annotation problem i
 are more skewed. Finally we note some evidence of domain-specific disagreements, for instance the German
 MT system normally translated ``review'' (as in ``systematic review'' -- a frequent term in the 
 Cochrane texts) as ``\"uberpr\"ufung'', which 
-one annotator marked correct, and the other (a Cochrane employee)  as incorrect.
+one annotator marked correct, and the other (a Cochrane employee) as incorrect.
 
 
 \subsection{Comparison with Crowdsourced Adequacy Judgements}\label{sec:adequacy}
@@ -1235,7 +1243,6 @@ On the other hand, HUME's annotation may be artificially boosting the perceived 
 of the sentence by allowing access to the source.
 
 
-%%%% UNTIL HERE %%%%
 \paragraph{Alignment.}
 In HMEANT, the alignment between the reference and translation structures is a key
 part of the manual annotation. If the alignment cannot be created, the 
@@ -1248,41 +1255,40 @@ interpretation of a PP-attachment, or the verb having an additional modifier in
 %suggested that sometimes, the structures of the reference and candidate
 %translations diverge without any good reason, for instance due to a different
 %interpretation of a PP-attachment, the verb can have one additional modifier in
-one of the structures. It would be desirable to allow updates to the structural
-annotations at the alignment stage,
+one of the structures. It would be desirable to allow modifications to
+the SRL annotations at the alignment stage,
 to avoid unduly penalization due to such spurious divergences.
 %annotations also at the alignment stage
 %to avoid unduly penalization due to such a spurious divergence.
-The same issue was seen by HMEANT authors themselves
-\parcite{lo:wu:reliability:2014}:
-the 
-IAA on SRL dropped from 90\% to 61\% 
+The same issue is noted in \parcite{lo:wu:reliability:2014}:
+the IAA on SRL dropped from 90\% to 61\% 
 when the two aligned structures were from two different annotators.
-
-%HUME uses only automatic (word-level) alignment, which only serves as a cue for directing
-%the attention of the annotators.
-%The user is expected to mentally correct the alignment as needed.
 HUME uses automatic (word-level) alignment, which only
 serves as a cue for directing the attention of the annotators.
 The user is expected to mentally correct the
 alignment as needed, thus circumventing this difficulty.
 
 
+%HUME uses only automatic (word-level) alignment, which only serves as a cue for directing
+%the attention of the annotators.
+%The user is expected to mentally correct the alignment as needed.
 
-\paragraph{Monolingual vs. Bilingual Evaluation}
+
+
+\paragraph{Monolingual vs. Bilingual Evaluation.}
 \label{src-vs-ref}
-HUME diverges from HMEANT (and also from the shallow automatic measures
-like BLEU or METEOR) in not requiring a reference.
+HUME diverges from both HMEANT and from shallower automatic measures
+like BLEU or METEOR, in not requiring a reference.
 Instead, it compares the source directly with the output translation.
-
 This requires us to employ bilingual annotators, but has the benefit of avoiding
-the reference translation. It is known that the reference translations are not
-always literal enough and the MT output semantics can be composed differently
-than the semantics of the reference. 
+using a reference. Reference translations may often be phrased in many structurally different
+ways, which may again lead unduly penalization of the translation in cases where
+it is a paraphrase of the reference.
 
-If only monolingual annotators are available, the HUME evaluation could be performed
-with a reference sentence instead of with the source. 
-\bh{But this would be a different metric}
+%If only monolingual annotators are available, the HUME evaluation could be performed
+%with a reference sentence instead of with the source. 
+%\bh{But this would be a different metric}
+
 % While HUME avoids this problem,
 %imposing a structure only on the source does prevent any fine-grained semantic
 %analysis of the translation.
@@ -1294,15 +1300,17 @@ with a reference sentence instead of with the source.
 %from a third language. ``References'' can thus easily contain information
 %that does not appear in the ``source''.
 
-\paragraph{Localisation of the Error}
-
+\com{
+\paragraph{Error Localisation.}
 In HMEANT, an error in a child node often results in the parent node
 being penalised as well. This makes it harder to quantify the true scale of  
 the original error, as its effect gets propagated up the tree. 
 In HUME, errors are localised as much as possible to where they occur,
-by the separation of atomic and structural units (See Fig \ref{fig:hume_tree_v2} 
-for an example).
-This allows us to calculate the total score of the sentence more accurately.
+by the separation of atomic and structural units,
+which supports a more accurate aggregation of the translation errors
+to a composite score.
+}
+\oa{Omitted point here}
 
 %I see this a falling under the verbal structures point
 %\paragraph{Annotation of Predicates Themselves}
@@ -1350,12 +1358,13 @@ This allows us to calculate the total score of the sentence more accurately.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Conclusion}\label{sec:conclusion}
 
-We have introduced HUME, a human semantics based MT evaluation measure which addresses
-a wide range of semantic phenomena. We have shown that it can be efficiently and 
-reliably annotated in 
-several languages, and that annotation quality is robust to sentence length.
-We believe that HUME, and a future automated version of HUME, will be able to guide the
-development of a more semantically aware approach to MT.
+We have introduced HUME, a human semantic MT evaluation measure which addresses
+a wide range of semantic phenomena. We have shown that it can be reliably and 
+efficiently annotated in multiple languages,
+and that annotation quality is robust to sentence length.
+We believe that
+HUME, and a future automated version of HUME, allows for a more fine-grained analysis of translation quality,
+and will be to guide the development of a more semantically aware approach to MT.
 
 
 
