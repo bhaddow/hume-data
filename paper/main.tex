@@ -12,6 +12,7 @@
 %\usepackage{hyperref}
 \usepackage{color}
 \usepackage{lipsum,adjustbox}
+\usepackage[font={small}]{caption}
 
 \def\emnlppaperid{***}
 
@@ -28,15 +29,15 @@
 \listfiles
 
 \newcommand{\com}[1]{}
-\newcommand{\secref}[1]{Section~\ref{#1}}
+\newcommand{\secref}[1]{\S\ref{#1}}
 \newcommand{\figref}[1]{Figure~\ref{#1}}
 \newcommand{\tabref}[1]{Table~\ref{#1}}
 \newcommand{\XXX}[1]{{\color{red}XXX #1}} % a general todo or comment
 %\newcommand{\XXX}[1]{}
-\newcommand{\oa}[1]{\footnote{\color{red}OA: #1}}
-%\newcommand{\oa}[1]{}
-\newcommand{\bh}[1]{\footnote{\color{blue}BH: #1}}
-%\newcommand{\bh}[1]{}
+%\newcommand{\oa}[1]{\footnote{\color{red}OA: #1}}
+\newcommand{\oa}[1]{}
+%\newcommand{\bh}[1]{\footnote{\color{blue}BH: #1}}
+\newcommand{\bh}[1]{}
 
 \def\perscite#1{\newcite{#1}}
 \def\parcite#1{\cite{#1}}
@@ -52,8 +53,9 @@
 \def\setsize#1{\lvert #1 \rvert}
 \def\func#1{\text{\it #1}}  % much better kerning within function names
 \def\HUME{\func{HUME}}
-\def\Correct{\func{Correct}}
-\def\Partial{\func{Partial}}
+\def\Adequate{\func{Adequate}}
+\def\Green{\func{Green}}
+\def\Orange{\func{Orange}}
 \def\Units{\func{Units}}
 
 
@@ -95,11 +97,13 @@
 
 Human evaluation of machine translation normally uses sentence-level measures such as relative ranking
 or adequacy/fluency scales. However these provide no insight into the MT errors,
- and do not scale well with sentence 
-length. We argue for a semantics-based evaluation, which aims to capture how much of the meaning
-is retained in the MT output, and can support the construction and tuning of semantics-based MT. 
+and do not scale well with sentence length.
+We argue for a semantics-based evaluation, which captures what meaning components
+are retained in the MT output, providing a more fine-grained analysis of
+translation quality, and enables the construction and tuning of semantics-based MT. 
 We present a novel human semantic evaluation measure for MT, Human
-UCCA-based MT Evaluation (HUME), building on the Universal Conceptual Cognitive Annotation (UCCA) semantic representation scheme.
+UCCA-based MT Evaluation (HUME), building on the Universal Conceptual Cognitive Annotation (UCCA)
+semantic representation scheme.
 Making progress over previous work, the proposed measure takes into account
 a wider range of semantic phenomena and does not rely on semantic annotation
 of the MT output itself, whose interpretation is often unclear.
@@ -135,16 +139,13 @@ good correlation with human adequacy scores.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Introduction}\label{sec:intro}
 
-Human judgement is the most important criterion for
-estimating the quality of an MT system.
+Human judgement is the cornerstone for estimating the quality of an MT system.
 Nevertheless, common measures for human MT evaluation, such as adequacy and fluency judgements
 or the relative ranking of possible translations, are problematic in two ways.
-First, as the quality of translation is determined by multiple factors, it is difficult
-to assign a single number that quantifies the quality of the entire sentence. This
+First, as the quality of translation is multi-faceted, it is difficult
+to quantify the quality of the entire sentence in a single number. This
 is indeed reflected in the diminishing inter-annotator agreement (IAA) rates of human ranking measures
-%as a function of
-with
-the sentence length \parcite{Bojar:2011}.
+with the sentence length \cite{Bojar:2011}.
 Second, a sentence-level quality score does not indicate what parts of the sentence
 are badly translated, and so cannot inform developers in repairing these errors.
 
@@ -159,8 +160,9 @@ A promising line of research decomposes metrics
 %that decompose
 over semantically defined units,
 quantifying the similarity of the output and the reference in terms of
-their verb argument structure; the most notable of these measures is
-HMEANT \parcite{lo2011structured}.
+their verb argument structure; the most notable of these measures is HMEANT
+\parcite{lo2011structured}.
+
 % SAVING SPACE:
 % \XXX{Do we want to cut the following shorter?}
 % However, 
@@ -181,24 +183,24 @@ argument structures and their inter-relations.
 HUME operates by aggregating human assessments of the translation quality of individual
 semantic units in the source sentence. We 
 %HUME only requires semantically annotating the source sentence,
-are thus avoiding the semantic annotation of machine-generated text. 
-This allows the re-use of the source semantic annotation for measuring the quality
-of different translations of the same source sentence.
+are thus avoiding the semantic annotation of machine-generated text,
+which is often garbled or semantically unclear.
+This also allows the re-use of the source semantic annotation for
+measuring the quality of different translations of the same source sentence,
+and 
 %By basing the measure on a direct comparison
 %of the source and translation we avoid the difficulties created by using
-We also avoid creating and relying on possibly suboptimal
-reference translations, albeit at the cost of requiring the
+avoids relying on possibly suboptimal reference translations,
+albeit at the cost of requiring the
 evaluator to be proficient in both the source and target languages.
 %An elaborate comparison of HUME and HMEANT is given in \secref{sec:hmeant_comp}.
 
 After a brief review (\secref{sec:background}), we describe HUME in detail
 (\secref{sec:hume}).
-Our experiments with four language pairs: English to Czech, German, Polish and Romanian (\secref{sec:experiments}) document the
-efficiency (time of annotation) and inter-annotator agreement scores for HUME. 
-We also report on the correlation scores of HUME with direct assesment of human 
-adequacy ratings. 
-Finally, the differences with HMEANT are discussed 
-(\secref{sec:hmeant_comp}).
+Our experiments with four language pairs: English to Czech, German, Polish and Romanian (\secref{sec:experiments})
+document HUME's inter-annotator agreement and efficiency (time of annotation). 
+We further empirically compare HUME with direct assesment of human adequacy ratings,
+and conclude by discussing the differences with HMEANT (\secref{sec:hmeant_comp}).
 
 % We conduct experiments with four language pairs: English-German, English-Polish,
 % English-Romanian and English-Czech, and report efficiency (time of annotation) and
@@ -245,7 +247,7 @@ Finally, the differences with HMEANT are discussed
 %\parcite{dreyer2012hyter}.
 
 
-\paragraph{Machine Translation Evaluation.}
+\paragraph{MT Evaluation.}
 %MT evaluation has been traditionally pursued through human-based
 %evaluation that quantifies the adequacy of the translation in preserving the meaning 
 %of the source sentence, and its fluency as a sentence in the target language
@@ -374,32 +376,30 @@ relation and zero or more participants. For example, the sentence ``After gradua
 contains two Scenes, whose main relations are ``graduation'' and ``moved''.
 The participant ``Tom'' is a part of both Scenes, while ``NYC'' only of the
 latter (\figref{fig:ucca_example_v2}). Further categories account for
-relations between Scenes and the internal structures of complex participants and relations.
+inter-scene relations and the sub-structures of participants and relations.
 
 % UCCA Motivation
-UCCA is a natural candidate for defining a semantic
-MT evaluation measure for a number of reasons. 
-First, it defines an intuitive set of categories
-that can be reliably annotated by non-experts, after as little as two hours
+The use of UCCA for semantic MT evaluation measure is motivated by several reasons. 
+First, UCCA's set of categories can
+be reliably annotated by non-experts after as little as two hours
 of training \parcite{marinotti2014}.
-Second, UCCA is a cross-linguistically applicable scheme, seeking to
-represent what is shared between languages
-by building on linguistic typological theory, and specifically on ``Basic Linguistic Theory''
-\parcite{Dixon:10a,Dixon:10b,Dixon:12}.
-The cross-linguistic applicability of UCCA has been tested in annotations of
+Second, UCCA is cross-linguistically applicable, seeking to
+represent what is shared between languages by building on
+linguistic typological theory \parcite{Dixon:10a,Dixon:10b,Dixon:12}.
+Its cross-linguistic applicability has so far been tested in annotations of
 English, French, German and Czech.
-Third, the scheme has been shown to be semantically stable
-in translation: UCCA annotations of translated text usually contain the same set of relationships
-\parcite{sulem2015conceptual}. This indicates that the scheme reflects
+Third, the scheme has been shown to be stable across translations:
+UCCA annotations of translated text usually contain the same set of relations
+\parcite{sulem2015conceptual}, indicating that the scheme reflects
 a common layer of representation that in a correct translation
-is mostly shared between the translation and the source. 
+is mostly shared between the translation and the source\oa{verb argument structure note?}. 
 
-We note that verbal argument structures are less stable in this sense, as a verbal
-argument structure may be translated or paraphrased to a nominal or adjectival
-argument structure, and is thus less suitable as a basis for a semantic measure.
-E.g., ``after he graduated, Tom moved to NYC'' contains two verbs,
-but is similar in meaning to the one-verbed
-``after graduation, Tom moved to NYC''. 
+%Verbal argument structures are less stable in this sense, as they
+%may be translated or paraphrased to a nominal or adjectival
+%argument structure, and is thus less suitable as a basis for a semantic measure.
+%E.g., ``after he graduated, Tom moved to NYC'' contains two verbs,
+%but is similar in meaning to the one-verbed
+%``after graduation, Tom moved to NYC''. 
 
 % While most broad-coverage semantic work focused on shallow semantic structures,
 % predominantly argument structures annotated with their semantic roles, much recent
@@ -409,21 +409,24 @@ but is similar in meaning to the one-verbed
 %  OB: AMR has been applied to more languages, including Chinese, so I would not
 %  dare saying that it is less stable.}
 
-The Abstract Meaning Representation (AMR) scheme \parcite{banarescu2013abstract}
-shares much of UCCA's motivation for defining a more complete semantic annotation.
+The Abstract Meaning Representation (AMR) \parcite{banarescu2013abstract} project
+shares UCCA's motivation for defining a more complete semantic annotation.
 However, using AMR is not optimal for defining a decomposition of a sentence into semantic
 units as it does not ground its semantic symbols in the text,
-thus does not provide clear decomposition of the sentence into sub-units.
+and thus does not provide clear decomposition of the sentence into sub-units.
 Also, AMR is more fine-grained than UCCA and consequently harder to annotate.
-Other approaches pursued a grounded representation of semantics,
-and have generally represented semantic structures as bi-lexical dependencies.
-Examples include the tectogrammatical layer \parcite{sgallhp:1986} used in the Prague dependency
-treebanks, e.g. the Czech-English one \parcite{hajic2012announcing}, as well
-as dependencies derived from Minimal Recursion Semantics representations \parcite{oepen2006discriminant}.
-Nevertheless, despite their appeal as deep and intuitive means for semantic representation,
-these approaches require linguistic expertise for their annotation, due to the intricate and
-fine-grained distinctions they provide, and so we argue they are less suitable as a basis
-for an interpretable MT evaluation.
+Other approaches represent semantic structures as bi-lexical dependencies
+\parcite{sgallhp:1986,hajic2012announcing,oepen2006discriminant},
+which are indeed grounded in the text, but are less suitable for MT evaluation
+as they require linguistic expertise for their annotation.
+
+%, and so we argue they are less suitable 
+%for an interpretable MT evaluation.
+
+%Examples include the tectogrammatical layer  used in the Prague dependency
+%treebanks, e.g. the Czech-English one \parcite{}, as well
+%as dependencies derived from Minimal Recursion Semantics representations \parcite{}.
+%Nevertheless, despite their appeal as deep and intuitive means for semantic representation,
 
 %\perscite{Basile:12} attempted to make some aspects of the semantic annotation more accessible,
 %but to our knowledge no results of this brand have been reported.
@@ -441,7 +444,7 @@ We denote the source sentence as $s$ and the translation as $t$.
 The procedure involves two manual steps: (1) UCCA-annotating $s$, 
 (2) human judgements as to the translation quality of each semantic unit of $s$ relative to $t$,
 where units are defined according to the UCCA annotation.
-Note that UCCA annotation is performed once for every source sentence,
+UCCA annotation is performed once for every source sentence,
 irrespective of the number of its translations we wish
 to evaluate\footnote{Instead of relying on the source,
 the evaluation could be based on the UCCA structure for the \emph{reference}
@@ -458,13 +461,10 @@ More details in the discussion in \secref{src-vs-ref}.
 We begin by creating UCCA annotations for the source sentence, following the
 UCCA guidelines\footnote{All UCCA-related resources can be found
   here: \url{http://www.cs.huji.ac.il/~oabend/ucca.html}}.
-Let $L$ be the set of possible UCCA labels.
-Given a sentence $s = (w_1, \ldots,w_n)$, its UCCA annotation is a DAG $G=(V,E,\ell)$,
-where $\ell: V \rightarrow L$, and where $W = \{w_1,\ldots,w_n\}$ correspond to the leaves of $G$.
-For every node $v \in V$, we define its {\it yield} $yld(v)$ as $v$'s descendants in $W$.
-The semantic units for a sentence $s$ according to $G$
-is the set of yields of nodes in $V$. 
-The translation is not UCCA-annotated.
+A UCCA annotation for a sentence $s$ is a labeled DAG $G$, whose leaves
+are the words of $s$.
+For every node in $G$, we define its {\it yield} to be its leaf descendants.
+The semantic units for $s$ according to $G$ are the yields of nodes in $G$. 
 
 %\begin{figure*}[t]
 %    \includegraphics[width=1\textwidth]{ucca-tree-mteval.jpg}
@@ -559,9 +559,9 @@ The translation is not UCCA-annotated.
 
 
 \paragraph{Translation Evaluation.}
-The basic strategy for annotating HUME is to traverse the semantic units
+HUME annotation is done by traversing the semantic units
 of the source sentence, which correspond to the arguments and relations expressed
-in the text, and to mark the extent to which they have been correctly translated.
+in the text, and marking the extent to which they have been correctly translated.
 HUME aggregates the judgements of the users into a composite score, 
 which reflects the overall extent to which the semantic content of $s$ is preserved in $t$.
 
@@ -576,12 +576,12 @@ in the evaluation.
 
 Atomic units can be labelled as ``Green'' (correct), ``Orange'' (partially correct)
 and ``Red'' (incorrect). 
-A Green label means that the meaning of the word or phrase has been largely preserved.
-An Orange label means that the essential meaning of the unit has been preserved,
+Green means that the meaning of the word or phrase has been largely preserved.
+Orange means that the essential meaning of the unit has been preserved,
 but some part of the translation is wrong.
-This could often be due to the translated word having the wrong tense,
-or the wrong morphology, in a way that impacts little on the understandability of the sentence.
-A Red label means that the essential meaning of the unit has not been captured.
+This is often be due to the translated word having the the wrong inflection,
+in a way that impacts little on the understandability of the sentence.
+Red means that the essential meaning of the unit has not been captured.
 
 Structural units have sub-units (children in the UCCA graph), which may themselves
 either be atomic or structural.
@@ -591,35 +591,27 @@ either be atomic or structural.
 %\XXX{(BH: don't follow this) For instance, a Scene unit represents the relation between the
 %Scene elements, such as the predicate (main relation), participants and adverbials.}
 Structural units are labeled as ``Adequate'' or ``Bad'', meaning
-that the relation between the sub-units went wrong.
-We use a three label system with atomic units, as
-opposed to a two label one in structural units,
-as atomic units often have slight errors, in which cases we do want to provide partial credit.
-
-There are many ways that the relationship between the children might go
-wrong in translation:
-
-\begin{compactitem}
-\item The components of the translation are ordered differently from the source,
-  such that the relation between them changes. For instance, if
-  the sentence ``man bites dog'' is translated into a sentence meaning ``dog bites man'',
-  the semantic unit corresponding to the Scene will be marked as Bad, while
-  the individual atomic units ``dog'', ``bites'' and ``man'' will be marked as Green.
-\item A superfluous word or phrase has been inserted into
-  the translation. For instance, if ``dog bites man'' is translated into ``dog viciously bites man''.
-\item One of the sub-units is missing from the translation.
-  For instance, if ``dog bites man'' is translated into ``dog bites''.
-% XXX let's leave the reviewers to notice this:
-%  \bh{Note that in this case we also 
-%  get an error in the atomic unit, assuming that ``man'' is a semantic unit in the source, but for the other
-%  two cases there is no atomic unit error.}
-\end{compactitem}
+that the relation between the sub-units went wrong\footnote{
+  Three labels are used with atomic units, as opposed to two labels with structural units,
+as atomic units are more susceptible to slight errors.}.
+There are three major cases where the relationship between the children might go
+wrong in translation.
+First, the components of the translation may be ordered differently from the source,
+such that the relation between them changes. For instance, if
+the sentence ``man bites dog'' is translated into a sentence meaning ``dog bites man'',
+the semantic unit corresponding to the Scene will be marked as Bad, while
+the individual atomic units ``dog'', ``bites'' and ``man'' will be marked as Green.
+Second, A superfluous word or phrase may be inserted into
+the translation. For instance, if ``dog bites man'' is translated into ``dog viciously bites man''.
+Third, one of the sub-units may be missing from the translation.
+For instance, if ``dog bites man'' is translated into ``dog bites''. 
 
 HUME labels reflect adequacy, rather than fluency judgements.
 Specifically, annotators are instructed to
 label a unit as Adequate if its translation is understandable and preserves
 the meaning of the source unit, even if its fluency is impaired.
 
+\com{
 In non-configurational languages, the relationship between the
 governing and dependent units is often expressed using morphological
 properties of the dependants instead of their ordering
@@ -627,6 +619,7 @@ properties of the dependants instead of their ordering
 less so for components of noun phrases). Errors in morphology
 should be expressed on the atomic units, so HUME can behave differently
 on configurational vs. non-configurational languages.
+}
 
 % An example HUME annotation is given in \figref{fig:hume_tree},
 % which presents an annotation of an UCCA tree, and a corresponding translation.
@@ -655,22 +648,22 @@ on configurational vs. non-configurational languages.
     \end{center}
   \caption{\label{fig:hume_tree_v2}
      HUME annotation of an UCCA tree with a word aligned example translation shown below. 
-Atomic units are labelled using traffic lights and structural nodes are marked A or B.}
+Atomic units are labelled using traffic lights and structural units are marked A or B.}
 \end{figure}
 % Ondrej removes the following, he thinks that errors are not supposed to be
 % propagated in HMEANT either:
 %In HMEANT, it is not clear whether errors should be propegated up the SRL hierarchy. 
 
-In Figure~\ref{fig:hume_tree_v2} we can see an example of a possible HUME
-annotation, with the translation shown in English for ease of comprehension.
+Figure~\ref{fig:hume_tree_v2} presents an example of a HUME
+annotation, where the translation is in English for ease of comprehension.
 When evaluating ``to NYC'' the annotator looks at the translation and sees the
 word ``stateside''. This word captures the whole phrase and so we mark this
-non-leaf node with an atomic label. Here we choose ``Orange'' since
-it approximately captures the meaning
-in this context. The ability to mark non-leaves with atomic labels allows
+non-leaf node with an atomic label. Here we choose Orange since
+it approximately captures the meaning in this context.
+The ability to mark non-leaves with atomic labels allows
 the annotator to account for translations which only correspond at the phrase
 level. Another feature highlighted in this example is that by separating structural
-and atomic nodes, we are able to define where an error occurs, and localise
+and atomic units, we are able to define where an error occurs, and localise
 the error to its point of origin. The linker ``After'' is translated incorrectly as ``by''
 which changes the meaning of the entire sentence. This error is captured at
 the atomic level, and it is labelled Red. The sentence still contains two scenes and
@@ -679,9 +672,10 @@ a linker and therefore we mark the root node as structurally correct, Adequate.
 \begin{figure*}[t]
     \begin{center}
     \includegraphics[width=1\textwidth]{hume_interface2.jpg}
-    \caption{The HUME annotation tool, based on the UCCA tool. The faded orange box at the top
-      contains the translation, and directly below it is the source sentence. The tree of semantic units
-      is shown below the source. Alignments between the source and translation appear in italics and unaligned intervening words appear in red.}
+    \caption{The HUME annotation tool. The top orange box
+      contains the translation. The source sentence is directly below it, followed by the tree of the source
+      semantic units. Alignments between the source and translation are in italics and
+      unaligned intervening words are in red (see text).}
     \label{fig:interface}
     \end{center}
 \end{figure*}
@@ -690,25 +684,23 @@ a linker and therefore we mark the root node as structurally correct, Adequate.
 \subsection{Composite Score}\label{sec:score}
 
 We proceed to detailing how judgements on the semantic units
-of the source are aggregated into a composite score. We start by taking a parsimonious approach
+of the source are aggregated into a composite score. 
 %While future extensive empirical evaluation with HUME and its application to MT
 %system tuning may suggest more complex definition,
 %as a starting point we take a parsimonious approach,
-and compute an accuracy score.
-
-Let $\Correct(s,t)$ be the number of atomic units in $s$ marked as Green relative to $t$ plus
-the number of structural units in $s$ marked as Adequate relative to $t$.
-Let $\Partial(s,t)$ be the number of atomic units in $s$ marked as Orange relative
-to $t$. Let $\setsize{\Units(s)}$ be the total number of units marked with any of the five labels.
+We start by taking a very simple approach and compute an accuracy score.
+Let $\Green(s,t)$, $\Adequate(s,t)$ and $\Orange(s,t)$ be the number of Green, Adequate and Orange
+units respectively. Let $\Units(s)$ be the number of units marked with any of the labels.
 Then HUME's composite score is:
 
 \vspace{-.5cm}
+{\scriptsize
 \begin{equation}
-  \small
-  \HUME(s,t) = \frac{\Correct(s,t) + 0.5\cdot \Partial(s,t)}{\setsize{\Units(s)}}
+  \HUME(s,t) = \frac{\Green(s,t) + \Adequate(s,t) + 0.5\cdot \Orange(s,t)}{\Units(s)}
   \nonumber
 \end{equation}
-
+}
+\vspace{-.5cm}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -740,17 +732,17 @@ most likely to be relevant for her judgement. As the alignments are automaticall
 and therefore noisy, the annotator is instructed to treat the aligned text is a cue, but to ignore
 the alignment if it is misleading, and instead 
 make a judgement according to the full translation.
-
-Concretely, let $s = (w_1,\ldots,w_n)$ be a source sentence, $t = (w'_1,\ldots,w'_n)$ a translation,
-and $A \subset 2^{s \times t}$ a many-to-many word alignment between them.
+Concretely, let $s$ be a source sentence, $t$ a translation,
+and $A \subset 2^{s \times t}$ a many-to-many word alignment.
 If $u$ is a semantic unit in $s$, whose yield is $yld(u)$, we define the aligned text in
-$t$ to be $a(u)=\bigcup_{(x_s,x_t) \in A \wedge x_s \cap yld(u) \neq \emptyset} x_t \subset t$.
-Where $a(u)$ is discontinuous in the text, words between the left
-and right boundaries of $a(u)$ which are not contained in it (intervening words)
-are presented in a smaller red font.
+$t$ to be $\bigcup_{(x_s,x_t) \in A \wedge x_s \cap yld(u) \neq \emptyset} x_t$.
+
+Where the aligned text is discontinuous in $t$, words between the left
+and right boundaries which are not contained in it (intervening words)
+are presented in a smaller red font. 
 Intervening words are likely to change the meaning of the translation
 of $u$, and thus should be paid attention to when considering whether the translation
-is correct or not.
+is correct or not. 
 
 For example, 
 %consider the sentence $s=$``We're driving back on Friday'' and the German
@@ -760,19 +752,17 @@ For example,
 in \figref{fig:interface}, ``ongoing pregnancy'' is translated to
 ``Schwangerschaft ... laufenden'' (lit. ``pregnancy ... ongoing''). This alone
 seems acceptable but the interleaving words in red notify the annotator to check
-the whole translation. The meaning of the expression is not preserved in the
-translation
-and the annotator should mark this structural node as ``B'', bad. 
-%The interleaving 
-%German words shown in red should not occur there, and the annotator should take this
-%into account and mark this structural node as ``B'', bad. 
+the whole translation, in which the meaning of the expression is not preserved.
+The annotator should thus mark this structural node as Bad.
 
+%The interleaving 
+%German words shown in red should not occur there, and the annotator should take this 
+%into account and mark this structural node as ``B'', bad. 
 
 % Ondrej did the following in a footnote in Section 3.1 Annotation Procedure
 %\bh{Somewhere we could explain that we
 %could do a similar annotation with monolinguals, although it entails aligning
 %reference and MT output}
-
 
 %There are cases where we cannot usefully compare individual words in the source to words in the target.
 %We often need to compare translation at the phrase level. If this is the case, then we can 
@@ -799,26 +789,28 @@ the translation as correct or not. The alignments are meant just as a guide. The
 
 In order to validate the HUME metric, we ran an annotation experiment with one source language (English),
 and four target languages (Czech, German, Polish and Romanian), using text from the public health domain.
-The domain is particularly suitable for experimenting on MT evaluation, as semantically
-accurate translation is paramount here, underscoring the importance of reliable
-semantic evaluation measures.
+Semantically accurate translation is paramount in this domain, which makes
+it particularly suitable for experimenting on MT evaluation. HUME is both evalauted in terms of its
+consistency (inter-annotator agreement), efficiency (time of annotation) and validity (through a comparison
+with crowd-sourced adequacy judgements).
 
 %particularly interested in this domain since our ultimate goal is to provide high-quality translations of health
 %information for speakers of languages other than English, and in this domain accurate transfer of meaning is
 %paramount.
 
-The experiment seeks to address two questions:
-\begin{inparaenum}
-\item Can HUME be annotated quickly and reliably, and does the reliability still hold for longer sentences?
-\item Can HUME capture translation issues that other annotation schemes (such as
-adequacy judgements and HMEANT)
-cannot?
+%The experiment seeks to address two questions:
+%\begin{inparaenum}
+%\item Can HUME be annotated quickly and reliably, and does the reliability still hold for longer sentences?
+%\item Can HUME capture translation issues that other annotation schemes (such as adequacy judgements
+%  and HMEANT) cannot?
+%\end{inparaenum}
+
 %\item What can HUME annotation tell us about the strengths and weaknesses of MT?
 %\bh{Maybe we should remove the third one, we
 %probably don't address it in this paper}
-\end{inparaenum}
 
-\subsection{Data Sets and Translation Systems}
+
+\subsection{Datasets and Translation Systems}
 
 For each of the four language pairs under consideration  we built phrase-based MT systems
 using Moses \parcite{Koehn:2007}.  These were trained on large parallel data sets extracted from
@@ -850,19 +842,16 @@ and abstracts.
 
 The source sentences are all in English, and their UCCA annotation was performed by four
 computational linguists and one linguist.
-
 For the annotation of the MT output, we recruited two annotators for each of German, Romanian
-and Polish and one main annotator for Czech.
-%In order to allow us to calculate
-For IAA also for
-Czech, several further annotators worked on a small number of 
-sentences each. We treat these further annotators as one annotator, giving us two annotators
+and Polish and one main annotator for Czech. For Czech IAA,
+several further annotators worked on a small number of 
+sentences each. We treat these further annotators as one annotator, resulting in two annotators
 for each language pair.
-The annotators were all native  speakers of the respective target languages and fluent in English.
+The annotators were all native speakers of the respective target languages and fluent in English.
 
 \tabref{tab:annot}
-shows the total number of sentences and nodes annotated by each annotator. Note
-that not all nodes in all sentences were annotated, often
+shows the total number of sentences and units annotated by each annotator. Note
+that not all units in all sentences were annotated, often
 due to
 %this was because
 the annotator not finishing a sentence or accidentally missing a node.
@@ -877,25 +866,28 @@ the annotator not finishing a sentence or accidentally missing a node.
 Sentences &  Annot. 1 & 324   & 339  & 351  & 230  \\
  & Annot. 2 & 205 & 104  & 340  & 337 \\
 \hline
-Nodes & Annot. 1 & 8794  & 9253 & 9557  & 6152 \\
+Units & Annot. 1 & 8794  & 9253 & 9557  & 6152 \\
  &Annot. 2 & 5553 & 2906  & 9303  & 9228  \\
 \end{tabular}
-\caption{Total numbers of sentences and nodes annotated on the MT output.}
+\caption{Number of HUME-annotated sentences and units.}
 \label{tab:annot}
 }
 \end{center}
 \end{table}
 
-The annotators worked remotely, at their own pace, so we did not collect precise timing
-information. Nevertheless we are able to estimate the annotation time using the timestamps
+\paragraph{Efficiency.}
+We estimate the annotation time using the timestamps
 provided by the annotation tool, which are recorded whenever an annotated sentence is
 submitted. Annotators are not able to re-open a sentence once submitted. 
-
-To estimate the annotation time, we calculate the time difference between successive 
-sentences, and discard outlying times since we assume there was a break taken. From inspection
-of histograms of annotation times, we set the upper threshold at 500 seconds. We
-show median annotation times in Table~\ref{tab:annot_times}, indicating that the annotation
+To estimate the annotation time, we compute the time difference between successive 
+sentences, and discard outlying times since we assume annotation was not continuous.
+From inspection of histograms of annotation times, we set the upper threshold at 500 seconds.
+Median annotation times are presented in Table~\ref{tab:annot_times},
+indicating that the annotation
 of a sentence takes around 2--4 minutes, with some variation between annotators.
+
+%The annotators worked remotely at their own pace, so no precise timing information is available.
+%Nevertheless
 
 \begin{table}[t]
 \begin{center}
@@ -907,8 +899,9 @@ Annot. 1 & 255 & 140  & 138 & 96 \\
 Annot. 2 & -- & 162 & 229 & 207 \\
 \end{tabular}
 \caption{Median annotation times per sentence, in seconds.
-We do not give times for the second Czech 
-``annotator'', since this was a collection of annotators, working in parallel.}
+  In the case of the second Czech 
+  ``annotator'', no timing information is available, as
+  this was a collection of annotators, working in parallel.}
 \label{tab:annot_times}
 }
 \end{center}
@@ -919,7 +912,7 @@ We do not give times for the second Czech
 % ... not enough room or time
 
 
-\subsection{Inter-Annotator Agreement}
+\paragraph{Inter-Annotator Agreement.}
 \label{sec:iaa}
 
 \begin{table}[t]
@@ -930,13 +923,13 @@ We do not give times for the second Czech
 \hline
 Sentences & 181 & 102 & 334 & 217 \\
 \hline
-All nodes & 4686   & 2793   & 8384   & 5604  \\
+All units & 4686   & 2793   & 8384   & 5604  \\
 Kappa & 0.64   & 0.61   & 0.58   & 0.69  \\
 \hline
-Atomic nodes & 2982 & 1724 & 5386 & 3570 \\
+Atomic units & 2982 & 1724 & 5386 & 3570 \\
 Kappa & 0.54 & 0.29 & 0.54 & 0.50 \\
 \hline
-Structural nodes & 1602 & 1040 & 2655 & 1989 \\
+Structural units & 1602 & 1040 & 2655 & 1989 \\
 Kappa & 0.31 & 0.44 & 0.33 & 0.58 \\
 \end{tabular}
 \caption{Inter-annotator agreement for the multiply-annotated portions of the data, as
@@ -955,17 +948,16 @@ Agreement (IAA) using Cohen's Kappa on the multiply-annotated portions of the da
 %between the sentences they annotated. For Czech we had the entire batch
 %annotated by one main annotator and multiple secondary annotators, 
 %each annotating a sub-part of the batch.
-
-\tabref{tab:iaa} reports the number of nodes which have two annotations from
+\tabref{tab:iaa} reports the number of units which have two annotations from
 different annotators and the corresponding Kappas.
 %
 %In order to compute Kappa, we consider the annotation task as a classification task on 
 %nodes, and compute agreement on nodes which have two annotations from different annotators.
 We report the overall Kappa, as well as separate Kappas on atomic
-nodes (annotated as Red, Orange or Green) and structural nodes (annotated
+units (annotated as Red, Orange or Green) and structural units (annotated
 as Adequate or Bad).
 As expected and confirmed by confusion matrices in \figref{fig:heatmap}, there
-is generally little confusion between the two types of nodes.
+is generally little confusion between the two types of units.
 
 %In general there should be little confusion between the two
 %types of nodes, and in future work the separation between the nodes should be enforced
@@ -1008,9 +1000,8 @@ is generally little confusion between the two types of nodes.
 
 
 
-To assess whether, as we hoped, HUME would make it easier to reliably annotate long sentences,
-we binned the sentences according to length and measured Kappa on each of the bins. Each bin covers
-a length range of 10, and we show the variance of kappa with length in \figref{fig:iaalength}.
+%presents the variance of kappa with length in each bin covers
+%a length range of 10. and we show .
 
 \def\iaafig #1{\includegraphics[width=3.8cm]{iaa_length_#1.png}}
 
@@ -1040,25 +1031,29 @@ a length range of 10, and we show the variance of kappa with length in \figref{f
 }
 \end{tabular}
 \caption{Kappa versus sentence length, separately for
-structural and atomic nodes. The numbers are the node counts in each bin. }
+structural and atomic units. The numbers are the node counts in each bin. }
 \label{fig:iaalength}
 \end{figure}
 
-We see from \figref{fig:iaalength} that there is no reduction of IAA with sentence
+To assess whether, HUME supports the reliable annotation of long sentences,
+we binned the sentences according to length and measured Kappa on each of the bins.
+The Kappas for each bin (bins are 10 words wide) is presented in 
+\figref{fig:iaalength}.
+Results show that there is no reduction of IAA with sentence
 length, except perhaps in German. Also, from \tabref{tab:iaa} the overall IAA
 is quite similar (0.6-0.7) for all languages, showing good agreement.
 However, there are differences observed when we break down by node type.
 In particular, we see a contrast  between
-Czech and Polish, where the IAA is higher for atomic than for structural nodes, and German and Romanian,
+Czech and Polish, where the IAA is higher for atomic than for structural units, and German and Romanian,
 where the reverse is true. We also observe low IAA (around 0.3) in the cases of
-German atomic nodes, and Polish and Czech structural nodes.
+German atomic units, and Polish and Czech structural units.
 
-Looking more closely at the areas of disagreement, we see that for the Polish structural nodes, the 
+Looking more closely at the areas of disagreement, we see that for the Polish structural units, the 
 proportion of As was quite different between the two annotators (53\% vs. 71\%), whereas for other
 languages the annotators agree in the proportions. We believe that this was because one of the Polish
-annotators did not fully understand the guidelines for structural nodes, and percolated
-errors up the tree, creating more Bs. For the German lexical nodes, and Czech structural nodes, where
-Kappa is also around 0.3, the proportion of such nodes being marked as ``correct'' is relatively 
+annotators did not fully understand the guidelines for structural units, and percolated
+errors up the tree, creating more Bs. For the German lexical units, and Czech structural units, where
+Kappa is also around 0.3, the proportion of such units being marked as ``correct'' is relatively 
 high, meaning that the class distribution is more skewed, so the expected agreement used in the
 Kappa calculation is high, lowering Kappa. Essentially, the annotation problem is harder when the classes
 are more skewed. Finally we note some evidence of domain-specific disagreements, for instance the German
@@ -1296,7 +1291,7 @@ In HMEANT, an error in a child node often results in the parent node
 being penalised as well. This makes it harder to quantify the true scale of  
 the original error, as its effect gets propagated up the tree. 
 In HUME, errors are localised as much as possible to where they occur,
-by the separation of atomic and structural nodes (See Fig \ref{fig:hume_tree_v2} 
+by the separation of atomic and structural units (See Fig \ref{fig:hume_tree_v2} 
 for an example).
 This allows us to calculate the total score of the sentence more accurately.
 
