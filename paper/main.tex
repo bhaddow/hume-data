@@ -1069,7 +1069,7 @@ one annotator marked correct, and the other (a Cochrane employee)  as incorrect.
 
 \subsection{Comparison with Crowdsourced Adequacy Judgements}\label{sec:adequacy}
 
-\def\iaafig #1{\includegraphics[width=0.4\textwidth]{humevsDA_10en-#1.pdf}}
+\def\iaafig #1{\includegraphics[width=0.45\textwidth]{humevsDA_10en-#1.pdf}}
 
 \begin{figure}[t]
 \renewcommand{\tabcolsep}{0pt}
@@ -1082,26 +1082,40 @@ one annotator marked correct, and the other (a Cochrane employee)  as incorrect.
   \iaafig{ro}
 }
 \end{tabular}
-\caption{Plots of HUME scores vs Direct Assesment scores which have been standardised for each crowdsourcing annotator. The regression is calculated using linear least squares.}
+\caption{Plots of HUME scores vs Direct Assesment scores which have been standardised for each crowdsourcing annotator and averaged for 10 annotators. HUME scores are averaged where there were two annotations. 
+%The regression is calculated using linear least squares.
+}
 \label{fig:dacorrelation}
 \end{figure}
-Recent research~\cite{TODO} has proposed a new method for collecting 
-accuracy ratings. The idea is that collecting a large number of adequacy judgements along a 
-scale of 0 to 100 allows us to apply statistical measures which make them reliable. 
+Recent research~\cite{graham2015accurate,graham2015crowd} has proposed a new approach for collecting 
+accuracy ratings. By crowdsourcing a large number of adequacy judgements for each candidate 
+translation on a fine-grained 
+scale of 0 to 100, we can apply statistical measures which result in reliable aggregate scores. 
 It has been shown that mean  judgements correlate very strongly with each other. 
-We followed~\cite{TODO} and collected up to 15 adequacy judgements on most of the
+We followed~\citep{graham2015accurate} and collected up to 15 adequacy judgements on most of the
 HUME annotated translations for German and Romanian. To ensure high quality judgments
 we restricted the IP of the annotators to those of the relevant country. We found that there were too
 few Czech and Polish annotators, and removing the IP restriction led to very poor quality results. 
-We can see that HUME and Direct Assesment scores do correlate. 
 We also removed unreliable crowdsourcing annotators
-according to the method discussed in ~\cite{TODO}. The Pearsons correlation for en-de is 0.58 and for en-ro is 0.70 which shows that they two measures do correlate. This confirms that 
+according to the method discussed in ~\cite{TODO}. 
+
+We can see in Figure~\ref{fig:dacorrelation} that HUME and Direct Assesment scores do correlate. 
+The Pearsons correlation for en-de is 0.58 and for en-ro is 0.70 which confirms that 
 the HUME metric is consistent with previously published methods in human evaluation, even though these
 two approaches are very different in their conception.
-We argue that although annotating HUME requires more expertise and effort, 
-the results are more valuable because a HUME evaluation can tell you what parts
-of the source sentence have been retained. Direct assesment scores require a crowd, which is sometimes not available or reliable, and it returns a single number which gives little insight into the quality of
-the translated sentence.  
+We argue that although annotating HUME requires more expertise and effort than direct assesment it has
+two advantages. It returns fine-grained information about the translations and it can use one 
+expert annotator. Direct assesment returns only one aggregate score, and requires a large number
+of crowdsourcing workers who may not be available or reliable. 
+
+\begin{figure}[t]
+\includegraphics[width=0.45\textwidth]{humevsDAcorrtypes-10en-dero.pdf}
+\caption{Pearsons correlation HUME scores vs DA for different node types. Struct is correlation for all structural nodes, P+S is correlation for all process and state nodes, H are parallel scene nodes, A participant, C centre, E elaborators, and L linker nodes.}
+\label{fig:dacorrelationtypes}
+\end{figure}
+
+In Figure~\ref{fig:dacorrelationtypes} we can see an analysis of HUME correlations with DA by HUME node type. Generally correlations are good. Some types of nodes seem to predict the DA scores better than others. The HUME scores on parallel scene nodes (H) and participant nodes (A) seem to correlate more strongly with DA than scores on process and state nodes (P+S) or linker nodes (L). 
+
 
 %\subsection{Discussion of Disagreements}\label{sec:disagreements}
 
