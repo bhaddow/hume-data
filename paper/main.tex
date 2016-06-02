@@ -104,20 +104,24 @@
 %  as well as its reliability, reflected in its inter-annotator agreement rates.
 
 Human evaluation of machine translation normally uses sentence-level measures such as relative ranking
-or adequacy/fluency scales. However these provide no insight into the MT errors,
+or adequacy/fluency scales. However these provide no insight into possible errors,
 and do not scale well with sentence length.
 We argue for a semantics-based evaluation, which captures what meaning components
 are retained in the MT output, providing a more fine-grained analysis of
 translation quality, and enables the construction and tuning of semantics-based MT. 
-We present a novel human semantic evaluation measure for MT, Human
+We present a novel human semantic evaluation measure, Human
 UCCA-based MT Evaluation (HUME), building on the Universal Conceptual Cognitive Annotation (UCCA)
 semantic representation scheme.
-Making progress over previous work, the proposed measure takes into account
-a wider range of semantic phenomena and does not rely on semantic annotation
-of the MT output itself, whose interpretation is often unclear.
+%Making progress over previous work, the proposed measure takes into account
+HUME covers
+a wider range of semantic phenomena than previous methods and does not rely on semantic annotation
+of the potentially garbled MT output. 
+%itself, whose interpretation is often unclear.
 We experiment with four language pairs, demonstrating HUME's broad applicability,
-as well as its reliability, reflected in its inter-annotator agreement rates and 
-good correlation with human adequacy scores.
+and report good
+%as well as its reliability, reflected in its 
+inter-annotator agreement rates and 
+ correlation with human adequacy scores.
 
 
 %Human evaluation of machine translation is a cognitively difficult task and when
@@ -184,7 +188,8 @@ their verb argument structure; the most notable of these measures is HMEANT
 % is difficult and arguably ill-defined.
 
 We propose the HUME metric,
-a human evaluation measure that decomposes over the UCCA semantic units of the sentence.
+a human evaluation measure that decomposes over the UCCA semantic units.
+% of the sentence.
 UCCA \parcite{abend2013universal} is an appealing candidate for semantic analysis,
 due to its cross-linguistic applicability, support for rapid annotation, and coverage
 of many fundamental semantic phenomena, such as verbal, nominal and adjectival
@@ -200,17 +205,18 @@ measuring the quality of different translations of the same source sentence,
 and 
 %By basing the measure on a direct comparison
 %of the source and translation we avoid the difficulties created by using
-avoids relying on possibly suboptimal reference translations,
-albeit at the cost of requiring the
-evaluator to be proficient in both the source and target languages.
+avoids relying on possibly suboptimal reference translations.
+%albeit at the cost of requiring the
+%evaluator to be proficient in both the source and target languages.
 %An elaborate comparison of HUME and HMEANT is given in \secref{sec:hmeant_comp}.
 
-After a brief review (\secref{sec:background}), we describe HUME in detail
-(\secref{sec:hume}).
-Our experiments with four language pairs: English to Czech, German, Polish and Romanian (\secref{sec:experiments})
-document HUME's inter-annotator agreement and efficiency (time of annotation). 
-We further empirically compare HUME with direct assessment of human adequacy ratings,
-and conclude by discussing the differences with HMEANT (\secref{sec:hmeant_comp}).
+%Could reinstate
+%After a brief review (\secref{sec:background}), we describe HUME in detail
+%(\secref{sec:hume}).
+%Our experiments with four language pairs: English to Czech, German, Polish and Romanian (\secref{sec:experiments})
+%document HUME's inter-annotator agreement and efficiency (time of annotation). 
+%We further empirically compare HUME with direct assessment of human adequacy ratings,
+%and conclude by discussing the differences with HMEANT (\secref{sec:hmeant_comp}).
 
 % We conduct experiments with four language pairs: English-German, English-Polish,
 % English-Romanian and English-Czech, and report efficiency (time of annotation) and
@@ -265,7 +271,7 @@ and conclude by discussing the differences with HMEANT (\secref{sec:hmeant_comp}
 Human evaluation is generally done by ranking the outputs of multiple systems
 e.g., in the WMT tasks \parcite{bojar2015findings}, or by giving
 adequacy/fluency scores to each translation, a procedure recently improved
-by \perscite{graham2015improving}.
+by \perscite{graham2015accurate}.
 However, while providing the gold standard for MT evaluation, human evaluation
 is not a scalable solution.
 %and is infeasible where a wide variety of systems or parameter settings are to be evaluated.
@@ -606,17 +612,21 @@ Structural units are labeled as ``Adequate'' or ``Bad'', meaning
 that the relation between the sub-units went wrong\footnote{
   Three labels are used with atomic units, as opposed to two labels with structural units,
 as atomic units are more susceptible to slight errors.}.
-There are three major cases where the relationship between the children might go
-wrong in translation.
-First, the components of the translation may be ordered differently from the source,
-such that the relation between them changes. For instance, if
-the sentence ``man bites dog'' is translated into a sentence meaning ``dog bites man'',
-the semantic unit corresponding to the Scene will be marked as Bad, while
-the individual atomic units ``dog'', ``bites'' and ``man'' will be marked as Green.
-Second, A superfluous word or phrase may be inserted into
-the translation. For instance, if ``dog bites man'' is translated into ``dog viciously bites man''.
-Third, one of the sub-units may be missing from the translation.
-For instance, if ``dog bites man'' is translated into ``dog bites''. 
+%here are three major cases where the relationship between the children might go
+%wrong in translation and 
+We will use the example ``man bites dog'' to illustrate typical examples of why a structural node
+should be labelled as ``Bad'':
+incorrect ordering (``dog bites man''), 
+deletion (``man bites'') and insertion (``man bites biscuit dog''). 
+%First, the components of the translation may be ordered differently from the source,
+%such that the relation between them changes. For instance, if
+%the sentence ``man bites dog'' is translated into a sentence meaning ``dog bites man'',
+%the semantic unit corresponding to the Scene will be marked as Bad, while
+%the individual atomic units ``dog'', ``bites'' and ``man'' will be marked as Green.
+%Second, A superfluous word or phrase may be inserted into
+%the translation. For instance, if ``dog bites man'' is translated into ``dog viciously bites man''.
+%Third, one of the sub-units may be missing from the translation.
+%For instance, if ``dog bites man'' is translated into ``dog bites''. 
 
 HUME labels reflect adequacy, rather than fluency judgements.
 Specifically, annotators are instructed to
@@ -1092,7 +1102,7 @@ one annotator marked correct, and the other (a Cochrane employee) as incorrect.
 }
 \label{fig:dacorrelation}
 \end{figure}
-Recent research~\cite{graham2015accurate,graham2015crowd} has proposed a new approach for collecting 
+Recent research~\cite{graham2015accurate,graham2015crowd,graham2015improving} has proposed a new approach for collecting 
 accuracy ratings, direct assessment (DA). By crowdsourcing a large number of adequacy judgements for each candidate 
 translation on a fine-grained 
 scale of 0 to 100, we can apply statistical measures which result in reliable aggregate scores. 
@@ -1117,7 +1127,7 @@ crowd which may not be available or reliable.
 \label{fig:dacorrelationtypes}
 \end{figure}
 
-In Figure~\ref{fig:dacorrelationtypes} we can see an analysis of HUME correlations with DA by HUME node type. We can see that correlation increases when combining different sematic node types and that correlation is highest for node type ``all''. Some types of nodes seem to predict the DA scores better than others. The HUME scores on parallel scene nodes (H) and participant nodes (A) seem to correlate more strongly with DA than scores on process and state nodes (P+S) or linker nodes (L). Center nodes (C) are also more correlated than elaborator nodes (E), which is what we would expect given that center nodes are by definition more important to the semantics of a sentence than elaborators. 
+In Figure~\ref{fig:dacorrelationtypes} we can see an analysis of HUME correlations with DA by HUME node type. We can see that correlation increases when combining different sematic node types and that correlation is highest for node type ``all''. Some types of nodes seem to predict the DA scores better than others. The HUME scores on parallel scene nodes (H) and participant nodes (A) seem to correlate more strongly with DA than scores on process and state nodes (P+S) or linker nodes (L). Center nodes (C) are also more correlated than elaborator nodes (E), which is what we would expect given that center nodes are by definition more important to the semantics of a sentence than elaborators. We leave it to future work to construct a HUME score which weights the different node types according to their semantic relevance. 
 
 
 %\subsection{Discussion of Disagreements}\label{sec:disagreements}
