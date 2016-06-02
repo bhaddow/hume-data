@@ -42,10 +42,10 @@
 \newcommand{\tabref}[1]{Table~\ref{#1}}
 \newcommand{\XXX}[1]{{\color{red}XXX #1}} % a general todo or comment
 %\newcommand{\XXX}[1]{}
-%\newcommand{\oa}[1]{\footnote{\color{red}OA: #1}}
-\newcommand{\oa}[1]{}
-%\newcommand{\bh}[1]{\footnote{\color{blue}BH: #1}}
-\newcommand{\bh}[1]{}
+\newcommand{\oa}[1]{\footnote{\color{red}OA: #1}}
+%\newcommand{\oa}[1]{}
+\newcommand{\bh}[1]{\footnote{\color{blue}BH: #1}}
+%\newcommand{\bh}[1]{}
 
 \def\perscite#1{\newcite{#1}}
 \def\parcite#1{\cite{#1}}
@@ -161,17 +161,17 @@ These problems are partially addressed by measures that decompose over parts of 
 translation. For automatic measures,
 these are often words or n-grams, for manual measures some structural
 information is taken into account \parcite{machacek:bojar:segranks:2015}, or the
-annotators are explicitly asked to mark errors, which however suffers from even
+annotators are explicitly asked to mark errors, which however suffer from even
 lower agreement than ranking \parcite{lommel:etal:mqm-iaa:2014}.
 % the following is specific to automatic measures:
 %quantifying the overlap of its sub-parts relative a reference translation.
 A promising line of research decomposes metrics
-%More recent work on MT evaluation proposed measures
-%that decompose
 over semantically defined units,
 quantifying the similarity of the output and the reference in terms of
 their verb argument structure; the most notable of these measures is HMEANT
 \parcite{lo2011structured}.
+%More recent work on MT evaluation proposed measures
+%that decompose
 
 % SAVING SPACE:
 % \XXX{Do we want to cut the following shorter?}
@@ -389,7 +389,7 @@ latter (\figref{fig:ucca_example_v2}). Further categories account for
 inter-scene relations and the sub-structures of participants and relations.
 
 % UCCA Motivation
-The use of UCCA for semantic MT evaluation measure is motivated by several reasons. 
+The use of UCCA for semantic MT evaluation measure is motivated by two main reasons. 
 First, UCCA's set of categories can
 be reliably annotated by non-experts after as little as two hours
 of training \parcite{marinotti2014}.
@@ -398,11 +398,11 @@ represent what is shared between languages by building on
 linguistic typological theory \parcite{Dixon:10a,Dixon:10b,Dixon:12}.
 Its cross-linguistic applicability has so far been tested in annotations of
 English, French, German and Czech.
-Third, the scheme has been shown to be stable across translations:
-UCCA annotations of translated text usually contain the same set of relations
-\parcite{sulem2015conceptual}, indicating that the scheme reflects
-a common layer of representation that in a correct translation
-is mostly shared between the translation and the source\oa{verb argument structure note?}. 
+%Third, the scheme has been shown to be stable across translations:
+%UCCA annotations of translated text usually contain the same set of relations
+%\parcite{sulem2015conceptual}, indicating that the scheme reflects
+%a common layer of representation that in a correct translation
+%is mostly shared between the translation and the source. 
 
 %Verbal argument structures are less stable in this sense, as they
 %may be translated or paraphrased to a nominal or adjectival
@@ -1116,10 +1116,13 @@ the translated sentence.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Comparison with HMEANT}\label{sec:hmeant_comp}
 
-Like HMEANT, HUME defines  a
-measure that decomposes over semantic units, rather than strings. 
-However, there are important differences in design decisions, which we summarize in this
-section.
+We turn to discussing the main differences between HUME and HMEANT,
+a semantic measure that measures the translation quality according to its similarity
+with a reference, measures in terms of the overlap between their SRL annotations.
+%Like HMEANT, HUME defines  a
+%measure that decomposes over semantic units, rather than strings. 
+%However, there are important differences in design decisions, which we summarize in this
+%section.
 
 \paragraph{Verbal Structures Only?}
 
@@ -1127,9 +1130,17 @@ HMEANT focuses on verbal
 argument structures, ignoring other pervasive phenomena such as nominal predicates, inter-clause
 relations and copula clauses.
 We are not aware of any empirical evaluation that demonstrates that verb argument structure,
-taken alone, captures the crux of the sentence semantics meanings.\oa{do we mention here that
-  Scenes in their own right correlate less with DA? maybe we should distinguish verbal and non-verbal
-  scenes?} Consider the example:
+taken alone, captures the crux of the sentence semantics meanings.
+Moreover, relying only on verbal argument structures is less stable across paraphrases
+and translations, as a verbal argument structure
+may be translated to a nominal or adjectival argument structure
+(e.g., ``after graduation'' may be translated into ``after he graduated'').
+This may lead to unjustified penalties low HMEANT score, as the verb
+in one structure has nothing to align to in the other.
+On the other hand, HUME has been shown to be reasonably stable in an English-French
+corpus study \cite{sulem2015conceptual}.
+
+Consider the following example:
 
 \begin{center}
 \begin{tabular}{lp{5.4cm}}
@@ -1176,7 +1187,7 @@ sentences, but are again ignored by HMEANT.
 An example where a linker is omitted in translation in our experiments is
 \equo{However, this review\dots}, which was translated to
 the German \equo{Diese \"Uberpr\"ufung\dots} (lit. \equo{This review}).
-This omission will not be taken into account by HMEANT at all\footnote{Argument structures and linkers are explicitly marked in UCCA. Non-auxiliary instances of ``be'' and nouns are identified using the NLTK standard tagger. Nominative argument structures are defined as Scenes whose main relation is headed by a noun.}.
+This omission will not be taken into account by HMEANT at all\footnote{Argument structures and linkers are explicitly marked in UCCA. Non-auxiliary instances of ``be'' and nouns are identified using the NLTK standard tagger. Nominal argument structures are here Scenes whose main relation is headed by a noun.}.
 
 % No space
 %It is also relatively common in translation that verbal constructions get
@@ -1189,7 +1200,6 @@ This omission will not be taken into account by HMEANT at all\footnote{Argument 
 %  not totally sure that the meaning is well preserved. So Ondrej would actually
 %  *remove* this example, because it would illustrate HMEANT's problems only if
 %  the meaning was correct.}
- 
 
 We note that some of these issues were already observed
 in previous applications of HMEANT to languages other than
@@ -1236,7 +1246,6 @@ for the translation.
 %HMEANT, they semantically annotate both the reference and the translation, then
 %align these manually, and assess to what extent they match.
 %We see this difference as crucial where semantic analysis is concerned, as it
-
 Not annotating the translation is appealing as it is often impossible to assign a
 semantic structure to a low quality translation.
 On the other hand, HUME's annotation may be artificially boosting the perceived understandability
