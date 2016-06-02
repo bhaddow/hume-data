@@ -31,10 +31,12 @@ TYPE = "stnd"
 
 def main():
 
+  corrs = []
+  nums = []
   for lang, code in LANGCODES:
     #for judgements in 5, 10, 15:
-    corrs = []
-    multicorrs = []
+    langcorrs = []
+    langnums = []
     for judgements in [10]:
 
       UCCAfileName = HUME_dir + "/himl2015.en-" + code + ".uccascores" 
@@ -61,11 +63,19 @@ def main():
 
         df = pandas.DataFrame({ 'UCCA' : UCCAresults[score_type],
                             'DA' : DAlist }) 
+        if (score_type == "P"):
+          df2 = pandas.DataFrame({ 'UCCA' : UCCAresults["S"],
+                            'DA' : DAlist }) 
+          df = pandas.concat([df,df2])
+        elif (score_type == "S"):
+          continue
+        
         #df.corr(method='pearson', min_periods=1)
         # df.plot(x='UCCA', y='DA')
         df = df[df['DA'] != ""]
         corr = np.corrcoef(df['UCCA'].tolist(), df['DA'].tolist())[1,0]
-        corrs.append(corr)
+        langcorrs.append(corr)
+        langnums.append(df['DA'].size)
         print ("All: type " + score_type + " NumDA: " + str(judgements) 
                    + ", en-" + code + ", size " + str(len(df['DA'].tolist())) + ": " 
                    + str(corr))
@@ -87,35 +97,49 @@ def main():
           plt.savefig(fname)
           plt.clf()
 
-        df = pandas.DataFrame({ 'UCCA' : MultUCCAresults[score_type],
-                            'DA' : DAlist }) 
-        #df.corr(method='pearson', min_periods=1)
-        # df.plot(x='UCCA', y='DA')
-        df = df[df['DA'] != ""]
-        df = df[df['UCCA'] >= 0]
-        corr = np.corrcoef(df['UCCA'].tolist(), df['DA'].tolist())[1,0]
-        multicorrs.append(corr)
-        print ("Mullt: type " + score_type + " NumDA: " + str(judgements) 
-                   + ", en-" + code + ", size " + str(len(df['DA'].tolist())) + ": " 
-                   + str(corr))
+        #df = pandas.DataFrame({ 'UCCA' : MultUCCAresults[score_type],
+        #                    'DA' : DAlist }) 
+        ##df.corr(method='pearson', min_periods=1)
+        ## df.plot(x='UCCA', y='DA')
+        #df = df[df['DA'] != ""]
+        #df = df[df['UCCA'] >= 0]
+        #corr = np.corrcoef(df['UCCA'].tolist(), df['DA'].tolist())[1,0]
+        #multicorrs.append(corr)
+        #print ("Mullt: type " + score_type + " NumDA: " + str(judgements) 
+        #           + ", en-" + code + ", size " + str(len(df['DA'].tolist())) + ": " 
+        #           + str(corr))
 
-    plt.rcParams.update({'font.size': 18})
-    ind = np.arange(len(corrs))
-    width = 0.35
-    fig, ax = plt.subplots()
-    #plt.tight_layout()
-    rects1 = ax.bar(ind, corrs, width, color='r')
-    rects2 = ax.bar(ind+width, multicorrs, width, color='b')
+      corrs.append(langcorrs)
+      nums.append(langnums)
 
-    ax.set_xticks(ind+width)
-    labels = ["all","atomic","structural","process","state","center","scene","elaborator","participant","linker"]
-    ax.set_xticklabels(labels, rotation="vertical")
-    #plt.subplots_adjust(left=0.9, right=1, top=1.6,bottom=1.5)
-    plt.ylabel('Correlation')
-    #plt.title('Human judgements for English-' + lang)
-    fname=HUME_dir + '/humevsDAcorrtypes.' + str(judgements) + 'en-' + code + '.pdf'
-    plt.savefig(fname)
-    plt.clf()
+  plt.rcParams.update({'font.size': 18})
+  width = 0.35
+  fig, ax = plt.subplots()
+  #plt.tight_layout()
+
+#order: all,atomic,struct,P+S,C,H,E,A,L
+#        0     1     2    3   4 5 6 7 8 
+#display order: all,atomic,struct,P+S,H,A,C,E,L
+  de = [corrs[1][0],corrs[1][1],corrs[1][2],corrs[1][3],corrs[1][5],corrs[1][7],corrs[1][4],corrs[1][6],corrs[1][8]]
+  ro = [corrs[0][0],corrs[0][1],corrs[0][2],corrs[0][3],corrs[0][5],corrs[0][7],corrs[0][4],corrs[0][6],corrs[0][8]]
+  ind = np.arange(len(de))
+
+  print (de)
+  print (ro)
+  rects1 = ax.bar(ind, de, width, color='r')
+  rects2 = ax.bar(ind+width, ro, width, color='b')
+  lgd = ['German', 'Romanian']
+
+  ax.legend([rects1[0], rects2[0]], lgd, loc='upper right', borderpad=0.2)
+  ax.set_xticks(ind+width)
+  labels = ["all ","atomic ","struct ","P and S ","H ","A ","C ","E ","L "]
+  ax.set_xticklabels(labels, rotation="vertical")
+  #plt.subplots_adjust(left=0.9, right=1, top=1.6,bottom=1.5)
+  plt.ylabel('Correlation')
+  #plt.title('Human judgements for English-' + lang)
+  fname=HUME_dir + '/humevsDAcorrtypes.' + str(judgements) + 'en-dero.pdf'
+  plt.savefig(fname)
+  plt.clf()
 
 
 if __name__ == "__main__":
