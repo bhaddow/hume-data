@@ -65,12 +65,11 @@ def main():
     mt_colkeys = ["mteval_{}".format(key) for key in mt_keys]
     with open(args.sentenceFile, "w") as csvfh,\
         open(args.nodeFile, "w") as ncsvfh:
-      print("sent_id,annot_id,ucca_annot_id,lang,timestamp,source,target,reference,align,bleu,ucca_node_count,", file=csvfh, end="")
       print("ucca_H,", file=csvfh, end="")
       print(",".join(mt_colkeys), file=csvfh,end="")
       print(file=csvfh)
 
-      print("node_id,sent_id,annot_id,lang,mt_label,child_count,children,parent,ucca_label,pos,source,target", file=ncsvfh)
+      print("node_id,sent_id,annot_id,lang,mt_label,child_count,children,parent,ucca_label,pos,source,target,is_scene", file=ncsvfh)
 
       csv_writer = csv.writer(csvfh,  lineterminator=os.linesep)
       ncsv_writer = csv.writer(ncsvfh,  lineterminator=os.linesep)
@@ -98,6 +97,8 @@ def main():
         for node in sent.ucca_tree.nodes:
           node = sent.ucca_tree.nodes[node]
           if node.tag != "FN": continue
+          is_scene = 'T' if node.is_scene() else 'F'
+          
           mt_annot = sent.mt_annotation.get(node.ID, "M")
           mt_eval_counts[mt_annot] += 1
           ucca_counts[node.ftag] += 1
@@ -118,13 +119,13 @@ def main():
                 return get_src_tgt(node.children[0])
             source,target,pos = [" ".join(l) for l in list(zip(*[get_src_tgt(node) for node in node.children]))]
           ncsv_writer.writerow((node.ID, str(sent.sent_id), sent.annot_id, sent.lang, mt_annot, \
-                str(child_count), children, parent, tag, pos, source, target ))
+                str(child_count), children, parent, tag, pos, source, target, is_scene ))
         fields.append(sum(mt_eval_counts.values()))
         fields.append(ucca_counts["H"])
         fields += [mt_eval_counts[key] for key in mt_keys]
-
+        
         csv_writer.writerow(fields)
- 
+
 if __name__ == "__main__":
   main()
 
