@@ -837,7 +837,7 @@ and abstracts.
 %already public anyway, and Lexi did some selection of examples for use in this expt. -- do we have to explain this?}
 % ... todo for the camera ready, if we get through
 
-\subsection{Annotation Statistics}
+\subsection{HUME Annotation Statistics}
 \label{sec:annot_stats}
 
 The source sentences are all in English, and their UCCA annotation was performed by four
@@ -932,7 +932,7 @@ Kappa & 0.54 & 0.29 & 0.54 & 0.50 \\
 Structural units & 1602 & 1040 & 2655 & 1989 \\
 Kappa & 0.31 & 0.44 & 0.33 & 0.58 \\
 \end{tabular}
-\caption{Inter-annotator agreement for the multiply-annotated portions of the data, as
+\caption{Inter-annotator agreement for the multiply-annotated portions of the data,
 measured by Cohen's Kappa. }
 \label{tab:iaa}
 }
@@ -1041,7 +1041,7 @@ The Kappas for each bin (bins are 10 words wide) is presented in
 \figref{fig:iaalength}.
 Results show that there is no reduction of IAA with sentence
 length, except perhaps in German. Also, from \tabref{tab:iaa} the overall IAA
-is quite similar (0.6-0.7) for all languages, showing good agreement.
+is quite similar for all languages, showing good agreement (0.6--0.7).
 However, there are differences observed when we break down by node type.
 In particular, we see a contrast  between
 Czech and Polish, where the IAA is higher for atomic than for structural units, and German and Romanian,
@@ -1083,14 +1083,15 @@ one annotator marked correct, and the other (a Cochrane employee)  as incorrect.
 Recent research~\cite{TODO} has proposed a new method for collecting 
 accuracy ratings. The idea is that collecting a large number of adequacy judgements along a 
 scale of 0 to 100 allows us to apply statistical measures which make them reliable. 
-It has been shown that mean  judgements correlate very strongly with each other. 
+It has been shown that mean judgements correlate very strongly with each other. 
 We followed~\cite{TODO} and collected up to 15 adequacy judgements on most of the
 HUME annotated translations for German and Romanian. To ensure high quality judgments
 we restricted the IP of the annotators to those of the relevant country. We found that there were too
 few Czech and Polish annotators, and removing the IP restriction led to very poor quality results. 
 We can see that HUME and Direct Assesment scores do correlate. 
 We also removed unreliable crowdsourcing annotators
-according to the method discussed in ~\cite{TODO}. The Pearsons correlation for en-de is 0.58 and for en-ro is 0.70 which shows that they two measures do correlate. This confirms that 
+according to the method discussed in ~\cite{TODO}. The Pearsons correlation
+for en-de is 0.58 and for en-ro is 0.70 which shows that they two measures do correlate. This confirms that 
 the HUME metric is consistent with previously published methods in human evaluation, even though these
 two approaches are very different in their conception.
 We argue that although annotating HUME requires more expertise and effort, 
@@ -1114,20 +1115,11 @@ section.
 
 HMEANT focuses on verbal
 argument structures, ignoring other pervasive phenomena such as nominal predicates, inter-clause
-relations and copula clauses. Some of the uncovered cases were already observed
-in previous applications of HMEANT to languages other than English (see \perscite{birch-EtAl:2013:WMT} for German, \perscite{bojar:wu:ssst:2012} for
-Czech and by \perscite{chuchunkov-tarelkin-galinskaya:2014:SSST-8} for Russian)
-but the problems are also seen in English.
-
-%This focus on verbal predicates has a number of unfortunate consequences. We show an example below:
-Consider the example:
-
-% \noindent
-% \begin{inparadesc}
-% \item[Source ] a coronary angioplasty may not be technically possible \\
-% \item[Transl.] eine koronare Angioplastie kann nicht technisch m{\"o}glich \\
-% \item[Gloss ]  a coronary angioplasty can not technically possible \\
-% \end{inparadesc}
+relations and copula clauses.
+We are not aware of any empirical evaluation that demonstrates that verb argument structure,
+taken alone, captures the crux of the sentence semantics meanings.\oa{do we mention here that
+  Scenes in their own right correlate less with DA? maybe we should distinguish verbal and non-verbal
+  scenes?} Consider the example:
 
 \begin{center}
 \begin{tabular}{lp{5.4cm}}
@@ -1137,32 +1129,44 @@ Gloss & \small a coronary angioplasty can not technically possible \\
 \end{tabular}
 \end{center}
 
-The German machine translation 
+
+%``a coronary angioplasty may not be technically possible'', which was translated by our en-de system
+%to ``eine koronare Angioplastie kann nicht technisch m{\"o}glich'' (gloss: 
+%a coronary angioplasty can not technically possible).
+
+The German translation 
 is largely correct, except that the main verb ``sein'' (``be'') is omitted.
 While this may be interpreted as a minor error, HMEANT will assign the
 sentence a very low score, as it failed to translate the main verb.
 
+%This focus on verbal predicates has a number of unfortunate consequences. We show an example below:
+
+% \noindent
+% \begin{inparadesc}
+% \item[Source ] a coronary angioplasty may not be technically possible \\
+% \item[Transl.] eine koronare Angioplastie kann nicht technisch m{\"o}glich \\
+% \item[Gloss ]  a coronary angioplasty can not technically possible \\
+% \end{inparadesc}
+
+\com{
+}
+
 There are however a number of other serious consequences on focusing on verbal
 predicates. We conducted an analysis of the English UCCA Wikipedia
-corpus (5324 sentences)
-in order to assess the impact of the following problems: 
-\\
-\begin{inparadesc}
-\item[Copula clauses] are treated in HMEANT simply as instances of the main verb ``be'', which
+corpus (5324 sentences) in order to assess the pervasiveness of three phenomena that are not
+well supported by HMEANT.
+First, copula clauses are treated in HMEANT simply as instances of the main verb ``be'', which
 generally does not convey the meaning of these clauses. They appear in 21.7\% of the sentences,
 according to conservative estimates that only consider non-auxiliary instances of ``be''.
-\\
-\item[Nominal argument structures,] which are ignored by  HMEANT are in fact highly
+Second, nominal argument structures, which are ignored by  HMEANT are in fact highly
 pervasive, appearing in 48.7\% of the sentences.
-\\
-\item[Linkers] expressing an inter-relation between
+Third, linkers, that express an inter-relation between
 clauses (mainly discourse markers and coordinating conjunctions) appear in 56\% of the
-sentences, but are ignored by HMEANT.
+sentences, but are again ignored by HMEANT.
 An example where a linker is omitted in translation in our experiments is
-with the source \equo{However, this review\dots}, which was translated to
+\equo{However, this review\dots}, which was translated to
 the German \equo{Diese \"Uberpr\"ufung\dots} (lit. \equo{This review}).
-This omission will not be taken into account by HMEANT at all\footnote{Argument structures and linkers are explicitly marked in UCCA. We identified non-auxiliary instances of ``be'' and nouns using the NLTK standard tagger. Nominative argument structures are here defined as Scenes whose main relation is headed by a noun.}.
-\end{inparadesc}
+This omission will not be taken into account by HMEANT at all\footnote{Argument structures and linkers are explicitly marked in UCCA. Non-auxiliary instances of ``be'' and nouns are identified using the NLTK standard tagger. Nominative argument structures are defined as Scenes whose main relation is headed by a noun.}.
 
 % No space
 %It is also relatively common in translation that verbal constructions get
@@ -1176,15 +1180,20 @@ This omission will not be taken into account by HMEANT at all\footnote{Argument 
 %  *remove* this example, because it would illustrate HMEANT's problems only if
 %  the meaning was correct.}
  
-We are not aware of any empirical evaluation that demonstrates that verb argument structure,
-taken alone, captures the crux of the sentence semantics meanings.
+
+We note that some of these issues were already observed
+in previous applications of HMEANT to languages other than
+English. See \perscite{birch-EtAl:2013:WMT} for German, \perscite{bojar:wu:ssst:2012} for
+Czech and \perscite{chuchunkov-tarelkin-galinskaya:2014:SSST-8} for Russian.
+
+
+
+
 % I am not sure that this is true
 %The coverage of
 %these and other phenomena by HUME will allow to empirically determine 
 %(rather than stipulate), which semantic structures are important
 %to preserve for MT evaluation, and which are less important.
-
-
 
 %
 %\paragraph{Cost of Structural Annotation}
@@ -1207,28 +1216,26 @@ taken alone, captures the crux of the sentence semantics meanings.
 %  UCCA annotation by trained annotators is about 700 tokens/hour (we didn't
 %  check it for individual sentences), but that's done only once so it should be amortized.}
 
-\paragraph{One vs. Two Structures}
-
-HUME uses just one structural annotation (for the source) while HMEANT relies on
-two independently constructed structural annotations (for both the reference and
-the candidate translation)
+\paragraph{One Structure or Two.}
+HUME only annotates the source, while HMEANT relies on
+two independently constructed structural annotations, one for the reference and one
+for the translation.
 %First of all, the annotation process is different. We semantically annotate the
 %source, then automatically project it to the translation, and ask bilingual
 %annotators to assess whether this projection shows a good or bad translation. In
 %HMEANT, they semantically annotate both the reference and the translation, then
 %align these manually, and assess to what extent they match.
 %We see this difference as crucial where semantic analysis is concerned, as it
-and it is often impossible to assign a semantic structure to a low quality MT output sentence.
+
+Not annotating the translation is appealing as it is often impossible to assign a
+semantic structure to a low quality translation.
+On the other hand, HUME's annotation may be artificially boosting the perceived understandability
+of the sentence by allowing access to the source.
 
 
-However, HMEANT's independent annotation of the source and translation makes a stricter check
-of whether the translation can be understood
-than we do. HUME may be artificially boosting the perceived understandability of
-the sentence by allowing access to the source.
-
-\paragraph{Importance of Alignment}
-
-In HMEANT, the alignment between the (reference and translation) structures is a key
+%%%% UNTIL HERE %%%%
+\paragraph{Alignment.}
+In HMEANT, the alignment between the reference and translation structures is a key
 part of the manual annotation. If the alignment cannot be created, the 
 translation is heavily penalized.
 Previous experiments with HMEANT
