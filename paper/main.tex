@@ -152,7 +152,9 @@ are badly translated, and so cannot inform developers in repairing these errors.
 These problems are partially addressed by measures that decompose over parts of the evaluated
 translation. For automatic measures,
 these are often words or n-grams, for manual measures some structural
-information is taken into account \parcite{machacek:bojar:segranks:2015}.
+information is taken into account \parcite{machacek:bojar:segranks:2015}, or the
+annotators are explicitly asked to mark errors, which however suffers from even
+lower agreement than ranking \parcite{lommel:etal:mqm-iaa:2014}.
 % the following is specific to automatic measures:
 %quantifying the overlap of its sub-parts relative a reference translation.
 A promising line of research decomposes metrics
@@ -199,7 +201,7 @@ After a brief review (\secref{sec:background}), we describe HUME in detail
 (\secref{sec:hume}).
 Our experiments with four language pairs: English to Czech, German, Polish and Romanian (\secref{sec:experiments})
 document HUME's inter-annotator agreement and efficiency (time of annotation). 
-We further empirically compare HUME with direct assesment of human adequacy ratings,
+We further empirically compare HUME with direct assessment of human adequacy ratings,
 and conclude by discussing the differences with HMEANT (\secref{sec:hmeant_comp}).
 
 % We conduct experiments with four language pairs: English-German, English-Polish,
@@ -1077,7 +1079,7 @@ one annotator marked correct, and the other (a Cochrane employee)  as incorrect.
   \iaafig{ro}
 }
 \end{tabular}
-\caption{Plots of HUME scores vs Direct Assesment scores which have been standardised for each crowdsourcing annotator. The regression is calculated using linear least squares.}
+\caption{Plots of HUME scores vs Direct Assessment scores which have been standardised for each crowdsourcing annotator. The regression is calculated using linear least squares.}
 \label{fig:dacorrelation}
 \end{figure}
 Recent research~\cite{TODO} has proposed a new method for collecting 
@@ -1088,7 +1090,7 @@ We followed~\cite{TODO} and collected up to 15 adequacy judgements on most of th
 HUME annotated translations for German and Romanian. To ensure high quality judgments
 we restricted the IP of the annotators to those of the relevant country. We found that there were too
 few Czech and Polish annotators, and removing the IP restriction led to very poor quality results. 
-We can see that HUME and Direct Assesment scores do correlate. 
+We can see that HUME and Direct Assessment scores do correlate. 
 We also removed unreliable crowdsourcing annotators
 according to the method discussed in ~\cite{TODO}. The Pearsons correlation
 for en-de is 0.58 and for en-ro is 0.70 which shows that they two measures do correlate. This confirms that 
@@ -1096,7 +1098,7 @@ the HUME metric is consistent with previously published methods in human evaluat
 two approaches are very different in their conception.
 We argue that although annotating HUME requires more expertise and effort, 
 the results are more valuable because a HUME evaluation can tell you what parts
-of the source sentence have been retained. Direct assesment scores require a crowd, which is sometimes not available or reliable, and it returns a single number which gives little insight into the quality of
+of the source sentence have been retained. Direct assessment scores require a crowd, which is sometimes not available or reliable, and it returns a single number which gives little insight into the quality of
 the translated sentence.  
 
 %\subsection{Discussion of Disagreements}\label{sec:disagreements}
