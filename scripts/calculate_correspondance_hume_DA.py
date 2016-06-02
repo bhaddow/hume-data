@@ -45,23 +45,22 @@ def main():
         else:
           DAlist.append("")
       
-
       df = pandas.DataFrame({ 'UCCA' : UCCAresults[0],
                           'DA' : DAlist }) 
-
+      
       
       df.corr(method='pearson', min_periods=1)
-
+      
      # df.plot(x='UCCA', y='DA')
       df = df[df['DA'] != ""]
-
+      
       print ("Correference HUME DA for " + str(judgements) + " judge, en-" + code + ", size " + str(len(df['DA'].tolist())) + ": " 
                    + str(np.corrcoef(df['UCCA'].tolist(), df['DA'].tolist())[1,0]))
 
       A = np.vstack([  df['UCCA'].tolist()  , np.ones(len(df['UCCA'].tolist()))]).T
       m,c = np.linalg.lstsq(A, df['DA'].tolist())[0]
       print (str(m) + " " + str(c))
-
+      
       
       #print(df.head())
       plt.plot(df['UCCA'], df['DA'], '.')
