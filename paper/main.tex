@@ -1126,14 +1126,15 @@ severe practical limitation of DA.
 
 Figure~\ref{fig:dacorrelation} plots the HUME score for each sentence against
 its DA score. HUME and Direct Assesment scores correlate reasonably well. The
-Pearson correlation for en-ro (en-de) is 0.70 (0.58), and 0.78 (0.74) if only
-doubly HUME-annotated points are considered. This confirms that HUME is consistent with an accepted human evaluation method, despite the differences in
-their conception.
-While DA is a valuable tool for MT research, HUME has two advantages:
+Pearson correlation for en-ro (en-de) is 0.70 (0.58), or 0.78 (0.74) if only
+doubly HUME-annotated points are considered.
+This confirms that HUME is consistent with an accepted human evaluation method,
+despite the differences in their conception.
+While DA is a valuable tool, HUME has two advantages:
 it returns fine-grained semantic information about 
 the quality of translations and it only requires very few annotators.
 Direct assesment returns a single opaque score, and (as also noted by
-Graham et al.), requires a large crowd which may not be available or reliable. 
+Graham et al.), and requires a large crowd which may not be available or reliable. 
 
 \begin{figure}[t]
 \includegraphics[width=0.45\textwidth]{humevsDAcorrtypes-10en-dero.pdf}
@@ -1145,7 +1146,14 @@ scenes (H), participants (P), centres (C), elaborators (E) and linkers
 \label{fig:dacorrelationtypes}
 \end{figure}
 
-Figure~\ref{fig:dacorrelationtypes} presents an analysis of HUME correlations with DA by HUME node type. We can see that correlation is highest where all sub-sets are taken into consideration (``all'' bar), supporting our claim for the value of taking into account a rich set of semantic phenomena. Some types of nodes seem to predict the DA scores better than others. The HUME scores on Parallel Scenes (H) and Participants (A) seem to correlate more strongly with DA than scores on Scene Main Relations (P+S) or linker nodes (L). Center nodes (C) are also more correlated than elaborator nodes (E), which is what we would expect given that center nodes are by definition more important to the semantics of a sentence than elaborators. We leave it to future work to construct a HUME score which weights the different node types according to their semantic relevance.
+
+Figure~\ref{fig:dacorrelationtypes} presents an analysis of HUME correlations with DA by HUME unit type.
+Each bar represents a correlation between HUME and an aggregate HUME score
+based on a sub-set of the units (\#nodes for the en-de/en-ro setting in brackets):
+all units ('all', 8726/11087), atomic ('atomic', 5417/6888) and structural units ('struct', 3207/3997),
+and units by UCCA categories: Scene main relations (i.e, Process and State units; 'P+S', / ), Participants ('A', / )
+Centres ('C', / ), elaborators ('E', / ) and linkers ('L', / )
+In both languages correlation is highest in the 'all' case, supporting our claim for the value of taking into account a rich set of semantic phenomena. Some types of nodes seem to predict the DA scores better than others. The HUME scores on Parallel Scenes (H) and Participants (A) seem to correlate more strongly with DA than scores on Scene Main Relations (P+S) or linker nodes (L). Center nodes (C) are also more correlated than elaborator nodes (E), which is what we would expect given that center nodes are by definition more important to the semantics of a sentence than elaborators. We leave it to future work to construct a HUME score which weights the different node types according to their semantic relevance.
 \oa{I think we should be careful here. It may very well be that these stem from the number of nodes taken into account. I think we should also say explicitly that .}
 This is also a demonstration of the more refined analysis (allowing to slice the data by semantic phenomena) enabled by taking a semantic approach to MT evaluation.
 
