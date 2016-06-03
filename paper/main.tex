@@ -1105,12 +1105,22 @@ one annotator marked correct, and the other (a Cochrane employee) as incorrect.
 \label{fig:dacorrelation}
 \end{figure}
 
-Recent research~\cite{graham2015accurate,graham2015crowd,graham2015improving} has proposed a new approach for collecting accuracy ratings, direct assessment (DA). By crowdsourcing a large number of adequacy judgements for each candidate translation on a fine-grained scale of 0 to 100, we can apply statistical measures which result in reliable aggregate scores, that correlate very strongly with one other.
+Recent research~\cite{graham2015accurate,graham2015crowd,graham2015improving} has proposed a new approach for collecting accuracy ratings, direct assessment (DA).
+%By crowdsourcing a large number of adequacy judgements for each candidate translation on a fine-grained scale of 0 to 100, we can apply statistical measures which result in reliable aggregate scores, that correlate very strongly with one other.
+Statistical interpretation of a large number of crowd-sourced adequacy
+judgements for each candidate translation on a fine-grained scale of 0 to 100
+results in reliable aggregate scores, that correlate very strongly with one
+other.
 
-We followed~\parcite{graham2015accurate} and collected 10 adequacy
+We attempted to follow \perscite{graham2015accurate} but struggled to get enough
+judgements for our target languages. We ended up with 10 adequacy 
 judgements on most of the HUME annotated translations for
-German and Romanian, using the CrowdFlower platform\footnote{\url{https://www.crowdflower.com}}. To ensure high quality judgments we restricted the IP of the annotators to those of the relevant country. Czech and Polish judgements were
-excluded, as our experiments only yielded very little high quality data.
+German and Romanian but insufficient data for Czech and Polish. We see this as a
+severe practical limitation of DA.
+%We followed~\parcite{graham2015accurate} and collected 10 adequacy
+%judgements on most of the HUME annotated translations for
+%German and Romanian, using the CrowdFlower platform\footnote{\url{https://www.crowdflower.com}}. To ensure high quality judgments we restricted the IP of the annotators to those of the relevant country. Czech and Polish judgements were
+%excluded, as our experiments only yielded very little high quality data.
 
 Figure~\ref{fig:dacorrelation} plots the HUME score for each sentence against its DA score. HUME and Direct Assesment scores correlate reasonably well. The Pearson correlation for en-ro (en-de) is 0.70 (0.58), and 0.78 (0.74) where only doubly HUME-annotated points are taken. This confirms that HUME is consistent with an accepted human evaluation method, despite the differences in
 their conception.
