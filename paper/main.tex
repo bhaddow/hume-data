@@ -1022,6 +1022,22 @@ is generally little confusion between the two types of units.
 
 \def\iaafig #1{\includegraphics[width=3.8cm]{iaa_length_#1.png}}
 
+To assess HUME reliability for long sentences,
+we binned the sentences according to length and measured Kappa on each of the
+bins (\figref{fig:iaalength}).
+%The Kappas for each bin is presented in 
+%\figref{fig:iaalength}.
+%Results show that there is
+We see
+no reduction of IAA with sentence
+length, except perhaps in German. Also, from \tabref{tab:iaa} the overall IAA
+is quite similar for all languages, showing good agreement (0.6--0.7).
+However, there are differences observed when we break down by node type.
+In particular, we see a contrast  between
+Czech and Polish, where the IAA is higher for atomic than for structural units, and German and Romanian,
+where the reverse is true. We also observe low IAA (around 0.3) in the cases of
+German atomic units, and Polish and Czech structural units.
+
 \begin{figure}[t]
 \renewcommand{\tabcolsep}{0pt}
 \begin{tabular}{cc}
@@ -1047,26 +1063,14 @@ is generally little confusion between the two types of units.
 
 }
 \end{tabular}
-\caption{Kappa versus sentence length, separately for
-structural and atomic units. The numbers are the node counts in each bin. }
+%\caption{Kappa versus sentence length, separately for
+%structural and atomic units. The numbers are the node counts in each bin. }
+\caption{Kappa versus sentence length for
+structural and atomic units. (Node counts in bins on top of each bar.)
+}
 \label{fig:iaalength}
 \end{figure}
 
-To assess HUME reliability for long sentences,
-we binned the sentences according to length and measured Kappa on each of the
-bins (\figref{fig:iaalength}).
-%The Kappas for each bin is presented in 
-%\figref{fig:iaalength}.
-%Results show that there is
-We see
-no reduction of IAA with sentence
-length, except perhaps in German. Also, from \tabref{tab:iaa} the overall IAA
-is quite similar for all languages, showing good agreement (0.6--0.7).
-However, there are differences observed when we break down by node type.
-In particular, we see a contrast  between
-Czech and Polish, where the IAA is higher for atomic than for structural units, and German and Romanian,
-where the reverse is true. We also observe low IAA (around 0.3) in the cases of
-German atomic units, and Polish and Czech structural units.
 
 Looking more closely at the areas of disagreement, we see that for the Polish structural units, the 
 proportion of As was quite different between the two annotators (53\% vs. 71\%), whereas for other
