@@ -20,16 +20,18 @@
 
 \makeatletter
 
-\titlespacing*{\section}
-{0pt}{1ex plus 1ex minus .2ex}{1ex plus .2ex}
-\titlespacing*{\subsection}
-{0pt}{1ex plus 1ex minus .2ex}{1ex plus .2ex}
+%\titlespacing*{\section}
+%{0pt}{1ex plus 1ex minus 1ex}{1ex plus .2ex}
+%\titlespacing*{\subsection}
+%              {0pt}{1ex plus 1ex minus 1ex}{1ex plus .2ex}
 
-\renewcommand{\paragraph}{
-  \@startsection{paragraph}{4}
-  {\z@}{.1ex \@plus .1ex \@minus .1ex}{-1.5em}
-  {\normalfont\normalsize\bfseries}
-}
+\titlespacing{\section}{2pt}{*0}{*0}
+\titlespacing{\subsection}{2pt}{*0}{*0}
+\titlespacing{\subsubsection}{2pt}{*0}{*0}
+\titlespacing{\paragraph}{1pt}{*0}{3pt}
+
+              
+
 \makeatother
 
 
@@ -103,15 +105,13 @@
 %  We experiment with four language pairs, demonstrating HUME's broad applicability,
 %  as well as its reliability, reflected in its inter-annotator agreement rates.
 
-Human evaluation of machine translation normally uses sentence-level measures such as relative ranking
-or adequacy/fluency scales. However these provide no insight into possible errors,
+Human evaluation of machine translation normally uses sentence-level measures such as relative ranking or adequacy scales. However these provide no insight into possible errors,
 and do not scale well with sentence length.
 We argue for a semantics-based evaluation, which captures what meaning components
 are retained in the MT output, providing a more fine-grained analysis of
 translation quality, and enables the construction and tuning of semantics-based MT. 
 We present a novel human semantic evaluation measure, Human
-UCCA-based MT Evaluation (HUME), building on the Universal Conceptual Cognitive Annotation (UCCA)
-semantic representation scheme.
+UCCA-based MT Evaluation (HUME), building on the UCCA semantic representation scheme.
 %Making progress over previous work, the proposed measure takes into account
 HUME covers
 a wider range of semantic phenomena than previous methods and does not rely on semantic annotation
@@ -211,12 +211,9 @@ avoids relying on possibly suboptimal reference translations.
 %An elaborate comparison of HUME and HMEANT is given in \secref{sec:hmeant_comp}.
 
 %Could reinstate
-%After a brief review (\secref{sec:background}), we describe HUME in detail
-%(\secref{sec:hume}).
-%Our experiments with four language pairs: English to Czech, German, Polish and Romanian (\secref{sec:experiments})
-%document HUME's inter-annotator agreement and efficiency (time of annotation). 
-%We further empirically compare HUME with direct assessment of human adequacy ratings,
-%and conclude by discussing the differences with HMEANT (\secref{sec:hmeant_comp}).
+After a brief review (\secref{sec:background}), we describe HUME in detail
+(\secref{sec:hume}).
+Our experiments with four language pairs: English to Czech, German, Polish and Romanian (\secref{sec:experiments}) document HUME's inter-annotator agreement and efficiency (time of annotation). We further empirically compare HUME with direct assessment of human adequacy ratings, and conclude by discussing the differences with HMEANT (\secref{sec:hmeant_comp}).
 
 % We conduct experiments with four language pairs: English-German, English-Polish,
 % English-Romanian and English-Czech, and report efficiency (time of annotation) and
@@ -358,19 +355,19 @@ We discuss the differences between HMEANT and HUME in \secref{sec:hmeant_comp}.
     \includegraphics[width=0.35\textwidth]{ucca-tree-v2.png}
 
 {\small
-\begin{tabular}{|l|l|l|l|}
+  \begin{tabular}{|l|l|l|l|}
 \hline
 L & Linker &  A & Participant \\
-H & Scene & R & Relater \\
+H & Parallel Scene & R & Relater \\
 P & Process & C & Centre \\
 \hline
 \end{tabular}
 }
     \end{center}
 \caption{\label{fig:ucca_example_v2}
-  Sample UCCA annotation where leaves correspond to words and nodes to units.
+  Sample UCCA annotation. Leaves correspond to words and nodes to units.
   The dashed edge indicates that ``Tom'' is also a participant in the ``moved to NYC''
-  Scene. Edge labels mark UCCA categories, listed  in the table.}
+  Scene. Edge labels mark UCCA categories.}
 %which are largely ignored in this work
 \end{figure}
 
@@ -464,16 +461,17 @@ The procedure involves two manual steps: (1) UCCA-annotating $s$,
 where units are defined according to the UCCA annotation.
 UCCA annotation is performed once for every source sentence,
 irrespective of the number of its translations we wish
-to evaluate\footnote{Instead of relying on the source,
-the evaluation could be based on the UCCA structure for the \emph{reference}
-translation.
-More details in the discussion in \secref{src-vs-ref}.
+to evaluate
+%\footnote{Instead of relying on the source,
+%the evaluation could be based on the UCCA structure for the \emph{reference}
+%translation.
+%More details in the discussion in \secref{src-vs-ref}.
 % This would allow monolingual annotators to take part in the
 % evaluation. On the downside, the translation would have to be aligned to the
 % reference and more importantly, we would risk inaccurate judgements due to
 % the naturally occurring differences between the source and its reference
 % translations.
-}.
+%}.
 
 \paragraph{UCCA Annotation.}
 We begin by creating UCCA annotations for the source sentence, following the
@@ -601,8 +599,8 @@ This is often be due to the translated word having the the wrong inflection,
 in a way that impacts little on the understandability of the sentence.
 Red means that the essential meaning of the unit has not been captured.
 
-Structural units have sub-units (children in the UCCA graph), which may themselves
-either be atomic or structural.
+Structural units have sub-units (children in the UCCA graph),
+which are themselves atomic or structural.
 % Ondrej thinks the following can be simply removed:
 %The labels assigned to such nodes reflect the extent to which
 %the relation between the sub-units is preserved in $t$.
@@ -1135,9 +1133,10 @@ This is also a demonstration of the more refined analysis (allowing to slice the
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Comparison with HMEANT}\label{sec:hmeant_comp}
 
-We turn to discussing the main differences between HUME and HMEANT,
-a semantic measure that measures the translation quality according to its similarity
-with a reference, measures in terms of the overlap between their SRL annotations.
+We discuss the main differences between HUME and HMEANT,
+a human MT evaluation metric that measures the overlap between the translation a reference
+in terms of their SRL annotations.
+
 %Like HMEANT, HUME defines  a
 %measure that decomposes over semantic units, rather than strings. 
 %However, there are important differences in design decisions, which we summarize in this
@@ -1145,21 +1144,7 @@ with a reference, measures in terms of the overlap between their SRL annotations
 
 \paragraph{Verbal Structures Only?}
 
-HMEANT focuses on verbal
-argument structures, ignoring other pervasive phenomena such as nominal predicates, inter-clause
-relations and copula clauses.
-We are not aware of any empirical evaluation that demonstrates that verb argument structure,
-taken alone, captures the crux of the sentence semantics meanings.
-Moreover, relying only on verbal argument structures is less stable across paraphrases
-and translations, as a verbal argument structure
-may be translated to a nominal or adjectival argument structure
-(e.g., ``after graduation'' may be translated into ``after he graduated'').
-This may lead to unjustified penalties low HMEANT score, as the verb
-in one structure has nothing to align to in the other.
-On the other hand, HUME has been shown to be reasonably stable in an English-French
-corpus study \cite{sulem2015conceptual}.
-
-Consider the following example:
+HMEANT focuses on verbal argument structures, ignoring other pervasive phenomena such as non-verbal predicates and inter-clause relations. Consider the following example:
 
 \vspace{-.3em}
 \begin{center}
@@ -1192,22 +1177,32 @@ sentence a very low score, as it failed to translate the main verb.
 \com{
 }
 
-There are however a number of other serious consequences on focusing on verbal
-predicates. We conducted an analysis of the English UCCA Wikipedia
-corpus (5324 sentences) in order to assess the pervasiveness of three phenomena that are not
-well supported by HMEANT.
-First, copula clauses are treated in HMEANT simply as instances of the main verb ``be'', which
-generally does not convey the meaning of these clauses. They appear in 21.7\% of the sentences,
-according to conservative estimates that only consider non-auxiliary instances of ``be''.
-Second, nominal argument structures, which are ignored by  HMEANT are in fact highly
+We conducted an analysis of the English UCCA Wikipedia corpus (5324 sentences) in order to assess the pervasiveness of three phenomena that are not well supported by HMEANT.
+First, copula clauses are treated in HMEANT simply as instances of the main verb ``be'', which generally does not convey the meaning of these clauses. They appear in 21.7\% of the sentences, according to conservative estimates that only consider non-auxiliary
+instances of ``be''.
+Second, nominal argument structures, ignored by HMEANT, are in fact highly
 pervasive, appearing in 48.7\% of the sentences.
-Third, linkers, that express an inter-relation between
-clauses (mainly discourse markers and coordinating conjunctions) appear in 56\% of the
-sentences, but are again ignored by HMEANT.
-An example where a linker is omitted in translation in our experiments is
-\equo{However, this review\dots}, which was translated to
-the German \equo{Diese \"Uberpr\"ufung\dots} (lit. \equo{This review}).
-This omission will not be taken into account by HMEANT at all\footnote{Argument structures and linkers are explicitly marked in UCCA. Non-auxiliary instances of ``be'' and nouns are identified using the NLTK standard tagger. Nominal argument structures are here Scenes whose main relation is headed by a noun.}.
+Third, linkers that express inter-relations between
+clauses (mainly discourse markers and conjunctions) appear in 56\% of the
+sentences, but are again ignored by HMEANT. As noted in our experiments, linkers
+are sometimes omitted in translation, but these omissions are not taken
+into consideration by HMEANT\footnote{Argument structures and linkers are explicitly marked in UCCA. Non-auxiliary instances of ``be'' and nouns are identified using the NLTK standard tagger. Nominal argument structures are here Scenes whose main relation is headed by a noun.}.
+
+%An example where a linker is omitted in translation in our experiments is
+%\equo{However, this review\dots}, which was translated to
+%the German \equo{Diese \"Uberpr\"ufung\dots} (lit. \equo{This review}).
+%This omission will not be taken into account by HMEANT at all
+
+We are not aware of any empirical argument suggesting that verb argument structures,
+taken alone, capture the crux of the sentence semantics.
+Moreover, relying only on verbal argument structures is less stable across paraphrases
+and translations, as a verbal argument structure
+may be translated to a nominal or adjectival argument structure
+(e.g., ``after graduation'' may be translated into ``after he graduated'').
+This may lead to an unduly low HMEANT score, as the verb
+in one structure has nothing to align to in the other.
+On the other hand, UCCA has been shown to be reasonably stable in an English-French
+corpus study \cite{sulem2015conceptual}.
 
 % No space
 %It is also relatively common in translation that verbal constructions get
@@ -1268,25 +1263,24 @@ for the translation.
 %We see this difference as crucial where semantic analysis is concerned, as it
 Not annotating the translation is appealing as it is often impossible to assign a
 semantic structure to a low quality translation.
-On the other hand, HUME's annotation may be artificially boosting the perceived understandability
-of the sentence by allowing access to the source.
+On the other hand, HUME may be artificially boosting the perceived understandability
+of the translation by allowing access to the source.
 
 
 \paragraph{Alignment.}
 In HMEANT, the alignment between the reference and translation structures is a key
 part of the manual annotation. If the alignment cannot be created, the 
 translation is heavily penalized.
-Previous experiments with HMEANT
-\parcite{bojar:wu:ssst:2012,chuchunkov-tarelkin-galinskaya:2014:SSST-8} have
-suggested that sometimes, the structures of the reference and of an accurate translation
-still diverge, for instance due to a different
+\newcite{bojar:wu:ssst:2012} and \newcite{chuchunkov-tarelkin-galinskaya:2014:SSST-8}
+argue that the structures of the reference and of an accurate translation
+may still diverge, for instance due to a different
 interpretation of a PP-attachment, or the verb having an additional modifier in
 %suggested that sometimes, the structures of the reference and candidate
 %translations diverge without any good reason, for instance due to a different
 %interpretation of a PP-attachment, the verb can have one additional modifier in
 one of the structures. It would be desirable to allow modifications to
 the SRL annotations at the alignment stage,
-to avoid unduly penalization due to such spurious divergences.
+to avoid unduly penalizing such spurious divergences.
 %annotations also at the alignment stage
 %to avoid unduly penalization due to such a spurious divergence.
 The same issue is noted in \parcite{lo:wu:reliability:2014}:
@@ -1306,13 +1300,12 @@ alignment as needed, thus circumventing this difficulty.
 
 \paragraph{Monolingual vs. Bilingual Evaluation.}
 \label{src-vs-ref}
-HUME diverges from both HMEANT and from shallower automatic measures
-like BLEU or METEOR, in not requiring a reference.
+HUME diverges from HMEANT and from shallower measures
+like BLEU, in not requiring a reference.
 Instead, it compares the source directly with the output translation.
-This requires us to employ bilingual annotators, but has the benefit of avoiding
-using a reference. Reference translations may often be phrased in many structurally different
-ways, which may again lead unduly penalization of the translation in cases where
-it is a paraphrase of the reference.
+This requires the employment of bilingual annotators, but has the benefit of avoiding
+using a reference, which is never uniquely defined, and may thus 
+lead to unjustly low scores where the translation is a paraphrase of the reference.
 
 %If only monolingual annotators are available, the HUME evaluation could be performed
 %with a reference sentence instead of with the source. 
