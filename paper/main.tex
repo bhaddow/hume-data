@@ -1053,10 +1053,13 @@ structural and atomic units. The numbers are the node counts in each bin. }
 \end{figure}
 
 To assess whether, HUME supports the reliable annotation of long sentences,
-we binned the sentences according to length and measured Kappa on each of the bins.
-The Kappas for each bin (bins are 10 words wide) is presented in 
-\figref{fig:iaalength}.
-Results show that there is no reduction of IAA with sentence
+we binned the sentences according to length and measured Kappa on each of the
+bins (\figref{fig:iaalength}).
+%The Kappas for each bin is presented in 
+%\figref{fig:iaalength}.
+%Results show that there is
+We see
+no reduction of IAA with sentence
 length, except perhaps in German. Also, from \tabref{tab:iaa} the overall IAA
 is quite similar for all languages, showing good agreement (0.6--0.7).
 However, there are differences observed when we break down by node type.
@@ -1117,7 +1120,11 @@ Graham et al.), requires a large crowd which may not be available or reliable.
 
 \begin{figure}[t]
 \includegraphics[width=0.45\textwidth]{humevsDAcorrtypes-10en-dero.pdf}
-\caption{Pearson correlation HUME scores vs DA for different node types. Struct refers to all structural nodes, P+S are all process and state nodes, H parallel scene nodes, A participant, C centre, E elaborators, and L linker nodes.}
+\caption{Pearson correlation HUME scores vs DA for different node types: all
+structural nodes (struct), process and state nodes jointly (P+S), parallel
+scenes (H), participants (P), centres (C), elaborators (E) and linkers
+(L).}
+%Struct refers to all structural nodes, P+S are all process and state nodes, H parallel scene nodes, A participant, C centre, E elaborators, and L linker nodes.}
 \label{fig:dacorrelationtypes}
 \end{figure}
 
