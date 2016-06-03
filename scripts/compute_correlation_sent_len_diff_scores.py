@@ -36,6 +36,7 @@ if __name__ == "__main__":
         fields = l.strip().split()
         da_scores.append((int(fields[0]),float(fields[2]))) # (sid,da score)
 
+    print([ucca_ids[x[0]] for x in da_scores])
 
     threshs = [int(x) for x in sys.argv[6].split(':')]
 
