@@ -753,7 +753,7 @@ and therefore noisy, the annotator is instructed to treat the aligned text is a 
 the alignment if it is misleading, and instead 
 make a judgement according to the full translation.
 Concretely, let $s$ be a source sentence, $t$ a translation,
-and $A \subset 2^{s \times t}$ a many-to-many word alignment.
+and $A \subset 2^s \times 2^t$ a many-to-many word alignment.
 If $u$ is a semantic unit in $s$, whose yield is $yld(u)$, we define the aligned text in
 $t$ to be $\bigcup_{(x_s,x_t) \in A \wedge x_s \cap yld(u) \neq \emptyset} x_t$.
 
@@ -810,7 +810,7 @@ the translation as correct or not. The alignments are meant just as a guide. The
 In order to validate the HUME metric, we ran an annotation experiment with one source language (English),
 and four target languages (Czech, German, Polish and Romanian), using text from the public health domain.
 Semantically accurate translation is paramount in this domain, which makes
-it particularly suitable for semantic  MT evaluation. HUME is both evalauted in terms of its
+it particularly suitable for semantic  MT evaluation. HUME is both evaluated in terms of its
 consistency (inter-annotator agreement), efficiency (time of annotation) and validity (through a comparison
 with crowd-sourced adequacy judgements).
 
@@ -1125,7 +1125,7 @@ severe practical limitation of DA.
 %excluded, as our experiments only yielded very little high quality data.
 
 Figure~\ref{fig:dacorrelation} plots the HUME score for each sentence against
-its DA score. HUME and Direct Assesment scores correlate reasonably well. The
+its DA score. HUME and Direct Assessment scores correlate reasonably well. The
 Pearson correlation for en-ro (en-de) is 0.70 (0.58), or 0.78 (0.74) if only
 doubly HUME-annotated points are considered.
 This confirms that HUME is consistent with an accepted human evaluation method,
@@ -1133,8 +1133,8 @@ despite the differences in their conception.
 While DA is a valuable tool, HUME has two advantages:
 it returns fine-grained semantic information about 
 the quality of translations and it only requires very few annotators.
-Direct assesment returns a single opaque score, and (as also noted by
-Graham et al.), and requires a large crowd which may not be available or reliable. 
+Direct assessment returns a single opaque score, and (as also noted by
+Graham et al.) requires a large crowd which may not be available or reliable. 
 
 \begin{figure}[t]
 \includegraphics[width=0.45\textwidth]{humevsDAcorrtypes-10en-dero.pdf}
@@ -1420,6 +1420,7 @@ We have introduced HUME, a human semantic MT evaluation measure which addresses
 a wide range of semantic phenomena. We have shown that it can be reliably and 
 efficiently annotated in multiple languages,
 and that annotation quality is robust to sentence length.
+Comparison to direct assessments further support HUME's validity.
 We believe that
 HUME, and a future automated version of HUME, allows for a more fine-grained analysis of translation quality,
 and will be to guide the development of a more semantically aware approach to MT.
