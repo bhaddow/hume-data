@@ -42,8 +42,8 @@
 \newcommand{\tabref}[1]{Table~\ref{#1}}
 \newcommand{\XXX}[1]{{\color{red}XXX #1}} % a general todo or comment
 %\newcommand{\XXX}[1]{}
-\newcommand{\oa}[1]{\footnote{\color{red}OA: #1}}
-%\newcommand{\oa}[1]{}
+%\newcommand{\oa}[1]{\footnote{\color{red}OA: #1}}
+\newcommand{\oa}[1]{}
 \newcommand{\bh}[1]{\footnote{\color{blue}BH: #1}}
 %\newcommand{\bh}[1]{}
 
@@ -269,7 +269,7 @@ avoids relying on possibly suboptimal reference translations.
 %of the source sentence, and its fluency as a sentence in the target language
 %\parcite{lopez2008statistical}.
 Human evaluation is generally done by ranking the outputs of multiple systems
-e.g., in the WMT tasks \parcite{bojar2015findings}, or by giving
+e.g., in the WMT tasks \parcite{bojar2015findings}, or by assigning
 adequacy/fluency scores to each translation, a procedure recently improved
 by \perscite{graham2015accurate}.
 However, while providing the gold standard for MT evaluation, human evaluation
@@ -916,11 +916,10 @@ of a sentence takes around 2--4 minutes, with some variation between annotators.
 & cs & de & pl & ro \\
 \hline
 Annot. 1 & 255 & 140  & 138 & 96 \\
-Annot. 2 & -- & 162 & 229 & 207 \\
+Annot. 2 & $^*$ & 162 & 229 & 207 \\
 \end{tabular}
 \caption{Median annotation times per sentence, in seconds.
-  In the case of the second Czech 
-  ``annotator'', no timing information is available, as
+  $^*$: no timing information is available, as
   this was a collection of annotators, working in parallel.}
 \label{tab:annot_times}
 }
@@ -1014,7 +1013,7 @@ is generally little confusion between the two types of units.
 
 }
 \end{tabular}
-\caption{Confusion matrices for each of the language pairs, plotted as heatmaps.}
+\caption{Confusion matrices for each language pair.}
 \label{fig:heatmap}
 \end{figure}
 
@@ -1072,17 +1071,17 @@ Looking more closely at the areas of disagreement, we see that for the Polish st
 proportion of As was quite different between the two annotators (53\% vs. 71\%), whereas for other
 languages the annotators agree in the proportions. We believe that this was because one of the Polish
 annotators did not fully understand the guidelines for structural units, and percolated
-errors up the tree, creating more Bs. For the German lexical units, and Czech structural units, where
-Kappa is also around 0.3, the proportion of such units being marked as ``correct'' is relatively 
+errors up the tree, creating more Bs. For German atomic and Czech structural units, where Kappa is also around 0.3, the proportion of such units being marked as ``correct'' is relatively 
 high, meaning that the class distribution is more skewed, so the expected agreement used in the
-Kappa calculation is high, lowering Kappa. Essentially, the annotation problem is harder when the classes
-are more skewed. Finally we note some evidence of domain-specific disagreements, for instance the German
-MT system normally translated ``review'' (as in ``systematic review'' -- a frequent term in the 
+Kappa calculation is high, lowering Kappa.
+%ssentially, the annotation problem is harder when the classes are more skewed.
+Finally we note some evidence of domain-specific disagreements, for instance
+the German MT system normally translated ``review'' (as in ``systematic review'' -- a frequent term in the 
 Cochrane texts) as ``\"uberpr\"ufung'', which 
 one annotator marked correct, and the other (a Cochrane employee) as incorrect.
 
 
-\subsection{Comparison with Crowdsourced Adequacy Judgements}\label{sec:adequacy}
+\subsection{Comparison with Direct Assessment}\label{sec:adequacy}
 
 \def\iaafig #1{\includegraphics[width=0.45\textwidth]{humevsDA_10en-#1.pdf}}
 
@@ -1102,32 +1101,31 @@ one annotator marked correct, and the other (a Cochrane employee) as incorrect.
 }
 \label{fig:dacorrelation}
 \end{figure}
-Recent research~\cite{graham2015accurate,graham2015crowd,graham2015improving} has proposed a new approach for collecting 
-accuracy ratings, direct assessment (DA). By crowdsourcing a large number of adequacy judgements for each candidate 
-translation on a fine-grained 
-scale of 0 to 100, we can apply statistical measures which result in reliable aggregate scores. 
-It has been shown that mean DA judgements correlate very strongly with each other. 
-We followed~\parcite{graham2015accurate} and collected up to 15 adequacy judgements on most of the
-HUME annotated translations for German and Romanian. To ensure high quality judgments
-we restricted the IP of the annotators to those of the relevant country. We found that there were too
-few Czech and Polish annotators, and removing the IP restriction led to very poor quality results. 
 
-We can see in Figure~\ref{fig:dacorrelation} that HUME and Direct Assesment scores correlate reasonably well.  
-The Pearsons correlation for en-de is 0.58 and for en-ro is 0.70 overall which confirms that 
-the HUME metric is consistent with an accepted human evaluation method, namely DA, 
-even though the two metrics are very different in their conception. 
-Although DA is a valuable tool for translation research, HUME has two advantages:
-it returns fine-grained semantic information about the quality of translations and it only requires one 
-annotator. Direct assesment returns a single score, and it needs a large 
-crowd which may not be available or reliable. 
+Recent research~\cite{graham2015accurate,graham2015crowd,graham2015improving} has proposed a new approach for collecting accuracy ratings, direct assessment (DA). By crowdsourcing a large number of adequacy judgements for each candidate translation on a fine-grained scale of 0 to 100, we can apply statistical measures which result in reliable aggregate scores, that correlate very strongly with one other.
+
+We followed~\parcite{graham2015accurate} and collected 10 adequacy
+judgements on most of the HUME annotated translations for
+German and Romanian, using the CrowdFlower platform\footnote{\url{https://www.crowdflower.com}}. To ensure high quality judgments we restricted the IP of the annotators to those of the relevant country. Czech and Polish judgements were
+excluded, as our experiments only yielded very little high quality data.
+
+Figure~\ref{fig:dacorrelation} plots the HUME score for each sentence against its DA score. HUME and Direct Assesment scores correlate reasonably well. The Pearson correlation for en-ro (en-de) is 0.70 (0.58), and 0.78 (0.74) where only doubly HUME-annotated points are taken. This confirms that HUME is consistent with an accepted human evaluation method, despite the differences in
+their conception.
+While DA is a valuable tool for MT research, HUME has two advantages:
+it returns fine-grained semantic information about 
+the quality of translations and it only requires very few annotators.
+Direct assesment returns a single opaque score, and (as also noted by
+Graham et al.), requires a large crowd which may not be available or reliable. 
 
 \begin{figure}[t]
 \includegraphics[width=0.45\textwidth]{humevsDAcorrtypes-10en-dero.pdf}
-\caption{Pearsons correlation HUME scores vs DA for different node types. Struct refers to all structural nodes, P+S are all process and state nodes, H parallel scene nodes, A participant, C centre, E elaborators, and L linker nodes.}
+\caption{Pearson correlation HUME scores vs DA for different node types. Struct refers to all structural nodes, P+S are all process and state nodes, H parallel scene nodes, A participant, C centre, E elaborators, and L linker nodes.}
 \label{fig:dacorrelationtypes}
 \end{figure}
 
-In Figure~\ref{fig:dacorrelationtypes} we can see an analysis of HUME correlations with DA by HUME node type. We can see that correlation increases when combining different sematic node types and that correlation is highest for node type ``all''. Some types of nodes seem to predict the DA scores better than others. The HUME scores on parallel scene nodes (H) and participant nodes (A) seem to correlate more strongly with DA than scores on process and state nodes (P+S) or linker nodes (L). Center nodes (C) are also more correlated than elaborator nodes (E), which is what we would expect given that center nodes are by definition more important to the semantics of a sentence than elaborators. We leave it to future work to construct a HUME score which weights the different node types according to their semantic relevance. 
+Figure~\ref{fig:dacorrelationtypes} presents an analysis of HUME correlations with DA by HUME node type. We can see that correlation is highest where all sub-sets are taken into consideration (``all'' bar), supporting our claim for the value of taking into account a rich set of semantic phenomena. Some types of nodes seem to predict the DA scores better than others. The HUME scores on Parallel Scenes (H) and Participants (A) seem to correlate more strongly with DA than scores on Scene Main Relations (P+S) or linker nodes (L). Center nodes (C) are also more correlated than elaborator nodes (E), which is what we would expect given that center nodes are by definition more important to the semantics of a sentence than elaborators. We leave it to future work to construct a HUME score which weights the different node types according to their semantic relevance.\oa{I think we should be careful here. It may very well be that these stem from the number of nodes taken into account. I think we should also say explicitly that .}
+This is also a demonstration of the more refined analysis (allowing to slice the data by semantic phenomena) enabled by taking a semantic approach to MT evaluation.
+
 
 
 %\subsection{Discussion of Disagreements}\label{sec:disagreements}
@@ -1163,6 +1161,7 @@ corpus study \cite{sulem2015conceptual}.
 
 Consider the following example:
 
+\vspace{-.3em}
 \begin{center}
 \begin{tabular}{lp{5.4cm}}
 Source & \small a coronary angioplasty may not be technically possible \\
@@ -1170,7 +1169,7 @@ Transl.& \small eine koronare Angioplastie kann nicht technisch m{\"o}glich \\
 Gloss & \small a coronary angioplasty can not technically possible \\
 \end{tabular}
 \end{center}
-
+\vspace{-.5em}
 
 %``a coronary angioplasty may not be technically possible'', which was translated by our en-de system
 %to ``eine koronare Angioplastie kann nicht technisch m{\"o}glich'' (gloss: 
