@@ -761,7 +761,7 @@ Where the aligned text is discontinuous in $t$, words between the left
 and right boundaries which are not contained in it (intervening words)
 are presented in a smaller red font. 
 Intervening words are likely to change the meaning of the translation
-of $u$, and thus should be paid attention to when considering whether the translation
+of $u$, and thus should be attended to when considering whether the translation
 is correct or not. 
 
 For example, 
@@ -810,7 +810,7 @@ the translation as correct or not. The alignments are meant just as a guide. The
 In order to validate the HUME metric, we ran an annotation experiment with one source language (English),
 and four target languages (Czech, German, Polish and Romanian), using text from the public health domain.
 Semantically accurate translation is paramount in this domain, which makes
-it particularly suitable for experimenting on MT evaluation. HUME is both evalauted in terms of its
+it particularly suitable for semantic  MT evaluation. HUME is both evalauted in terms of its
 consistency (inter-annotator agreement), efficiency (time of annotation) and validity (through a comparison
 with crowd-sourced adequacy judgements).
 
@@ -1029,8 +1029,8 @@ bins (\figref{fig:iaalength}).
 %\figref{fig:iaalength}.
 %Results show that there is
 We see
-no reduction of IAA with sentence
-length, except perhaps in German. Also, from \tabref{tab:iaa} the overall IAA
+no discernable reduction of IAA with sentence
+length. Also, from \tabref{tab:iaa} the overall IAA
 is quite similar for all languages, showing good agreement (0.6--0.7).
 However, there are differences observed when we break down by node type.
 In particular, we see a contrast  between
@@ -1112,10 +1112,10 @@ Recent research~\cite{graham2015accurate,graham2015crowd,graham2015improving} ha
 Statistical interpretation of a large number of crowd-sourced adequacy
 judgements for each candidate translation on a fine-grained scale of 0 to 100
 results in reliable aggregate scores, that correlate very strongly with one
-other.
+another.
 
 We attempted to follow \perscite{graham2015accurate} but struggled to get enough
-judgements for our target languages. We ended up with 10 adequacy 
+crowd-sourced judgements for our target languages. We ended up with 10 adequacy 
 judgements on most of the HUME annotated translations for
 German and Romanian but insufficient data for Czech and Polish. We see this as a
 severe practical limitation of DA.
@@ -1153,7 +1153,7 @@ all units ('all', 8624/10885), atomic ('atomic', 5417/6888) and structural units
 and units by UCCA categories: Scene main relations (i.e, Process and State units; 'P and S', 954/1178), Parallel Scenes ('H', 656/784),
 Participants ('A', 1348/1746),
 Centres ('C', 1904/2474), elaborators ('E', 1608/2031) and linkers ('L', 261/315).
-In both setting correlation is highest in the 'all' case, supporting our claim for the value of aggregating over a wide range of semantic phenomena. Some types of nodes predict the DA scores better than others. HUME scores on As correlate more strongly with DA than scores on Scene Main Relations (P+S). Center nodes (C) are also more correlated than elaborator nodes (E), which is expected given that Centers are defined to be more semantically dominant. Future work will construct an aggregate HUME score which weights the different node types according to their semantic relevance. 
+In both settings correlation is highest in the 'all' case, supporting our claim for the value of aggregating over a wide range of semantic phenomena. Some types of nodes predict the DA scores better than others. HUME scores on As correlate more strongly with DA than scores on Scene Main Relations (P+S). Center nodes (C) are also more correlated than elaborator nodes (E), which is expected given that Centers are defined to be more semantically dominant. Future work will construct an aggregate HUME score which weights the different node types according to their semantic relevance. 
 
 
 %\subsection{Discussion of Disagreements}\label{sec:disagreements}
@@ -1195,7 +1195,7 @@ is largely correct, except that the main verb ``sein'' (``be'') is omitted.
 While this may be interpreted as a minor error, HMEANT will assign the
 sentence a very low score, as it failed to translate the main verb.
 %
-Conversely, HMEANT does not allow to penalize errors such as tense or negation
+Conversely, HMEANT does not penalize errors such as tense or negation
 flip in a correctly aligned predicate.
 
 %This focus on verbal predicates has a number of unfortunate consequences. We show an example below:
