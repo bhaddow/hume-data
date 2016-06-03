@@ -1184,6 +1184,9 @@ The German translation
 is largely correct, except that the main verb ``sein'' (``be'') is omitted.
 While this may be interpreted as a minor error, HMEANT will assign the
 sentence a very low score, as it failed to translate the main verb.
+%
+Conversely, HMEANT does not allow to penalize errors such as tense or negation
+flip in a correctly aligned predicate.
 
 %This focus on verbal predicates has a number of unfortunate consequences. We show an example below:
 
@@ -1291,7 +1294,7 @@ of the translation by allowing access to the source.
 In HMEANT, the alignment between the reference and translation structures is a key
 part of the manual annotation. If the alignment cannot be created, the 
 translation is heavily penalized.
-\newcite{bojar:wu:ssst:2012} and \newcite{chuchunkov-tarelkin-galinskaya:2014:SSST-8}
+\perscite{bojar:wu:ssst:2012} and \perscite{chuchunkov-tarelkin-galinskaya:2014:SSST-8}
 argue that the structures of the reference and of an accurate translation
 may still diverge, for instance due to a different
 interpretation of a PP-attachment, or the verb having an additional modifier in
@@ -1303,7 +1306,7 @@ the SRL annotations at the alignment stage,
 to avoid unduly penalizing such spurious divergences.
 %annotations also at the alignment stage
 %to avoid unduly penalization due to such a spurious divergence.
-The same issue is noted in \parcite{lo:wu:reliability:2014}:
+The same issue is noted by \perscite{lo:wu:reliability:2014}:
 the IAA on SRL dropped from 90\% to 61\% 
 when the two aligned structures were from two different annotators.
 HUME uses automatic (word-level) alignment, which only
@@ -1352,7 +1355,8 @@ by the separation of atomic and structural units,
 which supports a more accurate aggregation of the translation errors
 to a composite score.
 }
-%\oa{Omitted point here}
+%\oa{Omitted point here} % OB: Added a sentence covering it: Conversely,
+%HMEANT does not...
 
 %I see this a falling under the verbal structures point
 %\paragraph{Annotation of Predicates Themselves}
