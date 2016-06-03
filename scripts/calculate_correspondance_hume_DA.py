@@ -42,7 +42,6 @@ def main():
       UCCAfileName = HUME_dir + "/himl2015.en-" + code + ".uccascores" 
       MultUCCAfileName = HUME_dir + "/himl2015.en-" + code + ".multuccascores" 
       DAfileName = HUME_dir + "/ad-" + TYPE + "-seg-scores-" + str(judgements) + ".en-" + code + ".csv" 
-
       UCCAresults = pandas.read_csv(UCCAfileName, index_col=False )
       MultUCCAresults = pandas.read_csv(MultUCCAfileName, index_col=False, skip_blank_lines=False)
       DAresults = pandas.read_csv(DAfileName, sep='\s+', converters={'SID': int, 'SCR' : float})
@@ -78,7 +77,7 @@ def main():
         langnums.append(df['DA'].size)
         print ("All: type " + score_type + " NumDA: " + str(judgements) 
                    + ", en-" + code + ", size " + str(len(df['DA'].tolist())) + ": " 
-                   + str(corr))
+                   + str(corr) + " Numnodes: " + str(df['DA'].size))
 
         A = np.vstack([  df['UCCA'].tolist()  , np.ones(len(df['UCCA'].tolist()))]).T
         m,c = np.linalg.lstsq(A, df['DA'].tolist())[0]
@@ -116,12 +115,15 @@ def main():
   width = 0.35
   fig, ax = plt.subplots()
   #plt.tight_layout()
+  print ("HERE! ", nums)
 
 #order: all,atomic,struct,P+S,C,H,E,A,L
 #        0     1     2    3   4 5 6 7 8 
 #display order: all,atomic,struct,P+S,H,A,C,E,L
   de = [corrs[1][0],corrs[1][1],corrs[1][2],corrs[1][3],corrs[1][5],corrs[1][7],corrs[1][4],corrs[1][6],corrs[1][8]]
   ro = [corrs[0][0],corrs[0][1],corrs[0][2],corrs[0][3],corrs[0][5],corrs[0][7],corrs[0][4],corrs[0][6],corrs[0][8]]
+  denums = [nums[1][0],nums[1][1],nums[1][2],nums[1][3],nums[1][5],nums[1][7],nums[1][4],nums[1][6],nums[1][8]]
+  ronums = [nums[0][0],nums[0][1],nums[0][2],nums[0][3],nums[0][5],nums[0][7],nums[0][4],nums[0][6],nums[0][8]]
   ind = np.arange(len(de))
 
   print (de)
@@ -137,10 +139,26 @@ def main():
   #plt.subplots_adjust(left=0.9, right=1, top=1.6,bottom=1.5)
   plt.ylabel('Correlation')
   #plt.title('Human judgements for English-' + lang)
+
+
+  #autolabel(rects1,denums,ax)
+  #autolabel(rects2,ronums,ax)
+
   fname=HUME_dir + '/humevsDAcorrtypes.' + str(judgements) + 'en-dero.pdf'
   plt.savefig(fname)
   plt.clf()
 
+def autolabel(rects,nums,ax):
+    # attach some text labels
+    count = 0
+    print (nums)
+    for rect in rects:
+        height = rect.get_height()
+        val = nums[count]
+        ax.text(rect.get_x() + rect.get_width()/2., 1.05*height,
+                '%d' % int(val),
+                ha='center', va='bottom')
+        count += 1
 
 if __name__ == "__main__":
   main()
