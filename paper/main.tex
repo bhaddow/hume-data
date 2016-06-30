@@ -1,6 +1,6 @@
 \documentclass[11pt,letterpaper]{article}
 %\usepackage[round]{natbib}
-\usepackage{emnlp2016}
+\usepackage{acl2016}
 \usepackage{amsmath}
 \usepackage{paralist}
 \usepackage{subfig}
@@ -14,6 +14,7 @@
 \usepackage{color}
 \usepackage{lipsum,adjustbox}
 \usepackage[font={small}]{caption}
+\aclfinalcopy
 
 \def\emnlppaperid{***}
 \setlength{\belowcaptionskip}{-10pt}
@@ -68,20 +69,20 @@
 \def\Orange{\func{Orange}}
 \def\Units{\func{Units}}
 
+\newcommand*{\affaddr}[1]{#1} 
+\newcommand*{\affmark}[1][*]{\textsuperscript{#1}}
+\newcommand*{\email}[1]{\texttt{#1}}
 
 \title{HUME: Human UCCA-Based Evaluation of Machine Translation}
 
-\author{Author 1\\
-	    XYZ Company\\
-	    111 Anywhere Street\\
-	    Mytown, NY 10000, USA\\
-	    {\tt author1@xyz.org}
-	  \And
-	Author 2\\
-  	ABC University\\
-  	900 Main Street\\
-  	Ourcity, PQ, Canada A1A 1T2\\
-  {\tt author2@abc.ca}}
+\author{
+Alexandra Birch\textsuperscript{1}, Barry Haddow\textsuperscript{1}, Ond{\v{r}}ej Bojar\textsuperscript{2}, Omri Abend\textsuperscript{3}\\
+\textsuperscript{1}School of Informatics, University of Edinburgh\\
+\textsuperscript{2}Institute of Formal and Applied Linguistics, Charles University in Prague\\
+\textsuperscript{3}School of Computer Science and Engineering, Hebrew University of Jerusalem\\
+\texttt{a.birch@ed.ac.uk, bhaddow@inf.ed.ac.uk}\\
+\texttt{bojar@ufal.mff.cuni.cz, oabend@cs.huji.ac.il}\\
+}
 
 \date{}
 
