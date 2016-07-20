@@ -1,0 +1,14 @@
+_T=20160720_12:06:47_18669	 tar zxvf ../../wmt16-newstask.tgz
+_T=20160720_12:06:56_18669	 tar zxvf ../../wmt16-newstask.tgz
+_T=20160720_12:07:05_18669	 mv data/0610/wmt16-dump-20160610-1226.eng-cze.csv data/0610/wmt16-dump-20160610-1226.eng-deu.csv data/0610/wmt16-dump-20160610-1226.eng-ron.csv .
+_T=20160720_12:07:06_18669	 ls
+_T=20160720_12:07:09_18669	 pwd
+_T=20160720_12:07:12_18669	 rm -rf data/
+_T=20160720_12:07:23_18669	 wget http://data.statmt.org/wmt16/translation-task/test.tgz
+_T=20160720_12:07:28_18669	 tar zxvf test.tgz
+_T=20160720_12:07:53_18669	 mv test/newstest2016-enro-src.en.sgm test/newstest2016-enro-ref.ro.sgm test/newstest2016-ende-src.en.sgm test/newstest2016-ende-ref.de.sgm test/newstest2016-encs-src.en.sgm test/newstest2016-encs-ref.cs.sgm .
+_T=20160720_12:07:54_18669	 ls
+_T=20160720_12:07:59_18669	 rm test.tgz
+_T=20160720_12:08:09_18669	 rm -rf test/
+_T=20160720_12:08:10_18669	 ls -a
+_T=20160720_12:18:14_18669	 vi README
