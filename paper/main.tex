@@ -7,17 +7,19 @@
 \usepackage{times}
 \usepackage{latexsym}
 \usepackage{graphicx}
+\usepackage[T1]{fontenc}
 \usepackage{url}
 \usepackage{pgfplotstable}
 \usepackage{titlesec}
-%\usepackage{hyperref}
 \usepackage{color}
 \usepackage{lipsum,adjustbox}
 \usepackage[font={small}]{caption}
+%\usepackage{hyperref}
+
 \aclfinalcopy
 
 \def\emnlppaperid{***}
-\setlength{\belowcaptionskip}{-10pt}
+%\setlength{\belowcaptionskip}{-10pt}
 
 \makeatletter
 
@@ -26,10 +28,10 @@
 %\titlespacing*{\subsection}
 %              {0pt}{1ex plus 1ex minus 1ex}{1ex plus .2ex}
 
-\titlespacing{\section}{2pt}{*0}{*0}
-\titlespacing{\subsection}{2pt}{*0}{*0}
-\titlespacing{\subsubsection}{2pt}{*0}{*0}
-\titlespacing{\paragraph}{1pt}{*0}{3pt}
+%\titlespacing{\section}{2pt}{*0}{*0}
+%\titlespacing{\subsection}{2pt}{*0}{*0}
+%\titlespacing{\subsubsection}{2pt}{*0}{*0}
+%\titlespacing{\paragraph}{1pt}{*0}{3pt}
 
               
 
@@ -45,8 +47,10 @@
 \newcommand{\tabref}[1]{Table~\ref{#1}}
 \newcommand{\XXX}[1]{{\color{red}XXX #1}} % a general todo or comment
 %\newcommand{\XXX}[1]{}
-%\newcommand{\oa}[1]{\footnote{\color{red}OA: #1}}
-\newcommand{\oa}[1]{}
+\newcommand{\oa}[1]{\footnote{\color{red}OA: #1}}
+\newcommand{\oamod}[1]{{\color{red}#1}}
+
+%\newcommand{\oa}[1]{}
 \newcommand{\bh}[1]{\footnote{\color{blue}BH: #1}}
 %\newcommand{\bh}[1]{}
 
@@ -77,12 +81,13 @@
 \title{HUME: Human UCCA-Based Evaluation of Machine Translation}
 
 \author{
-Alexandra Birch\textsuperscript{1}, Barry Haddow\textsuperscript{1}, Ond{\v{r}}ej Bojar\textsuperscript{2}, Omri Abend\textsuperscript{3}\\
+  Alexandra Birch\textsuperscript{1}, Omri Abend\textsuperscript{2}, Ond{\v{r}}ej Bojar\textsuperscript{3},
+  Barry Haddow\textsuperscript{1}\\
 \textsuperscript{1}School of Informatics, University of Edinburgh\\
-\textsuperscript{2} Charles University in Prague, Faculty of Mathematics and Physics\\
-\textsuperscript{3}School of Computer Science and Engineering, Hebrew University of Jerusalem\\
-\texttt{a.birch@ed.ac.uk, bhaddow@inf.ed.ac.uk}\\
-\texttt{bojar@ufal.mff.cuni.cz, oabend@cs.huji.ac.il}\\
+\textsuperscript{2}School of Computer Science and Engineering, Hebrew University of Jerusalem\\
+\textsuperscript{3} Charles University in Prague, Faculty of Mathematics and Physics\\
+\texttt{a.birch@ed.ac.uk, oabend@cs.huji.ac.il}\\
+\texttt{bojar@ufal.mff.cuni.cz, bhaddow@inf.ed.ac.uk}\\
 }
 
 \date{}
@@ -110,8 +115,8 @@ Alexandra Birch\textsuperscript{1}, Barry Haddow\textsuperscript{1}, Ond{\v{r}}e
 Human evaluation of machine translation normally uses sentence-level measures such as relative ranking or adequacy scales. However, these provide no insight into possible errors,
 and do not scale well with sentence length.
 We argue for a semantics-based evaluation, which captures what meaning components
-are retained in the MT output, providing a more fine-grained analysis of
-translation quality, and enables the construction and tuning of semantics-based MT. 
+are retained in the MT output, thus providing a more fine-grained analysis of
+translation quality, and enabling the construction and tuning of semantics-based MT. 
 We present a novel human semantic evaluation measure, Human
 UCCA-based MT Evaluation (HUME), building on the UCCA semantic representation scheme.
 %Making progress over previous work, the proposed measure takes into account
@@ -164,18 +169,14 @@ Second, a sentence-level quality score does not indicate what parts of the sente
 are badly translated, and so cannot inform developers in repairing these errors.
 
 These problems are partially addressed by measures that decompose over parts of the evaluated
-translation. For automatic measures,
-these are often words or n-grams, for manual measures some structural
-information is taken into account \parcite{machacek:bojar:segranks:2015}, or the
-annotators are explicitly asked to mark errors, which however suffers from even
-lower agreement than ranking \parcite{lommel:etal:mqm-iaa:2014}.
+translation, often words or n-grams (see \secref{sec:background} for a brief survey of previous
+work). A promising line of research decomposes metrics
+over semantically defined units, quantifying the similarity of the output and the
+reference in terms of their verb argument structure; the most notable of these measures is HMEANT
+\parcite{lo2011structured}.
+
 % the following is specific to automatic measures:
 %quantifying the overlap of its sub-parts relative a reference translation.
-A promising line of research decomposes metrics
-over semantically defined units,
-quantifying the similarity of the output and the reference in terms of
-their verb argument structure; the most notable of these measures is HMEANT
-\parcite{lo2011structured}.
 %More recent work on MT evaluation proposed measures
 %that decompose
 
@@ -199,22 +200,21 @@ argument structures and their inter-relations.
 
 HUME operates by aggregating human assessments of the translation quality of individual
 semantic units in the source sentence. We 
-%HUME only requires semantically annotating the source sentence,
 are thus avoiding the semantic annotation of machine-generated text,
 which is often garbled or semantically unclear.
 This also allows the re-use of the source semantic annotation for
 measuring the quality of different translations of the same source sentence,
-and 
+and avoids relying on possibly suboptimal reference translations.
+
 %By basing the measure on a direct comparison
 %of the source and translation we avoid the difficulties created by using
-avoids relying on possibly suboptimal reference translations.
 %albeit at the cost of requiring the
 %evaluator to be proficient in both the source and target languages.
 %An elaborate comparison of HUME and HMEANT is given in \secref{sec:hmeant_comp}.
 
 %Could reinstate
 After a brief review (\secref{sec:background}), we describe HUME in detail
-(\secref{sec:hume}).
+(\secref{sec:hume}). 
 Our experiments with four language pairs: English to Czech, German, Polish and Romanian (\secref{sec:experiments}) document HUME's inter-annotator agreement and efficiency (time of annotation). We further empirically compare HUME with direct assessment of human adequacy ratings, and conclude by discussing the differences with HMEANT (\secref{sec:hmeant_comp}).
 
 % We conduct experiments with four language pairs: English-German, English-Polish,
@@ -235,6 +235,7 @@ Our experiments with four language pairs: English to Czech, German, Polish and R
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Background}\label{sec:background}
+
 
 %While the measure addresses the two major shortcomings 
 %detailed above, it is unable to capture semantic differences which do not show up in 
@@ -258,7 +259,7 @@ Our experiments with four language pairs: English to Czech, German, Polish and R
 %which is often unintelligible. Finally, measures based on a comparison to a
 %reference translation
 %are necessarily incomplete, as they compare to a small number of references
-%out of the the huge number of possible translations a sentence may have
+%out of the huge number of possible translations a sentence may have
 %\parcite{dreyer2012hyter}.
 
 
@@ -271,27 +272,28 @@ Human evaluation is generally done by ranking the outputs of multiple systems
 e.g., in the WMT tasks \parcite{bojar2015findings}, or by assigning
 adequacy/fluency scores to each translation, a procedure recently improved
 by \perscite{graham2015accurate}.
+Some manual measures ask annotators to explicitly mark errors, which however
+suffers from even lower agreement than ranking \parcite{lommel:etal:mqm-iaa:2014}.
+
 However, while providing the gold standard for MT evaluation, human evaluation
 is not a scalable solution.
-%and is infeasible where a wide variety of systems or parameter settings are to be evaluated.
-% has motivated the construction of cheaper methods that correlate with human
-%judgement.
-
 Scalability is addressed by employing automatic and semi-automatic approximations of human
 judgements. Commonly, such scores decompose over the sub-parts of
-the translation, and quantify how many of these sub-parts appear in a manually created reference translation.
-This decomposition allows system developers
-to localize the errors.
-%, or at least unconfirmed parts within the translation.
+the translation, and quantify how many of these sub-parts appear in a manually
+created reference translation.
+This decomposition allows system developers to localize the errors.
 The most commonly used measures decompose over n-grams or individual words, e.g., 
-BLEU \parcite{Papineni:2002}, NIST \parcite{Doddington:2002} and METEOR
-\parcite{Banerjee:2005}.
+BLEU \parcite{Papineni:2002}, NIST \parcite{Doddington:2002} and METEOR \parcite{Banerjee:2005}.
 Another common approach is to determine the similarity between the reference and translation
 in terms of string edits \parcite{snover2006study}.
 While these measures stimulated much progress in MT research by allowing
 the evaluation of massive-scale experiments, the focus on words and n-grams does
 not provide a good estimate of semantic correctness, and may favour shallow string-based
 MT models.
+
+%and is infeasible where a wide variety of systems or parameter settings are to be evaluated.
+% has motivated the construction of cheaper methods that correlate with human
+%judgement.
 
 %These methods are most suitable for evaluating shallow MT approaches and are
 %less instructive as to what aspects of the reference's meaning were not preserved
@@ -312,6 +314,8 @@ using dependency grammar, and
 \perscite{gimenez2007linguistic} proposed to combine multiple types of information,
 capturing the overlap between the translation and reference in terms of their
 semantic (predicate-argument structures), lexical and morphosyntactic features.
+\perscite{machacek:bojar:segranks:2015} divided the source sentences into shorter segments,
+defined using a phrase structure parse, and applied human ranking to the resulting segments.\oa{is this description OK?}
 
 Perhaps the most notable attempt at semantic MT evaluation is MEANT and
 its human variant HMEANT \parcite{lo2011structured}, which quantifies the similarity between
@@ -375,17 +379,17 @@ P & Process & C & Centre \\
 
 \paragraph{Semantic Representation.}
 UCCA (Universal Conceptual Cognitive Annotation, \inparcite{abend2013universal}) is a
-cross-linguistically applicable, lightweight
-scheme for semantic annotation. Formally, an UCCA structure is a directed acyclic graph (DAG),
+cross-linguistically applicable scheme for semantic annotation.
+Formally, an UCCA structure is a directed acyclic graph (DAG),
 whose leaves correspond to the words of the text.
 The graph's nodes, called {\sc units}, are either terminals or several elements jointly
 viewed as a single entity according to some semantic or cognitive consideration. Edges bear
 a category, indicating the role of the sub-unit in the structure the unit
 represents.
 
-UCCA's current inventory of distinctions focuses on argument structures
-(adjectival, nominal, verbal and others) and relations between them.
-The most basic notion is the Scene, which describes a movement, an
+UCCA's basic inventory of distinctions (its {\it foundational layer})
+focuses on argument structures (adjectival, nominal, verbal and others)
+and relations between them. The most basic notion is the Scene, which describes a movement, an
 action or a state which persists in time. Each Scene contains one main
 relation and zero or more participants. For example, the sentence ``After graduation, Tom moved to NYC''
 contains two Scenes, whose main relations are ``graduation'' and ``moved''.
@@ -395,7 +399,7 @@ inter-scene relations and the sub-structures of participants and relations.
 
 % UCCA Motivation
 The use of UCCA for semantic MT evaluation measure is motivated by two main reasons. 
-First, UCCA's set of categories can
+First, UCCA's foundational layer can
 be reliably annotated by non-experts after as little as two hours
 of training \parcite{marinotti2014}.
 Second, UCCA is cross-linguistically applicable, seeking to
@@ -403,11 +407,11 @@ represent what is shared between languages by building on
 linguistic typological theory \parcite{Dixon:10a,Dixon:10b,Dixon:12}.
 Its cross-linguistic applicability has so far been tested in annotations of
 English, French, German and Czech.
-%Third, the scheme has been shown to be stable across translations:
-%UCCA annotations of translated text usually contain the same set of relations
-%\parcite{sulem2015conceptual}, indicating that the scheme reflects
-%a common layer of representation that in a correct translation
-%is mostly shared between the translation and the source. 
+Third, the scheme has been shown to be stable across translations:
+UCCA annotations of translated text usually contain the same set of relations
+\parcite{sulem2015conceptual}, indicating that UCCA reflects a layer of
+representation that in a correct translation is mostly shared between
+the translation and the source.
 
 %Verbal argument structures are less stable in this sense, as they
 %may be translated or paraphrased to a nominal or adjectival
@@ -427,12 +431,12 @@ English, French, German and Czech.
 The Abstract Meaning Representation (AMR) \parcite{banarescu2013abstract} project
 shares UCCA's motivation for defining a more complete semantic annotation.
 However, using AMR is not optimal for defining a decomposition of a sentence into semantic
-units as it does not ground its semantic symbols in the text,
+units as it does not anchor its semantic symbols in the text,
 and thus does not provide clear decomposition of the sentence into sub-units.
 Also, AMR is more fine-grained than UCCA and consequently harder to annotate.
 Other approaches represent semantic structures as bi-lexical dependencies
 \parcite{sgallhp:1986,hajic2012announcing,oepen2006discriminant},
-which are indeed grounded in the text, but are less suitable for MT evaluation
+which are indeed anchored in the text, but are less suitable for MT evaluation
 as they require linguistic expertise for their annotation.
 
 %, and so we argue they are less suitable 
@@ -449,9 +453,7 @@ as they require linguistic expertise for their annotation.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\vspace{-.1em}
 \section{The HUME Measure}\label{sec:hume}
-\vspace{-.2em}
 
 \subsection{Annotation Procedure}\label{sec:guidelines}
 
@@ -459,21 +461,17 @@ This section summarises the manual annotation procedure used
 to compute the HUME measure. 
 We denote the source sentence as $s$ and the translation as $t$. 
 The procedure involves two manual steps: (1) UCCA-annotating $s$, 
-(2) human judgements as to the translation quality of each semantic unit of $s$ relative to $t$,
+(2) HUME-annotation: human judgements as to the translation quality of each semantic
+unit of $s$ relative to $t$,
 where units are defined according to the UCCA annotation.
 UCCA annotation is performed once for every source sentence,
-irrespective of the number of its translations we wish
-to evaluate
-%\footnote{Instead of relying on the source,
-%the evaluation could be based on the UCCA structure for the \emph{reference}
-%translation.
-%More details in the discussion in \secref{src-vs-ref}.
-% This would allow monolingual annotators to take part in the
-% evaluation. On the downside, the translation would have to be aligned to the
-% reference and more importantly, we would risk inaccurate judgements due to
-% the naturally occurring differences between the source and its reference
-% translations.
-%}.
+irrespective of the number of its translations we wish to evaluate,
+and requires proficiency in the source language only.
+HUME annotation requires the employment of bilingual annotators
+\footnote{Where bilingual annotators are not available,
+  the evaluation could be based on the UCCA structure for the
+  \emph{reference} translation. See discussion in \secref{sec:hmeant_comp}.}
+
 
 \paragraph{UCCA Annotation.}
 We begin by creating UCCA annotations for the source sentence, following the
@@ -585,19 +583,22 @@ which reflects the overall extent to which the semantic content of $s$ is preser
 
 Annotation of the semantic units requires first deciding whether
 a unit is {\it structural}, i.e., has meaning-bearing sub-units also in the
-target language,
-or {\it atomic}. In most cases, atomic units
-correspond to individual words, but they may also correspond to unanalyzable
-multi-word expressions.
+target language, or {\it atomic}.
+In most cases, atomic units
+correspond to individual words, but they may also correspond to
+multi-word expressions that translate as one unit. \oamod{For instance,
+the expression ``took a shower'' is translated into the German ``duschte'',
+while its individual words do not correspond to any sub-part of the German translation,
+motivating the labeling the entire expression as an atomic node.}
 When a multi-word unit is labeled as atomic, its sub-units' annotations are ignored
 in the evaluation.
 
-Atomic units can be labelled as ``Green'' (correct), ``Orange'' (partially correct)
-and ``Red'' (incorrect). 
+Atomic units can be labelled as ``Green'' (G, correct), ``Orange'' (O, partially correct)
+and ``Red'' (R, incorrect). 
 Green means that the meaning of the word or phrase has been largely preserved.
 Orange means that the essential meaning of the unit has been preserved,
 but some part of the translation is wrong.
-This is often be due to the translated word having the the wrong inflection,
+This is often be due to the translated word having the wrong inflection,
 in a way that impacts little on the understandability of the sentence.
 Red means that the essential meaning of the unit has not been captured.
 
@@ -608,7 +609,7 @@ which are themselves atomic or structural.
 %the relation between the sub-units is preserved in $t$.
 %\XXX{(BH: don't follow this) For instance, a Scene unit represents the relation between the
 %Scene elements, such as the predicate (main relation), participants and adverbials.}
-Structural units are labeled as ``Adequate'' or ``Bad'', meaning
+Structural units are labeled as ``Adequate'' (A) or ``Bad'' (B), meaning
 that the relation between the sub-units went wrong\footnote{
   Three labels are used with atomic units, as opposed to two labels with structural units,
 as atomic units are more susceptible to slight errors.}.
@@ -670,7 +671,8 @@ on configurational vs. non-configurational languages.
     \end{center}
   \caption{\label{fig:hume_tree_v2}
      HUME annotation of an UCCA tree with a word aligned example translation shown below. 
-Atomic units are labelled using traffic lights (Red, Orange, Green) and structural units are marked A or B.}
+     Atomic units are labelled using traffic lights (Red, Orange, Green) and structural
+     units are marked A or B.}
 \end{figure}
 % Ondrej removes the following, he thinks that errors are not supposed to be
 % propagated in HMEANT either:
@@ -715,20 +717,23 @@ Let $\Green(s,t)$, $\Adequate(s,t)$ and $\Orange(s,t)$ be the number of Green, A
 units, respectively. Let $\Units(s)$ be the number of units marked with any of the labels.
 Then HUME's composite score is:
 
-\vspace{-.5cm}
+\vspace{-.3cm}
+
 {\scriptsize
 \begin{equation}
   \HUME(s,t) = \frac{\Green(s,t) + \Adequate(s,t) + 0.5\cdot \Orange(s,t)}{\Units(s)}
   \nonumber
 \end{equation}
 }
+
 \vspace{-.5cm}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Annotation Interface}
 
-\figref{fig:interface} shows the HUME annotation interface.
+\figref{fig:interface} shows the HUME annotation interface\footnote{A demo of HUME
+  can be found in \url{www.cs.huji.ac.il/~oabend/hume_demo.html}}.
 % We now describe the HUME annotation interface, shown in \figref{fig:interface}. 
 % %We turn to discuss the interface for collecting human judgements on the semantic units
 % %of the source, relating to the translation. 
@@ -741,12 +746,12 @@ Then HUME's composite score is:
 % %For each semantic unit, including the one for the
 % %entire source sentence, there is a textbox, displaying the yield of that unit.
 % %Information on the category of the unit (e.g., whether it is a Scene, participant etc.).
+\oamod{One source sentence and one translation are presented at a time.}
 The user is asked to select a label for each source semantic unit,
 by clicking the ``A'', ``B'', Green, Orange, or Red buttons to the right of the unit's box.
 Units with multiple parents (as with ``Tom'' in \figref{fig:hume_tree_v2}) are displayed
 twice, once under each of their parents, but are only annotatable in one of
 their instances, to avoid double counting.
-%Note that the UCCA labels are not shown.
 
 The interface presents, for each unit, the translation segment aligned with it.
 This allows the user, especially in long sentences, to focus her attention on the parts
@@ -774,7 +779,10 @@ For example,
 in \figref{fig:interface}, ``ongoing pregnancy'' is translated to
 ``Schwangerschaft ... laufenden'' (lit. ``pregnancy ... ongoing''). This alone
 seems acceptable but the interleaving words in red notify the annotator to check
-the whole translation, in which the meaning of the expression is not preserved.
+the whole translation, in which the meaning of the expression is not
+preserved\footnote{The interleaving words are ``... und beide berichtet berichteten ...'' (lit.
+  ``... and both report reported ...''), which doesn't form any coherent relation with the rest
+  of the sentence.}.
 The annotator should thus mark this structural node as Bad.
 
 %The interleaving 
@@ -846,7 +854,7 @@ These translation systems were used to translate texts derived from both NHS
 24\footnote{\url{http://www.nhs24.com/}} and
 Cochrane\footnote{\url{http://www.cochrane.org/}} into the four languages.
 NHS~24 is a public body providing healthcare and health-service
-related information in Scotland, Cochrane is an international NGO
+related information in Scotland; Cochrane is an international NGO
 which provides independent systematic reviews on health-related research.
 NHS~24 texts come from the ``Health A-Z'' section in the NHS Inform
 website, and Cochrane texts come from their plain language summaries
@@ -1145,10 +1153,12 @@ Graham et al.) requires a large crowd which may not be available or reliable.
 %  the en-de and en-ro experiments.
 Each bar represents a correlation between DA and an aggregate HUME score
 based on a sub-set of the units (\#nodes for the en-de/en-ro setting in brackets):
-all units ('all', 8624/10885), atomic ('atomic', 5417/6888) and structural units ('struct', 3207/3997),
-and units by UCCA categories: Scene main relations (i.e, Process and State units; 'P and S', 954/1178), Parallel Scenes ('H', 656/784),
-Participants ('A', 1348/1746),
-Centres ('C', 1904/2474), elaborators ('E', 1608/2031) and linkers ('L', 261/315).
+all units (``all'', 8624/10885), atomic (``atomic'', 5417/6888)
+and structural units (``struct'', 3207/3997),
+and units by UCCA categories: Scene main relations
+(i.e, Process and State units; ``P and S'', 954/1178), Parallel Scenes (``H'', 656/784),
+Participants (``A'', 1348/1746),
+Centres (``C'', 1904/2474), elaborators (``E'', 1608/2031) and linkers (``L'', 261/315).
 %  See text for the bar legend.
 %Struct refers to all structural nodes, P+S are all process and state nodes, H parallel scene nodes, A participant, C centre, E elaborators, and L linker nodes.}
 \label{fig:dacorrelationtypes}}
@@ -1167,9 +1177,12 @@ For both target languages, correlation is highest in the 'all' case, supporting 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Comparison with HMEANT}\label{sec:hmeant_comp}
 
+\oa{This entire section needs reviewing}
+
 We discuss the main differences between HUME and HMEANT,
 a human MT evaluation metric that measures the overlap between the translation a reference
-in terms of their SRL annotations.
+in terms of their SRL annotations. The discussion is acoompanied by examples from our
+experimental data.
 
 %Like HMEANT, HUME defines  a
 %measure that decomposes over semantic units, rather than strings. 
@@ -1180,7 +1193,6 @@ in terms of their SRL annotations.
 
 HMEANT focuses on verbal argument structures, ignoring other pervasive phenomena such as non-verbal predicates and inter-clause relations. Consider the following example:
 
-\vspace{-.3em}
 \begin{center}
 \begin{tabular}{lp{5.4cm}}
 Source & \small a coronary angioplasty may not be technically possible \\
@@ -1188,78 +1200,70 @@ Transl.& \small eine koronare Angioplastie kann nicht technisch m{\"o}glich \\
 Gloss & \small a coronary angioplasty can not technically possible \\
 \end{tabular}
 \end{center}
-\vspace{-.5em}
 
 %``a coronary angioplasty may not be technically possible'', which was translated by our en-de system
 %to ``eine koronare Angioplastie kann nicht technisch m{\"o}glich'' (gloss: 
 %a coronary angioplasty can not technically possible).
 
-The German translation 
-is largely correct, except that the main verb ``sein'' (``be'') is omitted.
+The German translation is largely correct, except that the main verb ``sein'' (``be'') is omitted.
 While this may be interpreted as a minor error, HMEANT will assign the
 sentence a very low score, as it failed to translate the main verb.
-%
-Conversely, HMEANT does not penalize errors such as tense or negation
-flip in a correctly aligned predicate.
 
-%This focus on verbal predicates has a number of unfortunate consequences. We show an example below:
+Conversely, HMEANT does not penalize errors (e.g., partial semantic compatability,
+or negation flip) in a correctly aligned predicate:
 
-% \noindent
-% \begin{inparadesc}
-% \item[Source ] a coronary angioplasty may not be technically possible \\
-% \item[Transl.] eine koronare Angioplastie kann nicht technisch m{\"o}glich \\
-% \item[Gloss ]  a coronary angioplasty can not technically possible \\
-% \end{inparadesc}
+\begin{center}
+\begin{tabular}{lp{5.4cm}}
+Source & \small ... don't skip meals ... \\
+Transl.& \small ... nicht {\"u}berspringen Mahlzeiten ... \\
+Gloss & \small don't skip meals ... \\
+\end{tabular}
+\end{center}
 
-\com{
-}
+While the translation is mostly understandable, the verb {\"u}berspringen is incorrect here
+(should be ``auslassen''). HUME allows marking the main verb as Orange, or even red, while
+giving partial score for the translation of ``don't'' and of ``meals''. HMEANT may only
+mark the predicate as correct, or mark the entire argument structure as an error.
 
-We conducted an analysis of the English UCCA Wikipedia corpus (5324 sentences) in order to assess the pervasiveness of three phenomena that are not well supported by HMEANT.\footnote{Argument structures and linkers are explicitly marked in UCCA. Non-auxiliary instances of ``be'' and nouns are identified using the NLTK standard tagger. Nominal argument structures are here Scenes whose main relation is headed by a noun.}
-First, copula clauses are treated in HMEANT simply as instances of the main verb ``be'', which generally does not convey the meaning of these clauses. They appear in 21.7\% of the sentences, according to conservative estimates that only consider non-auxiliary
-instances of ``be''.
-Second, nominal argument structures, ignored by HMEANT, are in fact highly
-pervasive, appearing in 48.7\% of the sentences.
-Third, linkers that express inter-relations between
-clauses (mainly discourse markers and conjunctions) appear in 56\% of the
-sentences, but are again ignored by HMEANT. As noted in our experiments, linkers
-are sometimes omitted in translation, but these omissions are not taken
-into consideration by HMEANT.
+It is also relatively common that verbal constructions are trasnlated
+as non-verbal ones or vice versa. Consider the following example:
 
-%An example where a linker is omitted in translation in our experiments is
-%\equo{However, this review\dots}, which was translated to
-%the German \equo{Diese \"Uberpr\"ufung\dots} (lit. \equo{This review}).
-%This omission will not be taken into account by HMEANT at all
+\begin{center}
+\begin{tabular}{lp{5.4cm}}
+Source & \small ... tend to be higher in saturated fats \\
+Transl.& \small in der Regel h{\"o}her in ges{\"a}ttigte Fette \\
+Gloss & \small as a rule higher in saturated fats \\
+\end{tabular}
+\end{center}
 
-We are not aware of any empirical argument suggesting that verb argument structures,
-taken alone, capture the crux of the sentence semantics.
-Moreover, relying only on verbal argument structures is less stable across paraphrases
-and translations, as a verbal argument structure
-may be translated to a nominal or adjectival argument structure
-(e.g., ``after graduation'' may be translated into ``after he graduated'').
-This may lead to an unduly low HMEANT score, as the verb
-in one structure has nothing to align to in the other.
-On the other hand, UCCA has been shown to be reasonably stable in an English-French
-corpus study \cite{sulem2015conceptual}.
+The German translation is largely correct, although the English verb ``tend''
+was translated into the German prepositional phrase ``in der Regel'' (``as a rule'').
+HMEANT will consider the translation to be of poor quality as there is no German verb
+to align the English one with.
 
-% No space
-%It is also relatively common in translation that verbal constructions get
-%nominalized or vice versa. An example from our dataset:
-%  ``Two {\bf review} authors assessed the studies independently\dots{}'' --
-%  ``Zwei Autoren bewertete die Studien unabh\"angig zu {\bf
-%  \"uberpr\"ufen}\dots{}'' (lit. ``Two authors assessed the studies
-%  independently to review\dots").\XXX{This is Omri's example, with
-%  Ondrej's gloss for German. Ondrej is
-%  not totally sure that the meaning is well preserved. So Ondrej would actually
-%  *remove* this example, because it would illustrate HMEANT's problems only if
-%  the meaning was correct.}
+We conducted an analysis of the English UCCA Wikipedia corpus (5324 sentences) in order to assess the pervasiveness of three phenomena that are not well supported by HMEANT.\footnote{Argument structures and linkers are explicitly marked in UCCA. Non-auxiliary instances of ``be'' and nouns are identified using the NLTK standard tagger. Nominal argument structures are here Scenes whose main relation is headed by a noun.} First, copula clauses are treated in HMEANT simply as instances of the main verb ``be'', which generally does not convey the meaning of these clauses. They appear in 21.7\% of the sentences, according to conservative estimates that only consider non-auxiliary instances of ``be''.
+Second, nominal argument structures, ignored by HMEANT, are in fact highly pervasive, appearing in 48.7\% of the sentences. Third, linkers that express inter-relations between clauses (mainly discourse markers and conjunctions) appear in 56\% of the sentences, but are again ignored by HMEANT. For instance, linkers are sometimes omitted in translation, but these omissions are not penalized by HMEANT. The following is such an example from our experimental dataset:
+
+\begin{center}
+\begin{tabular}{lp{5.4cm}}
+Source & \small However, this review was restricted to ... \\
+Transl.& \small Diese {\"U}berpr{\"u}fung bescr{\"a}nkte sich auf ... \\
+Gloss & \small This review was restricted to ... \\
+\end{tabular}
+\end{center}
+
+%We are not aware of any empirical argument suggesting that verb argument structures,
+%taken alone, capture the crux of the sentence semantics.
+%Moreover, as the above example shows, a verbal argument structure
+%may be translated to a nominal or adjectival argument structure,
+%leading to an unduly low HMEANT score.
+%On the other hand, UCCA has been shown to be reasonably stable in an English-French
+%corpus study \cite{sulem2015conceptual}.
 
 We note that some of these issues were already observed
 in previous applications of HMEANT to languages other than
 English. See \perscite{birch-EtAl:2013:WMT} for German, \perscite{bojar:wu:ssst:2012} for
 Czech and \perscite{chuchunkov-tarelkin-galinskaya:2014:SSST-8} for Russian.
-
-
-
 
 % I am not sure that this is true
 %The coverage of
@@ -1292,17 +1296,10 @@ Czech and \perscite{chuchunkov-tarelkin-galinskaya:2014:SSST-8} for Russian.
 HUME only annotates the source, while HMEANT relies on
 two independently constructed structural annotations, one for the reference and one
 for the translation.
-%First of all, the annotation process is different. We semantically annotate the
-%source, then automatically project it to the translation, and ask bilingual
-%annotators to assess whether this projection shows a good or bad translation. In
-%HMEANT, they semantically annotate both the reference and the translation, then
-%align these manually, and assess to what extent they match.
-%We see this difference as crucial where semantic analysis is concerned, as it
 Not annotating the translation is appealing as it is often impossible to assign a
 semantic structure to a low quality translation.
 On the other hand, HUME may be artificially boosting the perceived understandability
 of the translation by allowing access to the source.
-
 
 \paragraph{Alignment.}
 In HMEANT, the alignment between the reference and translation structures is a key
@@ -1312,14 +1309,10 @@ translation is heavily penalized.
 argue that the structures of the reference and of an accurate translation
 may still diverge, for instance due to a different
 interpretation of a PP-attachment, or the verb having an additional modifier in
-%suggested that sometimes, the structures of the reference and candidate
-%translations diverge without any good reason, for instance due to a different
-%interpretation of a PP-attachment, the verb can have one additional modifier in
 one of the structures. It would be desirable to allow modifications to
 the SRL annotations at the alignment stage,
 to avoid unduly penalizing such spurious divergences.
-%annotations also at the alignment stage
-%to avoid unduly penalization due to such a spurious divergence.
+
 The same issue is noted by \perscite{lo:wu:reliability:2014}:
 the IAA on SRL dropped from 90\% to 61\% 
 when the two aligned structures were from two different annotators.
@@ -1343,9 +1336,11 @@ Instead, it compares the source directly with the output translation.
 This requires the employment of bilingual annotators, but has the benefit of avoiding
 using a reference, which is never uniquely defined, and may thus 
 lead to unjustly low scores where the translation is a paraphrase of the reference.
+If only monolingual annotators are available, the HUME evaluation could be performed
+with a reference sentence instead of with the source. This, however,
+would risk inaccurate judgements due to the naturally occurring differences
+between the source and its reference translations.
 
-%If only monolingual annotators are available, the HUME evaluation could be performed
-%with a reference sentence instead of with the source. 
 %\bh{But this would be a different metric}
 
 % While HUME avoids this problem,
@@ -1423,9 +1418,10 @@ a wide range of semantic phenomena. We have shown that it can be reliably and
 efficiently annotated in multiple languages,
 and that annotation quality is robust to sentence length.
 Comparison to direct assessments further support HUME's validity.
-We believe that
-HUME, and a future automated version of HUME, allows for a more fine-grained analysis of translation quality,
-and will be to guide the development of a more semantically aware approach to MT.
+We believe that HUME, and a future automated version of HUME,
+allows for a finer-grained analysis of translation quality,
+and will be useful in informing the development of a more semantically aware
+approach to MT.
 
 
 
@@ -1494,7 +1490,7 @@ the
 source sentence to 
 the
 translation provided by the system. These word
-alignments are used to project the UCCA annotation from the source sentence to the the translation output, and then bilingual
+alignments are used to project the UCCA annotation from the source sentence to the translation output, and then bilingual
 annotators go through each projected UCCA node, assessing how well it is translated.  
 We can estimate the impact of individual errors given their location in the semantic structure 
 and we can thus extract a score for the whole sentence. More details on the procedure are provided 
@@ -1591,7 +1587,7 @@ most promising representation for evaluating translation.
 }
 
 \section*{Acknowledgments}
-{T}his work was conducted within the scope of the \ProjectType, which has received funding from the European Union’s Horizon 2020 research and innovation programme under grant agreement No \GrantNo (\ProjectName).
+{T}his work was conducted within the scope of the \ProjectType, which has received funding from the European Union's Horizon 2020 research and innovation programme under grant agreement No \GrantNo (\ProjectName).
 
 %Do not number the acknowledgment section.
 %This section should not be presented for the submission version.
