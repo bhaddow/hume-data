@@ -1209,8 +1209,7 @@ The German translation is largely correct, except that the main verb ``sein'' (`
 While this may be interpreted as a minor error, HMEANT will assign the
 sentence a very low score, as it failed to translate the main verb.
 
-Conversely, HMEANT does not penalize errors (e.g., partial semantic compatability,
-or negation flip) in a correctly aligned predicate:
+Conversely, HMEANT does not penalize errors (e.g., incorrect tense or negation flip) in a correctly aligned predicate:
 
 \begin{center}
 \begin{tabular}{lp{5.4cm}}
@@ -1220,10 +1219,8 @@ Gloss & \small ... don't skip meals ... \\
 \end{tabular}
 \end{center}
 
-While the translation is mostly understandable, the verb {\"u}berspringen is incorrect here
-(should be ``auslassen''). HUME allows marking the main verb as Orange, or even red, while
-giving partial score for the translation of ``don't'' and of ``meals''. HMEANT may only
-mark the predicate as correct, or mark the entire argument structure as an error.
+While the translation is mostly understandable, the verb {\"u}berspringen is incorrectly inflected. HUME allows marking the main verb as Orange, while
+marking the translation of the argument (``Malhzeiten'' or ``meals'') as correct. HMEANT may only mark the predicate as correct, or mark the entire argument structure as an error.
 
 It is also relatively common that verbal constructions are trasnlated
 as non-verbal ones or vice versa. Consider the following example:
