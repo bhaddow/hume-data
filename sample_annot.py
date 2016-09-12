@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 from xml.etree.ElementTree import ElementTree, tostring, fromstring
 from xml.dom import minidom
+import pprint
 
 from ucca.convert import *
 
@@ -15,6 +16,7 @@ def main():
   align = dfh.readline()[:-1]
   annot = dfh.readline()[2:-2]
   
+  pprint.pprint (annot)
   elem = fromstring(annot)
   #xmlstr = minidom.parseString(ET.tostring(elem)).toprettyxml(indent="   ")
   #print(xmlstr)
