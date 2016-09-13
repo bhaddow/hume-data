@@ -203,8 +203,9 @@ semantic units in the source sentence. We
 are thus avoiding the semantic annotation of machine-generated text,
 which is often garbled or semantically unclear.
 This also allows the re-use of the source semantic annotation for
-measuring the quality of different translations of the same source sentence,
-and avoids relying on possibly suboptimal reference translations.
+measuring the quality of different translations of the same source sentence
+and avoids relying on reference translations, 
+which have been shown to bias annotators~\cite{fomicheva-specia_ACL:2016}.
 
 %By basing the measure on a direct comparison
 %of the source and translation we avoid the difficulties created by using
@@ -271,7 +272,11 @@ Our experiments with four language pairs: English to Czech, German, Polish and R
 Human evaluation is generally done by ranking the outputs of multiple systems
 e.g., in the WMT tasks \parcite{bojar2015findings}, or by assigning
 adequacy/fluency scores to each translation, a procedure recently improved
-by \perscite{graham2015accurate}.
+by \perscite{graham2015accurate} and called direct assessment. We use this method to compare and contrast
+with HUME later in the paper. HTER~\parcite{snover2006study} is another widely used human evaluation metric
+which uses edit distance metrics to compare a translation and its human 
+post-edition. HTER suffers from the problem that small edits in the translation
+could in fact be serious flaws in accuracy, eg. deleting a negation. 
 Some manual measures ask annotators to explicitly mark errors, which however
 suffers from even lower agreement than ranking \parcite{lommel:etal:mqm-iaa:2014}.
 
@@ -315,7 +320,7 @@ using dependency grammar, and
 capturing the overlap between the translation and reference in terms of their
 semantic (predicate-argument structures), lexical and morphosyntactic features.
 \perscite{machacek:bojar:segranks:2015} divided the source sentences into shorter segments,
-defined using a phrase structure parse, and applied human ranking to the resulting segments.\oa{is this description OK?}
+defined using a phrase structure parse, and applied human ranking to the resulting segments.
 
 Perhaps the most notable attempt at semantic MT evaluation is MEANT and
 its human variant HMEANT \parcite{lo2011structured}, which quantifies the similarity between
@@ -358,7 +363,7 @@ We discuss the differences between HMEANT and HUME in \secref{sec:hmeant_comp}.
 
 \begin{figure}
     \begin{center}
-    \includegraphics[width=0.35\textwidth]{ucca-tree-v2.png}
+    \includegraphics[width=0.35\textwidth]{ucca-tree-v3.png}
 
 {\small
   \begin{tabular}{|l|l|l|l|}
@@ -372,7 +377,7 @@ P & Process & C & Centre \\
     \end{center}
 \caption{\label{fig:ucca_example_v2}
   Sample UCCA annotation. Leaves correspond to words and nodes to units.
-  The dashed edge indicates that ``Tom'' is also a participant in the ``moved to NYC''
+  The dashed edge indicates that ``Tom'' is also a participant in the ``moved to America''
   Scene. Edge labels mark UCCA categories.}
 %which are largely ignored in this work
 \end{figure}
@@ -391,9 +396,9 @@ UCCA's basic inventory of distinctions (its {\it foundational layer})
 focuses on argument structures (adjectival, nominal, verbal and others)
 and relations between them. The most basic notion is the Scene, which describes a movement, an
 action or a state which persists in time. Each Scene contains one main
-relation and zero or more participants. For example, the sentence ``After graduation, Tom moved to NYC''
+relation and zero or more participants. For example, the sentence ``After graduation, Tom moved to America''
 contains two Scenes, whose main relations are ``graduation'' and ``moved''.
-The participant ``Tom'' is a part of both Scenes, while ``NYC'' only of the
+The participant ``Tom'' is a part of both Scenes, while ``America'' only of the
 latter (\figref{fig:ucca_example_v2}). Further categories account for
 inter-scene relations and the sub-structures of participants and relations.
 
@@ -416,9 +421,9 @@ the translation and the source.
 %Verbal argument structures are less stable in this sense, as they
 %may be translated or paraphrased to a nominal or adjectival
 %argument structure, and is thus less suitable as a basis for a semantic measure.
-%E.g., ``after he graduated, Tom moved to NYC'' contains two verbs,
+%E.g., ``after he graduated, Tom moved to America'' contains two verbs,
 %but is similar in meaning to the one-verbed
-%``after graduation, Tom moved to NYC''. 
+%``after graduation, Tom moved to America''. 
 
 % While most broad-coverage semantic work focused on shallow semantic structures,
 % predominantly argument structures annotated with their semantic roles, much recent
@@ -586,10 +591,10 @@ a unit is {\it structural}, i.e., has meaning-bearing sub-units also in the
 target language, or {\it atomic}.
 In most cases, atomic units
 correspond to individual words, but they may also correspond to
-multi-word expressions that translate as one unit. \oamod{For instance,
+multi-word expressions that translate as one unit. For instance,
 the expression ``took a shower'' is translated into the German ``duschte'',
 while its individual words do not correspond to any sub-part of the German translation,
-motivating the labeling the entire expression as an atomic node.}
+motivating the labeling the entire expression as an atomic node.
 When a multi-word unit is labeled as atomic, its sub-units' annotations are ignored
 in the evaluation.
 
@@ -651,14 +656,14 @@ on configurational vs. non-configurational languages.
 % individually. 
 
 %For example, consider the sentence ``After graduation, Tom moved
-%to NYC'' as the source $s$, see \figref{fig:ucca_example}.
+%to America'' as the source $s$, see \figref{fig:ucca_example}.
 %The atomic units are the individual words,
 %nodes \#1--6 and the structural nodes are \#7--10. Assume that the translation $t$
 %is ``After Tom will move to Paris, graduation''\footnote{We take $t$ to
 %  be in English for presentation purposes. In our experiments, $t$ is in German,
 %  Czech, Polish or Romanian.}.
 %Then ``after'', ``graduation'', ``Tom'' and ``to'' are marked Green, ``moved'' is marked
-%Orange (as it corresponds to ``will move'' in $t$), and ``NYC''
+%Orange (as it corresponds to ``will move'' in $t$), and ``America''
 %is marked as Red, as it was mistranslated to ``Paris''. Node \#9 is marked Adequate,
 %as the Scene of Tom moving is properly reflected in the translation. Node \#10, which
 %expresses the relation between the graduation and moving Scenes, is marked Bad,
@@ -667,7 +672,7 @@ on configurational vs. non-configurational languages.
 
 \begin{figure}
     \begin{center}
-    \includegraphics[width=0.35\textwidth]{ucca-tree-mteval-v2.png}
+    \includegraphics[width=0.35\textwidth]{ucca-tree-mteval-v3.png}
     \end{center}
   \caption{\label{fig:hume_tree_v2}
      HUME annotation of an UCCA tree with a word aligned example translation shown below. 
@@ -680,7 +685,7 @@ on configurational vs. non-configurational languages.
 
 Figure~\ref{fig:hume_tree_v2} presents an example of a HUME
 annotation, where the translation is in English for ease of comprehension.
-When evaluating ``to NYC'' the annotator looks at the translation and sees the
+When evaluating ``to America'' the annotator looks at the translation and sees the
 word ``stateside''. This word captures the whole phrase and so we mark this
 non-leaf node with an atomic label. Here we choose Orange since
 it approximately captures the meaning in this context.
@@ -746,7 +751,7 @@ Then HUME's composite score is:
 % %For each semantic unit, including the one for the
 % %entire source sentence, there is a textbox, displaying the yield of that unit.
 % %Information on the category of the unit (e.g., whether it is a Scene, participant etc.).
-\oamod{One source sentence and one translation are presented at a time.}
+One source sentence and one translation are presented at a time.
 The user is asked to select a label for each source semantic unit,
 by clicking the ``A'', ``B'', Green, Orange, or Red buttons to the right of the unit's box.
 Units with multiple parents (as with ``Tom'' in \figref{fig:hume_tree_v2}) are displayed
@@ -876,7 +881,9 @@ several further annotators worked on a small number of
 sentences each. We treat these further annotators as one annotator, resulting in two annotators
 for each language pair.
 The annotators were all native speakers of the respective target languages and fluent in English.
-\oa{maybe we should put in what training they've received}
+They completed a three hour on-line training session where we described UCCA and the HUME task and then
+we worked through a number of examples. 
+
 
 \tabref{tab:annot}
 shows the total number of sentences and units annotated by each annotator.
@@ -985,6 +992,8 @@ units (annotated as Red, Orange or Green) and structural units (annotated
 as Adequate or Bad).
 As expected and confirmed by confusion matrices in \figref{fig:heatmap}, there
 is generally little confusion between the two types of units.
+This results in the Kappa for all units being considerably higher than the kappa
+over the atomic units or structural units, where there is more internal confusion. 
 
 %In general there should be little confusion between the two
 %types of nodes, and in future work the separation between the nodes should be enforced
@@ -994,7 +1003,7 @@ is generally little confusion between the two types of units.
 %The Kappas are shown in \tabref{tab:iaa}.
 
 
-\def\iaafig #1{\includegraphics[width=3.8cm]{iaa_heatmap_#1.png}}
+\def\iaafig #1{\includegraphics[width=4cm]{iaa_heatmap_#1.png}}
 
 \begin{figure}[t]
 \renewcommand{\tabcolsep}{0pt}
@@ -1172,16 +1181,22 @@ For both target languages, correlation is highest in the 'all' case, supporting 
 
 %\subsection{Discussion of Disagreements}\label{sec:disagreements}
 
-
+We have just presented a quantitative comparison between DA and HUME. DA is however, a very
+different type of metric to HUME. It returns just one score per sentence and requires annotators to make 
+decisions collating many smaller judgements about individual errors in the sentence. 
+Comparing DA and HUME is important in order to see where they agree and differ in order to
+determine under what circumstances it would be appropriate to apply each method. 
+In cases where we specifically want to know about the quality of semantic
+components in a translation, HUME and HMEANT could be considered.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Comparison with HMEANT}\label{sec:hmeant_comp}
 
-\oa{This entire section needs reviewing}
 
-We discuss the main differences between HUME and HMEANT,
-a human MT evaluation metric that measures the overlap between the translation a reference
-in terms of their SRL annotations. The discussion is acoompanied by examples from our
+HMEANT is a human MT evaluation metric that measures the overlap between the translation a reference
+in terms of their SRL annotations.
+In this section we present a qualitative comparison between HUME and HMEANT
+and the discussion is accompanied by examples from our
 experimental data.
 
 %Like HMEANT, HUME defines  a
@@ -1209,20 +1224,20 @@ The German translation is largely correct, except that the main verb ``sein'' (`
 While this may be interpreted as a minor error, HMEANT will assign the
 sentence a very low score, as it failed to translate the main verb.
 
-Conversely, HMEANT does not penalize errors (e.g., incorrect tense or negation flip) in a correctly aligned predicate:
+%This is not entirely true - they do allow an alignment with partial
+%Conversely, HMEANT does not penalize errors (e.g., incorrect tense or negation flip) in a correctly aligned predicate:
+%
+%\begin{center}
+%\begin{tabular}{lp{5.4cm}}
+%Source & \small ... don't skip meals ... \\
+%Transl.& \small ... nicht {\"u}berspringen Mahlzeiten ... \\
+%Gloss & \small ... don't skip meals ... \\
+%\end{tabular}
+%\end{center}
+%While the translation is mostly understandable, the verb {\"u}berspringen is incorrectly inflected. HUME allows marking the %main verb as Orange, while
+%marking the translation of the argument (``Malhzeiten'' or ``meals'') as correct. HMEANT may only mark the predicate as %correct, or mark the entire argument structure as an error.
 
-\begin{center}
-\begin{tabular}{lp{5.4cm}}
-Source & \small ... don't skip meals ... \\
-Transl.& \small ... nicht {\"u}berspringen Mahlzeiten ... \\
-Gloss & \small ... don't skip meals ... \\
-\end{tabular}
-\end{center}
-
-While the translation is mostly understandable, the verb {\"u}berspringen is incorrectly inflected. HUME allows marking the main verb as Orange, while
-marking the translation of the argument (``Malhzeiten'' or ``meals'') as correct. HMEANT may only mark the predicate as correct, or mark the entire argument structure as an error.
-
-It is also relatively common that verbal constructions are trasnlated
+It is also relatively common that verbal constructions are translated
 as non-verbal ones or vice versa. Consider the following example:
 
 \begin{center}
