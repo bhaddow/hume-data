@@ -1226,19 +1226,6 @@ The German translation is largely correct, except that the main verb ``sein'' (`
 While this may be interpreted as a minor error, HMEANT will assign the
 sentence a very low score, as it failed to translate the main verb.
 
-%This is not entirely true - they do allow an alignment with partial
-%Conversely, HMEANT does not penalize errors (e.g., incorrect tense or negation flip) in a correctly aligned predicate:
-%
-%\begin{center}
-%\begin{tabular}{lp{5.4cm}}
-%Source & \small ... don't skip meals ... \\
-%Transl.& \small ... nicht {\"u}berspringen Mahlzeiten ... \\
-%Gloss & \small ... don't skip meals ... \\
-%\end{tabular}
-%\end{center}
-%While the translation is mostly understandable, the verb {\"u}berspringen is incorrectly inflected. HUME allows marking the %main verb as Orange, while
-%marking the translation of the argument (``Malhzeiten'' or ``meals'') as correct. HMEANT may only mark the predicate as %correct, or mark the entire argument structure as an error.
-
 It is also relatively common that verbal constructions are translated
 as non-verbal ones or vice versa. Consider the following example:
 
@@ -1255,8 +1242,27 @@ was translated into the German prepositional phrase ``in der Regel'' (``as a rul
 HMEANT will consider the translation to be of poor quality as there is no German verb
 to align the English one with.
 
-We conducted an analysis of the English UCCA Wikipedia corpus (5324 sentences) in order to assess the pervasiveness of three phenomena that are not well supported by HMEANT.\footnote{Argument structures and linkers are explicitly marked in UCCA. Non-auxiliary instances of ``be'' and nouns are identified using the NLTK standard tagger. Nominal argument structures are here Scenes whose main relation is headed by a noun.} First, copula clauses are treated in HMEANT simply as instances of the main verb ``be'', which generally does not convey the meaning of these clauses. They appear in 21.7\% of the sentences, according to conservative estimates that only consider non-auxiliary instances of ``be''.
-Second, nominal argument structures, ignored by HMEANT, are in fact highly pervasive, appearing in 48.7\% of the sentences. Third, linkers that express inter-relations between clauses (mainly discourse markers and conjunctions) appear in 56\% of the sentences, but are again ignored by HMEANT. For instance, linkers are sometimes omitted in translation, but these omissions are not penalized by HMEANT. The following is such an example from our experimental dataset:
+In other cases, HMEANT's does not to penalize errors. For instance, as HMEANT is defined as an aggregate
+of the scores given to the slot fillers, it cannot assign partial scores to the predicates themselves in
+cases of a divergent tense or a negation flip. Consider the following:
+
+\begin{center}
+\begin{tabular}{lp{5.4cm}}
+Source & \small ... don't skip meals ... \\
+Transl.& \small ... nicht {\"u}berspringen Mahlzeiten ... \\
+Gloss & \small ... don't skip meals ... \\
+\end{tabular}
+\end{center}
+
+The translation is mostly understandable, although the verb ``{\"u}berspringen'' is incorrectly inflected.
+HUME allows marking it as Orange (as it was  indeed annotated in our experiments), while
+HMEANT allows either to mark it as correct, or otherwise mark the entire frame as a ``no match''.
+
+We conducted an analysis of the English UCCA Wikipedia corpus (5324 sentences) in order to assess the
+pervasiveness of three phenomena that are not well supported by HMEANT.\footnote{Argument structures and
+linkers are explicitly marked in UCCA. Non-auxiliary instances of ``be'' and nouns are identified using
+the NLTK standard tagger. Nominal argument structures are here Scenes whose main relation is headed by a noun.}
+First, copula clauses are treated in HMEANT simply as instances of the main verb ``be'', which generally does not convey the meaning of these clauses. They appear in 21.7\% of the sentences, according to conservative estimates that only consider non-auxiliary instances of ``be''. Second, nominal argument structures, ignored by HMEANT, are in fact highly pervasive, appearing in 48.7\% of the sentences. Third, linkers that express inter-relations between clauses (mainly discourse markers and conjunctions) appear in 56\% of the sentences, but are again ignored by HMEANT. For instance, linkers are sometimes omitted in translation, but these omissions are not penalized by HMEANT. The following is such an example from our experimental dataset:
 
 \begin{center}
 \begin{tabular}{lp{5.4cm}}
