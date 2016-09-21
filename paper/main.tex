@@ -1180,16 +1180,39 @@ Figure~\ref{fig:dacorrelationtypes} presents an analysis of HUME's correlations 
 an analysis enabled by HUME's semantic decomposition. 
 For both target languages, correlation is highest in the 'all' case, supporting our claim for the value of aggregating over a wide range of semantic phenomena. Some types of nodes predict the DA scores better than others. HUME scores on As correlate more strongly with DA than scores on Scene Main Relations (P+S). Center nodes (C) are also more correlated than elaborator nodes (E), which is expected given that Centers are defined to be more semantically dominant. Future work will construct an aggregate HUME score which weights the different node types according to their semantic relevance. 
 
+\begin{figure*}[t]
+\begin{tabular}{c}
+\includegraphics[width=1\textwidth]{tree_653_de1_de2.png}\\
+\includegraphics[width=0.6\textwidth]{DAline-extract.png}
+\end{tabular}
+\caption{An example of a doubly annotated HUME en-de sentence. Structural nodes which are `A' are shown in yellow, and `B' are shown in blue. A sample of 10 of the raw DA assesments for the German machine translation are shown below.}
+\label{fig:humeeg}
+\end{figure*}
+%Original sentence ID = 653
+%HUME SID=287
+%RAW DA
+%82.0+36.0+57.0+32.0+74.0+57.0+24.0+95.0+30.0+0.0+70.0+38.0+41.0+92.0+45.0+15.0+59.0+82.0+24.0+87.0+24.0+24.0+86.0+87.0+8.0+36.0+43.0+61.0+41.0+14.0+0.0+15.0+50.0+16.0+26.0+23.0+83.0+39.0+45.0+1.0+80.0+31.0+53.0+12.0+64.0+22.0+46.0+39.0
+%STD DA
+%-0.345604136518,-3.33742540772,0.423428930981,-0.548184035933,-0.677176346874,-1.65622648693,-1.55926607798,-1.1272965301,-0.0171653191891,-1.02340816821,-0.872524664699,-0.966670725408,-0.280564543666,-3.14230662916,-0.0830045886964,-1.47697478054,0.470426332641,-1.1678743283,-0.432290259946,-1.92671695959,0.141372817859,-1.36373703007,-0.179200976557,-0.427598369803
+%
+%54.8 = sample of 10 raw scores
+%-0.230 = sample of 10 std scores
+%Generate a random sample each time: here is one random sample from score_segs.R: 
+%57+64+0+39+83+50+45+53+32+46
+%57+64+0+39+83+50+45+53+32+46
+%36+64+80+41+1+83+46+50+39+95=535 -> show this one as is closest to 54.8
+
+
 
 %\subsection{Discussion of Disagreements}\label{sec:disagreements}
 
 We have just presented a quantitative comparison between DA and HUME. DA is however, a very
-different type of metric to HUME. It returns just one score per sentence and requires annotators to make 
-decisions collating many smaller judgements about individual errors in the sentence. 
-Comparing DA and HUME is important in order to see where they agree and differ in order to
+different type of metric to HUME. Looking at Figure~\ref{fig:humeeg} we can see an example of
+a German translation annotated with both HUME and DA. DA standardises and averages scores across annotators and returns one score per sentence. 
+HUME allows us to interogate the quality of individual types of semantic components in a translation, and in
+this sense it is more similar to HMEANT.
+Comparing DA and HUME is important in order to see where they agree and to
 determine under what circumstances it would be appropriate to apply each method. 
-In cases where we specifically want to know about the quality of semantic
-components in a translation, HUME and HMEANT could be considered.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Comparison with HMEANT}\label{sec:hmeant_comp}
