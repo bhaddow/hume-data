@@ -406,9 +406,8 @@ inter-scene relations and the sub-structures of participants and relations.
 
 % UCCA Motivation
 The use of UCCA for semantic MT evaluation measure is motivated by two main reasons. 
-First, UCCA's foundational layer can
-be reliably annotated by non-experts after as little as two hours
-of training \parcite{marinotti2014}.
+First, UCCA's foundational layer can be annotated by non-experts after a short training
+\parcite{abend2013universal,marinotti2014}.
 Second, UCCA is cross-linguistically applicable, seeking to
 represent what is shared between languages by building on
 linguistic typological theory \parcite{Dixon:10a,Dixon:10b,Dixon:12}.
@@ -827,8 +826,8 @@ the translation as correct or not. The alignments are meant just as a guide. The
 In order to validate the HUME metric, we ran an annotation experiment with one source language (English),
 and four target languages (Czech, German, Polish and Romanian), using text from the public health domain.
 Semantically accurate translation is paramount in this domain, which makes
-it particularly suitable for semantic  MT evaluation. HUME is both evaluated in terms of its
-consistency (inter-annotator agreement), efficiency (time of annotation) and validity (through a comparison
+it particularly suitable for semantic  MT evaluation. HUME is evaluated in terms of its
+consistency (inter-annotator agreement), efficiency (time of annotation) and validity (by comparing it
 with crowd-sourced adequacy judgements).
 
 %particularly interested in this domain since our ultimate goal is to provide high-quality translations of health
@@ -1182,10 +1181,13 @@ For both target languages, correlation is highest in the 'all' case, supporting 
 
 \begin{figure*}[t]
 \begin{tabular}{c}
-\includegraphics[width=1\textwidth]{tree_653_de1_de2.png}\\
-\includegraphics[width=0.6\textwidth]{DAline-extract.png}
+\includegraphics[width=1\textwidth]{tree_653_ver2.png}\\
+%\includegraphics[width=0.6\textwidth]{DAline-extract.png}
 \end{tabular}
-\caption{An example of a doubly annotated HUME en-de sentence. Structural nodes which are `A' are shown in yellow, and `B' are shown in blue. A sample of 10 of the raw DA assesments for the German machine translation are shown below.}
+\caption{An example of a doubly annotated HUME en-de sentence. The color of the nodes correspond to their
+  HUME label: yellow (A), blue (B), and atomic nodes with their traffic. Nodes in which the annotators
+  disagree are split in color. The scale at the bottom right shows a sample of 10 raw DA assessments
+  for this example. }
 \label{fig:humeeg}
 \end{figure*}
 %Original sentence ID = 653
@@ -1206,13 +1208,15 @@ For both target languages, correlation is highest in the 'all' case, supporting 
 
 %\subsection{Discussion of Disagreements}\label{sec:disagreements}
 
-We have just presented a quantitative comparison between DA and HUME. DA is however, a very
-different type of metric to HUME. Looking at Figure~\ref{fig:humeeg} we can see an example of
-a German translation annotated with both HUME and DA. DA standardises and averages scores across annotators and returns one score per sentence. 
-HUME allows us to interogate the quality of individual types of semantic components in a translation, and in
-this sense it is more similar to HMEANT.
-Comparing DA and HUME is important in order to see where they agree and to
-determine under what circumstances it would be appropriate to apply each method. 
+While a quantitative comparison between DA and HUME, as we have just presented, is telling of their
+differences and commonalities, it is important to note that the two measures are fundamentally different.
+Figure~\ref{fig:humeeg} presents an example of a doubly HUME-annotated English-German example
+accompanied by 10 raw DA scores assigned to that sentence. 
+While DA standardises and averages scores across annotators to denoise the raw data, and obtain
+a single aggregate score, HUME decomposes over a combinatorial structure, thus allowing
+to localize the translation errors.
+%Comparing DA and HUME is important in order to see where they agree and to
+%determine under what circumstances it would be appropriate to apply each method. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Comparison with HMEANT}\label{sec:hmeant_comp}
@@ -1220,9 +1224,8 @@ determine under what circumstances it would be appropriate to apply each method.
 
 HMEANT is a human MT evaluation metric that measures the overlap between the translation a reference
 in terms of their SRL annotations.
-In this section we present a qualitative comparison between HUME and HMEANT
-and the discussion is accompanied by examples from our
-experimental data.
+In this section we present a qualitative comparison between HUME and HMEANT,
+using examples from our experimental data.
 
 %Like HMEANT, HUME defines  a
 %measure that decomposes over semantic units, rather than strings. 
@@ -1377,7 +1380,7 @@ alignment as needed, thus circumventing this difficulty.
 \label{src-vs-ref}
 HUME diverges from HMEANT and from shallower measures
 like BLEU, in not requiring a reference.
-Instead, it compares the source directly with the output translation.
+Instead, it directly compares the source and the translation.
 This requires the employment of bilingual annotators, but has the benefit of avoiding
 using a reference, which is never uniquely defined, and may thus 
 lead to unjustly low scores where the translation is a paraphrase of the reference.
@@ -1469,7 +1472,7 @@ and will be useful in informing the development of a more semantically aware
 approach to MT.
 
 All annotation data gathered in this project, together with analysis scripts is available
-in github\footnote{\url{https://github.com/bhaddow/hume-emnlp16}}.
+online\footnote{\url{https://github.com/bhaddow/hume-emnlp16}}.
 
 
 
