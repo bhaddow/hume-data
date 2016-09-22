@@ -218,7 +218,7 @@ which have been shown to bias annotators~\cite{fomicheva-specia_ACL:2016}.
 %Could reinstate
 After a brief review (\secref{sec:background}), we describe HUME in detail
 (\secref{sec:hume}). 
-Our experiments with four language pairs: English to Czech, German, Polish and Romanian (\secref{sec:experiments}) document HUME's inter-annotator agreement and efficiency (time of annotation). We further empirically compare HUME with direct assessment of human adequacy ratings, and conclude by discussing the differences with HMEANT (\secref{sec:hmeant_comp}).
+Our experiments with four language pairs: English to Czech, German, Polish and Romanian (\secref{sec:experiments}) document HUME's inter-annotator agreement and efficiency (time of annotation). We further empirically compare HUME with direct assessment of human adequacy ratings (\secref{sec:adequacy}), and conclude by discussing the differences with HMEANT (\secref{sec:hmeant_comp}).
 
 % We conduct experiments with four language pairs: English-German, English-Polish,
 % English-Romanian and English-Czech, and report efficiency (time of annotation) and
@@ -274,13 +274,13 @@ Our experiments with four language pairs: English to Czech, German, Polish and R
 Human evaluation is generally done by ranking the outputs of multiple systems
 e.g., in the WMT tasks \parcite{bojar2015findings}, or by assigning
 adequacy/fluency scores to each translation, a procedure recently improved
-by \perscite{graham2015accurate} and called direct assessment. We use this method to compare and contrast
+by \perscite{graham2015accurate} under the title Direct Assessment. We use this method to compare and contrast
 with HUME later in the paper. HTER~\parcite{snover2006study} is another widely used human evaluation metric
 which uses edit distance metrics to compare a translation and its human 
 post-edition. HTER suffers from the problem that small edits in the translation
-could in fact be serious flaws in accuracy, eg. deleting a negation. 
-Some manual measures ask annotators to explicitly mark errors, which however
-suffers from even lower agreement than ranking \parcite{lommel:etal:mqm-iaa:2014}.
+could in fact be serious flaws in accuracy, e.g., deleting a negation. 
+Some manual measures ask annotators to explicitly mark errors, but this has
+been found to have even lower agreement than ranking \parcite{lommel:etal:mqm-iaa:2014}.
 
 However, while providing the gold standard for MT evaluation, human evaluation
 is not a scalable solution.
@@ -317,7 +317,7 @@ In order to address this shortcoming, more recent work quantified
 the similarity of the reference and translation in terms
 of their structure. \perscite{liu2005syntactic} took a syntactic approach, 
 using dependency grammar, and
-\perscite{owczarzak2007evaluating} took a similar approach using lexical-functional grammar structures.
+\perscite{owczarzak2007evaluating} took a similar approach using Lexical Functional Grammar structures.
 \perscite{gimenez2007linguistic} proposed to combine multiple types of information,
 capturing the overlap between the translation and reference in terms of their
 semantic (predicate-argument structures), lexical and morphosyntactic features.
@@ -385,18 +385,18 @@ P & Process & C & Centre \\
 \end{figure}
 
 \paragraph{Semantic Representation.}
-UCCA (Universal Conceptual Cognitive Annotation, \inparcite{abend2013universal}) is a
+UCCA (Universal Conceptual Cognitive Annotation) \cite{abend2013universal} is a
 cross-linguistically applicable scheme for semantic annotation.
 Formally, an UCCA structure is a directed acyclic graph (DAG),
 whose leaves correspond to the words of the text.
-The graph's nodes, called {\sc units}, are either terminals or several elements jointly
+The graph's nodes, called {\it units}, are either terminals or several elements jointly
 viewed as a single entity according to some semantic or cognitive consideration. Edges bear
 a category, indicating the role of the sub-unit in the structure the unit
 represents.
 
 UCCA's basic inventory of distinctions (its {\it foundational layer})
 focuses on argument structures (adjectival, nominal, verbal and others)
-and relations between them. The most basic notion is the Scene, which describes a movement, an
+and relations between them. The most basic notion is the {\it Scene}, which describes a movement, an
 action or a state which persists in time. Each Scene contains one main
 relation and zero or more participants. For example, the sentence ``After graduation, Tom moved to America''
 contains two Scenes, whose main relations are ``graduation'' and ``moved''.
@@ -405,7 +405,7 @@ latter (\figref{fig:ucca_example_v2}). Further categories account for
 inter-scene relations and the sub-structures of participants and relations.
 
 % UCCA Motivation
-The use of UCCA for semantic MT evaluation measure is motivated by two main reasons. 
+The use of UCCA for semantic MT evaluation has several motivations. 
 First, UCCA's foundational layer can be annotated by non-experts after a short training
 \parcite{abend2013universal,marinotti2014}.
 Second, UCCA is cross-linguistically applicable, seeking to
@@ -434,11 +434,11 @@ the translation and the source.
 %  OB: AMR has been applied to more languages, including Chinese, so I would not
 %  dare saying that it is less stable.}
 
-The Abstract Meaning Representation (AMR) \parcite{banarescu2013abstract} project
+The Abstract Meaning Representation (AMR) \parcite{banarescu2013abstract}
 shares UCCA's motivation for defining a more complete semantic annotation.
 However, using AMR is not optimal for defining a decomposition of a sentence into semantic
 units as it does not anchor its semantic symbols in the text,
-and thus does not provide clear decomposition of the sentence into sub-units.
+and thus does not provide clear decomposition of the sentence into sub-spans.
 Also, AMR is more fine-grained than UCCA and consequently harder to annotate.
 Other approaches represent semantic structures as bi-lexical dependencies
 \parcite{sgallhp:1986,hajic2012announcing,oepen2006discriminant},
@@ -473,16 +473,16 @@ where units are defined according to the UCCA annotation.
 UCCA annotation is performed once for every source sentence,
 irrespective of the number of its translations we wish to evaluate,
 and requires proficiency in the source language only.
-HUME annotation requires the employment of bilingual annotators
-\footnote{Where bilingual annotators are not available,
+HUME annotation requires the employment of bilingual
+annotators.\footnote{Where bilingual annotators are not available,
   the evaluation could be based on the UCCA structure for the
   \emph{reference} translation. See discussion in \secref{sec:hmeant_comp}.}
 
 
 \paragraph{UCCA Annotation.}
 We begin by creating UCCA annotations for the source sentence, following the
-UCCA guidelines\footnote{All UCCA-related resources can be found
-  here: \url{http://www.cs.huji.ac.il/~oabend/ucca.html}}.
+UCCA guidelines.\footnote{All UCCA-related resources can be found
+  here: \url{http://www.cs.huji.ac.il/~oabend/ucca.html}}
 A UCCA annotation for a sentence $s$ is a labeled DAG $G$, whose leaves
 are the words of $s$.
 For every node in $G$, we define its {\it yield} to be its leaf descendants.
@@ -588,8 +588,8 @@ HUME aggregates the judgements of the users into a composite score,
 which reflects the overall extent to which the semantic content of $s$ is preserved in $t$.
 
 Annotation of the semantic units requires first deciding whether
-a unit is {\it structural}, i.e., has meaning-bearing sub-units also in the
-target language, or {\it atomic}.
+a unit is {\it structural}, i.e., has meaning-bearing
+sub-units in the target language, or {\it atomic}.
 In most cases, atomic units
 correspond to individual words, but they may also correspond to
 multi-word expressions that translate as one unit. For instance,
@@ -676,7 +676,7 @@ on configurational vs. non-configurational languages.
     \includegraphics[width=0.35\textwidth]{ucca-tree-mteval-v3.png}
     \end{center}
   \caption{\label{fig:hume_tree_v2}
-     HUME annotation of an UCCA tree with a word aligned example translation shown below. 
+     HUME annotation of an UCCA tree with a word-aligned example translation shown below. 
      Atomic units are labelled using traffic lights (Red, Orange, Green) and structural
      units are marked A or B.}
 \end{figure}
@@ -696,8 +696,8 @@ level. Another feature highlighted in this example is that by separating structu
 and atomic units, we are able to define where an error occurs, and localise
 the error to its point of origin. The linker ``After'' is translated incorrectly as ``by''
 which changes the meaning of the entire sentence. This error is captured at
-the atomic level, and it is labelled Red. The sentence still contains two scenes and
-a linker and therefore we mark the root node as structurally correct, Adequate.
+the atomic level, and it is labelled Red. The sentence still contains two Scenes and
+a Linker and therefore we mark the root node as structurally correct, Adequate.
 
 \begin{figure*}[t]
     \begin{center}
@@ -761,7 +761,7 @@ their instances, to avoid double counting.
 
 The interface presents, for each unit, the translation segment aligned with it.
 This allows the user, especially in long sentences, to focus her attention on the parts
-most likely to be relevant for her judgement. As the alignments are automatically derived,
+that are most likely to be relevant for her judgement. As the alignments are automatically derived,
 and therefore noisy, the annotator is instructed to treat the aligned text is a cue, but to ignore
 the alignment if it is misleading, and instead 
 make a judgement according to the full translation.
@@ -852,7 +852,7 @@ For each of the four language pairs under consideration  we built phrase-based M
 using Moses \parcite{Koehn:2007}.  These were trained on large parallel data sets extracted from
 OPUS \parcite{tiedemann:2009}, and the data sets released for the WMT14
 medical translation task \parcite{bojar-EtAl:2014:W14-33}, 
-giving between 45 and 85 million sentences of training data, depending on language pair.
+giving between 45 and 85 million sentences of training data, depending on the language pair.
 %\oa{I think we should probably
 %  say how many in each.}.
 % ... if someone asks us to do so...
@@ -877,13 +877,13 @@ and abstracts.
 The source sentences are all in English, and their UCCA annotation was performed by four
 computational linguists and one linguist.
 For the annotation of the MT output, we recruited two annotators for each of German, Romanian
-and Polish and one main annotator for Czech. For Czech IAA,
+and Polish and one main annotator for Czech. For computing Czech IAA,
 several further annotators worked on a small number of 
 sentences each. We treat these further annotators as one annotator, resulting in two annotators
 for each language pair.
 The annotators were all native speakers of the respective target languages and fluent in English.
-They completed a three hour on-line training session where we described UCCA and the HUME task and then
-we worked through a number of examples. 
+They completed a three hour on-line training session which included a description of
+UCCA and the HUME task, followed by walking through a few examples. 
 
 
 \tabref{tab:annot}
@@ -916,7 +916,7 @@ We estimate the annotation time using the timestamps
 provided by the annotation tool, which are recorded whenever an annotated sentence is
 submitted. Annotators are not able to re-open a sentence once submitted. 
 To estimate the annotation time, we compute the time difference between successive 
-sentences, and discard outlying times since we assume annotation was not continuous.
+sentences, and discard outlying times, assuming annotation was not continuous in these cases.
 From inspection of histograms of annotation times, we set the upper threshold at 500 seconds.
 Median annotation times are presented in Table~\ref{tab:annot_times},
 indicating that the annotation
@@ -993,7 +993,7 @@ units (annotated as Red, Orange or Green) and structural units (annotated
 as Adequate or Bad).
 As expected and confirmed by confusion matrices in \figref{fig:heatmap}, there
 is generally little confusion between the two types of units.
-This results in the Kappa for all units being considerably higher than the kappa
+This results in the Kappa for all units being considerably higher than the Kappa
 over the atomic units or structural units, where there is more internal confusion. 
 
 %In general there should be little confusion between the two
@@ -1037,7 +1037,7 @@ over the atomic units or structural units, where there is more internal confusio
 
 
 
-%presents the variance of kappa with length in each bin covers
+%presents the variance of Kappa with length in each bin covers
 %a length range of 10. and we show .
 
 \def\iaafig #1{\includegraphics[width=3.8cm]{iaa_length_#1.png}}
@@ -1050,8 +1050,8 @@ we binned the sentences according to length and measured Kappa on each bin
 %Results show that there is
 We see
 no discernible reduction of IAA with sentence
-length. Also, from \tabref{tab:iaa} the overall IAA
-is similar for all languages, showing good agreement (0.6--0.7).
+length. \tabref{tab:iaa} also shows that the overall IAA
+is similar for all languages, presenting good agreement (0.6--0.7).
 However, there are differences observed when we break down by node type.
 Specifically, we see a contrast  between
 Czech and Polish, where the IAA is higher for atomic than for structural units, and German and Romanian,
@@ -1102,11 +1102,11 @@ Kappa calculation is high, lowering Kappa.
 %ssentially, the annotation problem is harder when the classes are more skewed.
 Finally we note some evidence of domain-specific disagreements, for instance
 the German MT system normally translated ``review'' (as in ``systematic review'' -- a frequent term in the 
-Cochrane texts) as ``\"uberpr\"ufung'', which 
+Cochrane texts) as ``\"Uberpr\"ufung'', which 
 one annotator marked correct, and the other (a Cochrane employee) as incorrect.
 
 
-\subsection{Comparison with Direct Assessment}\label{sec:adequacy}
+\section{Comparison with Direct Assessment}\label{sec:adequacy}
 
 \def\iaafig #1{\includegraphics[width=0.45\textwidth]{humevsDA_10en-#1.pdf}}
 
@@ -1149,7 +1149,7 @@ its DA score. HUME and Direct Assessment scores correlate reasonably well. The
 Pearson correlation for en-ro (en-de) is 0.70 (0.58), or 0.78 (0.74) if only
 doubly HUME-annotated points are considered.
 This confirms that HUME is consistent with an accepted human evaluation method,
-despite the differences in their conception.
+despite their conceptual differences.
 While DA is a valuable tool, HUME has two advantages:
 it returns fine-grained semantic information about 
 the quality of translations and it only requires very few annotators.
@@ -1177,7 +1177,7 @@ Centres (``C'', 1904/2474), elaborators (``E'', 1608/2031) and linkers (``L'', 2
 
 Figure~\ref{fig:dacorrelationtypes} presents an analysis of HUME's correlations with DA by HUME unit type,
 an analysis enabled by HUME's semantic decomposition. 
-For both target languages, correlation is highest in the 'all' case, supporting our claim for the value of aggregating over a wide range of semantic phenomena. Some types of nodes predict the DA scores better than others. HUME scores on As correlate more strongly with DA than scores on Scene Main Relations (P+S). Center nodes (C) are also more correlated than elaborator nodes (E), which is expected given that Centers are defined to be more semantically dominant. Future work will construct an aggregate HUME score which weights the different node types according to their semantic relevance. 
+For both target languages, correlation is highest in the 'all' case, supporting our claim for the value of aggregating over a wide range of semantic phenomena. Some types of nodes predict the DA scores better than others. HUME scores on As correlate more strongly with DA than scores on Scene Main Relations (P+S). Center nodes (C) are also more correlated than elaborator nodes (E), which is expected given that Centers are defined to be more semantically dominant. Future work will construct an aggregate HUME score which weights the different node types according to their semantic prominence. 
 
 \begin{figure*}[t]
 \begin{tabular}{c}
@@ -1208,13 +1208,17 @@ For both target languages, correlation is highest in the 'all' case, supporting 
 
 %\subsection{Discussion of Disagreements}\label{sec:disagreements}
 
-While a quantitative comparison between DA and HUME, as we have just presented, is telling of their
-differences and commonalities, it is important to note that the two measures are fundamentally different.
+%While a quantitative comparison between DA and HUME, as we have just presented, is telling of their
+%differences and commonalities, it is important to note that the two measures are fundamentally different.
 Figure~\ref{fig:humeeg} presents an example of a doubly HUME-annotated English-German example
-accompanied by 10 raw DA scores assigned to that sentence. 
-While DA standardises and averages scores across annotators to denoise the raw data, and obtain
-a single aggregate score, HUME decomposes over a combinatorial structure, thus allowing
-to localize the translation errors.
+accompanied by 10 raw DA scores assigned to that sentence.
+The figure illustrates the conceptual difference between the measures:
+while DA standardises and averages scores across annotators to denoise the
+crowd-sourced raw data, thus obtaining a single aggregate score,
+HUME decomposes over a combinatorial structure, thus allowing to
+localize the translation errors. We turn to comparing HUME to a more
+conceptually-related  measure, namely HMEANT.
+
 %Comparing DA and HUME is important in order to see where they agree and to
 %determine under what circumstances it would be appropriate to apply each method. 
 
@@ -1234,7 +1238,7 @@ using examples from our experimental data.
 
 \paragraph{Verbal Structures Only?}
 
-HMEANT focuses on verbal argument structures, ignoring other pervasive phenomena such as non-verbal predicates and inter-clause relations. Consider the following example:
+HMEANT focuses on verbal argument structures, ignoring other pervasive phenomena such as non-verbal predicates and inter-clausal relations. Consider the following example:
 
 \begin{center}
 \begin{tabular}{lp{5.4cm}}
@@ -1263,10 +1267,11 @@ Gloss & \small ... as a rule higher in saturated fats \\
 \end{tabular}
 \end{center}
 
-The German translation is largely correct, although the English verb ``tend''
-was translated into the German prepositional phrase ``in der Regel'' (``as a rule'').
+The German translation is largely correct, despite the grammatical divergence,
+namely that the English verb ``tend''
+is translated into the German prepositional phrase ``in der Regel'' (``as a rule'').
 HMEANT will consider the translation to be of poor quality as there is no German verb
-to align the English one with.
+to align with the English one.
 
 \com{
 In other cases, HMEANT's does not to penalize errors. For instance, as HMEANT is defined as an aggregate
@@ -1289,7 +1294,7 @@ HMEANT allows either to mark it as correct, or otherwise mark the entire frame a
 We conducted an analysis of the English UCCA Wikipedia corpus (5324 sentences) in order to assess the
 pervasiveness of three phenomena that are not well supported by HMEANT.\footnote{Argument structures and
 linkers are explicitly marked in UCCA. Non-auxiliary instances of ``be'' and nouns are identified using
-the NLTK standard tagger. Nominal argument structures are here Scenes whose main relation is headed by a noun.}
+the NLTK standard tagger. Nominal argument structures are here Scenes whose Main Relation is headed by a noun.}
 First, copula clauses are treated in HMEANT simply as instances of the main verb ``be'', which generally does not convey the meaning of these clauses. They appear in 21.7\% of the sentences, according to conservative estimates that only consider non-auxiliary instances of ``be''. Second, nominal argument structures, ignored by HMEANT, are in fact highly pervasive, appearing in 48.7\% of the sentences. Third, linkers that express inter-relations between clauses (mainly discourse markers and conjunctions) appear in 56\% of the sentences, but are again ignored by HMEANT. For instance, linkers are sometimes omitted in translation, but these omissions are not penalized by HMEANT. The following is such an example from our experimental dataset:
 
 \begin{center}
@@ -1471,7 +1476,7 @@ allows for a finer-grained analysis of translation quality,
 and will be useful in informing the development of a more semantically aware
 approach to MT.
 
-All annotation data gathered in this project, together with analysis scripts is available
+All annotation data gathered in this project, together with analysis scripts, is available
 online\footnote{\url{https://github.com/bhaddow/hume-emnlp16}}.
 
 
@@ -1563,7 +1568,7 @@ and their inter-relations and participants.
 As can be seen
 in Figure~\ref{ucca-tree}, the UCCA annotation results in a tree structure where each leaf is linked to
 a word in the sentence at the bottom. A scene must contain a process (P) or a state (S). It can also contain
-participants (A) and it can be linked to other scenes by a linker (Linker). Participants, processes and states can be
+participants (A) and it can be linked to other scenes by a Linker (Linker). Participants, processes and states can be
 further analysed into elaborators (E), centres (C) and relators (R). These labels are very 
 %high level 
 high-level 
@@ -1630,7 +1635,7 @@ UCCA provides universal semantic structures which
 %has 
 have
 a minimal set of labels. It provides a complete semantic tree which does not rely on syntactic heads and the semantic structure is grounded directly to the words in the sentence. 
- Even though the set of UCCA labels are fairly restricted,  nevertheless they allow us to determine the most important components of the graph (for example it defines centres and linkers which would be likely to carry more weight than elaborators), and we can use this to better calculate the score. 
+ Even though the set of UCCA labels are fairly restricted,  nevertheless they allow us to determine the most important components of the graph (for example it defines centres and Linkers which would be likely to carry more weight than elaborators), and we can use this to better calculate the score. 
 We think that UCCA is the
 most promising representation for evaluating translation. 
 }
