@@ -8,6 +8,7 @@
 \usepackage{latexsym}
 \usepackage{graphicx}
 \usepackage[T1]{fontenc}
+\usepackage{tikz}
 \usepackage{url}
 \usepackage{pgfplotstable}
 \usepackage{titlesec}
@@ -15,6 +16,7 @@
 \usepackage{lipsum,adjustbox}
 \usepackage[font={small}]{caption}
 %\usepackage{hyperref}
+\usetikzlibrary{positioning}
 
 \aclfinalcopy
 
@@ -160,7 +162,8 @@ inter-annotator agreement rates and
 
 %\let\thefootnote\relax\footnotetext{*All authors contributed equally to this work.}
 
-Human judgement is the cornerstone for estimating the quality of an MT system.
+%Human judgement is the cornerstone for estimating the quality of an MT system.
+Human judgement should be the ultimate test of the quality of an MT system.
 Nevertheless, common measures for human MT evaluation, such as adequacy and fluency judgements
 or the relative ranking of possible translations, are problematic in two ways.
 First, as the quality of translation is multi-faceted, it is difficult
@@ -193,7 +196,7 @@ reference in terms of their verb argument structure; the most notable of these m
 % is difficult and arguably ill-defined.
 
 We propose the HUME metric,
-a human evaluation measure that decomposes over the UCCA semantic units.
+a human evaluation measure that decomposes over UCCA semantic units.
 % of the sentence.
 UCCA \parcite{abend2013universal} is an appealing candidate for semantic analysis,
 due to its cross-linguistic applicability, support for rapid annotation, and coverage
@@ -274,7 +277,8 @@ Our experiments with four language pairs: English to Czech, German, Polish and R
 Human evaluation is generally done by ranking the outputs of multiple systems
 e.g., in the WMT tasks \parcite{bojar2015findings}, or by assigning
 adequacy/fluency scores to each translation, a procedure recently improved
-by \perscite{graham2015accurate} under the title Direct Assessment. We use this method to compare and contrast
+by \perscite{graham2015accurate} under the title Direct Assessment. We use this latter method to compare and
+contrast
 with HUME later in the paper. HTER~\parcite{snover2006study} is another widely used human evaluation metric
 which uses edit distance metrics to compare a translation and its human 
 post-edition. HTER suffers from the problem that small edits in the translation
@@ -1180,10 +1184,14 @@ an analysis enabled by HUME's semantic decomposition.
 For both target languages, correlation is highest in the 'all' case, supporting our claim for the value of aggregating over a wide range of semantic phenomena. Some types of nodes predict the DA scores better than others. HUME scores on As correlate more strongly with DA than scores on Scene Main Relations (P+S). Center nodes (C) are also more correlated than elaborator nodes (E), which is expected given that Centers are defined to be more semantically dominant. Future work will construct an aggregate HUME score which weights the different node types according to their semantic prominence. 
 
 \begin{figure*}[t]
-\begin{tabular}{c}
-\includegraphics[width=1\textwidth]{tree_653_ver2.png}\\
+\begin{tikzpicture}
+\node(tree) [] {\includegraphics[width=1\textwidth]{tree_653_de1_de2.pdf}};
+\node [below right = -2cm and  -8cm of tree]{\includegraphics[width=0.4\textwidth]{DAline-extract.png}};
+\end{tikzpicture}
+%\begin{tabular}{c}
+%\includegraphics[width=1\textwidth]{tree_653_ver2.png}\\
 %\includegraphics[width=0.6\textwidth]{DAline-extract.png}
-\end{tabular}
+%\end{tabular}
 \caption{An example of a doubly annotated HUME en-de sentence. The color of the nodes correspond to their
   HUME label: yellow (A), blue (B), and atomic nodes with their traffic. Nodes in which the annotators
   disagree are split in color. The scale at the bottom right shows a sample of 10 raw DA assessments
@@ -1216,7 +1224,7 @@ The figure illustrates the conceptual difference between the measures:
 while DA standardises and averages scores across annotators to denoise the
 crowd-sourced raw data, thus obtaining a single aggregate score,
 HUME decomposes over a combinatorial structure, thus allowing to
-localize the translation errors. We turn to comparing HUME to a more
+localize the translation errors. We now turn to comparing HUME to a more
 conceptually-related  measure, namely HMEANT.
 
 %Comparing DA and HUME is important in order to see where they agree and to
@@ -1641,7 +1649,12 @@ most promising representation for evaluating translation.
 }
 
 \section*{Acknowledgments}
-{T}his work was conducted within the scope of the \ProjectType, which has received funding from the European Union's Horizon 2020 research and innovation programme under grant agreement No \GrantNo\ (\ProjectName).
+%{T}his work was conducted within the scope of the \ProjectType, which has received funding from the European Union's Horizon 2020 research and innovation programme under grant agreement No \GrantNo\ (\ProjectName).
+
+
+This project has received funding from the European Union's Horizon 2020 research and innovation
+programme under grant agreement \GrantNo\ (\ProjectName).
+
 
 %Do not number the acknowledgment section.
 %This section should not be presented for the submission version.
