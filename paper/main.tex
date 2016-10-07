@@ -1183,21 +1183,21 @@ Figure~\ref{fig:dacorrelationtypes} presents an analysis of HUME's correlations 
 an analysis enabled by HUME's semantic decomposition. 
 For both target languages, correlation is highest in the 'all' case, supporting our claim for the value of aggregating over a wide range of semantic phenomena. Some types of nodes predict the DA scores better than others. HUME scores on As correlate more strongly with DA than scores on Scene Main Relations (P+S). Center nodes (C) are also more correlated than elaborator nodes (E), which is expected given that Centers are defined to be more semantically dominant. Future work will construct an aggregate HUME score which weights the different node types according to their semantic prominence. 
 
-\begin{figure*}[t]
-\begin{tikzpicture}
-\node(tree) [] {\includegraphics[width=1\textwidth]{tree_653_de1_de2.pdf}};
-\node [below right = -2cm and  -8cm of tree]{\includegraphics[width=0.4\textwidth]{DAline-extract.png}};
-\end{tikzpicture}
+%\begin{figure*}[t]
+%\begin{tikzpicture}
+%\node(tree) [] {\includegraphics[width=1\textwidth]{tree_653_de1_de2.pdf}};
+%\node [below right = -2cm and  -8cm of tree]{\includegraphics[width=0.4\textwidth]{DAline-extract.png}};
+%\end{tikzpicture}
 %\begin{tabular}{c}
 %\includegraphics[width=1\textwidth]{tree_653_ver2.png}\\
 %\includegraphics[width=0.6\textwidth]{DAline-extract.png}
 %\end{tabular}
-\caption{An example of a doubly annotated HUME en-de sentence. The color of the nodes correspond to their
-  HUME label: yellow (A), blue (B), and atomic nodes with their traffic light color. Nodes in which the annotators
-  disagree are split in color. The scale at the bottom right shows a sample of 10 raw DA assessments
-  for this example. }
-\label{fig:humeeg}
-\end{figure*}
+%\caption{An example of a doubly annotated HUME en-de sentence. The color of the nodes correspond to their
+%  HUME label: yellow (A), blue (B), and atomic nodes with their traffic light color. Nodes in which the annotators
+%  disagree are split in color. The scale at the bottom right shows a sample of 10 raw DA assessments
+%  for this example. }
+%\label{fig:humeeg}
+%\end{figure*}
 %Original sentence ID = 653
 %HUME SID=287
 %RAW DA
@@ -1218,9 +1218,10 @@ For both target languages, correlation is highest in the 'all' case, supporting 
 
 %While a quantitative comparison between DA and HUME, as we have just presented, is telling of their
 %differences and commonalities, it is important to note that the two measures are fundamentally different.
-Figure~\ref{fig:humeeg} presents an example of a doubly HUME-annotated English-German example
-accompanied by 10 raw DA scores assigned to that sentence.
-The figure illustrates the conceptual difference between the measures:
+%Figure~\ref{fig:humeeg} presents an example of a doubly HUME-annotated English-German example
+%accompanied by 10 raw DA scores assigned to that sentence.
+%The figure illustrates the conceptual difference between the measures:
+HUME and DA are conceputally very different metrics:
 while DA standardises and averages scores across annotators to denoise the
 crowd-sourced raw data, thus obtaining a single aggregate score,
 HUME decomposes over a combinatorial structure, thus allowing to
