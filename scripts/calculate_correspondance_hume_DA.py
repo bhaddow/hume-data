@@ -23,7 +23,6 @@ LANGCODES = ("Romanian","ro"), ("Polish", "pl"), ("German", "de"), ("Czech", "cs
 LANGCODES = ("Romanian","ro"),("German", "de"),
 
 HUME_dir = "data/mturkDA"
-DA_dir = "/Users/alexandrabirch/work/2016-YvetteGraham/segment-mteval/proc-hits/analysis"
 fileVersion = "5"
 TYPE = "raw"
 TYPE = "stnd"
