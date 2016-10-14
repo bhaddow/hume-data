@@ -13,9 +13,11 @@ import pandas
 
 import numpy as np
 
+from common import NODES
+
 def main():
   parser = argparse.ArgumentParser()
-  parser.add_argument("-n", "--node-file", default="nodes.csv", \
+  parser.add_argument("-n", "--node-file", default=NODES, \
     help="CSV file containing the node data")
 
   args = parser.parse_args()

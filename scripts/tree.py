@@ -11,6 +11,8 @@ import pandas
 import pydot
 import sys
 
+from common import NODES, SENTENCES
+
 COLORS = {
   "R" : "red",
   "O" : "orange", 
@@ -153,8 +155,8 @@ def main():
   parser.add_argument("-s", "--sentence-id", type=int, default=169)
   args = parser.parse_args()
 
-  nodes = pandas.read_csv("nodes.csv", converters={'node_id': str, 'parent' : str})
-  sentences = pandas.read_csv("sentences.csv")
+  nodes = pandas.read_csv(NODES, converters={'node_id': str, 'parent' : str})
+  sentences = pandas.read_csv(SENTENCES)
   plotter = Plotter(sentences, nodes)
 
   if args.annotator_id:

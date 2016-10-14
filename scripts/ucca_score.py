@@ -5,6 +5,8 @@ import sys
 import pandas
 from  pandas_confusion import ConfusionMatrix
 
+from common import NODES
+
 def stats(alldata):
   print ("Stats \n\n")
   users = alldata['annot_id'].unique()
@@ -133,7 +135,7 @@ def count_children(alldata,node,count):
 
 
 def main():
-  alldata = pandas.read_csv("nodes.csv", converters={'node_id': str, 'parent' : str})
+  alldata = pandas.read_csv(NODES, converters={'node_id': str, 'parent' : str})
 #  alldata = pandas.read_csv("mini.csv", converters={'id': str, 'parent' : str})
   stats(alldata)
 #  plain_score(alldata)

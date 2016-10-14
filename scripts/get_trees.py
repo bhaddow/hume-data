@@ -17,13 +17,15 @@ import sys
 
 from tree import Plotter
 
+from common import NODES, SENTENCES
+
 LOG = logging.getLogger(__name__)
    
 def main():
   logging.basicConfig(format='%(asctime)s %(levelname)s: %(name)s: %(message)s', datefmt='%Y-%m-%d %H:%M:%S', level=logging.INFO)
   parser = argparse.ArgumentParser()
-  parser.add_argument("-n", "--nodes-file", default="nodes.csv")
-  parser.add_argument("-s", "--sentences-file", default="sentences.csv")
+  parser.add_argument("-n", "--nodes-file", default=NODES)
+  parser.add_argument("-s", "--sentences-file", default=SENTENCES)
   parser.add_argument("-o", "--output-dir", default="trees")
   args = parser.parse_args()
 

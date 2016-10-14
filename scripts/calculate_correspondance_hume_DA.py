@@ -22,7 +22,7 @@ import extract_sentences_for_WMT_metrics_task
 LANGCODES = ("Romanian","ro"), ("Polish", "pl"), ("German", "de"), ("Czech", "cs")
 LANGCODES = ("Romanian","ro"),("German", "de"),
 
-HUME_dir = "data/mturkDA"
+HUME_dir = sys.path[0] + "/../data/mturkDA"
 fileVersion = "5"
 TYPE = "raw"
 TYPE = "stnd"

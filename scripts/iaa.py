@@ -9,6 +9,8 @@ import pandas
 import numpy as np
 from  pandas_confusion import ConfusionMatrix
 
+from common import NODES
+
 LANGCODES = ("Romanian","ro"), ("Polish", "pl"), ("German", "de"), ("Czech", "cs")
 
 def get_kappa(cm):
@@ -86,7 +88,7 @@ def print_iaa_sentence_detail(agree, detail_file):
 
 def main():
   parser = argparse.ArgumentParser()
-  parser.add_argument("-n", "--node-file", default="nodes.csv", \
+  parser.add_argument("-n", "--node-file", default=NODES, \
     help="CSV file containing the node data")
   parser.add_argument("--exclude-missing", default=True, action="store_true",
     help="Excluding nodes that either annotator has missed")

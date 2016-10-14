@@ -16,6 +16,8 @@ import pandas
 from  pandas_confusion import ConfusionMatrix
 from iaa import get_kappa, LANGCODES
 
+from common import NODES, SENTENCES
+
 LOG = logging.getLogger(__name__)
 
 
@@ -99,8 +101,8 @@ def do_length_bins(sentences, agree, args):
 def main():
   logging.basicConfig(format='%(asctime)s %(levelname)s: %(name)s: %(message)s', datefmt='%Y-%m-%d %H:%M:%S', level=logging.DEBUG)
   parser = argparse.ArgumentParser()
-  parser.add_argument("-n", "--node-file", default="nodes.csv")
-  parser.add_argument("-s", "--sentence-file", default="sentences.csv")
+  parser.add_argument("-n", "--node-file", default=NODES)
+  parser.add_argument("-s", "--sentence-file", default=SENTENCES)
 
   parser.add_argument("-l", "--length-bins-file", help="Output file for length bins", default="iaa_length.csv")
   parser.add_argument("-b", "--bleu-bins-file", help="Output file for bleu bins", default="iaa_bleu.csv")

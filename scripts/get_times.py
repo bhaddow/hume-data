@@ -19,12 +19,14 @@ import numpy as np
 
 from scipy import stats
 
+from common import SENTENCES
+
 LOG = logging.getLogger(__name__)
    
 def main():
   logging.basicConfig(format='%(asctime)s %(levelname)s: %(name)s: %(message)s', datefmt='%Y-%m-%d %H:%M:%S', level=logging.INFO)
   parser = argparse.ArgumentParser()
-  parser.add_argument("-s", "--sentences-file", default="sentences.csv")
+  parser.add_argument("-s", "--sentences-file", default=SENTENCES)
   args = parser.parse_args()
 
   sentences = pandas.read_csv(args.sentences_file, converters={'timestamp' : pandas.to_datetime})

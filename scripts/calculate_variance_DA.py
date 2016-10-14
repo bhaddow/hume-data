@@ -17,8 +17,7 @@ import numpy as np
 LANGCODES = ("Romanian","ro"), ("Polish", "pl"), ("German", "de"), ("Czech", "cs")
 LANGCODES = ("Romanian","ro"),("German", "de"),
 
-HUME_dir = "data/mturkDA"
-DA_dir = "/Users/alexandrabirch/work/2016-YvetteGraham/segment-mteval/proc-hits/analysis"
+HUME_dir = sys.path[0] + "/../data/mturkDA"
 fileVersion = "5"
 
 
