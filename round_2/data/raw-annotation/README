@@ -1,0 +1,66 @@
+Attached. Please let me know if this information is clear enough.
+
+All in all, there are only 27 HUME tasks that were saved but not submitted out of 3900. I simply excluded these 27.
+
+Please bear in mind that two sentences (i.e., 6 HUME assignments in each language) where deemed as unintelligible by the UCCA annotator, and I removed them from the annotation.
+
+
+Passages for which there is a "save" (per user):
+    498 user_cs_all0.dump
+    492 user_cs_all1.dump
+    497 user_de_all0.dump
+    497 user_de_all1.dump
+    287 user_pl_all_3.dump
+    288 user_pl_all_4.dump
+    529 user_pl_all_5.dump
+    317 user_ro_all0.dump: 
+    289 user_ro_all1.dump:
+    206 user_ro_all2.dump:
+
+Passages for which there is a "submit"  (per user):
+    496 user_cs_all0.dump:
+    487 user_cs_all1.dump:
+    495 user_de_all0.dump:
+    496 user_de_all1.dump:
+    287 user_pl_all_3.dump
+    288 user_pl_all_4.dump
+    522 user_pl_all_5.dump
+    311 user_ro_all0.dump:
+    287 user_ro_all1.dump:
+    204 user_ro_all2.dump:
+
+
+I'm reattaching the dumps. The format is as follows:
+
+1. Each task output is separated by a line of '========='
+2. Each task contains (in this order): username, sequence name (should be in 1-1 correspondence with username in our case), index of task in the sequence, passage number (passage numbers should be consistent across the languages, though Polish-English had a different set I bolive), HUME labels (<unit ID>:<label ID>, '#'-delimited), source sentence, translation sentence, alignment, UCCA xml, username of UCCA anntoator, timestamp of submit.
+
+The mapping between index of the task in the sequence and the original files, I added a README file. Relevant part is pasted here:
+
+Original sequences:
+German (301 sents in each): first NMT, then PBMT, then SYNTAX
+Czech (301 sents in each): first Chimera, then NMT, then Tecto
+Romanian (301 sents in each): Combo, NMT, PBMT
+Polish (351 sents in each): NMT, PBMT, Year1
+
+From these sequences I derived the sequences for each user:
+German, Czech -- two users, both sharing the first 100 sentences and then having distinct 402 (user 0), 401 (user 1) sentences.
+Romanian -- 3 users. All have the first 50 in common, then the first has 451 sentences more, and the second and third have 241 and 161 more sentences respectively more.
+Polish -- 3 users. All have the first 30 in common, then the first and second have 258 sentences more, and the third has 507 sentences more.
+
+
+This is the number of tasks assigned to each user
+
+cs_all0 502
+cs_all1 501
+de_all0 502
+de_all1 501
+
+pl_all3 288
+pl_all4 288
+pl_all5 537
+
+ro_all0 501
+ro_all1 291
+ro_all2 211
+

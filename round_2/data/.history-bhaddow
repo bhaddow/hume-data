@@ -1,0 +1,10 @@
+_T=20170614_10:44:12_26505	 ls
+_T=20170614_10:44:25_26505	 ls
+_T=20170614_10:44:53_26505	 mkdir uploaded raw-annotation processed
+_T=20170614_10:44:53_26505	 ls
+_T=20170614_10:45:14_26505	 cp -r /home/bhaddow/code/himl/ucca-eval/v2/uploaded_data/* uploaded/
+_T=20170614_10:45:48_26505	 pwd
+_T=20170614_10:45:50_26505	 ls
+_T=20170614_10:45:53_26505	 ls raw-annotation/
+_T=20170614_10:46:07_26505	 ls
+_T=20170614_10:46:47_26505	 ls
