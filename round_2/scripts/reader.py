@@ -33,7 +33,7 @@ def parse_pairs(line):
   return ret
 
 def get_sentences(filenames):
-  if not filenames: filenames = glob.glob("data/raw/*dump")
+  if not filenames: filenames = glob.glob("../data/raw-annotation/*dump")
   filenames.sort()
   cs2_ids = set() # Record sentence ids annotated by cs2, since we only keep the first cs2 annotation on each sentence
   for filename in filenames:

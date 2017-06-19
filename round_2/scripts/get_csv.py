@@ -39,9 +39,9 @@ def main():
     logging.basicConfig(format='%(asctime)s %(levelname)s: %(name)s: %(message)s', datefmt='%Y-%m-%d %H:%M:%S', level=logging.DEBUG)
     parser = argparse.ArgumentParser()
     parser.add_argument('-i', '--inputFile', nargs='+', dest='inFile', help="Input UCCAMT Eval dump files")
-    parser.add_argument('-y', '--sysIndex', help = "System index file", default="../data/sys_index")
-    parser.add_argument('-s', '--sentenceFile',   help="Sentence tsv file", default="sentences.tsv")
-    parser.add_argument('-n', '--nodeFile',  help="Node tsv file", default="nodes.tsv")
+    parser.add_argument('-y', '--sysIndex', help = "System index file", default="../data/raw-annotation/sys_index")
+    parser.add_argument('-s', '--sentenceFile',   help="Sentence tsv file", default="../data/processed/sentences.tsv")
+    parser.add_argument('-n', '--nodeFile',  help="Node tsv file", default="../data/processed/nodes.tsv")
     parser.add_argument("-c", "--comma-delimited", action="store_true")
     args = parser.parse_args()
 
@@ -65,7 +65,7 @@ def main():
     sources = {} #key: (lang,lineno)
 
     mypath = os.path.dirname(sys.argv[0])
-    data_dir = mypath + "/../uploaded_data"
+    data_dir = mypath + "/../data/uploaded/"
     for lang in "cs", "de", "ro", "pl":
       with open("{0}/en-{1}/ref.{1}".format(data_dir, lang)) as rfh:
         for i,line in enumerate(rfh):
