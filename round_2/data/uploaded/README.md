@@ -18,7 +18,7 @@ The following table shows the systems used in the comparison. Note that all syst
 | en-de | pbmt | University of Edinburgh's PBMT system |
 | en-de | syntax | University of Edinburgh's Syntax-based system |
 | en-pl | nmt | NMT system built for HimL |
-| en-pl | nmt | PBMT system built for HimL |
+| en-pl | pbmt | PBMT system built for HimL |
 | en-ro | pbmt | University of Edinburgh's PBMT system  |
 | en-ro | nmt | University of Edinburgh's NMT system  |
 | en-ro | combo | QT21 system combination  |
