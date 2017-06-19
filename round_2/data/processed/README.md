@@ -42,8 +42,8 @@ These are the columns of the nodes table:
 * `children`      : The children of this node (list of node_ids)
 * `parent`        : The parent of this node (or 0 for root node)
 * `ucca_label`    : The UCCA label of this node
-* `pos`           : The position of the node in the source (Q: why is it sometimes -1?)
-* `source`        : The source span of the node (Q: why is it sometimes missing?
+* `pos`           : The position of the node in the source (Set to -1 for a structural node)
+* `source`        : The source span of the node (Missing for structural nodes)
 * `target`        : The target span. This is computed by projecting through the alignment, so can be "UNALIGNED".
 * `is_scene`      : Whether the node is an UCCA scene.
 * `height`        : The height of the node in the UCCA tree.
