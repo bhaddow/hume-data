@@ -12,9 +12,10 @@ import os
 import os.path
 import sys
 import ucca
+import pdb
 
 from collections import Counter
-from reader import get_sentences, ANNOTATION_KEY
+from reader import get_sentences, parse_pairs, ANNOTATION_KEY
 
 LOG = logging.getLogger(__name__)
 
@@ -39,9 +40,9 @@ def main():
     logging.basicConfig(format='%(asctime)s %(levelname)s: %(name)s: %(message)s', datefmt='%Y-%m-%d %H:%M:%S', level=logging.DEBUG)
     parser = argparse.ArgumentParser()
     parser.add_argument('-i', '--inputFile', nargs='+', dest='inFile', help="Input UCCAMT Eval dump files")
-    parser.add_argument('-y', '--sysIndex', help = "System index file", default="../data/raw-annotation/sys_index")
-    parser.add_argument('-s', '--sentenceFile',   help="Sentence tsv file", default="../data/processed/sentences.tsv")
-    parser.add_argument('-n', '--nodeFile',  help="Node tsv file", default="../data/processed/nodes.tsv")
+    parser.add_argument('-y', '--sysIndex', help = "System index file", default="../data/sys_index")
+    parser.add_argument('-s', '--sentenceFile',   help="Sentence tsv file", default="sentences.tsv")
+    parser.add_argument('-n', '--nodeFile',  help="Node tsv file", default="nodes.tsv")
     parser.add_argument("-c", "--comma-delimited", action="store_true")
     args = parser.parse_args()
 
@@ -62,6 +63,7 @@ def main():
     # Load references and bleu
     references = {} #key: (lang,lineno)
     bleus = {} #key: (system,lang,lineno)
+    aligns = {} #key: (system,lang,lineno)
     sources = {} #key: (lang,lineno)
 
     mypath = os.path.dirname(sys.argv[0])
@@ -83,6 +85,16 @@ def main():
         with open(bleu_file[:-5]) as sfh:
           for i,line in enumerate(sfh):
             sources[(lang,i)] = line[:-1]
+
+      align_files = glob.glob("{0}/en-{1}/*.ucca.align".format(data_dir,lang))
+      for align_file in align_files:
+        system = os.path.basename(align_file)[:-11]
+        LOG.info("Loading align from {} for {}".format(align_file,  system))
+        with open(align_file) as afh:
+          for i,line in enumerate(afh):
+            align = line[:-1]
+            #print ("align, system, lang, i ", system, lang, i, align)
+            aligns[(system,lang,i)] = align 
 
 
     # Load system index
@@ -115,7 +127,9 @@ def main():
       sentence_fields.append("ucca_H")
       sentence_fields.extend(mt_colkeys)
       csv_writer.writerow(sentence_fields)
-      ncsv_writer.writerow(["node_id","sequence_id","sent_id","system_id","annot_id","lang","mt_label","child_count","children","parent","ucca_label","pos","source","target","is_scene", "height", "num_tokens"])
+      ncsv_writer.writerow(["node_id","sequence_id","sent_id","system_id","annot_id","lang","mt_label","child_count","children","parent","ucca_label","pos","source","target","is_scene","height","num_tokens"])
+
+
       for sent in get_sentences(inFile):
         fields = []
         fields.append(sent.sequence_id)
@@ -143,14 +157,22 @@ def main():
         if bleu == 0.0:
           LOG.info("Bleu missing. System: {}, Lang: {}, sentence: {}".format(system_id, sent.lang, sent.sent_id))
         fields.append(ref)
-        fields.append(" ".join(["%s-%s" % (src,tgt) for src,tgt in sent.align]))
+        align = aligns.get((system_id.lower(), sent.lang, int(sent.sent_id)),"")
+        #print ("Align ", align)
+        if align == "":
+          LOG.info("Align missing. System: {}, Lang: {}, sentence: {}".format(system_id, sent.lang, sent.sent_id))
+          if sent.lang != 'pl':
+            pdb.set_trace()
+        align_pairs = parse_pairs(align)
+        fields.append(" ".join(["%s-%s" % (src,tgt) for src,tgt in align_pairs]))
         fields.append(bleu)
-
+        
         # ucca nodes and annotations
         target_tokens = sent.target.split()
-        for src,tgt in sent.align:
+        align_map = {}
+        for src,tgt in align_pairs:
           if tgt < len(target_tokens):
-            align_map = {src: target_tokens[tgt]}
+            align_map[src] = target_tokens[tgt]
           else:
             LOG.debug("Error in alignment: " + str(tgt))
         mt_eval_counts = Counter()
@@ -169,7 +191,13 @@ def main():
           parent = "0"
           if node.fparent: parent = node.fparent.ID
           tag = node.ftag
-          num_tokens = len(list(node.get_terminals(punct=False)))
+          tokens = list(node.get_terminals(punct=False))
+          num_tokens = len(tokens)
+          #if num_tokens == 1:
+          #  print(tokens[0])
+          #  print(ref)
+          #  print(str(tokens[0]) in ref)
+                      
           height = compute_height(node)
           
           if not tag: tag = "root"
