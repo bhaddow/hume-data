@@ -1,0 +1,6 @@
+a few notes on functionality:
+
+-- in order to get the outgoing edges: use list functionality (u[i], list(u) etc.)
+-- in order to get the incoming edges: node._incoming (should be changed to u.incoming returns tuple! the same with outgoing)
+-- should add ftag
+
