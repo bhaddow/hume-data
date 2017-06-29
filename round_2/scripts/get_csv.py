@@ -45,7 +45,7 @@ def main():
     parser.add_argument('-n', '--nodeFile',  help="Node tsv file", default="nodes.tsv")
     parser.add_argument("-c", "--comma-delimited", action="store_true")
     args = parser.parse_args()
-
+    
     #Check timestamps before running update
     #if args.inFile:
     #  inTime = 0
