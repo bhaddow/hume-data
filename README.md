@@ -31,6 +31,25 @@ The main reference for HUME is our EMNLP paper
 }
 ```
 
+## Data Organisation
+
+### Round 1
+This is organised into the following directories:
+
+* `round_1/data/uploaded` : The system outputs uploaded to the annotation tool, as well the sources, reference and  bleu scores. The source and references
+are taken from the [HimL 2015 Test Sets](http://www.himl.eu/test-sets) 
+* `round_1/data/raw-annotation` : The annotations dumped directly from the annotation tool.
+* `round_1/data/processed` : The data from the tool, processed into more readable comma-separated value (csv) files.
+* `round_1/data/direct-assessment` : The data gathered from direct assessment of the translation (i.e. adequacy judgements)
+
+### Round 2
+This is organised into the following directories
+
+
+* `uploaded` : The data uploaded to the HUME annotation tool - sources, system outputs and alignments. Also the references.
+* `raw-annotation` : The annotations dumped directly from the annotation tool.
+* `processed` : The data from the tool, processed into more readable tab-separated value (tsv) files.
+
 ## Licence
 The data sets are licensed under the [Creative Commons Attribution-NonCommercial 4.0 license](https://creativecommons.org/licenses/by-nc/4.0/),
 and the source code is licensed under the [Apache Licencse 2.0](http://www.apache.org/licenses/LICENSE-2.0).
