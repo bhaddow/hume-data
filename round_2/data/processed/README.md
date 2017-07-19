@@ -48,3 +48,5 @@ These are the columns of the nodes table:
 * `is_scene`      : Whether the node is an UCCA scene.
 * `height`        : The height of the node in the UCCA tree.
 * `num_tokens`    : The number of tokens spanned by the node.
+* `ucca_construction_type`  : The coarse UCCA category
+* `parent_ucca_construction_type`  : The parent's coarse UCCA category
