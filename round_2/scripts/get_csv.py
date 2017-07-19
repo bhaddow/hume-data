@@ -33,7 +33,7 @@ def get_cxn_type(node):
   if node.is_scene():
     return 'Scene'
   children_categories = [edge.tag for edge in list(node)]
-  print(children_categories)
+  #print(children_categories)
   if 'L' in children_categories or 'H' in children_categories:
     return 'Linkage'
   if 'E' in children_categories:
@@ -192,7 +192,7 @@ def main():
             LOG.debug("Error in alignment: " + str(tgt))
         mt_eval_counts = Counter()
         ucca_counts = Counter()
-        for node in sent.ucca_tree.nodes:
+        for node in sorted(sent.ucca_tree.nodes):
           node = sent.ucca_tree.nodes[node]
           if node.tag != "FN": continue
           is_scene = 'T' if node.is_scene() else 'F'
