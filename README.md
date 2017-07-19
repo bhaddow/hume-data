@@ -46,9 +46,10 @@ are taken from the [HimL 2015 Test Sets](http://www.himl.eu/test-sets)
 This is organised into the following directories
 
 
-* `uploaded` : The data uploaded to the HUME annotation tool - sources, system outputs and alignments. Also the references.
-* `raw-annotation` : The annotations dumped directly from the annotation tool.
-* `processed` : The data from the tool, processed into more readable tab-separated value (tsv) files.
+* `round_2/data/uploaded` : The data uploaded to the HUME annotation tool - sources, system outputs and alignments. Also the references. The data is taken from
+the [HimL 2015 Test Sets](http://www.himl.eu/test-sets) and the [WMT16 News Test Sets](http://www.statmt.org/wmt16/translation-task.html)
+* `round_2/data/raw-annotation` : The annotations dumped directly from the annotation tool.
+* `round_2/data/processed` : The data from the tool, processed into more readable tab-separated value (tsv) files.
 
 ## Licence
 The data sets are licensed under the [Creative Commons Attribution-NonCommercial 4.0 license](https://creativecommons.org/licenses/by-nc/4.0/),
