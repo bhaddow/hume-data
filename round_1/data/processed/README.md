@@ -1,8 +1,8 @@
 # Overview
 
 This directory contains the annotation data, processed into two tables, stored in csv format. The tables are:
-* `nodes.tsv` Contains one entry for each node in each annotated sentence
-* `sentences.tsv` Contains one entry for each sentence
+* `nodes.csv` Contains one entry for each node in each annotated sentence
+* `sentences.csv` Contains one entry for each sentence
 
 ## Sentences
 
