@@ -20,7 +20,7 @@ analysis.
 
 ## References
 
-The main reference for HUME is our EMNLP paper
+The main reference for HUME is our EMNLP paper, which describes the round_1 annotation.
 
 ```
 @inproceedings{birch2016emnlp,
